@@ -6,11 +6,3 @@ const api = axios.create({
 })
 
 export default api
-
-function bad(a,b) {
-  if(+a) {
-    return a
-  } else (b) {
-    console.error("error")
-  }
-}

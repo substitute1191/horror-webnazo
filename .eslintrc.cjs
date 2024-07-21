@@ -47,7 +47,7 @@ module.exports = {
       version: "detect",
     },
   },
-  plugins: ["react-refresh"],
+  plugins: ["@typescript-eslint","react-refresh"],
   rules: {
     eqeqeq: "error",
     "no-console": "warn",
@@ -142,7 +142,7 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['webnazo-front/**/*.ts', 'webnazo-front/**/*.tsx'],
+      files: ['./webnazo-front/**/*.ts', './webnazo-front/**/*.tsx'],
       env: {
         browser: true,
       }

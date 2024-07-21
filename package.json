@@ -6,10 +6,16 @@
     "dev": "concurrently \"npm run dev:webnazo-front\" \"npm run dev:webnazo-back\"",
     "dev:webnazo-front": "cd webnazo-front && npm run dev",
     "dev:webnazo-back": "cd webnazo-back && npm run dev",
-    "install": "concurrently \"npm run install:webnazo-front\" \"npm run install:webnazo-back\"",
+    "setup": "npm install && concurrently \"npm run install\" \"npm run install:webnazo-front\" \"npm run install:webnazo-back\"",
     "install:webnazo-front": "cd webnazo-front && npm install",
     "install:webnazo-back": "cd webnazo-back && npm install",
     "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "prettier --write",
+      "eslint --max-warning=10"
+    ]
   },
   "keywords": [],
   "author": "",
@@ -30,6 +36,7 @@
     "eslint-plugin-storybook": "^0.8.0",
     "husky": "^9.1.1",
     "lint-staged": "^15.2.7",
-    "prettier": "^3.3.3"
+    "prettier": "^3.3.3",
+    "typescript": "^5.5.3"
   }
 }
