@@ -1,7 +1,7 @@
 import express from "express"
 import cors from "cors"
 // * db: データベースを操作するためのPrismaクライアント
-import { db } from "lib/prisma"
+import { db } from "./lib/prisma"
 
 const app: express.Express = express()
 const port = 4000

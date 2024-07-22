@@ -1,6 +1,6 @@
 import CharacterFlicker from "./CharacterFlicker"
 import MusicPrompt from "./MusicPrompt"
-import NoiseOverlay from "./NoiseOverlay"
+import StartButton from "./StartButton"
 import useHome from "./useHome"
 
 // TODO 音楽を再生するか否かの状態をグローバルに管理する状態を作成する
@@ -43,12 +43,7 @@ const Home = () => {
           />
           そ
         </div>
-        <button className="overflow-hidden relative bg-black self-center mt-14 text-5xl font-onryou text-white px-8 h-24 bg-no-repeat bg-center">
-          <NoiseOverlay />
-          <span className="animate-irregular-blink hover:animate-none hover:font-semibold">
-            部屋を作成する
-          </span>
-        </button>
+        <StartButton />
       </div>
     </div>
   )
