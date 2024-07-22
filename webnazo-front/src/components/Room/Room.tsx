@@ -1,4 +1,18 @@
+import { phaseAtom } from "@/atoms/atoms"
+import Phase0 from "./phase0/Phase0"
+import Phase1 from "./phase1/Phase1"
+import { useAtom } from "jotai"
+
 const Room = () => {
-  return <div>ルームページ</div>
+  const [phase] = useAtom(phaseAtom)
+
+  return (
+    <div>
+      <div>ルームページ</div>
+      {phase === 0 ? <Phase0 /> : null}
+      {phase === 1 ? <Phase1 /> : null}
+    </div>
+  )
 }
+
 export default Room
