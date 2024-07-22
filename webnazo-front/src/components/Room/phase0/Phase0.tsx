@@ -25,6 +25,7 @@ const Phase0 = () => {
       })
       .then(() => {
         setPhase(1)
+        localStorage.setItem("player_number", JSON.stringify(selectedPlayer))
       })
       .catch((e) => {
         console.error(e)
