@@ -1,0 +1,16 @@
+{
+  "roots": ["<rootDir>/src"],
+  "testMatch": [
+    "**/__tests__/**/*.+(ts|tsx|js)",
+    "**/?(*.)+(spec|test).+(ts|tsx|js)"
+  ],
+  "transform": {
+    "^.+\\.(ts|tsx)$": "ts-jest"
+  },
+  "testEnvironment": "jest-environment-jsdom",
+  "moduleNameMapper": {
+    "^@/(.*)$": "<rootDir>/src/$1",
+    "\\.(mp3|wav|ogg)$": "<rootDir>/__mocks__/fileMock.js"
+  },
+  "setupFilesAfterEnv": ["<rootDir>/jest.setup.ts"]
+}
