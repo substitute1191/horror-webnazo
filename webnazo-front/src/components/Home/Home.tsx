@@ -1,7 +1,7 @@
 import useBGM from "@/SoundManager/useBGM"
 import SoundMenu from "../SoundMenu/SoundMenu"
 import CharacterFlicker from "./CharacterFlicker/CharacterFlicker"
-import MusicPrompt from "./MusicPrompt"
+import MusicPrompt from "./MusicPrompt/MusicPrompt"
 import NoiseOverlay from "./NoiseOverlay/NoiseOverlay"
 import bgmSrc from "@/assets/sound/lp-horror.mp3"
 import { useEffect } from "react"
