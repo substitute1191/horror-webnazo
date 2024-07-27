@@ -37,5 +37,5 @@ app.get("/apitest", (req, res) => {
 })
 
 app.listen(port, () => {
-  console.log(`Express Listening on port ${port}`)
+  console.debug(`Express Listening on port ${port}`)
 })

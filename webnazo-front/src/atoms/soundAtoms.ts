@@ -1,5 +1,5 @@
-import { atom } from "jotai"
+import { atomWithStorage } from "jotai/utils"
 
-export const isPlayableAtom = atom(false)
-
-export const volumeAtom = atom(1)
+export const isPlayableAtom = atomWithStorage("isPlayable", false)
+export const seVolumeAtom = atomWithStorage("seVol", 1)
+export const bgmVolumeAtom = atomWithStorage("bgmVol", 1)

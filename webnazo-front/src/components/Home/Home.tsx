@@ -1,19 +1,25 @@
-import CharacterFlicker from "./CharacterFlicker"
+import useBGM from "@/SoundManager/useBGM"
+import SoundMenu from "../SoundMenu/SoundMenu"
+import CharacterFlicker from "./CharacterFlicker/CharacterFlicker"
 import MusicPrompt from "./MusicPrompt"
-import NoiseOverlay from "./NoiseOverlay"
-import useHome from "./useHome"
+import NoiseOverlay from "./NoiseOverlay/NoiseOverlay"
+import bgmSrc from "@/assets/sound/lp-horror.mp3"
+import { useEffect } from "react"
 
-// TODO 音楽を再生するか否かの状態をグローバルに管理する状態を作成する
 const Home = () => {
-  const { showPrompt, handleAccept, handleDecline } = useHome()
+  const { play, pause } = useBGM(bgmSrc)
+
+  useEffect(() => {
+    void play()
+    return () => pause()
+  }, [play, pause])
 
   return (
     <div className="relative w-full h-screen">
       {/* <FoggyImage src={bgimageSrc} /> */}
+      <SoundMenu />
+      <MusicPrompt />
       <div className="bg-home-bg object-fit bg-cover absolute inset-0 flex flex-col justify-center items-center">
-        {showPrompt ? (
-          <MusicPrompt onAccept={handleAccept} onDecline={handleDecline} />
-        ) : null}
         <div className="p-2 text-5xl place-content-center font-onryou text-white self-center">
           Web
           <CharacterFlicker
@@ -32,14 +38,14 @@ const Home = () => {
             origin="よ"
             sometime={["%", "ラ"]}
             sometimeClassName={["text-black"]}
-            probability={0.02}
+            probability={0.05}
           />
           う
           <CharacterFlicker
             origin="こ"
             sometime={["■", "Σ"]}
             sometimeClassName={[""]}
-            probability={0.05}
+            probability={0.01}
           />
           そ
         </div>
