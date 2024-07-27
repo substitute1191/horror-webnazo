@@ -9,7 +9,8 @@
     "setup": "npm install && concurrently \"npm run install\" \"npm run install:webnazo-front\" \"npm run install:webnazo-back\"",
     "install:webnazo-front": "cd webnazo-front && npm install",
     "install:webnazo-back": "cd webnazo-back && npm install",
-    "prepare": "husky"
+    "prepare": "husky",
+    "test": "cd webnazo-front && npm run test" 
   },
   "lint-staged": {
     "*.{ts,tsx}": [
