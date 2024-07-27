@@ -56,7 +56,7 @@ module.exports = {
       "warn",
       { allowConstantExport: true },
     ],
-    "max-lines-per-function": ["warn", { max: 50, skipBlankLines: true }],
+    "max-lines-per-function": ["warn", { max: 80, skipBlankLines: true }],
     "max-depth": ["warn", 3],
     complexity: ["warn", 5],
     "@typescript-eslint/naming-convention": [
