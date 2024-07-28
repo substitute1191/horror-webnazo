@@ -1,6 +1,9 @@
 import { MemoryRouter } from "react-router-dom"
 import Home from "./Home"
-import { render, screen } from "@testing-library/react"
+import { userEvent } from "@testing-library/user-event"
+import { render, screen, waitFor } from "@testing-library/react"
+import type * as ReactRouterDOM from "react-router-dom"
+import api from "@/utils/api"
 
 jest.mock("@/SoundManager/useBGM", () => ({
   __esModule: true,
@@ -27,7 +30,27 @@ jest.mock("./NoiseOverlay/NoiseOverlay", () => () => (
 ))
 jest.mock("@/assets/sound/lp-horror.mp3", () => "mocked-bgm-file")
 
+const mockedUseNavigate = jest.fn()
+jest.mock("react-router-dom", () => {
+  const actual = jest.requireActual<typeof ReactRouterDOM>("react-router-dom")
+  return {
+    ...actual,
+    useNavigate: () => mockedUseNavigate,
+  }
+})
+
+jest.mock("@/utils/api", () => ({
+  get: jest.fn(),
+}))
+
 describe("Homeコンポーネント", () => {
+  const user = userEvent.setup()
+  const apiGet = jest.spyOn(api, "get")
+
+  beforeEach(() => {
+    jest.clearAllMocks()
+  })
+
   test("部屋を作成するボタンの描画テスト", () => {
     render(
       <MemoryRouter>
@@ -38,5 +61,26 @@ describe("Homeコンポーネント", () => {
     expect(createRoomButton).toBeInTheDocument()
   })
 
-  //TODO ボタンがクリック可能かのテストを書く
+  test("enterRoomがボタンをクリックすると呼ばれる", async () => {
+    ;(api.get as jest.MockedFunction<typeof api.get>).mockResolvedValue({
+      data: { roomId: "test-room-id" },
+    })
+
+    render(
+      <MemoryRouter>
+        <Home />
+      </MemoryRouter>
+    )
+
+    const startButton = screen.getByText("部屋を作成する")
+    await user.click(startButton)
+
+    await waitFor(() => {
+      expect(apiGet).toHaveBeenCalledWith("/api/createRoom")
+    })
+
+    await waitFor(() => {
+      expect(mockedUseNavigate).toHaveBeenCalledWith("/room/test-room-id")
+    })
+  })
 })
