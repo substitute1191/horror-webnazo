@@ -1,7 +1,7 @@
 import express from "express"
 import cors from "cors"
 // * db: データベースを操作するためのPrismaクライアント
-import { db } from "lib/prisma"
+import { db } from "./lib/prisma"
 
 const app: express.Express = express()
 const port = 4000
@@ -24,10 +24,31 @@ app.get("/api/createRoom", (_req, res, next) => {
         },
       })
       console.debug(newRoom)
-      res.send({ message: "Room Created!" })
+      res.send({ roomId: newRoom.id })
     } catch (e) {
       console.error(e)
       next(e)
+    }
+  })()
+})
+
+app.post("/api/room/:roomId/selectPlayer", (_req, res, next) => {
+  void (async () => {
+    const roomId = _req.params.roomId
+    try {
+      await db.room.update({
+        where: {
+          id: roomId,
+        },
+        data: {
+          phase: 1,
+        },
+      })
+      console.log("update ok")
+      res.sendStatus(204)
+    } catch (err) {
+      console.error(err)
+      next(err)
     }
   })()
 })

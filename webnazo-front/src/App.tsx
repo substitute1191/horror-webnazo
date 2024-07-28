@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import Home from "@/components/Home/Home"
+import Room from "@/components/Room/Room"
 
 const App = () => {
   return (
@@ -7,6 +8,7 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/room/:roomId" element={<Room />} />
         </Routes>
       </BrowserRouter>
     </div>

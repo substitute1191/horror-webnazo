@@ -2,9 +2,9 @@ import useBGM from "@/SoundManager/useBGM"
 import SoundMenu from "../SoundMenu/SoundMenu"
 import CharacterFlicker from "./CharacterFlicker/CharacterFlicker"
 import MusicPrompt from "./MusicPrompt/MusicPrompt"
-import NoiseOverlay from "./NoiseOverlay/NoiseOverlay"
 import bgmSrc from "@/assets/sound/lp-horror.mp3"
 import { useEffect } from "react"
+import StartButton from "./StartButton"
 
 const Home = () => {
   const { play, pause } = useBGM(bgmSrc)
@@ -49,12 +49,7 @@ const Home = () => {
           />
           そ
         </div>
-        <button className="overflow-hidden relative bg-black self-center mt-14 text-5xl font-onryou text-white px-8 h-24 bg-no-repeat bg-center">
-          <NoiseOverlay />
-          <span className="animate-irregular-blink hover:animate-none hover:font-semibold">
-            部屋を作成する
-          </span>
-        </button>
+        <StartButton />
       </div>
     </div>
   )
