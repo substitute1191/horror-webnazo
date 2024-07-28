@@ -1,3 +1,4 @@
+import { MemoryRouter } from "react-router-dom"
 import Home from "./Home"
 import { render, screen } from "@testing-library/react"
 
@@ -28,7 +29,11 @@ jest.mock("@/assets/sound/lp-horror.mp3", () => "mocked-bgm-file")
 
 describe("Homeコンポーネント", () => {
   test("部屋を作成するボタンの描画テスト", () => {
-    render(<Home />)
+    render(
+      <MemoryRouter>
+        <Home />
+      </MemoryRouter>
+    )
     const createRoomButton = screen.getByText("部屋を作成する")
     expect(createRoomButton).toBeInTheDocument()
   })
