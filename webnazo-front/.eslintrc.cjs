@@ -15,6 +15,7 @@ module.exports = {
             },
           },
         ],
+        "max-lines-per-function": "off",
       },
     },
   ],
