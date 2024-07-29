@@ -1,5 +1,5 @@
 /* eslint-disable max-lines-per-function */
-import api from "@/api"
+import api from "@/utils/api"
 import { useState } from "react"
 import { useParams } from "react-router-dom"
 import { phaseAtom } from "@/atoms/atoms"

@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom"
 import NoiseOverlay from "./NoiseOverlay/NoiseOverlay"
-import api from "@/api"
+import api from "@/utils/api"
 
 interface ResType {
   roomId: string
