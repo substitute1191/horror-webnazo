@@ -7,7 +7,7 @@ import rank3 from "@/assets/image/ranking/rank_3.png"
 import api from "@/utils/api"
 import { useParams } from "react-router-dom"
 import { useAtom } from "jotai"
-import { phaseAtom } from "@/atoms/atoms"
+import { phaseAtom } from "@/atoms/roomAtoms"
 
 const Phase1 = () => {
   const { roomId } = useParams()
