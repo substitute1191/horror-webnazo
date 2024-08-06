@@ -3,12 +3,12 @@ import pyramid from "@/assets/image/mascot/mascot.png"
 
 const Phase1 = () => {
   return (
-    <div className="bg-cyan-200 pt-5 w-3/5 mx-auto pb-52 font-pop">
+    <div className="bg-cyan-200 pt-7 w-3/5 mx-auto pb-52 font-pop">
       <h1>
         <img
           src={rankmatchLogo}
           alt="ランクマッチのロゴ"
-          className="w-80 mx-auto mb-5"
+          className="w-1/2 mx-auto mb-5 animate-float"
         />
       </h1>
       <div className="bg-white w-11/12 mx-auto border-stone-600 border-solid border-2 px-14 py-7">
