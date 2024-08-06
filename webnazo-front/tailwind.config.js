@@ -40,6 +40,7 @@ export default {
     },
     fontFamily: {
       onryou: ["onryou", "sans-serif"],
+      pop: ['"Yusei Magic"', "cursive"],
     },
   },
   plugins: [],
