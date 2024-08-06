@@ -11,6 +11,8 @@ export default {
       backgroundImage: {
         "home-bg": "url('/public/images/homebg.jpg')",
         "home-button": "url('/public/images/homebutton.png')",
+        yumekawa: "url('/src/assets/image/yumekawa.jpg')",
+        yumekawa2: "url('/src/assets/image/yumekawa2.jpg')",
       },
       animation: {
         "irregular-blink": "irregular-blink 5s steps(5,jump-none) infinite",
