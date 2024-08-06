@@ -8,7 +8,6 @@ const Room = () => {
 
   return (
     <div>
-      <div>ルームページ</div>
       {phase === 0 ? <Phase0 /> : null}
       {phase === 1 ? <Phase1 /> : null}
     </div>
