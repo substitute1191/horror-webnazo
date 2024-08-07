@@ -7,6 +7,7 @@ import { useEffect } from "react"
 import { useParams } from "react-router-dom"
 import { v4 as uuidv4 } from "uuid"
 import { SocketContext } from "./socketContext"
+import Phase2 from "./phase2/Phase2"
 
 const Room = () => {
   const phase = useAtomValue(phaseAtom)
@@ -38,6 +39,7 @@ const Room = () => {
       <div>
         {phase === 0 ? <Phase0 /> : null}
         {phase === 1 ? <Phase1 /> : null}
+        {phase === 2 ? <Phase2 /> : null}
       </div>
     </SocketContext.Provider>
   )

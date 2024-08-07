@@ -46,3 +46,23 @@ export const selectPlayer = (
     }
   })()
 }
+
+export const joinGame = (req: Request, res: Response, next: NextFunction) => {
+  void (async () => {
+    const roomId = req.params.roomId
+    try {
+      await db.room.update({
+        where: {
+          id: roomId,
+        },
+        data: {
+          phase: 2,
+        },
+      })
+      res.sendStatus(204)
+    } catch (err) {
+      console.error(err)
+      next(err)
+    }
+  })()
+}
