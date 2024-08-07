@@ -1,5 +1,9 @@
+/* eslint-disable max-lines-per-function */
 import rankmatchLogo from "@/assets/image/rankmatch_logo.png"
 import pyramid from "@/assets/image/mascot/mascot.png"
+import rank1 from "@/assets/image/ranking/rank_1.png"
+import rank2 from "@/assets/image/ranking/rank_2.png"
+import rank3 from "@/assets/image/ranking/rank_3.png"
 import api from "@/utils/api"
 import { useParams } from "react-router-dom"
 import { useAtom } from "jotai"
@@ -57,18 +61,27 @@ const Phase1 = () => {
               ゲームに参加する
             </button>
           </div>
-          <div>
-            <h3 className="mb-7 mt-16 text-6xl">前回の成績優秀者</h3>
-            <ul className="mb-6 leading-loose">
-              <li className="mb-7 text-8xl">○○さん</li>
-              <li className="mb-7 text-6xl">○○さん</li>
-              <li className="text-4xl">○○さん</li>
+          <div className="mb-20 mt-16 bg-pink-100 p-5">
+            <h3 className="mb-7 text-6xl">前回の成績優秀者</h3>
+            <ul className="leading-loose">
+              <li className="flex text-6xl">
+                <img src={rank1} alt="一位" className="w-48" />
+                <span className="mb-10 mt-auto">知的生命体YOSHIO さん</span>
+              </li>
+              <li className="mb-7 flex pl-8 text-5xl">
+                <img src={rank2} alt="二位" className="w-32" />
+                <span className="mb-7 ml-3 mt-auto">北亨夏高校クイ研 さん</span>
+              </li>
+              <li className="flex pl-14 text-4xl">
+                <img src={rank3} alt="三位" className="w-20" />
+                <span className="mb-4 ml-7 mt-auto">ゆゅ（＠ω＠） さん</span>
+              </li>
             </ul>
           </div>
-          <div>
+          <div className="mb-20 bg-red-50 p-5">
             <img src={pyramid} alt="ピラミッド君" className="mx-auto mb-10" />
             <h3 className="text-center text-5xl">ピラミッド君</h3>
-            <p className="mb-20 mt-8 text-2xl">
+            <p className="mt-8 text-2xl">
               このサイトのマスコットキャラクター。謎で頂点を目指すユーザーの皆を応援している。可愛い外見で毒のあることを言うという自己認識を持っているが、そもそも自分が可愛くないことに気づいていない。
               <br />
               オカルトが大の苦手であり、心霊スポットなどお化けが出そうなところからはすぐに逃げ出してしまう。
@@ -76,7 +89,7 @@ const Phase1 = () => {
               そのためピラミッドが王族の墓として作られたという通説を真っ赤なデマであるとして強く否定している。
             </p>
           </div>
-          <div>
+          <div className="bg-orange-100 p-5">
             <h3 className="mb-10 text-center text-5xl">注意事項</h3>
             <ul className="text-2xl">
               {/*
