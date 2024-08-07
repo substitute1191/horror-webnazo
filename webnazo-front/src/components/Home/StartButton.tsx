@@ -11,7 +11,7 @@ const StartButton: React.FC = () => {
 
   const enterRoom = (): void => {
     api
-      .get<ResType>("/api/createRoom")
+      .get<ResType>("/createRoom")
       .then((res) => {
         const roomId = res.data.roomId
         navigate(`/room/${roomId}`)
@@ -23,7 +23,7 @@ const StartButton: React.FC = () => {
 
   return (
     <button
-      className="overflow-hidden relative bg-black self-center mt-14 text-5xl font-onryou text-white px-8 h-24 bg-no-repeat bg-center"
+      className="font-onryou relative mt-14 h-24 self-center overflow-hidden bg-black bg-center bg-no-repeat px-8 text-5xl text-white"
       onClick={enterRoom}
     >
       <NoiseOverlay />

@@ -21,9 +21,9 @@ export function setupSocketServer(httpServer: HttpServer) {
 
     socket.on(
       "selectChara",
-      ({ roomId, playerNumber }: { roomId: string; playerNumber: number }) => {
+      ({ roomId, chara }: { roomId: string; chara: number }) => {
         console.debug("selectChara event")
-        io.to(roomId).emit("selected", playerNumber)
+        socket.broadcast.to(roomId).emit("selected", chara)
       }
     )
 

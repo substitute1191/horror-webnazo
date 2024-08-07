@@ -1,0 +1,14 @@
+{
+  "name": "@horror-nazo/shared-types",
+  "version": "1.0.0",
+  "description": "Shared type definitions",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
+  },
+  "files": [
+    "dist"
+  ]
+}
