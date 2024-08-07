@@ -74,7 +74,7 @@ const Phase1 = () => {
               </li>
               <li className="flex pl-14 text-4xl">
                 <img src={rank3} alt="三位" className="w-20" />
-                <span className="mb-4 ml-7 mt-auto">ゆゅ（＠ω＠） さん</span>
+                <span className="mb-4 ml-7 mt-auto">ゆ（＠ω＠） さん</span>
               </li>
             </ul>
           </div>
@@ -111,8 +111,8 @@ const Phase1 = () => {
             </ul>
           </div>
         </div>
-      </div>
-    </div>
+      </div >
+    </div >
   )
 }
 export default Phase1
