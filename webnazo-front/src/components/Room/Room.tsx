@@ -1,17 +1,17 @@
-import { phaseAtom } from "@/atoms/atoms"
-import Phase0 from "./phase0/Phase0"
+import { initializeRoomAtom, phaseAtom } from "@/atoms/roomAtoms"
+import CharaSelect from "./phase0/CharaSelect"
 import Phase1 from "./phase1/Phase1"
-import { useAtomValue } from "jotai"
+import { useAtomValue, useSetAtom } from "jotai"
 import { useSocket } from "@/utils/useSocket"
 import { useEffect } from "react"
 import { useParams } from "react-router-dom"
-import { v4 as uuidv4 } from "uuid"
 import { SocketContext } from "./socketContext"
 
 const Room = () => {
   const phase = useAtomValue(phaseAtom)
   const { roomId } = useParams()
   const { socket, connect, disconnect, isConnected } = useSocket()
+  const initializeRoom = useSetAtom(initializeRoomAtom)
 
   /* eslint-disable react-hooks/exhaustive-deps*/
   useEffect(() => {
@@ -20,13 +20,13 @@ const Room = () => {
   }, [])
 
   useEffect(() => {
-    if (localStorage.getItem("userId") === null) {
-      const userId = uuidv4()
-      localStorage.setItem("userId", userId)
+    if (roomId !== undefined) {
+      void initializeRoom(roomId)
     }
+  }, [roomId, initializeRoom])
 
+  useEffect(() => {
     if (socket !== null && isConnected) {
-      console.debug("joining room")
       socket.emit("joinRoom", {
         roomId: roomId,
       })
@@ -34,9 +34,9 @@ const Room = () => {
   }, [socket, isConnected])
 
   return (
-    <SocketContext.Provider value={{ socket }}>
+    <SocketContext.Provider value={{ socket, isConnected }}>
       <div>
-        {phase === 0 ? <Phase0 /> : null}
+        {phase === 0 ? <CharaSelect /> : null}
         {phase === 1 ? <Phase1 /> : null}
       </div>
     </SocketContext.Provider>

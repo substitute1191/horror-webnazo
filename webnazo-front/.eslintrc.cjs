@@ -10,7 +10,7 @@ module.exports = {
             selector: "property",
             format: ["camelCase", "PascalCase"],
             filter: {
-              regex: "^__esModule$",
+              regex: "^(__esModule|Content-Type|Accept|Authorization)$",
               match: false,
             },
           },

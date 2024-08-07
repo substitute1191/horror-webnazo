@@ -1,4 +1,4 @@
-import express from "express"
+import express, { json, NextFunction, Request, Response } from "express"
 import cors from "cors"
 import roomRoutes from "routes/room"
 import { createServer } from "http"
@@ -17,12 +17,21 @@ app.use(
     credentials: true,
   })
 )
+app.use(json())
 
 // コントローラーの設定
 app.use("/api", roomRoutes)
 
 // socketサーバーの設定
 setupSocketServer(server)
+
+app.use((err: Error, req: Request, res: Response, _next: NextFunction) => {
+  console.error(err.stack)
+
+  res.status(500).json({
+    error: "Internal Server Error",
+  })
+})
 
 server.listen(port, () => {
   console.debug(`Express Listening on port ${port}`)
