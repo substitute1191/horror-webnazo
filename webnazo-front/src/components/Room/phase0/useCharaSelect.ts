@@ -1,9 +1,10 @@
 import {
   phaseAtom,
-  initializeRoomAtom,
   myCharaAtom,
   otherCharaAtom,
   userIdAtom,
+  checkAllSelectedAtom,
+  isAllSelectedAtom,
 } from "@/atoms/roomAtoms"
 import api from "@/utils/api"
 import { useAtom, useSetAtom, useAtomValue } from "jotai"
@@ -15,17 +16,12 @@ import { SocketContext } from "../socketContext"
 const useCharaSelect = () => {
   const { roomId } = useParams()
   const setPhase = useSetAtom(phaseAtom)
-  const initializeRoom = useSetAtom(initializeRoomAtom)
   const [myChara, setMyChara] = useAtom(myCharaAtom)
   const [otherChara, setOtherChara] = useAtom(otherCharaAtom)
   const userId = useAtomValue(userIdAtom)
   const { socket, isConnected } = useContext(SocketContext)
-
-  useEffect(() => {
-    if (roomId !== undefined) {
-      void initializeRoom(roomId)
-    }
-  }, [roomId, initializeRoom])
+  const isAllSelected = useAtomValue(isAllSelectedAtom)
+  const checkAllSelected = useSetAtom(checkAllSelectedAtom)
 
   useEffect(() => {
     if (socket !== null) {
@@ -40,6 +36,10 @@ const useCharaSelect = () => {
       }
     }
   }, [socket, isConnected, roomId, setOtherChara])
+
+  useEffect(() => {
+    checkAllSelected()
+  }, [myChara, otherChara, checkAllSelected])
 
   const handleChange = (chara: number) => {
     api
@@ -76,6 +76,7 @@ const useCharaSelect = () => {
     otherChara,
     handleChange,
     startGame,
+    isAllSelected,
   }
 }
 
