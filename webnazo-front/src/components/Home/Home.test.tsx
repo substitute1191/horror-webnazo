@@ -76,7 +76,7 @@ describe("Homeコンポーネント", () => {
     await user.click(startButton)
 
     await waitFor(() => {
-      expect(apiGet).toHaveBeenCalledWith("/api/createRoom")
+      expect(apiGet).toHaveBeenCalledWith("/createRoom")
     })
 
     await waitFor(() => {

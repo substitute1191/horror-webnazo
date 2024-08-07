@@ -1,7 +1,8 @@
 import useCharaSelect from "./useCharaSelect"
 
 const CharaSelect = () => {
-  const { myChara, otherChara, handleChange, startGame } = useCharaSelect()
+  const { myChara, otherChara, handleChange, startGame, isAllSelected } =
+    useCharaSelect()
 
   return (
     <div className="bg-home-bg object-fit flex h-screen flex-col items-center justify-center bg-cover text-6xl">
@@ -41,9 +42,11 @@ const CharaSelect = () => {
           </label>
         </div>
       </form>
-      <button className="font-onryou" onClick={startGame}>
-        ゲームスタート
-      </button>
+      {isAllSelected ? (
+        <button className="font-onryou" onClick={startGame}>
+          ゲームスタート
+        </button>
+      ) : null}
     </div>
   )
 }

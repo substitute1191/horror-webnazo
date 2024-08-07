@@ -1,7 +1,7 @@
-import { phaseAtom } from "@/atoms/roomAtoms"
+import { initializeRoomAtom, phaseAtom } from "@/atoms/roomAtoms"
 import CharaSelect from "./phase0/CharaSelect"
 import Phase1 from "./phase1/Phase1"
-import { useAtomValue } from "jotai"
+import { useAtomValue, useSetAtom } from "jotai"
 import { useSocket } from "@/utils/useSocket"
 import { useEffect } from "react"
 import { useParams } from "react-router-dom"
@@ -12,12 +12,19 @@ const Room = () => {
   const phase = useAtomValue(phaseAtom)
   const { roomId } = useParams()
   const { socket, connect, disconnect, isConnected } = useSocket()
+  const initializeRoom = useSetAtom(initializeRoomAtom)
 
   /* eslint-disable react-hooks/exhaustive-deps*/
   useEffect(() => {
     connect()
     return () => disconnect()
   }, [])
+
+  useEffect(() => {
+    if (roomId !== undefined) {
+      void initializeRoom(roomId)
+    }
+  }, [roomId, initializeRoom])
 
   useEffect(() => {
     if (socket !== null && isConnected) {
