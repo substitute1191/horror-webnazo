@@ -1,27 +1,22 @@
 import {
-  phaseAtom,
   myCharaAtom,
   otherCharaAtom,
   userIdAtom,
   checkAllSelectedAtom,
-  isAllSelectedAtom,
 } from "@/atoms/roomAtoms"
 import api from "@/utils/api"
-import { useAtom, useSetAtom, useAtomValue } from "jotai"
+import { useAtom, useAtomValue } from "jotai"
 import { useContext, useEffect } from "react"
 import { useParams } from "react-router-dom"
-import { Room } from "shared-types"
 import { SocketContext } from "../socketContext"
 
 const useCharaSelect = () => {
   const { roomId } = useParams()
-  const setPhase = useSetAtom(phaseAtom)
   const [myChara, setMyChara] = useAtom(myCharaAtom)
   const [otherChara, setOtherChara] = useAtom(otherCharaAtom)
   const userId = useAtomValue(userIdAtom)
   const { socket, isConnected } = useContext(SocketContext)
-  const isAllSelected = useAtomValue(isAllSelectedAtom)
-  const checkAllSelected = useSetAtom(checkAllSelectedAtom)
+  const [isAllSelected, checkAllSelected] = useAtom(checkAllSelectedAtom)
 
   useEffect(() => {
     if (socket !== null) {
@@ -60,22 +55,10 @@ const useCharaSelect = () => {
     setMyChara(chara)
   }
 
-  const startGame = () => {
-    api
-      .get<Room>(`/room/${roomId}/proceed`)
-      .then(({ data }) => {
-        setPhase(data.phase)
-      })
-      .catch((e) => {
-        console.error(e)
-      })
-  }
-
   return {
     myChara,
     otherChara,
     handleChange,
-    startGame,
     isAllSelected,
   }
 }

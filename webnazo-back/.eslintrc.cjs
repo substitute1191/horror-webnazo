@@ -46,7 +46,7 @@ module.exports = {
       { terms: ["todo", "fixme", "memo"], location: "anywhere" },
     ],
     "max-lines": ["warn", 200],
-    "max-lines-per-function": ["warn", { max: 30, skipBlankLines: true }],
+    "max-lines-per-function": ["warn", { max: 50, skipBlankLines: true }],
     "max-depth": ["warn", 3],
     complexity: ["warn", 5],
     "@typescript-eslint/naming-convention": [

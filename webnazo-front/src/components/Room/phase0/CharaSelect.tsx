@@ -1,8 +1,9 @@
+import useProceed from "../useProceed"
 import useCharaSelect from "./useCharaSelect"
 
 const CharaSelect = () => {
-  const { myChara, otherChara, handleChange, startGame, isAllSelected } =
-    useCharaSelect()
+  const { myChara, otherChara, handleChange, isAllSelected } = useCharaSelect()
+  const { proceed } = useProceed()
 
   return (
     <div className="bg-home-bg object-fit flex h-screen flex-col items-center justify-center bg-cover text-6xl">
@@ -43,7 +44,7 @@ const CharaSelect = () => {
         </div>
       </form>
       {isAllSelected ? (
-        <button className="font-onryou" onClick={startGame}>
+        <button className="font-onryou" onClick={() => proceed(1)}>
           ゲームスタート
         </button>
       ) : null}
