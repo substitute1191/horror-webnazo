@@ -1,10 +1,6 @@
 import { Router } from "express"
-import {
-  createRoom,
-  getRoomData,
-  proceed,
-  selectPlayer,
-} from "controller/roomController"
+import { createRoom, getRoomData } from "controller/roomController"
+import { proceed, selectPlayer } from "controller/roomActionController"
 import asyncHandler from "express-async-handler"
 
 const router = Router()
