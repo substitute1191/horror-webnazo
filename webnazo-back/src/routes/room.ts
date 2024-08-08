@@ -12,6 +12,6 @@ const router = Router()
 router.get("/createRoom", asyncHandler(createRoom))
 router.get("/room/:roomId", asyncHandler(getRoomData))
 router.post("/room/:roomId/selectPlayer", asyncHandler(selectPlayer))
-router.get("/room/:roomId/proceed", asyncHandler(proceed))
+router.post("/room/:roomId/proceed", asyncHandler(proceed))
 
 export default router

@@ -20,14 +20,17 @@ export const getRoomData = async (req: Request, res: Response) => {
   res.status(200).json(room)
 }
 
+const proceedSchema = z.object({
+  phase: z.number(),
+})
+
 export const proceed = async (req: Request, res: Response) => {
   const { roomId } = req.params
+  const { phase } = proceedSchema.parse(req.body)
   const room = await db.room.update({
     where: { id: roomId },
     data: {
-      phase: {
-        increment: 1,
-      },
+      phase: phase,
     },
   })
   res.status(200).json(room)

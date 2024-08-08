@@ -56,12 +56,15 @@ export const initializeRoomAtom = atom(
   }
 )
 
-export const checkAllSelectedAtom = atom(null, (get, set) => {
-  const myChara = get(myCharaAtom)
-  const otherChara = get(otherCharaAtom)
-  if (myChara !== 0 && otherChara !== 0) {
-    set(isAllSelectedAtom, true)
-  } else {
-    set(isAllSelectedAtom, false)
+export const checkAllSelectedAtom = atom(
+  (get) => get(isAllSelectedAtom),
+  (get, set) => {
+    const myChara = get(myCharaAtom)
+    const otherChara = get(otherCharaAtom)
+    if (myChara !== 0 && otherChara !== 0) {
+      set(isAllSelectedAtom, true)
+    } else {
+      set(isAllSelectedAtom, false)
+    }
   }
-})
+)
