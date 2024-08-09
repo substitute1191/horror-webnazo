@@ -4,25 +4,10 @@ import pyramid from "@/assets/image/mascot/mascot.png"
 import rank1 from "@/assets/image/ranking/rank_1.png"
 import rank2 from "@/assets/image/ranking/rank_2.png"
 import rank3 from "@/assets/image/ranking/rank_3.png"
-import api from "@/utils/api"
-import { useParams } from "react-router-dom"
-import { useAtom } from "jotai"
-import { phaseAtom } from "@/atoms/roomAtoms"
+import useProceed from "../useProceed"
 
 const Phase1 = () => {
-  const { roomId } = useParams()
-  const [, setPhase] = useAtom(phaseAtom)
-
-  const joinGame = () => {
-    api
-      .post(`/room/${roomId}/joinGame`)
-      .then(() => {
-        setPhase(2)
-      })
-      .catch((e) => {
-        console.error(e)
-      })
-  }
+  const { proceed } = useProceed()
 
   return (
     <div className="bg-yumekawa bg-cover">
@@ -56,7 +41,7 @@ const Phase1 = () => {
           <div className="text-center">
             <button
               className="w-full border-2 border-solid border-stone-600 bg-zinc-200 px-3 py-7 text-center text-7xl"
-              onClick={joinGame}
+              onClick={() => proceed(2)}
             >
               ゲームに参加する
             </button>
@@ -111,8 +96,8 @@ const Phase1 = () => {
             </ul>
           </div>
         </div>
-      </div >
-    </div >
+      </div>
+    </div>
   )
 }
 export default Phase1
