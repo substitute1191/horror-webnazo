@@ -52,10 +52,11 @@ const Phase1 = () => {
             </p>
             <div className="text-center">
               <button
-                className="w-full border-2 border-solid border-stone-600 bg-zinc-200 px-3 py-7 text-center text-7xl"
+                className="flex w-full transform items-center justify-between rounded-full bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 px-3 py-7 text-center text-7xl font-bold text-white shadow-lg transition duration-300 hover:scale-105 hover:shadow-2xl focus:outline-none"
                 onClick={() => proceed(2)}
               >
-                ゲームに参加する
+                <span className="flex-grow text-center">ゲームに参加する</span>
+                <i className="fas fa-angle-right mr-5"></i>
               </button>
             </div>
             <div className="mb-20 mt-16 bg-pink-100 p-12">
@@ -97,6 +98,10 @@ const Phase1 = () => {
                 <br />
                 <li className="list-inside list-disc">
                   このサイトは同時に多くのユーザーが閲覧しています。過度な更新を行うとサーバーに過剰な負荷がかかる恐れがあるため、ページが表示されない時にたくさん更新はしないでください。
+                </li>
+                <br />
+                <li className="list-inside list-disc">
+                  サイトが落ちてしまったときは、5分程度で正常に戻りますので更新せずにそのままお待ちください。
                 </li>
                 <br />
                 <li className="list-inside list-disc">
