@@ -27,6 +27,12 @@ export default function useRoom() {
         roomId: roomId,
       })
     }
+
+    return () => {
+      if (socket !== null) {
+        socket.off("joinRoom")
+      }
+    }
   }, [socket, isConnected])
 
   return { socket, isConnected }

@@ -6,6 +6,8 @@ declare global {
 
 const audioContext = new (window.AudioContext || window.webkitAudioContext)()
 
+// TODO 動作が不安定なのでコンソールはまだ残しておく 最終的には消す
+/* eslint-disable no-console*/
 class BGMManager {
   private buffer: AudioBuffer | null = null
   private source: AudioBufferSourceNode | null = null
@@ -15,6 +17,7 @@ class BGMManager {
   private startTime: number = 0
   private offset: number = 0
   private loadPromise: Promise<void> | null = null
+  private hasUserInteracted: boolean = false
 
   constructor(
     private bgmUrl: string,
@@ -40,10 +43,18 @@ class BGMManager {
     }
   }
 
+  public getHasUserInteracted(): boolean {
+    return this.hasUserInteracted
+  }
+
+  public setUserInteracted(): void {
+    this.hasUserInteracted = true
+  }
+
   public async play(): Promise<void> {
     console.debug("Play method called")
-    if (!this.isPlayable || this.isPlaying) {
-      console.debug("Not playable or already playing")
+    if (!this.isPlayable || this.isPlaying || !this.hasUserInteracted) {
+      console.debug("Not playable or already playing, or no user interaction")
       return
     }
 
@@ -61,7 +72,16 @@ class BGMManager {
     this.source = audioContext.createBufferSource()
     this.source.buffer = this.buffer
     this.source.loop = true
-    this.source.connect(this.gainNode)
+
+    const fadeGain = audioContext.createGain()
+    fadeGain.gain.setValueAtTime(0, audioContext.currentTime)
+    fadeGain.gain.linearRampToValueAtTime(
+      this.volume,
+      audioContext.currentTime + 1
+    )
+
+    this.source.connect(fadeGain)
+    fadeGain.connect(this.gainNode)
 
     this.startTime = audioContext.currentTime - this.offset
     this.source.start(0, this.offset)
@@ -70,7 +90,7 @@ class BGMManager {
   }
 
   public pause(): void {
-    if (!this.isPlaying || !this.source) return
+    if (!this.isPlaying || this.source === null) return
 
     this.offset =
       (audioContext.currentTime - this.startTime) % (this.buffer?.duration || 0)
@@ -79,7 +99,7 @@ class BGMManager {
   }
 
   public stop(): void {
-    if (!this.isPlaying || !this.source) return
+    if (!this.isPlaying || this.source === null) return
 
     this.source.stop()
     this.isPlaying = false
