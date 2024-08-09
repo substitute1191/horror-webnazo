@@ -3,13 +3,14 @@ import { isPlayableAtom, bgmVolumeAtom } from "@/atoms/soundAtoms"
 import { useCallback, useEffect, useRef, useState } from "react"
 import BGMManager from "@/SoundManager/BGMManager"
 
-/* eslint-disable max-lines-per-function,react-hooks/exhaustive-deps*/
+/* eslint-disable no-console,max-lines-per-function,react-hooks/exhaustive-deps*/
 const useBGM = (bgmUrl: string) => {
   const volume = useAtomValue(bgmVolumeAtom)
   const isPlayable = useAtomValue(isPlayableAtom)
   const managerRef = useRef<BGMManager | null>(null)
   const [isPlaying, setIsPlaying] = useState(false)
   const [isLoaded, setIsLoaded] = useState(false)
+  const [hasUserInteracted, setHasUserInteracted] = useState(false)
   const playRequestedRef = useRef(false)
 
   // BGMManagerの作成を一度だけ行う
@@ -25,9 +26,29 @@ const useBGM = (bgmUrl: string) => {
 
     void checkLoaded()
 
+    const handleUserInteraction = () => {
+      if (
+        managerRef.current !== null &&
+        !managerRef.current.getHasUserInteracted()
+      ) {
+        managerRef.current.setUserInteracted()
+        setHasUserInteracted(true)
+        document.removeEventListener("click", handleUserInteraction)
+        document.removeEventListener("keydown", handleUserInteraction)
+        document.removeEventListener("touchstart", handleUserInteraction)
+      }
+    }
+
+    document.addEventListener("click", handleUserInteraction)
+    document.addEventListener("keydown", handleUserInteraction)
+    document.addEventListener("touchstart", handleUserInteraction)
+
     return () => {
       managerRef.current?.stop()
       managerRef.current = null
+      document.removeEventListener("click", handleUserInteraction)
+      document.removeEventListener("keydown", handleUserInteraction)
+      document.removeEventListener("touchstart", handleUserInteraction)
       console.debug("useBGM: Cleanup completed")
     }
   }, [bgmUrl])
@@ -57,7 +78,12 @@ const useBGM = (bgmUrl: string) => {
   }, [isPlayable])
 
   const playBGM = async () => {
-    if (managerRef.current !== null && isLoaded && isPlayable) {
+    if (
+      managerRef.current !== null &&
+      isLoaded &&
+      isPlayable &&
+      hasUserInteracted
+    ) {
       try {
         await managerRef.current.play()
         setIsPlaying(managerRef.current.getIsPlaying())
@@ -83,9 +109,11 @@ const useBGM = (bgmUrl: string) => {
         }
         checkLoaded()
       })
+    } else if (!hasUserInteracted) {
+      console.debug("useBGM: Waiting for user interaction")
     }
     await playBGM()
-  }, [isLoaded, isPlayable])
+  }, [isLoaded, isPlayable, hasUserInteracted])
 
   const pause = useCallback(() => {
     console.debug("useBGM: pause called")
@@ -101,7 +129,7 @@ const useBGM = (bgmUrl: string) => {
     playRequestedRef.current = false
   }, [])
 
-  return { play, pause, stop, isLoaded, isPlaying }
+  return { play, pause, stop, isLoaded, isPlaying, hasUserInteracted }
 }
 
 export default useBGM

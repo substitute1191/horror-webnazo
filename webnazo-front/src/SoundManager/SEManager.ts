@@ -6,6 +6,8 @@ declare global {
 
 const audioContext = new (window.AudioContext || window.webkitAudioContext)()
 
+// TODO 動作が不安定なのでコンソールはまだ残しておく 最終的には消す
+/* eslint-disable no-console*/
 class SEManager {
   private buffer: AudioBuffer | null = null
   private source: AudioBufferSourceNode | null = null

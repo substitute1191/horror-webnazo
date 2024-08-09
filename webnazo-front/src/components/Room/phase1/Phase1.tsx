@@ -5,9 +5,20 @@ import rank1 from "@/assets/image/ranking/rank_1.png"
 import rank2 from "@/assets/image/ranking/rank_2.png"
 import rank3 from "@/assets/image/ranking/rank_3.png"
 import useProceed from "../useProceed"
+import useBGM from "@/SoundManager/useBGM"
+import bgmSrc from "@/assets/sound/pom_pom_shower.mp3"
+import { useEffect } from "react"
 
 const Phase1 = () => {
   const { proceed } = useProceed()
+  const { play, pause } = useBGM(bgmSrc)
+
+  useEffect(() => {
+    void play()
+    return () => {
+      pause()
+    }
+  })
 
   return (
     <div className="bg-yumekawa bg-cover">
