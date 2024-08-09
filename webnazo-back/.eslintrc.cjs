@@ -40,7 +40,7 @@ module.exports = {
   plugins: [],
   rules: {
     eqeqeq: "error",
-    "no-console": "warn",
+    "no-console": ["warn", { allow: ["error"] }],
     "no-warning-comments": [
       "warn",
       { terms: ["todo", "fixme", "memo"], location: "anywhere" },

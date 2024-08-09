@@ -11,10 +11,13 @@ export default {
       backgroundImage: {
         "home-bg": "url('/public/images/homebg.jpg')",
         "home-button": "url('/public/images/homebutton.png')",
+        yumekawa: "url('/src/assets/image/yumekawa.jpg')",
+        yumekawa2: "url('/src/assets/image/yumekawa2.jpg')",
       },
       animation: {
         "irregular-blink": "irregular-blink 5s steps(5,jump-none) infinite",
         noise: "noise 0.2s infinite",
+        float: "float 3s ease-in-out infinite",
       },
       keyframes: {
         "irregular-blink": {
@@ -36,10 +39,15 @@ export default {
           "80%": { transform: "translate(-6%,0) scale(1.5)" },
           "90%": { transform: "translate(4%,2%) scale(1.5)" },
         },
+        float: {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-20px)" },
+        },
       },
     },
     fontFamily: {
       onryou: ["onryou", "sans-serif"],
+      pop: ['"Yusei Magic"', "cursive"],
     },
   },
   plugins: [],

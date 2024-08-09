@@ -3,13 +3,15 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "concurrently \"npm run dev:webnazo-front\" \"npm run dev:webnazo-back\"",
+    "dev": "concurrently \"npm run dev:webnazo-front\" \"npm run dev:webnazo-back\" \"npm run localdb\"",
     "dev:webnazo-front": "cd webnazo-front && npm run dev",
     "dev:webnazo-back": "cd webnazo-back && npm run dev",
     "setup": "npm install && concurrently \"npm run install\" \"npm run install:webnazo-front\" \"npm run install:webnazo-back\"",
     "install:webnazo-front": "cd webnazo-front && npm install",
     "install:webnazo-back": "cd webnazo-back && npm install",
-    "prepare": "husky"
+    "prepare": "husky",
+    "test": "cd webnazo-front && npm run test",
+    "localdb": "cd webnazo-back && supabase start"
   },
   "lint-staged": {
     "*.{ts,tsx}": [
@@ -37,6 +39,7 @@
     "husky": "^9.1.1",
     "lint-staged": "^15.2.7",
     "prettier": "^3.3.3",
+    "prettier-plugin-tailwindcss": "^0.6.5",
     "typescript": "^5.5.3"
   }
 }

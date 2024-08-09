@@ -29,7 +29,7 @@ module.exports = {
     ecmaFeatures: {
       jsx: true,
     },
-    project: ['./tsconfig.json', './webnazo-front/tsconfig.json', './webnazo-back/tsconfig.json'],
+    project: ['./tsconfig.json', './webnazo-front/tsconfig.json', './webnazo-back/tsconfig.json',"./shared-types/tsconfig.json"],
     tsconfigRootDir: __dirname,
   },
   settings: {
@@ -39,7 +39,12 @@ module.exports = {
     "import/resolver": {
       typescript: {
         alwaysTryTypes: true,
-        project: ['./tsconfig.json', './webnazo-front/tsconfig.json', './webnazo-back/tsconfig.json'],
+        project: [
+          './tsconfig.json', 
+          './webnazo-front/tsconfig.json', 
+          './webnazo-back/tsconfig.json',
+          './shared-types/tsconfig.json'
+        ],
       },
       node: true,
     },
@@ -50,15 +55,15 @@ module.exports = {
   plugins: ["@typescript-eslint","react-refresh"],
   rules: {
     eqeqeq: "error",
-    "no-console": "warn",
+    "no-console": ["warn", { allow: ["error"] }],
     "max-lines": ["warn", 120],
     "react-refresh/only-export-components": [
       "warn",
       { allowConstantExport: true },
     ],
-    "max-lines-per-function": ["warn", { max: 50, skipBlankLines: true }],
+    "max-lines-per-function": ["warn", { max: 80, skipBlankLines: true }],
     "max-depth": ["warn", 3],
-    complexity: ["warn", 5],
+    complexity: ["warn", 7],
     "@typescript-eslint/naming-convention": [
       "error",
       {

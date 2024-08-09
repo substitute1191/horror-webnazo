@@ -19,6 +19,6 @@
   "include": [],
   "references": [
     { "path": "./webnazo-front" },
-    { "path": "./webnazo-back" }
+    { "path": "./webnazo-back" },
   ]
 }
