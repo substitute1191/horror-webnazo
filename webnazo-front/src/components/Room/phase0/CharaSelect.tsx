@@ -1,6 +1,7 @@
 import useProceed from "../useProceed"
 import useCharaSelect from "./useCharaSelect"
 
+// TODO テストを書く
 const CharaSelect = () => {
   const { myChara, otherChara, handleChange, isAllSelected } = useCharaSelect()
   const { proceed } = useProceed()
