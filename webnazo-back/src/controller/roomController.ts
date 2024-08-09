@@ -1,4 +1,4 @@
-import { Request, Response } from "express"
+import { Request, Response, NextFunction } from "express"
 import { db } from "../lib/prisma"
 import { z } from "zod"
 

@@ -15,9 +15,9 @@ const Phase1 = () => {
 
   const joinGame = () => {
     api
-      .post(`/api/room/${roomId}/joinGame`)
+      .post(`/room/${roomId}/joinGame`)
       .then(() => {
-        setPhase((prev) => ++prev)
+        setPhase(2)
       })
       .catch((e) => {
         console.error(e)
