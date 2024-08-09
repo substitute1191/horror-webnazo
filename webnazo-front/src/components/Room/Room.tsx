@@ -16,6 +16,7 @@ const Room = () => {
         {phase === 0 ? <CharaSelect /> : null}
         {phase === 1 ? <Phase1 /> : null}
         {phase === 2 ? <Phase2 /> : null}
+        {phase === 3 ? <div>Phase 3</div> : null}
       </div>
     </SocketContext.Provider>
   )
