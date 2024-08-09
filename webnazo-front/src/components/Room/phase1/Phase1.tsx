@@ -64,17 +64,21 @@ const Phase1 = () => {
               <ul className="leading-loose">
                 <li className="flex text-6xl">
                   <img src={rank1} alt="一位" className="w-48" />
-                  <span className="mb-10 mt-auto">知的生命体YOSHIO さん</span>
+                  <span className="mb-10 mt-auto">
+                    知的生命体YOSHIO <span className="text-4xl">さん</span>
+                  </span>
                 </li>
                 <li className="mb-7 flex pl-8 text-5xl">
                   <img src={rank2} alt="二位" className="w-32" />
                   <span className="mb-7 ml-3 mt-auto">
-                    北亨夏高校クイ研 さん
+                    北亨夏高校クイ研 <span className="text-[2rem]">さん</span>
                   </span>
                 </li>
                 <li className="flex pl-14 text-4xl">
                   <img src={rank3} alt="三位" className="w-20" />
-                  <span className="mb-4 ml-7 mt-auto">ゆ（＠ω＠） さん</span>
+                  <span className="mb-4 ml-7 mt-auto">
+                    ゆ（＠ω＠） <span className="text-3xl">さん</span>
+                  </span>
                 </li>
               </ul>
             </div>
