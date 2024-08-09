@@ -22,7 +22,7 @@ const Phase1 = () => {
 
   return (
     <div className="bg-yumekawa bg-white/40 bg-cover bg-blend-color">
-      <div className="font-pop mx-auto w-3/5 border-2 border-solid border-fuchsia-200 bg-gradient-to-t from-orange-200 via-lime-300 to-emerald-200 pb-52 pt-7">
+      <div className="font-pop mx-auto w-full border-2 border-solid border-fuchsia-200 bg-gradient-to-t from-orange-200 via-lime-300 to-emerald-200 pb-52 pt-7 lg:w-3/5">
         <h1>
           <img
             src={rankmatchLogo}
