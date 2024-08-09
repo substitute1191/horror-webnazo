@@ -27,6 +27,13 @@ export function setupSocketServer(httpServer: HttpServer) {
       }
     )
 
+    socket.on(
+      "proceed",
+      ({ roomId, phase }: { roomId: string; phase: number }) => {
+        socket.broadcast.to(roomId).emit("updatePhase", phase)
+      }
+    )
+
     socket.on("disconnect", () => {
       console.log("user disconnected!")
     })
