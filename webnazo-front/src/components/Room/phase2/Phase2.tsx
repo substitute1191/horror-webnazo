@@ -5,7 +5,10 @@ import rankmatchFakeLogo from "@/assets/image/rankmatch_fake_logo.png"
 import AboutSite from "../components/prehorror/AboutSite"
 import RankmatchQuestions from "../components/prehorror/RankmatchQuestions"
 import useProceed from "../useProceed"
+import KeepSpeakingPyramid from "../components/prehorror/KeepSpeakingPyramid"
 
+// TODO 後で関数を分割する
+/* eslint-disable max-lines-per-function */
 const Phase2 = () => {
   const { play, pause } = useBGM(bgmSrc)
   const [tab, setTab] = useState(0)
@@ -50,6 +53,7 @@ const Phase2 = () => {
     <div className="bg-yumekawa bg-white/40 bg-cover bg-blend-color">
       <div className="font-pop mx-auto w-full border-2 border-solid border-fuchsia-200 bg-gradient-to-t from-orange-200 via-lime-300 to-emerald-200 pb-52 pt-7 lg:w-3/5">
         <div className="relative">
+          <KeepSpeakingPyramid />
           <img
             src={rankmatchFakeLogo}
             className="mx-auto mb-5 w-1/2"
