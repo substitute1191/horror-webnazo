@@ -8,7 +8,15 @@ import useRoom from "./useRoom"
 
 const Room = () => {
   const phase = useAtomValue(phaseAtom)
-  const { socket, isConnected } = useRoom()
+  const { socket, isConnected, isPending, error } = useRoom()
+
+  if (isPending) {
+    return <div>Loading...</div>
+  }
+
+  if (error !== null) {
+    return <div>Error: {error.message}</div>
+  }
 
   return (
     <SocketContext.Provider value={{ socket, isConnected }}>
