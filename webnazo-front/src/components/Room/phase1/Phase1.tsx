@@ -34,7 +34,7 @@ const Phase1 = () => {
         <div className="mx-auto w-11/12 rounded-2xl border border-solid border-fuchsia-200 bg-white px-2 py-2">
           <div className="rounded-2xl border-2 border-dashed border-fuchsia-200 px-12 py-5">
             <SiteDescription />
-            <p className="mb-5 mt-14 text-center text-3xl font-extrabold">
+            <div className="mb-5 mt-14 text-center text-3xl font-extrabold">
               <div>
                 次回のゲームは<span className="text-red-500">8月1日21時</span>
                 からスタート！
@@ -44,7 +44,7 @@ const Phase1 = () => {
                 2人1組
               </span>
               での参加となります！友人を誘って参加しよう！
-            </p>
+            </div>
             <div className="text-center">
               <button
                 className="flex w-full transform items-center justify-between rounded-full bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 px-3 py-7 text-center text-7xl font-bold text-white shadow-lg transition duration-300 hover:scale-105 hover:shadow-2xl focus:outline-none"
