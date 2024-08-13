@@ -4,23 +4,12 @@ import { useSetAtom } from "jotai"
 import { useParams } from "react-router-dom"
 import { Room } from "shared-types"
 import { SocketContext } from "./socketContext"
-import { useContext, useEffect } from "react"
+import { useContext } from "react"
 
 export default function useProceed() {
   const { roomId } = useParams()
   const setPhase = useSetAtom(phaseAtom)
   const { socket } = useContext(SocketContext)
-
-  useEffect(() => {
-    if (socket) {
-      socket.on("updatePhase", (newPhase: number) => {
-        const localPhase = Number(localStorage.getItem("phase"))
-        if (localPhase !== newPhase) {
-          setPhase(newPhase)
-        }
-      })
-    }
-  })
 
   const proceed = (phase: number) => {
     api
