@@ -65,7 +65,10 @@ describe("Phase1 component", () => {
     })
 
     render(<Phase1 />)
+
     const joinGame = screen.getByText("ゲームに参加する")
+    expect(joinGame).toBeInTheDocument()
+
     await user.click(joinGame)
 
     await waitFor(() => {
