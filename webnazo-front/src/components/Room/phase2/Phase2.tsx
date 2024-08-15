@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react"
 import bgmSrc from "@/assets/sound/Sunflower.mp3"
 import rankmatchFakeLogo from "@/assets/image/rankmatch_fake_logo.png"
 import AboutSite from "../components/prehorror/AboutSite"
-import RankmatchQuestions from "../components/prehorror/RankmatchQuestions"
+import RankmatchQuestions from "../components/prehorror/Questions/RankmatchQuestions"
 import useProceed from "../useProceed"
 import KeepSpeakingPyramid from "../components/prehorror/KeepSpeakingPyramid"
 

@@ -14,6 +14,9 @@ export default {
         yumekawa: "url('/src/assets/image/yumekawa.jpg')",
         yumekawa2: "url('/src/assets/image/yumekawa2.jpg')",
       },
+      transformStyle: {
+        "3d": "preserve-3d",
+      },
       animation: {
         "irregular-blink": "irregular-blink 5s steps(5,jump-none) infinite",
         noise: "noise 0.2s infinite",

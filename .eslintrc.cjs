@@ -81,6 +81,14 @@ module.exports = {
         leadingUnderscore: "allow",
       },
       {
+        "selector": "typeParameter",
+        "format": ["PascalCase"],
+        "custom": {
+          "regex": "^T$|^[A-Z]$|^[A-Z][a-zA-Z]+$",
+          "match": true
+        }
+      },
+      {
         selector: "class",
         format: ["PascalCase"],
       },
