@@ -8,7 +8,7 @@ jest.mock("@/assets/image/rankmatch_logo.png", () => "rankmatch_logo.png")
 jest.mock("@/assets/image/mascot/mascot.png", () => "mascot.png")
 jest.mock("@/assets/image/ranking/rank_1.png", () => "rank_1.png")
 jest.mock("@/assets/image/ranking/rank_2.png", () => "rank_2.png")
-jest.mock("@/assets/image/ranking/rank_3.png")
+jest.mock("@/assets/image/ranking/rank_3.png", () => "rank_3.png")
 
 jest.mock("@/assets/sound/pom_pom_shower.mp3", () => "mocked-bgm-file")
 
@@ -73,5 +73,10 @@ describe("Phase1 component", () => {
         phase: 2,
       })
     })
+  })
+
+  it("コンポーネントのスナップショットが一致する", () => {
+    const { container } = render(<Phase1 />)
+    expect(container).toMatchSnapshot()
   })
 })
