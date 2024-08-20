@@ -16,3 +16,12 @@ export interface RankMatch {
   q2sentence: Record<string, boolean>
   room: Room
 }
+
+export interface Position {
+  x: number
+  y: number
+}
+
+export interface Positions {
+  [key: string]: Position
+}

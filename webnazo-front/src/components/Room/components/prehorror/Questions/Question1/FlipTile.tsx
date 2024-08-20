@@ -1,5 +1,6 @@
 import useFlipTile from "./useFlipTile"
 
+// eslint-disable-next-line max-lines-per-function
 const FlipTile = () => {
   const { idx, puzzle, answer, isClear, flip } = useFlipTile()
 
@@ -42,7 +43,7 @@ const FlipTile = () => {
   return (
     <div>
       <h1 style={{ fontSize: "1.875rem", marginBottom: "1rem" }}>
-        Q1 左のパズルを右図と一致させろ！
+        Q1 左のパズルを右図と一致させろ！（最短で5手）
       </h1>
       <div className="flex justify-center gap-12">
         <div style={containerStyle}>
