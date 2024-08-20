@@ -1,4 +1,5 @@
 import pyramid from "@/assets/image/mascot/mascot.png"
+import CollectableChara from "./CollectableChara"
 
 const AboutPyramid = () => {
   return (
@@ -8,9 +9,13 @@ const AboutPyramid = () => {
       <p className="mt-8 text-2xl">
         このサイトのマスコットキャラクター。謎で頂点を目指すユーザーの皆を応援している。可愛い外見で毒のあることを言うという自己認識を持っているが、そもそも自分が可愛くないことに気づいていない。
         <br />
-        オカルトが大の苦手であり、心霊スポットなどお化けが出そうなところからはすぐに逃げ出してしまう。
+        オカルトが大の苦手であり、お化けが出そうな場所からはすぐ逃げ出してしまう。
         <br />
         そのためピラミッドが王族の墓として作られたという通説を真っ赤なデマであるとして強く否定している。
+        <br />
+        座右の銘は「
+        <CollectableChara chara="ぎ" />
+        りぎりでいつも生きていたいから」。
       </p>
     </div>
   )

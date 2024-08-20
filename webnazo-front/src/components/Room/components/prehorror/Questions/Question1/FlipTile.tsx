@@ -78,7 +78,7 @@ const FlipTile = () => {
           {idx.map((rowIdx) =>
             idx.map((colIdx) => (
               <div
-                key={rowIdx + rowIdx * 4}
+                key={`answer${colIdx + rowIdx * 4}`}
                 className={`border-gray flex items-center justify-center border text-xl font-bold shadow-md ${answer[rowIdx][colIdx] === 0 ? "bg-gray-500" : "bg-slate-50"}`}
               >
                 {colIdx + rowIdx * 4}

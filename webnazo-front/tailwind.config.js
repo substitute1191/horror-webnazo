@@ -49,6 +49,7 @@ export default {
       },
     },
     fontFamily: {
+      gothic: ["YuGothic", "Yu Gothic"],
       onryou: ["onryou", "sans-serif"],
       pop: ['"Yusei Magic"', "cursive"],
     },

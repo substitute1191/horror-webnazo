@@ -1,5 +1,5 @@
-import { roomAtom } from "@/atoms/roomAtoms"
-import { useRoomQuery } from "@/hooks/useRoomQuery"
+import { roomAtom, roomIdAtom } from "@/atoms/roomAtoms"
+import { useRoomOperation } from "@/hooks/useRoomQuery"
 import { useSocket } from "@/utils/useSocket"
 import { useSetAtom } from "jotai"
 import { useEffect } from "react"
@@ -7,15 +7,19 @@ import { useParams } from "react-router-dom"
 
 export default function useRoom() {
   const { roomId } = useParams()
-  const { data: room, isPending, error } = useRoomQuery(roomId as string)
+  const { data: room, isPending, error } = useRoomOperation()
   const setRoom = useSetAtom(roomAtom)
   const { socket, connect, disconnect, isConnected } = useSocket()
+  const setRoomId = useSetAtom(roomIdAtom)
 
   useEffect(() => {
     if (room !== undefined) {
       setRoom(room)
     }
-  }, [room, setRoom])
+    if (roomId !== undefined) {
+      setRoomId(roomId)
+    }
+  }, [room, setRoom, roomId, setRoomId])
 
   /* eslint-disable react-hooks/exhaustive-deps*/
   useEffect(() => {
