@@ -1,0 +1,195 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CharaSelect単体のテスト スタートボタンの出現確認: 両プレイヤー選択後 1`] = `
+<div>
+  <div
+    class="bg-home-bg object-fit flex h-screen flex-col items-center justify-center bg-cover text-6xl"
+  >
+    <form
+      id="playerSelect"
+    >
+      <div
+        class="mb-8"
+      >
+        <input
+          checked=""
+          class="peer/player1 hidden"
+          id="player1"
+          name="player"
+          type="radio"
+        />
+        <label
+          class="font-onryou block rounded p-4 text-white peer-checked/player1:bg-slate-500 peer-disabled/player1:cursor-not-allowed peer-disabled/player1:opacity-50"
+          for="player1"
+        >
+          プレイヤー１
+        </label>
+      </div>
+      <div
+        class="mb-8"
+      >
+        <input
+          class="peer/player2 hidden"
+          disabled=""
+          id="player2"
+          name="player"
+          type="radio"
+        />
+        <label
+          class="font-onryou block rounded p-4 text-white peer-checked/player2:bg-slate-500 peer-disabled/player2:cursor-not-allowed peer-disabled/player2:opacity-50"
+          for="player2"
+        >
+          プレイヤー２
+        </label>
+      </div>
+    </form>
+    <button
+      class="font-onryou"
+    >
+      ゲームスタート
+    </button>
+  </div>
+</div>
+`;
+
+exports[`CharaSelect単体のテスト 初期状態のコンポーネントのスナップショットが一致する: 初期状態 1`] = `
+<div>
+  <div
+    class="bg-home-bg object-fit flex h-screen flex-col items-center justify-center bg-cover text-6xl"
+  >
+    <form
+      id="playerSelect"
+    >
+      <div
+        class="mb-8"
+      >
+        <input
+          class="peer/player1 hidden"
+          id="player1"
+          name="player"
+          type="radio"
+        />
+        <label
+          class="font-onryou block rounded p-4 text-white peer-checked/player1:bg-slate-500 peer-disabled/player1:cursor-not-allowed peer-disabled/player1:opacity-50"
+          for="player1"
+        >
+          プレイヤー１
+        </label>
+      </div>
+      <div
+        class="mb-8"
+      >
+        <input
+          class="peer/player2 hidden"
+          id="player2"
+          name="player"
+          type="radio"
+        />
+        <label
+          class="font-onryou block rounded p-4 text-white peer-checked/player2:bg-slate-500 peer-disabled/player2:cursor-not-allowed peer-disabled/player2:opacity-50"
+          for="player2"
+        >
+          プレイヤー２
+        </label>
+      </div>
+    </form>
+  </div>
+</div>
+`;
+
+exports[`Phase0のテスト 「ゲームスタート」出現後のコンポーネントのスナップショットが一致する: 両プレイヤー選択後 1`] = `
+<div>
+  <div
+    class="bg-home-bg object-fit flex h-screen flex-col items-center justify-center bg-cover text-6xl"
+  >
+    <form
+      id="playerSelect"
+    >
+      <div
+        class="mb-8"
+      >
+        <input
+          checked=""
+          class="peer/player1 hidden"
+          id="player1"
+          name="player"
+          type="radio"
+        />
+        <label
+          class="font-onryou block rounded p-4 text-white peer-checked/player1:bg-slate-500 peer-disabled/player1:cursor-not-allowed peer-disabled/player1:opacity-50"
+          for="player1"
+        >
+          プレイヤー１
+        </label>
+      </div>
+      <div
+        class="mb-8"
+      >
+        <input
+          class="peer/player2 hidden"
+          disabled=""
+          id="player2"
+          name="player"
+          type="radio"
+        />
+        <label
+          class="font-onryou block rounded p-4 text-white peer-checked/player2:bg-slate-500 peer-disabled/player2:cursor-not-allowed peer-disabled/player2:opacity-50"
+          for="player2"
+        >
+          プレイヤー２
+        </label>
+      </div>
+    </form>
+    <button
+      class="font-onryou"
+    >
+      ゲームスタート
+    </button>
+  </div>
+</div>
+`;
+
+exports[`Phase0のテスト 初期状態のコンポーネントのスナップショットが一致する: 初期状態 1`] = `
+<div>
+  <div
+    class="bg-home-bg object-fit flex h-screen flex-col items-center justify-center bg-cover text-6xl"
+  >
+    <form
+      id="playerSelect"
+    >
+      <div
+        class="mb-8"
+      >
+        <input
+          class="peer/player1 hidden"
+          id="player1"
+          name="player"
+          type="radio"
+        />
+        <label
+          class="font-onryou block rounded p-4 text-white peer-checked/player1:bg-slate-500 peer-disabled/player1:cursor-not-allowed peer-disabled/player1:opacity-50"
+          for="player1"
+        >
+          プレイヤー１
+        </label>
+      </div>
+      <div
+        class="mb-8"
+      >
+        <input
+          class="peer/player2 hidden"
+          id="player2"
+          name="player"
+          type="radio"
+        />
+        <label
+          class="font-onryou block rounded p-4 text-white peer-checked/player2:bg-slate-500 peer-disabled/player2:cursor-not-allowed peer-disabled/player2:opacity-50"
+          for="player2"
+        >
+          プレイヤー２
+        </label>
+      </div>
+    </form>
+  </div>
+</div>
+`;
