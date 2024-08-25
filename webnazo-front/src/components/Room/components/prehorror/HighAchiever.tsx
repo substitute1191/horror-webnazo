@@ -1,7 +1,7 @@
 import rank1 from "@/assets/image/ranking/rank_1.png"
 import rank2 from "@/assets/image/ranking/rank_2.png"
 import rank3 from "@/assets/image/ranking/rank_3.png"
-import CollectableChara from "./CollectableChara"
+import CollectableChara from "./Questions/Question2/CollectableChara"
 
 const HighAchierver = () => {
   return (

@@ -2,7 +2,7 @@ import FlipTile from "./Question1/FlipTile"
 import { useAtomValue } from "jotai"
 import { q2sentenceAtom } from "@/atoms/roomAtoms"
 import mapSrc from "@/assets/image/map/map.png"
-import PlaceImage from "./Question1/PlaceImage"
+import PlaceImage from "./Question3/PlaceImage"
 import cafeSrc from "@/assets/image/map/cafe.png"
 import superSrc from "@/assets/image/map/super.png"
 import buildingSrc from "@/assets/image/map/building.png"
@@ -10,6 +10,7 @@ import ohakaSrc from "@/assets/image/map/ohaka.png"
 import parkSrc from "@/assets/image/map/park.png"
 import postSrc from "@/assets/image/map/post.png"
 import schoolSrc from "@/assets/image/map/school.png"
+import PlaceOhaka from "./Question3/PlaceOhaka"
 
 // eslint-disable-next-line complexity
 const RankmatchQuestions = () => {
@@ -56,7 +57,7 @@ const RankmatchQuestions = () => {
             最初の曲がり角で、右に曲がります。 左手にスーパーがあります。
           </li>
           <li className="mb-2">
-            3.信号を通らずに、カフェから墓地に行く方法はありません。
+            3.信号を通らずに、ビルからスーパーに行く方法はありません。
           </li>
           <li>
             4.ビルからバス停の前を通らずに公園へ行くには、必ず学校かカフェの入口の前を
@@ -64,18 +65,17 @@ const RankmatchQuestions = () => {
           </li>
         </ul>
       </div>
-      <div>
-        <h2 className="font-bold">以下の画像を配置して考えてみよう！</h2>
-        <PlaceImage imgSrc={cafeSrc} initialPosition={{ x: 453, y: 1640 }} />
-        <PlaceImage
-          imgSrc={buildingSrc}
-          initialPosition={{ x: 553, y: 1640 }}
-        />
-        <PlaceImage imgSrc={ohakaSrc} initialPosition={{ x: 653, y: 1640 }} />
-        <PlaceImage imgSrc={parkSrc} initialPosition={{ x: 753, y: 1640 }} />
-        <PlaceImage imgSrc={postSrc} initialPosition={{ x: 853, y: 1640 }} />
-        <PlaceImage imgSrc={schoolSrc} initialPosition={{ x: 953, y: 1640 }} />
-        <PlaceImage imgSrc={superSrc} initialPosition={{ x: 1053, y: 1640 }} />
+      <div className="relative h-32">
+        <h2 className="text-3xl font-bold">
+          以下の画像を配置して考えてみよう！
+        </h2>
+        <PlaceImage imgSrc={cafeSrc} initialPosition={{ x: 0, y: 35 }} />
+        <PlaceImage imgSrc={buildingSrc} initialPosition={{ x: 85, y: 35 }} />
+        <PlaceOhaka imgSrc={ohakaSrc} initialPosition={{ x: 170, y: 35 }} />
+        <PlaceImage imgSrc={parkSrc} initialPosition={{ x: 255, y: 35 }} />
+        <PlaceImage imgSrc={postSrc} initialPosition={{ x: 340, y: 35 }} />
+        <PlaceImage imgSrc={schoolSrc} initialPosition={{ x: 425, y: 35 }} />
+        <PlaceImage imgSrc={superSrc} initialPosition={{ x: 510, y: 35 }} />
       </div>
     </>
   )

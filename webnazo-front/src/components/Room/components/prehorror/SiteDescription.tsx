@@ -1,4 +1,4 @@
-import CollectableChara from "./CollectableChara"
+import CollectableChara from "./Questions/Question2/CollectableChara"
 
 const SiteDescription = () => {
   return (

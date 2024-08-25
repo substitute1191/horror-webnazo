@@ -1,5 +1,5 @@
 import pyramid from "@/assets/image/mascot/mascot.png"
-import CollectableChara from "./CollectableChara"
+import CollectableChara from "./Questions/Question2/CollectableChara"
 
 const AboutPyramid = () => {
   return (
