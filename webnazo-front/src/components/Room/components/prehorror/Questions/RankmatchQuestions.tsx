@@ -23,7 +23,8 @@ const RankmatchQuestions = () => {
       </div>
       <FlipTile />
       <div className="text-3xl">
-        Q2 「<span className="font-gothic text-[0.95em] font-bold">これ</span>
+        Q2 「
+        <span className="font-gothic text-[0.95em] font-bold">この文字</span>
         」を集めろ！
       </div>
       <div className="text-2xl">

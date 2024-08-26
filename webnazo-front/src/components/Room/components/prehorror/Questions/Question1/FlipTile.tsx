@@ -43,7 +43,7 @@ const FlipTile = () => {
   return (
     <div>
       <h1 style={{ fontSize: "1.875rem", marginBottom: "1rem" }}>
-        Q1 左のパズルを右図と一致させろ！（最短で5手）
+        Q1 左のパズルを右図と一致させろ！（最短で3手）
       </h1>
       <div className="flex justify-center gap-12">
         <div style={containerStyle}>

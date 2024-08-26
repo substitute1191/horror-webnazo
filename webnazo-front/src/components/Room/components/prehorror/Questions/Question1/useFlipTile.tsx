@@ -13,10 +13,10 @@ const useFlipTile = () => {
     [0, 1, 1, 0],
   ])
   const answer = [
-    [0, 1, 1, 1],
     [1, 1, 1, 1],
-    [1, 1, 1, 1],
-    [1, 1, 1, 1],
+    [1, 1, 1, 0],
+    [1, 1, 1, 0],
+    [1, 0, 0, 0],
   ]
   const [isClear, setIsClear] = useState(false)
   const { play: playFlip } = useSE(flipSE)

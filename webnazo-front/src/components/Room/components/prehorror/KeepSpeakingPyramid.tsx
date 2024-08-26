@@ -20,6 +20,8 @@ const KeepSpeakingPyramid = () => {
   const pyramidRef = useRef<HTMLImageElement>(null)
   const [isRunaway, setIsRunaway] = useState(false)
   const { play } = useSE(runawaySrc)
+  const [isRunawayAnimationEnd, setIsRunawayAnimationEnd] = useState(false)
+  const [isPlaying, setIsPlaying] = useState(false)
 
   useEffect(() => {
     if (pyramidRef.current !== null) {
@@ -29,41 +31,54 @@ const KeepSpeakingPyramid = () => {
       const { x: ohakaX, y: ohakaY } = ohakaPosition
 
       if (
-        Math.sqrt((pyramidX - ohakaX) ** 2 + (pyramidY - ohakaY) ** 2) <= 250
+        Math.sqrt((pyramidX - ohakaX) ** 2 + (pyramidY - ohakaY) ** 2) <= 200 &&
+        !isPlaying
       ) {
-        console.debug("お墓が近づきすぎています！！")
+        setIsPlaying(true)
         play()
         setIsRunaway(true)
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ohakaPosition, play])
 
   const handleComplete = useCallback(() => {
     setIdx((prev) => (prev + 1) % sentences.length)
   }, [sentences.length])
 
+  const handleRunawayAnimationEnd = () => {
+    setIsRunawayAnimationEnd(true)
+  }
+
   return (
-    <div className="absolute -left-32 flex h-full w-[120%] gap-4">
-      <img
-        ref={pyramidRef}
-        src={pyramid}
-        alt="ピラミッド君"
-        className={`animate-float ${isRunaway ? "animate-runaway" : ""}`}
-      />
-      {isRunaway ? (
-        <div className="flex h-full w-full items-center">
-          <div className="flex h-full w-full animate-[fadeout_0.8s_linear_forwards] items-center rounded-xl bg-slate-50 p-12 text-5xl opacity-90">
-            うわあああああああーーーーーーー！！
-          </div>
+    <>
+      {!isRunawayAnimationEnd ? (
+        <div
+          className={`absolute -left-32 flex h-full w-[120%] gap-4 ${isRunawayAnimationEnd ? "z-0" : "z-10"}`}
+        >
+          <img
+            ref={pyramidRef}
+            src={pyramid}
+            alt="ピラミッド君"
+            className={`animate-float ${isRunaway ? "animate-runaway" : ""}`}
+            onAnimationEnd={handleRunawayAnimationEnd}
+          />
+          {isRunaway ? (
+            <div className="pointer-events-none flex h-full w-full animate-[fadeout_0.8s_linear_forwards] items-center">
+              <div className="pointer-events-none flex h-full w-full animate-[fadeout_0.8s_linear_forwards] items-center rounded-xl bg-slate-50 p-12 text-5xl opacity-90">
+                うわあああああああーーーーーーー！！
+              </div>
+            </div>
+          ) : (
+            <SpeakingPyramid
+              key={idx}
+              text={sentences[idx]}
+              onComplete={handleComplete}
+            />
+          )}
         </div>
-      ) : (
-        <SpeakingPyramid
-          key={idx}
-          text={sentences[idx]}
-          onComplete={handleComplete}
-        />
-      )}
-    </div>
+      ) : null}
+    </>
   )
 }
 

@@ -70,7 +70,7 @@ export default {
       },
     },
     fontFamily: {
-      gothic: ["YuGothic", "Yu Gothic"],
+      gothic: ["メイリオ", "Yu Gothic"],
       onryou: ["onryou", "sans-serif"],
       pop: ['"Yusei Magic"', "cursive"],
     },
