@@ -1,4 +1,4 @@
-import { roomAtom, roomIdAtom } from "@/atoms/roomAtoms"
+import { roomAtom, roomIdAtom , phaseAtom } from "@/atoms/roomAtoms"
 import { useRoomOperation } from "@/hooks/useRoomQuery"
 import { useSocket } from "@/utils/useSocket"
 import { useSetAtom } from "jotai"
@@ -9,6 +9,7 @@ export default function useRoom() {
   const { roomId } = useParams()
   const { data: room, isPending, error } = useRoomOperation()
   const setRoom = useSetAtom(roomAtom)
+  const setPhase = useSetAtom(phaseAtom)
   const { socket, connect, disconnect, isConnected } = useSocket()
   const setRoomId = useSetAtom(roomIdAtom)
 
@@ -29,6 +30,12 @@ export default function useRoom() {
 
   useEffect(() => {
     if (socket !== null && isConnected) {
+      socket.on("updatePhase", (newPhase: number) => {
+        const localPhase = Number(localStorage.getItem("phase"))
+        if (localPhase !== newPhase) {
+          setPhase(newPhase)
+        }
+      })
       socket.emit("joinRoom", {
         roomId: roomId,
       })

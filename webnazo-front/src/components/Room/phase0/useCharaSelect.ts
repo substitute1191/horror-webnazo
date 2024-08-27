@@ -10,7 +10,6 @@ import { useContext, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import { SocketContext } from "../socketContext"
 
-// TODO テストを書く
 const useCharaSelect = () => {
   const { roomId } = useParams()
   const [myChara, setMyChara] = useAtom(myCharaAtom)
