@@ -1,6 +1,7 @@
 import rank1 from "@/assets/image/ranking/rank_1.png"
 import rank2 from "@/assets/image/ranking/rank_2.png"
 import rank3 from "@/assets/image/ranking/rank_3.png"
+import CollectableChara from "./Questions/Question2/CollectableChara"
 
 const HighAchierver = () => {
   return (
@@ -22,7 +23,8 @@ const HighAchierver = () => {
         <li className="flex pl-14 text-4xl">
           <img src={rank3} alt="三位" className="w-20" />
           <span className="mb-4 ml-7 mt-auto">
-            ゆ（＠ω＠） <span className="text-3xl">さん</span>
+            <CollectableChara chara="ざ" />
+            （＠ω＠） <span className="text-3xl">さん</span>
           </span>
         </li>
       </ul>

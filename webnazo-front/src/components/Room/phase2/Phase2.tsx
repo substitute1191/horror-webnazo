@@ -1,20 +1,22 @@
 import useBGM from "@/SoundManager/useBGM"
-import { useEffect, useRef, useState } from "react"
+import { useEffect } from "react"
 import bgmSrc from "@/assets/sound/Sunflower.mp3"
 import rankmatchFakeLogo from "@/assets/image/rankmatch_fake_logo.png"
 import AboutSite from "../components/prehorror/AboutSite"
-import RankmatchQuestions from "../components/prehorror/RankmatchQuestions"
+import RankmatchQuestions from "../components/prehorror/Questions/RankmatchQuestions"
 import useProceed from "../useProceed"
 import KeepSpeakingPyramid from "../components/prehorror/KeepSpeakingPyramid"
+import { tabInPhase2Atom } from "@/atoms/roomAtoms"
+import { useAtom } from "jotai"
 
 // TODO 後で関数を分割する
 /* eslint-disable max-lines-per-function */
 const Phase2 = () => {
   const { play, pause } = useBGM(bgmSrc)
-  const [tab, setTab] = useState(0)
-  const imageMapResizerLoaded = useRef(false)
+  const [tab, setTab] = useAtom(tabInPhase2Atom)
   const { proceed } = useProceed()
 
+  // 音楽再生
   useEffect(() => {
     void play()
 
@@ -23,42 +25,54 @@ const Phase2 = () => {
     }
   }, [play, pause])
 
+  // ロゴのクリック部分のレスポンシブ対応
   useEffect(() => {
-    if (!imageMapResizerLoaded.current) {
-      const script = document.createElement("script")
-      script.src =
-        "https://unpkg.com/image-map-resizer@1.0.10/js/imageMapResizer.min.js"
-      script.async = true
-      document.body.appendChild(script)
+    const loadImageMapResizer = () => {
+      if (typeof window.imageMapResize !== "function") {
+        const script = document.createElement("script")
+        script.src =
+          "https://unpkg.com/image-map-resizer@1.0.10/js/imageMapResizer.min.js"
+        script.async = true
 
-      script.onload = () => {
-        // スクリプトがロードされた後にimageMapResize()を実行
-        if (typeof window.imageMapResize === "function") {
-          window.imageMapResize()
+        script.onload = () => {
+          if (typeof window.imageMapResize === "function") {
+            window.imageMapResize()
+          }
         }
-        imageMapResizerLoaded.current = true
-      }
 
-      return () => {
-        document.body.removeChild(script)
+        document.body.appendChild(script)
+
+        return () => {
+          document.body.removeChild(script)
+        }
+      } else {
+        window.imageMapResize()
       }
     }
+
+    void loadImageMapResizer()
   }, [])
 
+  // タブ切り替え
   const handleClick = (num: number) => {
     setTab(num)
   }
 
   return (
-    <div className="bg-yumekawa bg-white/40 bg-cover bg-blend-color">
+    <div
+      id="phase2"
+      className="bg-yumekawa bg-white/40 bg-cover bg-blend-color"
+    >
       <div className="font-pop mx-auto w-full border-2 border-solid border-fuchsia-200 bg-gradient-to-t from-orange-200 via-lime-300 to-emerald-200 pb-52 pt-7 lg:w-3/5">
         <div className="relative">
           <KeepSpeakingPyramid />
+          {/* <FakeLogoSVG /> */}
           <img
             src={rankmatchFakeLogo}
-            className="mx-auto mb-5 w-1/2"
+            className="z-2 relative mx-auto mb-5 w-1/2"
             useMap="#ImageMap"
             alt=""
+            style={{ cursor: "default" }}
           />
           <map name="ImageMap">
             <area

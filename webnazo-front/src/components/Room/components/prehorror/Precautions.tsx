@@ -1,18 +1,30 @@
+import CollectableChara from "./Questions/Question2/CollectableChara"
+
 const Precautions = () => {
   return (
     <div className="bg-orange-100 p-12">
       <h3 className="mb-10 text-center text-5xl">注意事項</h3>
       <ul className="text-2xl">
         <li className="list-inside list-disc">
-          シーズン中は謎の回答をSNSなどでネタバレしないようにしてください。
+          シーズン中
+          <CollectableChara chara="は" />
+          謎の回答をSNSなどでネタバレしないようにしてください。
         </li>
         <br />
         <li className="list-inside list-disc">
-          このサイトは同時に多くのユーザーが閲覧しています。過度な更新を行うとサーバーに過剰な負荷がかかる恐れがあるため、ページが表示されない時にたくさん更新はしないでください。
+          このサイトは同時
+          <CollectableChara chara="に" />
+          多くのユーザーが閲覧しています。過度な更新を行うとサーバーに過剰な負荷がかかって
+          <CollectableChara chara="や" />
+          ばいです。 ページが表示されない時でもたくさん更新はしないでください。
         </li>
         <br />
         <li className="list-inside list-disc">
-          サイトが落ちてしまったときは、5分程度で正常に戻りますので更新せずにそのままお待ちください。
+          サイトが落ちてしまったと
+          <CollectableChara chara="き" />
+          は、5分程度で正常に戻ります
+          <CollectableChara chara="の" />
+          で更新せずにそのままお待ちください。
         </li>
         <br />
         <li className="list-inside list-disc">

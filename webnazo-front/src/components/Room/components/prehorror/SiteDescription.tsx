@@ -1,3 +1,5 @@
+import CollectableChara from "./Questions/Question2/CollectableChara"
+
 const SiteDescription = () => {
   return (
     <>
@@ -9,7 +11,8 @@ const SiteDescription = () => {
         <span className="text-red-500">ナゾトキランクマッチ</span>
         」が開催される！
         <br />
-        皆で一斉に同じ謎解き問題に参加して、解くまでの時間を競うのだ！解くのが早ければ早いほどレーティングが上がっていくぞ！
+        <CollectableChara chara="み" />
+        んなで一斉に同じ謎解き問題に参加して、解くまでの時間を競うのだ！解くのが早ければ早いほどレーティングが上がっていくぞ！
         <br />
         <span className="text-red-500">全国の謎解きマニアたちと勝負せよ！</span>
       </p>

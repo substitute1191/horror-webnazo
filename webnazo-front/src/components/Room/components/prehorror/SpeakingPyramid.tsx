@@ -40,7 +40,7 @@ const SpeakingPyramid: React.FC<SpeakingPyramidProps> = ({
   useEffect(() => {
     const timer = setTimeout(() => {
       void updateText()
-    }, 100)
+    }, 75)
 
     return () => {
       clearTimeout(timer)
