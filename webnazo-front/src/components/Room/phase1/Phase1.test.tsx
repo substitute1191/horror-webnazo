@@ -11,10 +11,19 @@ jest.mock("@/assets/image/ranking/rank_2.png", () => "rank_2.png")
 jest.mock("@/assets/image/ranking/rank_3.png", () => "rank_3.png")
 
 jest.mock("@/assets/sound/pom_pom_shower.mp3", () => "mocked-bgm-file")
+jest.mock("@/assets/sound/決定ボタンを押す53.mp3", () => "mocked-bgm-file")
 
 const mockPlay = jest.fn(() => Promise.resolve())
 const mockPause = jest.fn()
 jest.mock("@/SoundManager/useBGM", () => ({
+  __esModule: true,
+  default: jest.fn(() => ({
+    play: mockPlay,
+    pause: mockPause,
+  })),
+}))
+
+jest.mock("@/SoundManager/useSE", () => ({
   __esModule: true,
   default: jest.fn(() => ({
     play: mockPlay,
