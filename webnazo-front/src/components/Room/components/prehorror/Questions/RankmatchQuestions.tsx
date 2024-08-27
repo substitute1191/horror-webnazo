@@ -1,25 +1,19 @@
 import FlipTile from "./Question1/FlipTile"
 import { useAtomValue } from "jotai"
-import { q2sentenceAtom } from "@/atoms/roomAtoms"
-import mapSrc from "@/assets/image/map/map.png"
-import PlaceImage from "./Question3/PlaceImage"
-import cafeSrc from "@/assets/image/map/cafe.png"
-import superSrc from "@/assets/image/map/super.png"
-import buildingSrc from "@/assets/image/map/building.png"
-import ohakaSrc from "@/assets/image/map/ohaka.png"
-import parkSrc from "@/assets/image/map/park.png"
-import postSrc from "@/assets/image/map/post.png"
-import schoolSrc from "@/assets/image/map/school.png"
-import PlaceOhaka from "./Question3/PlaceOhaka"
+import { q2sentenceAtom, roomAtom } from "@/atoms/roomAtoms"
+import Question3 from "./Question3/Question3"
 
+// * この複雑度の無視は仕方ない
 // eslint-disable-next-line complexity
 const RankmatchQuestions = () => {
   const q2sentence = useAtomValue(q2sentenceAtom)
+  const room = useAtomValue(roomAtom)
 
   return (
     <>
       <div className="text-3xl">
-        問題：「Q1の答え」の「Q2の答え」を「Q3の答え」せよ
+        問題：「Q1の答え」の「Q2の答え」を「
+        {room.isDone[2] ? "クリック" : "Q3の答え"}」せよ
       </div>
       <FlipTile />
       <div className="text-3xl">
@@ -37,47 +31,7 @@ const RankmatchQuestions = () => {
         {q2sentence["ぎ"] ? "ぎ" : "？"}
         {q2sentence["は"] ? "は" : "？"}？
       </div>
-      <div className="text-3xl">Q3 道案内を参考に地図を完成させろ！</div>
-      <div>
-        <img src={mapSrc} alt="" />
-      </div>
-      <div>
-        <h2 className="text-2xl font-bold">道案内</h2>
-        <ul>
-          <li className="mb-2">
-            1.まず学校を出たら、左に曲がります。
-            一つ目の突き当りで、左に曲がりそのまま直進します。
-            進めなくなったら、左に曲がります。
-            信号まで進む前に、右に曲がると郵便局に到着します。
-          </li>
-          <li className="mb-2">
-            2.まず公園を出たら、左に曲がります。
-            1つ目の信号で、右に曲がり、2つ目の信号まで進んでください。
-            2つ目の信号で、左に曲がります。
-            郵便局が左手に見える場所で、右に曲がります。
-            最初の曲がり角で、右に曲がります。 左手にスーパーがあります。
-          </li>
-          <li className="mb-2">
-            3.信号を通らずに、ビルからスーパーに行く方法はありません。
-          </li>
-          <li>
-            4.ビルからバス停の前を通らずに公園へ行くには、必ず学校かカフェの入口の前を
-            通る必要があります。
-          </li>
-        </ul>
-      </div>
-      <div className="relative h-32">
-        <h2 className="text-3xl font-bold">
-          以下の画像を配置して考えてみよう！
-        </h2>
-        <PlaceImage imgSrc={cafeSrc} initialPosition={{ x: 0, y: 35 }} />
-        <PlaceImage imgSrc={buildingSrc} initialPosition={{ x: 85, y: 35 }} />
-        <PlaceOhaka imgSrc={ohakaSrc} initialPosition={{ x: 170, y: 35 }} />
-        <PlaceImage imgSrc={parkSrc} initialPosition={{ x: 255, y: 35 }} />
-        <PlaceImage imgSrc={postSrc} initialPosition={{ x: 340, y: 35 }} />
-        <PlaceImage imgSrc={schoolSrc} initialPosition={{ x: 425, y: 35 }} />
-        <PlaceImage imgSrc={superSrc} initialPosition={{ x: 510, y: 35 }} />
-      </div>
+      <Question3 />
     </>
   )
 }

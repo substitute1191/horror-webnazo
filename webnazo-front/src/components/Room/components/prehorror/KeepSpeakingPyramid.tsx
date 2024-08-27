@@ -6,6 +6,7 @@ import { ohakaPositionAtom } from "./Questions/Question3/OhakaPositionAtom"
 import useSE from "@/SoundManager/useSE"
 import runawaySrc from "@/assets/sound/ピューンと逃げる.mp3"
 
+/* eslint-disable max-lines-per-function */
 const KeepSpeakingPyramid = () => {
   const sentences = useMemo(
     () => [
@@ -46,9 +47,34 @@ const KeepSpeakingPyramid = () => {
     setIdx((prev) => (prev + 1) % sentences.length)
   }, [sentences.length])
 
-  const handleRunawayAnimationEnd = () => {
-    setIsRunawayAnimationEnd(true)
-  }
+  const handleRunawayAnimationEnd = useCallback(
+    (event: React.AnimationEvent<HTMLImageElement>) => {
+      if (event.animationName === "runaway") {
+        setIsRunawayAnimationEnd(true)
+      }
+    },
+    []
+  )
+
+  useEffect(() => {
+    const pyramidElem = pyramidRef.current
+    const domHandler = function (
+      this: HTMLImageElement,
+      event: AnimationEvent
+    ) {
+      handleRunawayAnimationEnd(
+        event as unknown as React.AnimationEvent<HTMLImageElement>
+      )
+    }
+    if (pyramidElem !== null) {
+      pyramidElem.addEventListener("animationend", domHandler)
+    }
+    return () => {
+      if (pyramidElem !== null) {
+        pyramidElem.removeEventListener("animationend", domHandler)
+      }
+    }
+  }, [handleRunawayAnimationEnd])
 
   return (
     <>

@@ -19,7 +19,7 @@ export const myCharaAtom = atomWithStorage("myChara", 0)
 export const otherCharaAtom = atomWithStorage("otherChara", 0)
 export const isAllSelectedAtom = atomWithStorage("isAllSelected", false)
 export const roomIdAtom = atomWithStorage("roomId", "")
-export const isDoneAtom = atomWithStorage("isDone", {})
+export const isDoneAtom = atomWithStorage("isDone", [false, false, false])
 export const q2sentenceAtom = atomWithStorage<Record<string, boolean>>(
   "q2sentence",
   {
