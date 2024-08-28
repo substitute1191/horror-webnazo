@@ -11,7 +11,7 @@ const useSE = (soundUrl: string) => {
   useEffect(() => {
     managerRef.current = new SEManager(soundUrl, volume, isPlayable)
     return () => {
-      managerRef.current?.stop()
+      void managerRef.current?.stop()
       managerRef.current = null
     }
   }, [soundUrl, volume, isPlayable])
@@ -26,12 +26,12 @@ const useSE = (soundUrl: string) => {
 
   const play = useCallback(() => {
     if (!isPlayable) return
-    managerRef.current?.play()
+    void managerRef.current?.play()
   }, [isPlayable])
 
   const stop = useCallback(() => {
     if (!isPlayable) return
-    managerRef.current?.stop()
+    void managerRef.current?.stop()
   }, [isPlayable])
 
   const isLoaded = useCallback(() => {
