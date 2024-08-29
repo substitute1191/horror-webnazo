@@ -1,36 +1,18 @@
 import useSoundMenu from "./useSoundMenu"
 
 const SoundMenu = () => {
-  const {
-    isVisible,
-    isPlayable,
-    menuRef,
-    seVol,
-    bgmVol,
-    handleSEChange,
-    handleBGMChange,
-    handleIsPlayableChange,
-  } = useSoundMenu()
+  const { isVisible, menuRef, seVol, bgmVol, handleSEChange, handleBGMChange } =
+    useSoundMenu()
 
   return (
     <>
       {isVisible ? (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
           <div
             ref={menuRef}
-            className="flex flex-col p-4 bg-black rounded w-40"
+            className="flex w-40 flex-col rounded bg-black p-4"
           >
             <span className="text-white">サウンドメニュー</span>
-            <label className="text-white">
-              <input
-                type="checkbox"
-                name=""
-                id=""
-                checked={!isPlayable}
-                onChange={handleIsPlayableChange}
-              />
-              ミュートにする
-            </label>
             <label htmlFor="se-volume" className="text-white">
               SE音量
             </label>

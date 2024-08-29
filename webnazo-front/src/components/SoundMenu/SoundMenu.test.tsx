@@ -62,16 +62,6 @@ describe("SoundMenuコンポーネント", () => {
     )
   })
 
-  test("ミュートチェックボックスをクリックすると切り替わる", async () => {
-    renderSoundMenu()
-    await user.keyboard("{F2}")
-    const checkbox = screen.getByLabelText<HTMLInputElement>("ミュートにする")
-    expect(checkbox).toBeInTheDocument()
-    expect(checkbox).toBeChecked()
-    await user.click(checkbox)
-    expect(checkbox).not.toBeChecked()
-  })
-
   test("SE音量スライダーの値を変更すると値が変わる", async () => {
     renderSoundMenu()
     await user.keyboard("{F2}")

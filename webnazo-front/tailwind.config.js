@@ -81,6 +81,14 @@ export default {
             opacity: 1,
           },
         },
+        fadein: {
+          "0%": {
+            opacity: 0,
+          },
+          "100%": {
+            opacity: 1,
+          },
+        },
         "fadein-up": {
           "0%": {
             transform: "translateY(40px)",
@@ -89,6 +97,35 @@ export default {
           "100%": {
             transform: "translateY(0)",
             opacity: 1,
+          },
+        },
+        "fadein-left": {
+          "0%": {
+            transform: "translateX(-1000px)",
+            opacity: 0,
+          },
+          "100%": {
+            transform: "translateX(0px)",
+            opacity: 1,
+          },
+        },
+        "text-pulse": {
+          "0%": {
+            transform: "scale(1.0)",
+          },
+          "80%": {
+            transform: "scale(2.5)",
+          },
+          "100%": {
+            transform: "scale(2)",
+          },
+        },
+        "text-inpulse": {
+          "0%": {
+            transform: "scale(2.0)",
+          },
+          "100%": {
+            transform: "scale(1)",
           },
         },
       },

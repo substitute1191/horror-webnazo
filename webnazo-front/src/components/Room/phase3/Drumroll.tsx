@@ -1,12 +1,8 @@
-import { useState } from "react"
 import ShuffleNumber from "./ShuffleNumber"
+import usePhase3AnimStep from "./usePhase3AnimStep"
 
 const Drumroll = () => {
-  const [startAnim, setStartAnim] = useState(false)
-
-  const handleAnimEnd = () => {
-    setStartAnim(true)
-  }
+  const { animStep, handleAnimEnd } = usePhase3AnimStep()
 
   return (
     <div
@@ -14,7 +10,7 @@ const Drumroll = () => {
       onAnimationEnd={handleAnimEnd}
     >
       <span className="text-3xl">気になる順位は？</span>
-      {startAnim ? <ShuffleNumber display={100} /> : null}
+      {animStep >= 2 ? <ShuffleNumber display={100} /> : null}
     </div>
   )
 }

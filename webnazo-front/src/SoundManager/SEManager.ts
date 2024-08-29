@@ -47,7 +47,10 @@ class SEManager {
   }
 
   public async play(): Promise<void> {
-    if (!this.isPlayable || this.isPlaying) return
+    if (!this.isPlayable) {
+      console.debug("SEManager: isPlaying, play suspended")
+      return
+    }
 
     this.playPromise = (async () => {
       try {
