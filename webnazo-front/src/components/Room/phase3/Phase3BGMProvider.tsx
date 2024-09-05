@@ -11,10 +11,10 @@ interface SharedFunctions {
 }
 
 export const Phase3Context = createContext<SharedFunctions>({
-  playEndroll: () => {},
-  stopEndroll: () => {},
-  playKinshiku: () => {},
-  stopKinshiku: () => {},
+  playEndroll: () => { },
+  stopEndroll: () => { },
+  playKinshiku: () => { },
+  stopKinshiku: () => { },
 })
 
 const Phase3BGMProvider = ({ children }: { children: React.ReactNode }) => {
