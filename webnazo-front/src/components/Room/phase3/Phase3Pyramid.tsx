@@ -1,7 +1,8 @@
 import Pyramid from "@/assets/image/mascot/mascot.png"
 import usePhase3AnimStep from "./usePhase3AnimStep"
-import { useMemo, useState } from "react"
+import { useContext, useMemo, useState } from "react"
 import SpeachBubble from "./SpeachBubble"
+import { Phase3Context } from "./Phase3BGMProvider"
 
 const Phase3Pyramid = () => {
   const { animStep, handleAnimEnd } = usePhase3AnimStep()
@@ -18,6 +19,7 @@ const Phase3Pyramid = () => {
     ],
     []
   )
+  const { stopEndroll } = useContext(Phase3Context)!
 
   const handlePyramidFadeIn = () => {
     setPyramidEnd(true)
@@ -25,8 +27,17 @@ const Phase3Pyramid = () => {
   }
 
   const handleComplete = () => {
-    setIdx((prev) => prev + 1)
-    setFirstAnimate(false)
+    console.info(idx)
+    console.info(texts.length)
+    if (idx !== texts.length - 1) {
+      setTimeout(() => {
+        setIdx((prev) => prev + 1)
+        setFirstAnimate(false)
+      }, 2000)
+    } else {
+      console.info("音楽を止める処理が呼ばれる")
+      stopEndroll()
+    }
   }
 
   return (

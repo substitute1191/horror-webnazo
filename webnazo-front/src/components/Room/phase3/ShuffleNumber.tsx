@@ -1,16 +1,15 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import useSE from "@/SoundManager/useSE"
-import useBGM from "@/SoundManager/useBGM"
 import drumrollSE from "@/assets/sound/ドラムロール.mp3"
 import drumrollEndSE from "@/assets/sound/ロールの閉め.mp3"
-import endrollSrc from "@/assets/sound/Waffle_Finale.mp3"
+import { Phase3Context } from "./Phase3BGMProvider"
 
 const ShuffleNumber = ({ display }: { display: number }) => {
   const [currentNumber, setCurrentNumber] = useState(0)
   const { play: drumrollPlay, stop: drumrollStop } = useSE(drumrollSE)
   const { play: drumrollEndPlay, stop: _drumrollEndStop } = useSE(drumrollEndSE)
   const [isDrumrollEnd, setIsDrumrollEnd] = useState("")
-  const { play: endrollPlay, stop: endrollStop } = useBGM(endrollSrc)
+  const { playEndroll, stopEndroll } = useContext(Phase3Context)!
 
   useEffect(() => {
     drumrollPlay()
@@ -30,12 +29,12 @@ const ShuffleNumber = ({ display }: { display: number }) => {
         setIsDrumrollEnd(
           "text-red-500 animate-[text-inpulse_0.3s_ease-in-out_forwards]"
         )
-        void endrollPlay()
+        playEndroll()
       }, 1000)
     }, 3000)
 
     return () => {
-      endrollStop()
+      stopEndroll()
       drumrollStop()
       clearInterval(intervalId)
     }
@@ -44,8 +43,8 @@ const ShuffleNumber = ({ display }: { display: number }) => {
     drumrollEndPlay,
     drumrollPlay,
     drumrollStop,
-    endrollPlay,
-    endrollStop,
+    playEndroll,
+    stopEndroll,
   ])
 
   return (
