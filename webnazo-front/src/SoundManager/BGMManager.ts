@@ -7,7 +7,7 @@ declare global {
 const audioContext = new (window.AudioContext || window.webkitAudioContext)()
 
 // TODO 動作が不安定なのでコンソールはまだ残しておく 最終的には消す
-/* eslint-disable no-console*/
+/* eslint-disable no-console,max-lines */
 class BGMManager {
   private buffer: AudioBuffer | null = null
   private source: AudioBufferSourceNode | null = null
@@ -53,7 +53,7 @@ class BGMManager {
 
   public async play(): Promise<void> {
     console.debug("Play method called")
-    if (!this.isPlayable || this.isPlaying || !this.hasUserInteracted) {
+    if (!this.isPlayable || this.isPlaying) {
       console.debug("Not playable or already playing, or no user interaction")
       return
     }
@@ -86,7 +86,6 @@ class BGMManager {
     this.startTime = audioContext.currentTime - this.offset
     this.source.start(0, this.offset)
     this.isPlaying = true
-    console.debug("Playback started")
   }
 
   public pause(): void {

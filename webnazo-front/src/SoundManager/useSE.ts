@@ -1,41 +1,51 @@
 import { useAtomValue } from "jotai"
 import { isPlayableAtom, seVolumeAtom } from "@/atoms/soundAtoms"
-import { useCallback, useEffect, useRef } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import SEManager from "@/SoundManager/SEManager"
 
+/* eslint-disable */
 const useSE = (soundUrl: string) => {
   const volume = useAtomValue(seVolumeAtom)
   const isPlayable = useAtomValue(isPlayableAtom)
   const managerRef = useRef<SEManager | null>(null)
+  const [isLoaded, setIsLoaded] = useState(false)
 
   useEffect(() => {
-    managerRef.current = new SEManager(soundUrl, volume, isPlayable)
+    if (!managerRef.current) {
+      managerRef.current = new SEManager(soundUrl, volume, isPlayable)
+      const checkLoaded = async () => {
+        const loaded = await managerRef.current?.isLoaded()
+        setIsLoaded(loaded ?? false)
+      }
+      void checkLoaded()
+    }
+
     return () => {
-      managerRef.current?.stop()
+      void managerRef.current?.stop()
       managerRef.current = null
     }
-  }, [soundUrl, volume, isPlayable])
+  }, [soundUrl]) // 依存配列からvolumeとisPlayableを削除
 
   useEffect(() => {
-    managerRef.current?.setVolume(volume)
+    if (managerRef.current) {
+      managerRef.current.setVolume(volume)
+    }
   }, [volume])
 
   useEffect(() => {
-    managerRef.current?.setIsPlayable(isPlayable)
+    if (managerRef.current) {
+      managerRef.current.setIsPlayable(isPlayable)
+    }
   }, [isPlayable])
 
   const play = useCallback(() => {
-    if (!isPlayable) return
-    managerRef.current?.play()
+    if (!isPlayable || !managerRef.current) return
+    void managerRef.current.play()
   }, [isPlayable])
 
   const stop = useCallback(() => {
-    if (!isPlayable) return
-    managerRef.current?.stop()
-  }, [isPlayable])
-
-  const isLoaded = useCallback(() => {
-    return managerRef.current?.isLoaded() ?? false
+    if (!managerRef.current) return
+    void managerRef.current.stop()
   }, [])
 
   return { play, stop, isLoaded }

@@ -35,7 +35,6 @@ export const useRoomOperation = () => {
   })
 
   useEffect(() => {
-    console.debug(roomQuery.data)
     if (roomQuery.data !== undefined) {
       setRoom(roomQuery.data)
     }
