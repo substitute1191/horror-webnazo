@@ -31,6 +31,25 @@ export const startGameTimer = async (req: Request, res: Response) => {
   res.status(204)
 }
 
+interface FinishTimeType {
+  finishTime: number
+}
+
+export const stopGameTimer = async (req: Request, res: Response) => {
+  const { roomId } = req.params
+  const { finishTime } = req.body as FinishTimeType
+  const { startTime } = await db.room.findUniqueOrThrow({
+    where: {
+      id: roomId,
+    },
+    select: {
+      startTime: true,
+    },
+  })
+  const timeRecord = finishTime - parseInt(startTime as string, 10)
+  res.status(200).json(timeRecord)
+}
+
 const SelectPlayerSchema = z.object({
   userId: z.string(),
   chara: z.number(),

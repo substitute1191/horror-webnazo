@@ -7,7 +7,7 @@ const CharaSelect = () => {
     useCharaSelect()
   const { proceed } = useProceed()
 
-  const proceedAndSetTime = (phase: number): void => {
+  const proceedAndSetStartTime = (phase: number): void => {
     proceed(phase)
     startGameTimer()
   }
@@ -51,7 +51,10 @@ const CharaSelect = () => {
         </div>
       </form>
       {isAllSelected ? (
-        <button className="font-onryou" onClick={() => proceedAndSetTime(1)}>
+        <button
+          className="font-onryou"
+          onClick={() => proceedAndSetStartTime(1)}
+        >
           ゲームスタート
         </button>
       ) : null}

@@ -8,6 +8,8 @@ import useProceed from "../useProceed"
 import KeepSpeakingPyramid from "../components/prehorror/KeepSpeakingPyramid"
 import { tabInPhase2Atom } from "@/atoms/roomAtoms"
 import { useAtom } from "jotai"
+import api from "@/utils/api"
+import { useParams } from "react-router-dom"
 
 // TODO 後で関数を分割する
 /* eslint-disable max-lines-per-function */
@@ -15,6 +17,7 @@ const Phase2 = () => {
   const { play, pause } = useBGM(bgmSrc)
   const [tab, setTab] = useAtom(tabInPhase2Atom)
   const { proceed } = useProceed()
+  const { roomId } = useParams()
 
   // 音楽再生
   useEffect(() => {
@@ -58,6 +61,19 @@ const Phase2 = () => {
     setTab(num)
   }
 
+  const proceedAndSetFinishTime = (phase: number) => {
+    proceed(phase)
+    const finishTime = Date.now().toString()
+    api
+      .post(`/room/${roomId}/stopGameTimer`, {
+        finishTime,
+      })
+      .then()
+      .catch((e) => {
+        console.error(e)
+      })
+  }
+
   return (
     <div
       id="phase2"
@@ -76,7 +92,7 @@ const Phase2 = () => {
           />
           <map name="ImageMap">
             <area
-              onClick={() => proceed(3)}
+              onClick={() => proceedAndSetFinishTime(3)}
               shape="rect"
               coords="137,272,243,382"
               href="#"
