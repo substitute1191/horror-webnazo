@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import ShuffleNumber from "./ShuffleNumber"
-import usePhase3AnimStep from "./usePhase3AnimStep"
+import usePhase3AnimStep from "./hooks/usePhase3AnimStep"
 import api from "@/utils/api"
 import { useParams } from "react-router-dom"
 

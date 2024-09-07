@@ -9,7 +9,7 @@ const ShuffleNumber = ({ display }: { display: number }) => {
   const { play: drumrollPlay, stop: drumrollStop } = useSE(drumrollSE)
   const { play: drumrollEndPlay, stop: _drumrollEndStop } = useSE(drumrollEndSE)
   const [isDrumrollEnd, setIsDrumrollEnd] = useState("")
-  const { playEndroll, stopEndroll } = useContext(Phase3Context)!
+  const { playEndroll, stopEndroll } = useContext(Phase3Context)
 
   useEffect(() => {
     drumrollPlay()
