@@ -18,7 +18,6 @@ const SpeachBubble: React.FC<Props> = ({
   const { play } = useSE(popchara)
 
   const updateText = useCallback(() => {
-    console.debug(charaIdx === text.length)
     if (charaIdx < text.length) {
       play()
       setShowText((prev) => `${prev}${text[charaIdx]}`)
@@ -26,7 +25,6 @@ const SpeachBubble: React.FC<Props> = ({
     }
 
     if (charaIdx === text.length) {
-      console.debug("texts end")
       setCharaIdx((prev) => prev + 1)
       handleComplete()
     }
@@ -48,7 +46,7 @@ const SpeachBubble: React.FC<Props> = ({
     >
       <div className="-bottom-4 left-4 mt-20 h-0 w-0 rotate-90 transform border-l-[10px] border-r-[10px] border-t-[30px] border-l-transparent border-r-transparent border-t-slate-50"></div>
       <div className="h-full w-full rounded-xl bg-slate-50 p-8 text-4xl opacity-90">
-        {showText}
+        {text !== "" ? showText : ""}
       </div>
     </div>
   )

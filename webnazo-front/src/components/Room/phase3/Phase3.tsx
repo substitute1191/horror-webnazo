@@ -1,11 +1,15 @@
 import GameClearMessage from "./GameClearMessage"
 import Drumroll from "./Drumroll"
-import usePhase3AnimStep from "./usePhase3AnimStep"
+import usePhase3AnimStep from "./hooks/usePhase3AnimStep"
 import Phase3Pyramid from "./Phase3Pyramid"
 import Phase3BGMProvider from "./Phase3BGMProvider"
+import { useAtomValue } from "jotai"
+import { isShowAdvAtom } from "@/atoms/phase3Atom"
+import Advertisement from "./Advertisement"
 
 const Phase3 = () => {
   const { animStep, handleAnimEnd } = usePhase3AnimStep()
+  const isShowAdv = useAtomValue(isShowAdvAtom)
 
   return (
     <Phase3BGMProvider>
@@ -17,6 +21,7 @@ const Phase3 = () => {
           <Phase3Pyramid />
           <GameClearMessage onAnimationComplete={handleAnimEnd} />
           {animStep >= 1 ? <Drumroll /> : null}
+          {isShowAdv ? <Advertisement /> : null}
         </div>
       </div>
     </Phase3BGMProvider>

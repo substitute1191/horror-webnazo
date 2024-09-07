@@ -1,5 +1,5 @@
 import ShuffleNumber from "./ShuffleNumber"
-import usePhase3AnimStep from "./usePhase3AnimStep"
+import usePhase3AnimStep from "./hooks/usePhase3AnimStep"
 
 const Drumroll = () => {
   const { animStep, handleAnimEnd } = usePhase3AnimStep()
