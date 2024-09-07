@@ -3,8 +3,14 @@ import useCharaSelect from "./useCharaSelect"
 
 // TODO テストを書く
 const CharaSelect = () => {
-  const { myChara, otherChara, handleChange, isAllSelected } = useCharaSelect()
+  const { myChara, otherChara, handleChange, isAllSelected, startGameTimer } =
+    useCharaSelect()
   const { proceed } = useProceed()
+
+  const proceedAndSetTime = (phase: number): void => {
+    proceed(phase)
+    startGameTimer()
+  }
 
   return (
     <div className="bg-home-bg object-fit flex h-screen flex-col items-center justify-center bg-cover text-6xl">
@@ -45,7 +51,7 @@ const CharaSelect = () => {
         </div>
       </form>
       {isAllSelected ? (
-        <button className="font-onryou" onClick={() => proceed(1)}>
+        <button className="font-onryou" onClick={() => proceedAndSetTime(1)}>
           ゲームスタート
         </button>
       ) : null}

@@ -19,6 +19,18 @@ export const proceed = async (req: Request, res: Response) => {
   res.status(200).json(room)
 }
 
+export const startGameTimer = async (req: Request, res: Response) => {
+  const { roomId } = req.params
+  const gameStartTimeString = Date.now().toString()
+  await db.room.update({
+    where: { id: roomId },
+    data: {
+      startTime: gameStartTimeString,
+    },
+  })
+  res.status(204)
+}
+
 const SelectPlayerSchema = z.object({
   userId: z.string(),
   chara: z.number(),
