@@ -55,21 +55,11 @@ const useCharaSelect = () => {
     setMyChara(chara)
   }
 
-  const startGameTimer = () => {
-    api
-      .post(`/room/${roomId}/startGameTimer`)
-      .then()
-      .catch((e) => {
-        console.error(e)
-      })
-  }
-
   return {
     myChara,
     otherChara,
     handleChange,
     isAllSelected,
-    startGameTimer,
   }
 }
 

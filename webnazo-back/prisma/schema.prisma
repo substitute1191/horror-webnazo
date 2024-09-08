@@ -19,6 +19,8 @@ model Room {
   character1 String?
   character2 String?
   startTime String?
+  finishTime String?
+  timeRecord String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   rankMatch RankMatch?

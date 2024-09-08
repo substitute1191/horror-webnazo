@@ -60,3 +60,32 @@ export const getQ2sentence = async (req: Request, res: Response) => {
 
   res.status(200).json(rankMatch.q2sentence)
 }
+
+export const getRank = async (req: Request, res: Response) => {
+  const { roomId } = req.params
+  const { timeRecord } = await db.room.findUniqueOrThrow({
+    where: {
+      id: roomId,
+    },
+    select: {
+      timeRecord: true,
+    },
+  })
+  const timeRecords = await db.room.findMany({
+    select: {
+      timeRecord: true,
+    },
+    where: {
+      timeRecord: {
+        not: null,
+      },
+    },
+  })
+  const resultsArray = timeRecords.map(({ timeRecord }) =>
+    parseInt(timeRecord as string)
+  )
+  const sortedResults = resultsArray.sort((a, b) => a - b)
+  const rank =
+    sortedResults.indexOf(parseInt(timeRecord as unknown as string)) + 1
+  res.status(200).json(rank)
+}

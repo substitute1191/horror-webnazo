@@ -46,8 +46,17 @@ export const stopGameTimer = async (req: Request, res: Response) => {
       startTime: true,
     },
   })
-  const timeRecord = finishTime - parseInt(startTime as string, 10)
-  res.status(200).json(timeRecord)
+  const result = finishTime - parseInt(startTime as string, 10)
+  await db.room.update({
+    where: {
+      id: roomId,
+    },
+    data: {
+      finishTime: finishTime.toString(),
+      timeRecord: result.toString(),
+    },
+  })
+  res.status(204)
 }
 
 const SelectPlayerSchema = z.object({

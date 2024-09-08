@@ -3,6 +3,7 @@ import {
   createRoom,
   getQ2sentence,
   getRoomData,
+  getRank,
 } from "controller/roomController"
 import {
   proceed,
@@ -22,6 +23,7 @@ router.post("/room/:roomId/selectPlayer", asyncHandler(selectPlayer))
 router.post("/room/:roomId/proceed", asyncHandler(proceed))
 router.post("/room/:roomId/startGameTimer", asyncHandler(startGameTimer))
 router.post("/room/:roomId/stopGameTimer", asyncHandler(stopGameTimer))
+router.get("/room/:roomId/getRank", asyncHandler(getRank))
 router.post("/room/:roomId/collectQ2Sentence", asyncHandler(collectQ2Sentence))
 router.post("/room/:roomId/checkQ3", asyncHandler(checkQ3))
 
