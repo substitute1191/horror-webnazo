@@ -19,7 +19,6 @@ const Drumroll = () => {
   }, [roomId])
 
   const { animStep, handleAnimEnd } = usePhase3AnimStep()
-  console.log(rank)
   return (
     <div
       className="mt-20 w-[50%] animate-[fadein-up_0.7s_linear] rounded border border-slate-50 bg-slate-50 bg-opacity-70 p-12 text-center"
