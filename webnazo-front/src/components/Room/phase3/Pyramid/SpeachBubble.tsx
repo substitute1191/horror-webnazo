@@ -17,43 +17,42 @@ const SpeachBubble: React.FC<Props> = ({
   const [charaIdx, setCharaIdx] = useState(0)
   const { play } = useSE(popchara)
   const lastTime = useRef<number>(0)
+  const requestRef = useRef<number>()
 
   const updateText = useCallback(
     (currentTime: number) => {
-      if (currentTime - lastTime.current > 100) {
+      if (currentTime - lastTime.current > 75) {
         lastTime.current = currentTime
         if (charaIdx < text.length) {
-          console.info(text, charaIdx)
           play()
           setShowText((prev) => `${prev}${text[charaIdx]}`)
           setCharaIdx((prev) => prev + 1)
-        }
-
-        if (charaIdx === text.length) {
+        } else if (charaIdx === text.length) {
           setCharaIdx((prev) => prev + 1)
           handleComplete()
         }
       }
-      requestAnimationFrame(updateText)
     },
     [charaIdx, handleComplete, play, text]
   )
 
   useEffect(() => {
+    const animate = (time: number) => {
+      updateText(time)
+      requestRef.current = requestAnimationFrame(animate)
+    }
+    requestRef.current = requestAnimationFrame(animate)
+    return () => {
+      if (requestRef.current) {
+        cancelAnimationFrame(requestRef.current)
+      }
+    }
+  }, [updateText])
+
+  useEffect(() => {
     setShowText("")
     setCharaIdx(0)
   }, [text])
-
-  useEffect(() => {
-    const animationId = requestAnimationFrame(updateText)
-    // const timer = setInterval(() => {
-    //   updateText()
-    // }, 75)
-
-    return () => {
-      cancelAnimationFrame(animationId)
-    }
-  }, [updateText])
 
   return (
     <div
