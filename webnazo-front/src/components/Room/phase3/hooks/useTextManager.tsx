@@ -69,7 +69,7 @@ const useTextManager = () => {
       setShowText(texts2[0])
       setTimeout(() => {
         setIsShowTexts2(true)
-      }, 1000)
+      }, 2000)
     }
   }
 

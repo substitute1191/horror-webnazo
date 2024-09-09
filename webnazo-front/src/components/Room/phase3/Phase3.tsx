@@ -18,7 +18,10 @@ const Phase3 = () => {
   const { setCursorPos } = useFakeCursor()
   const animationRef = useRef<number>()
 
-  const warningLines = useMemo(() => ["ねえ、人の話聞いてる！？"], [])
+  const warningLines = useMemo(
+    () => ["人の話聞いてる！？", "バチボコにヤバいよ！", "あわわわわわわ"],
+    []
+  )
 
   const animate = useCallback(() => {
     const closeBtn = document.getElementById("closeBtn")
@@ -29,11 +32,19 @@ const Phase3 = () => {
     const dx = closeBtnPos.x - cursorPos.x
     const dy = closeBtnPos.y - cursorPos.y
 
-    const speed = 3
+    const speed = 1.5
     const distance = Math.sqrt(dx * dx + dy * dy)
 
-    if (190 < distance && distance < 210) {
+    if (240 < distance && distance < 250) {
       setShowText(warningLines[0])
+    }
+
+    if (130 < distance && distance < 150) {
+      setShowText(warningLines[1])
+    }
+
+    if (70 < distance && distance < 80) {
+      setShowText(warningLines[2])
     }
 
     if (distance > speed) {
