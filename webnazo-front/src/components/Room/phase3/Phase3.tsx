@@ -6,10 +6,60 @@ import Phase3BGMProvider from "./Phase3BGMProvider"
 import Advertisement from "./Advertisement/Advertisement"
 import useAnimationState from "./hooks/useAnimationState"
 import FakeCursor from "./Cursor/FakeCursor"
+import { useCallback, useEffect, useMemo, useRef } from "react"
+import useFakeCursor from "./Cursor/useFakeCursor"
+import useTextManager from "./hooks/useTextManager"
 
 const Phase3 = () => {
   const { animStep, handleAnimEnd } = usePhase3AnimStep()
-  const { isShowAdv } = useAnimationState()
+  const { setShowText } = useTextManager()
+  const { isShowAdv, isApproachingCloseBtn } = useAnimationState()
+  const cursorRef = useRef<HTMLImageElement>(null)
+  const { setCursorPos } = useFakeCursor()
+  const animationRef = useRef<number>()
+
+  const warningLines = useMemo(() => ["ねえ、人の話聞いてる！？"], [])
+
+  const animate = useCallback(() => {
+    const closeBtn = document.getElementById("closeBtn")
+    if (closeBtn === null || cursorRef.current === null) return
+    const cursorPos = cursorRef.current.getBoundingClientRect()
+    const closeBtnPos = closeBtn.getBoundingClientRect()
+
+    const dx = closeBtnPos.x - cursorPos.x
+    const dy = closeBtnPos.y - cursorPos.y
+
+    const speed = 3
+    const distance = Math.sqrt(dx * dx + dy * dy)
+
+    if (190 < distance && distance < 210) {
+      setShowText(warningLines[0])
+    }
+
+    if (distance > speed) {
+      const ratio = speed / distance
+      const newX = cursorPos.x + dx * ratio
+      const newY = cursorPos.y + dy * ratio
+      setCursorPos({
+        x: newX,
+        y: newY,
+      })
+      animationRef.current = requestAnimationFrame(animate)
+    } else {
+      setCursorPos(closeBtnPos)
+    }
+  }, [setCursorPos, setShowText, warningLines])
+
+  useEffect(() => {
+    if (isApproachingCloseBtn) {
+      animationRef.current = requestAnimationFrame(animate)
+
+      return () => {
+        if (animationRef.current !== undefined)
+          cancelAnimationFrame(animationRef.current)
+      }
+    }
+  }, [animate, isApproachingCloseBtn, setCursorPos])
 
   return (
     <Phase3BGMProvider>
@@ -22,7 +72,7 @@ const Phase3 = () => {
           <GameClearMessage onAnimationComplete={handleAnimEnd} />
           {animStep >= 1 ? <Drumroll /> : null}
           {isShowAdv ? <Advertisement /> : null}
-          <FakeCursor />
+          <FakeCursor ref={cursorRef} />
         </div>
       </div>
     </Phase3BGMProvider>

@@ -18,6 +18,7 @@ const CloseButton = () => {
 
   return (
     <div
+      id="closeBtn"
       ref={closeBtnRef}
       className="absolute right-3 top-[1rem] z-10 w-[1.6rem] border border-slate-100 bg-red-500 text-center shadow-md"
     >

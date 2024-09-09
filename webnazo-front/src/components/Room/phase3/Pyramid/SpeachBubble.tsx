@@ -1,5 +1,5 @@
 import useSE from "@/SoundManager/useSE"
-import { useCallback, useEffect, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import popchara from "@/assets/sound/popchara/b.mp3"
 
 type Props = {
@@ -16,27 +16,42 @@ const SpeachBubble: React.FC<Props> = ({
   const [showText, setShowText] = useState("")
   const [charaIdx, setCharaIdx] = useState(0)
   const { play } = useSE(popchara)
+  const lastTime = useRef<number>(0)
 
-  const updateText = useCallback(() => {
-    if (charaIdx < text.length) {
-      play()
-      setShowText((prev) => `${prev}${text[charaIdx]}`)
-      setCharaIdx((prev) => prev + 1)
-    }
+  const updateText = useCallback(
+    (currentTime: number) => {
+      if (currentTime - lastTime.current > 100) {
+        lastTime.current = currentTime
+        if (charaIdx < text.length) {
+          console.info(text, charaIdx)
+          play()
+          setShowText((prev) => `${prev}${text[charaIdx]}`)
+          setCharaIdx((prev) => prev + 1)
+        }
 
-    if (charaIdx === text.length) {
-      setCharaIdx((prev) => prev + 1)
-      handleComplete()
-    }
-  }, [charaIdx, handleComplete, play, text])
+        if (charaIdx === text.length) {
+          setCharaIdx((prev) => prev + 1)
+          handleComplete()
+        }
+      }
+      requestAnimationFrame(updateText)
+    },
+    [charaIdx, handleComplete, play, text]
+  )
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      updateText()
-    }, 75)
+    setShowText("")
+    setCharaIdx(0)
+  }, [text])
+
+  useEffect(() => {
+    const animationId = requestAnimationFrame(updateText)
+    // const timer = setInterval(() => {
+    //   updateText()
+    // }, 75)
 
     return () => {
-      clearInterval(timer)
+      cancelAnimationFrame(animationId)
     }
   }, [updateText])
 
