@@ -1,11 +1,19 @@
-import { useState } from "react"
 import usePhase3AnimStep from "./usePhase3AnimStep"
+import { atom, useAtom } from "jotai"
+
+const isEndFadeinAtom = atom(false)
+const firstAnimateAtom = atom(true)
+const isShowAdvAtom = atom(false)
+const isShowTexts2Atom = atom(false)
+const isShakeAtom = atom(false)
 
 const useAnimationState = () => {
   const { handleAnimEnd } = usePhase3AnimStep()
-  const [isEndFadein, setIsEndFadein] = useState(false)
-  const [firstAnimate, setFirstAnimate] = useState(true)
-  const [isShowAdv, setIsShowAdv] = useState(false)
+  const [isEndFadein, setIsEndFadein] = useAtom(isEndFadeinAtom)
+  const [firstAnimate, setFirstAnimate] = useAtom(firstAnimateAtom)
+  const [isShowAdv, setIsShowAdv] = useAtom(isShowAdvAtom)
+  const [isShowTexts2, setIsShowTexts2] = useAtom(isShowTexts2Atom)
+  const [isShake, setIsShake] = useAtom(isShakeAtom)
 
   const handlePyramidFadeIn = () => {
     setIsEndFadein(true)
@@ -20,6 +28,10 @@ const useAnimationState = () => {
     isShowAdv,
     setIsShowAdv,
     handlePyramidFadeIn,
+    isShowTexts2,
+    setIsShowTexts2,
+    isShake,
+    setIsShake,
   }
 }
 
