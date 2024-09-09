@@ -1,18 +1,21 @@
-import { useCallback, useContext, useMemo, useState } from "react"
+import { useCallback, useContext, useEffect, useMemo } from "react"
 import { Phase3Context } from "../Phase3BGMProvider"
 import useAnimationState from "./useAnimationState"
+import { atom, useAtom } from "jotai"
+import useFakeCursor from "../Cursor/useFakeCursor"
+
+/* eslint-disable max-lines-per-function */
+const idxAtom = atom<number>(0)
+const showTextAtom = atom<string>("")
 
 const useTextManager = () => {
+  const [idx, setIdx] = useAtom(idxAtom)
+  const [showText, setShowText] = useAtom(showTextAtom)
+  const { setFirstAnimate, setIsShowAdv, setIsShowTexts2, setIsShake } =
+    useAnimationState()
   const { stopEndroll, playKinshiku } = useContext(Phase3Context)
-  const {
-    isEndFadein,
-    setIsEndFadein,
-    firstAnimate,
-    setFirstAnimate,
-    isShowAdv,
-    setIsShowAdv,
-    handlePyramidFadeIn,
-  } = useAnimationState()
+  const { setIsHideCursor } = useFakeCursor()
+
   const texts = useMemo(
     () => [
       "二人ともお疲れ様！納得の行く成績は出せたかな？",
@@ -36,24 +39,20 @@ const useTextManager = () => {
     []
   )
 
-  const [idx, setIdx] = useState(0)
-  const [showText, setShowText] = useState(texts[0])
-  const [isShowText2, setIsShowText2] = useState(false)
-
   const updateText = useCallback(
     (texts: string[]) => {
       setIdx((prev) => prev + 1)
       setShowText(texts[idx + 1])
       setFirstAnimate(false)
     },
-    [idx, setFirstAnimate]
+    [idx, setFirstAnimate, setIdx, setShowText]
   )
 
   const handleComplete = () => {
     if (idx !== texts.length - 1) {
       setTimeout(() => {
         updateText(texts)
-      }, 2000)
+      }, 20)
     } else {
       stopEndroll()
       setIsShowAdv(true)
@@ -64,28 +63,36 @@ const useTextManager = () => {
       setIdx(0)
       setShowText(texts2[0])
       setTimeout(() => {
-        setIsShowText2(true)
+        setIsShowTexts2(true)
       }, 1000)
     }
   }
 
+  const handleComplete2 = () => {
+    if (idx !== texts2.length - 1) {
+      setTimeout(() => {
+        updateText(texts2)
+      }, 10)
+    } else {
+      console.debug("handleComplete2 end!")
+      setIsShake(true)
+      setIsHideCursor(true)
+    }
+  }
+
+  useEffect(() => {
+    setShowText(texts[0])
+  }, [setShowText, texts])
+
   return {
-    isEndFadein,
-    setIsEndFadein,
-    firstAnimate,
-    setFirstAnimate,
-    isShowAdv,
-    setIsShowAdv,
-    handlePyramidFadeIn,
-    texts,
-    texts2,
     idx,
     setIdx,
     showText,
     setShowText,
+    texts,
+    texts2,
     handleComplete,
-    isShowText2,
-    updateText,
+    handleComplete2,
   }
 }
 

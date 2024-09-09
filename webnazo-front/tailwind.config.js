@@ -89,6 +89,17 @@ export default {
             opacity: 1,
           },
         },
+        shake: {
+          "0%,100%": {
+            transform: "translateX(0)",
+          },
+          "20%,60%": {
+            transform: "translateX(1px)",
+          },
+          "40%,80%": {
+            transform: "translateX(-1px)",
+          },
+        },
         "fadein-up": {
           "0%": {
             transform: "translateY(40px)",
