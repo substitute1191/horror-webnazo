@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react"
 import useSE from "@/SoundManager/useSE"
 import drumrollSE from "@/assets/sound/ドラムロール.mp3"
 import drumrollEndSE from "@/assets/sound/ロールの閉め.mp3"
-import { Phase3Context } from "./Phase3BGMProvider"
+import { Phase3Context } from "../Phase3BGMProvider"
 
 const ShuffleNumber = ({ display }: { display: number }) => {
   const [currentNumber, setCurrentNumber] = useState(0)
