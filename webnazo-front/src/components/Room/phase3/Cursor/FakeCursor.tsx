@@ -1,13 +1,15 @@
 import cursorSrc from "@/assets/image/cursor.png"
 import useFakeCursor from "./useFakeCursor"
+import { forwardRef } from "react"
 
-const FakeCursor = () => {
+const FakeCursor = forwardRef<HTMLImageElement>((_, ref) => {
   const { isHideCursor, cursorPos } = useFakeCursor()
 
   if (!isHideCursor) return null
 
   return (
     <img
+      ref={ref}
       style={{
         top: `${cursorPos.y}px`,
         left: `${cursorPos.x}px`,
@@ -17,6 +19,8 @@ const FakeCursor = () => {
       alt=""
     />
   )
-}
+})
+
+FakeCursor.displayName = "FakeCursor"
 
 export default FakeCursor
