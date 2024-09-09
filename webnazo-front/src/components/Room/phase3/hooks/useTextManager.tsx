@@ -11,8 +11,13 @@ const showTextAtom = atom<string>("")
 const useTextManager = () => {
   const [idx, setIdx] = useAtom(idxAtom)
   const [showText, setShowText] = useAtom(showTextAtom)
-  const { setFirstAnimate, setIsShowAdv, setIsShowTexts2, setIsShake } =
-    useAnimationState()
+  const {
+    setFirstAnimate,
+    setIsShowAdv,
+    setIsShowTexts2,
+    setIsShake,
+    setIsApproachingCloseBtn,
+  } = useAnimationState()
   const { stopEndroll, playKinshiku } = useContext(Phase3Context)
   const { setIsHideCursor } = useFakeCursor()
 
@@ -77,6 +82,7 @@ const useTextManager = () => {
       console.debug("handleComplete2 end!")
       setIsShake(true)
       setIsHideCursor(true)
+      setIsApproachingCloseBtn(true)
     }
   }
 

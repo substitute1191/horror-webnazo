@@ -6,6 +6,7 @@ const firstAnimateAtom = atom(true)
 const isShowAdvAtom = atom(false)
 const isShowTexts2Atom = atom(false)
 const isShakeAtom = atom(false)
+const isApproachingCloseBtnAtom = atom(false)
 
 const useAnimationState = () => {
   const { handleAnimEnd } = usePhase3AnimStep()
@@ -14,6 +15,9 @@ const useAnimationState = () => {
   const [isShowAdv, setIsShowAdv] = useAtom(isShowAdvAtom)
   const [isShowTexts2, setIsShowTexts2] = useAtom(isShowTexts2Atom)
   const [isShake, setIsShake] = useAtom(isShakeAtom)
+  const [isApproachingCloseBtn, setIsApproachingCloseBtn] = useAtom(
+    isApproachingCloseBtnAtom
+  )
 
   const handlePyramidFadeIn = () => {
     setIsEndFadein(true)
@@ -32,6 +36,8 @@ const useAnimationState = () => {
     setIsShowTexts2,
     isShake,
     setIsShake,
+    isApproachingCloseBtn,
+    setIsApproachingCloseBtn,
   }
 }
 

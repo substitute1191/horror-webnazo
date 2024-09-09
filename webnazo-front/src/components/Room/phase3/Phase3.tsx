@@ -1,9 +1,9 @@
-import GameClearMessage from "./GameClearMessage"
-import Drumroll from "./Drumroll"
+import GameClearMessage from "./ClearAnim/GameClearMessage"
+import Drumroll from "./ClearAnim/Drumroll"
 import usePhase3AnimStep from "./hooks/usePhase3AnimStep"
-import Phase3Pyramid from "./Phase3Pyramid"
+import Phase3Pyramid from "./Pyramid/Phase3Pyramid"
 import Phase3BGMProvider from "./Phase3BGMProvider"
-import Advertisement from "./Advertisement"
+import Advertisement from "./Advertisement/Advertisement"
 import useAnimationState from "./hooks/useAnimationState"
 import FakeCursor from "./Cursor/FakeCursor"
 

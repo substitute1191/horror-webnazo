@@ -1,8 +1,8 @@
 import Pyramid from "@/assets/image/mascot/mascot.png"
-import usePhase3AnimStep from "./hooks/usePhase3AnimStep"
+import usePhase3AnimStep from "../hooks/usePhase3AnimStep"
 import SpeachBubble from "./SpeachBubble"
-import useTextManager from "./hooks/useTextManager"
-import useAnimationState from "./hooks/useAnimationState"
+import useTextManager from "../hooks/useTextManager"
+import useAnimationState from "../hooks/useAnimationState"
 
 /* eslint-disable complexity */
 const Phase3Pyramid = () => {
