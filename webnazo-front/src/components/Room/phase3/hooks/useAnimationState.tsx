@@ -12,7 +12,9 @@ const isCursorAtCloseBtnAtom = atom(false)
 const isShowGameClearMsgAtom = atom(false)
 const isShowDrumrollAtom = atom(false)
 const isEndShuffleNumberAtom = atom(false)
+const bgModeAtom = atom(0)
 
+// TODO 後で役割毎に分割する
 const useAnimationState = () => {
   const [isEndFadein, setIsEndFadein] = useAtom(isEndFadeinAtom)
   const [firstAnimate, setFirstAnimate] = useAtom(firstAnimateAtom)
@@ -35,7 +37,11 @@ const useAnimationState = () => {
     isEndShuffleNumberAtom
   )
 
+  const [bgMode, setBgMode] = useAtom(bgModeAtom)
+
   return {
+    bgMode,
+    setBgMode,
     isShowGameClearMsg,
     setIsShowGameClearMsg,
     isShowDrumroll,
