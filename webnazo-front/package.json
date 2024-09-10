@@ -23,6 +23,7 @@
     "@tanstack/react-query": "^5.51.23",
     "@types/three": "^0.166.0",
     "axios": "^1.7.2",
+    "clsx": "^2.1.1",
     "esm": "^3.2.25",
     "image-map-resizer": "^1.0.10",
     "jotai": "^2.9.3",

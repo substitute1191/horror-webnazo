@@ -6,6 +6,7 @@ const usePhase3AnimStep = () => {
   const [animStep, setAnimStep] = useAtom(animAtom)
 
   const handleAnimEnd = () => {
+    console.info("handleAnimEnd called!")
     setAnimStep((prev) => prev + 1)
   }
 
