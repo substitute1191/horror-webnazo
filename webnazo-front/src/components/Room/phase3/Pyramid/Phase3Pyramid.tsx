@@ -3,6 +3,7 @@ import usePhase3AnimStep from "../hooks/usePhase3AnimStep"
 import SpeechBubble from "./SpeechBubble"
 import useTextManager from "../hooks/useTextManager"
 import useAnimationState from "../hooks/useAnimationState"
+import { useEffect } from "react"
 
 /* eslint-disable complexity */
 const Phase3Pyramid = () => {
@@ -16,8 +17,14 @@ const Phase3Pyramid = () => {
     isShowAdv,
     handlePyramidFadeIn,
     isShake,
+    setIsShake,
     isShowTexts2,
+    isCursorAtCloseBtn,
   } = useAnimationState()
+
+  useEffect(() => {
+    if (isCursorAtCloseBtn) setIsShake(false)
+  }, [isCursorAtCloseBtn, setIsShake])
 
   return (
     <div className="flex h-52 w-full px-2">
