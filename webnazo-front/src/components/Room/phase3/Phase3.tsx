@@ -7,11 +7,13 @@ import Advertisement from "./Advertisement/Advertisement"
 import useAnimationState from "./hooks/useAnimationState"
 import FakeCursor from "./Cursor/FakeCursor"
 import usePhase3Anim from "./usePhase3Anim"
+import usePhase3AdvAnim from "./usePhase3AdvAnim"
 
 const Phase3 = () => {
   const { animStep, handleAnimEnd } = usePhase3AnimStep()
   const { isShowAdv } = useAnimationState()
   const { cursorRef } = usePhase3Anim()
+  const { currentImg } = usePhase3AdvAnim()
 
   return (
     <Phase3BGMProvider>
@@ -23,7 +25,7 @@ const Phase3 = () => {
           <Phase3Pyramid />
           <GameClearMessage onAnimationComplete={handleAnimEnd} />
           {animStep >= 1 ? <Drumroll /> : null}
-          {isShowAdv ? <Advertisement /> : null}
+          {isShowAdv ? <Advertisement currentImg={currentImg} /> : null}
           <FakeCursor ref={cursorRef} />
         </div>
       </div>
