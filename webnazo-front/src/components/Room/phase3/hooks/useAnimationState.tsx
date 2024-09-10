@@ -1,4 +1,3 @@
-import usePhase3AnimStep from "./usePhase3AnimStep"
 import { atom, useAtom } from "jotai"
 
 const isEndFadeinAtom = atom(false)
@@ -10,8 +9,11 @@ const isApproachingCloseBtnAtom = atom(false)
 const speakingTimeAtom = atom<number>(75)
 const isCursorAtCloseBtnAtom = atom(false)
 
+const isShowGameClearMsgAtom = atom(false)
+const isShowDrumrollAtom = atom(false)
+const isEndShuffleNumberAtom = atom(false)
+
 const useAnimationState = () => {
-  const { handleAnimEnd } = usePhase3AnimStep()
   const [isEndFadein, setIsEndFadein] = useAtom(isEndFadeinAtom)
   const [firstAnimate, setFirstAnimate] = useAtom(firstAnimateAtom)
   const [isShowAdv, setIsShowAdv] = useAtom(isShowAdvAtom)
@@ -25,19 +27,27 @@ const useAnimationState = () => {
     isCursorAtCloseBtnAtom
   )
 
-  const handlePyramidFadeIn = () => {
-    setIsEndFadein(true)
-    handleAnimEnd()
-  }
+  const [isShowGameClearMsg, setIsShowGameClearMsg] = useAtom(
+    isShowGameClearMsgAtom
+  )
+  const [isShowDrumroll, setIsShowDrumroll] = useAtom(isShowDrumrollAtom)
+  const [isEndShuffleNumber, setIsEndShuffleNumber] = useAtom(
+    isEndShuffleNumberAtom
+  )
 
   return {
+    isShowGameClearMsg,
+    setIsShowGameClearMsg,
+    isShowDrumroll,
+    setIsShowDrumroll,
+    isEndShuffleNumber,
+    setIsEndShuffleNumber,
     isEndFadein,
     setIsEndFadein,
     firstAnimate,
     setFirstAnimate,
     isShowAdv,
     setIsShowAdv,
-    handlePyramidFadeIn,
     isShowTexts2,
     setIsShowTexts2,
     isShake,
