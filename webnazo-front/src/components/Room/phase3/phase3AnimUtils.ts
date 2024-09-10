@@ -27,7 +27,7 @@ export const calculateNewPosition = (
 
 /* eslint-disable complexity */
 export const setWaringLines = (distance: number, warningLines: string[]) => {
-  if (280 < distance && distance < 300) {
+  if (300 < distance && distance < 330) {
     return warningLines[0]
   }
 

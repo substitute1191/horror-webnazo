@@ -13,4 +13,32 @@
   .grad1 {
     @apply border-fuchsia-200 bg-gradient-to-t from-orange-200 via-lime-300 to-emerald-200;
   }
+
+  .grad2 {
+    @apply border-fuchsia-200 bg-gradient-to-t from-orange-300 via-lime-400 to-emerald-300;
+  }
+
+  .grad3 {
+    @apply border-fuchsia-200 bg-gradient-to-t from-orange-400 via-lime-500 to-emerald-400;
+  }
+
+  .grad4 {
+    @apply border-fuchsia-200 bg-gradient-to-t from-orange-500 via-lime-600 to-emerald-500;
+  }
+
+  .grad5 {
+    @apply border-fuchsia-200 bg-gradient-to-t from-orange-600 via-lime-700 to-emerald-600;
+  }
+
+  .grad6 {
+    @apply border-fuchsia-200 bg-gradient-to-t from-orange-700 via-lime-800 to-emerald-700;
+  }
+
+  .grad7 {
+    @apply border-fuchsia-200 bg-gradient-to-t from-orange-800 via-lime-900 to-emerald-800;
+  }
+
+  .grad8 {
+    @apply border-fuchsia-200 bg-gradient-to-t from-red-900 via-gray-900 to-emerald-900;
+  }
 }

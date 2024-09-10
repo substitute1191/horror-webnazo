@@ -6,7 +6,7 @@ const currentImgAtom = atom(1)
 const currentImgIncAtom = atom(1)
 
 const usePhase3AdvAnim = () => {
-  const { isCursorAtCloseBtn } = useAnimationState()
+  const { isCursorAtCloseBtn, setBgMode } = useAnimationState()
   const [currentImg, setCurrentImg] = useAtom(currentImgAtom)
   const [currentImgInc, setCurrentImgInc] = useAtom(currentImgIncAtom)
   const rafRef = useRef<number>()
@@ -17,6 +17,7 @@ const usePhase3AdvAnim = () => {
       if (currentTime - lastTime.current > 800) {
         lastTime.current = currentTime
         setCurrentImg(0)
+        setBgMode((prev) => prev + 1)
         setCurrentImgInc((prev) => {
           return prev === 11 ? 10 : prev + 1
         })
@@ -25,7 +26,7 @@ const usePhase3AdvAnim = () => {
         }, 100)
       }
     },
-    [currentImgInc, setCurrentImg, setCurrentImgInc]
+    [currentImgInc, setBgMode, setCurrentImg, setCurrentImgInc]
   )
 
   useEffect(() => {

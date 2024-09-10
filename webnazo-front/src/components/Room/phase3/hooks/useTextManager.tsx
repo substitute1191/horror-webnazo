@@ -58,7 +58,7 @@ const useTextManager = () => {
     if (idx !== texts.length - 1) {
       setTimeout(() => {
         updateText(texts)
-      }, 20)
+      }, 500)
     } else {
       stopEndroll()
       setIsShowAdv(true)
@@ -78,7 +78,7 @@ const useTextManager = () => {
     if (idx !== texts2.length - 1) {
       setTimeout(() => {
         updateText(texts2)
-      }, 10)
+      }, 500)
     } else {
       console.debug("handleComplete2 end!")
       setIsShake(true)
