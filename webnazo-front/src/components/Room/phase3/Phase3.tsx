@@ -1,6 +1,5 @@
 import GameClearMessage from "./ClearAnim/GameClearMessage"
 import Drumroll from "./ClearAnim/Drumroll"
-import usePhase3AnimStep from "./hooks/usePhase3AnimStep"
 import Phase3Pyramid from "./Pyramid/Phase3Pyramid"
 import Phase3BGMProvider from "./Phase3BGMProvider"
 import Advertisement from "./Advertisement/Advertisement"
@@ -10,8 +9,7 @@ import usePhase3CursorAnim from "./usePhase3CurosrAnim"
 import usePhase3AdvAnim from "./usePhase3AdvAnim"
 
 const Phase3 = () => {
-  const { animStep, handleAnimEnd } = usePhase3AnimStep()
-  const { isShowAdv } = useAnimationState()
+  const { isShowGameClearMsg, isShowAdv } = useAnimationState()
   const { cursorRef } = usePhase3CursorAnim()
   const { currentImg } = usePhase3AdvAnim()
 
@@ -23,8 +21,8 @@ const Phase3 = () => {
       >
         <div className="font-pop grad1 mx-auto flex h-screen w-full flex-col items-center border-2 border-solid pb-52 pt-7 lg:w-3/5">
           <Phase3Pyramid />
-          <GameClearMessage onAnimationComplete={handleAnimEnd} />
-          {animStep >= 1 ? <Drumroll /> : null}
+          <GameClearMessage />
+          {isShowGameClearMsg ? <Drumroll /> : null}
           {isShowAdv ? <Advertisement currentImg={currentImg} /> : null}
           <FakeCursor ref={cursorRef} />
         </div>

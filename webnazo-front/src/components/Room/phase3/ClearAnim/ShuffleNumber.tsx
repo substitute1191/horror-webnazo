@@ -1,8 +1,9 @@
-import { useContext, useEffect, useState } from "react"
+import { AnimationEvent, useContext, useEffect, useState } from "react"
 import useSE from "@/SoundManager/useSE"
 import drumrollSE from "@/assets/sound/ドラムロール.mp3"
 import drumrollEndSE from "@/assets/sound/ロールの閉め.mp3"
 import { Phase3Context } from "../Phase3BGMProvider"
+import useAnimationState from "../hooks/useAnimationState"
 
 const ShuffleNumber = ({ display }: { display: number }) => {
   const [currentNumber, setCurrentNumber] = useState(0)
@@ -10,6 +11,13 @@ const ShuffleNumber = ({ display }: { display: number }) => {
   const { play: drumrollEndPlay, stop: _drumrollEndStop } = useSE(drumrollEndSE)
   const [isDrumrollEnd, setIsDrumrollEnd] = useState("")
   const { playEndroll, stopEndroll } = useContext(Phase3Context)
+  const { setIsEndShuffleNumber } = useAnimationState()
+
+  const handleAnimationEnd = (e: AnimationEvent<HTMLDivElement>) => {
+    if (e.animationName === "text-pulse") {
+      setIsEndShuffleNumber(true)
+    }
+  }
 
   useEffect(() => {
     drumrollPlay()
@@ -48,7 +56,10 @@ const ShuffleNumber = ({ display }: { display: number }) => {
   ])
 
   return (
-    <div className={`text-3xl ${isDrumrollEnd}`}>
+    <div
+      className={`text-3xl ${isDrumrollEnd}`}
+      onAnimationEnd={(e) => handleAnimationEnd(e)}
+    >
       <span className="text-9xl">{currentNumber}</span>位
     </div>
   )

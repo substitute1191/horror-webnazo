@@ -1,36 +1,54 @@
 import Pyramid from "@/assets/image/mascot/mascot.png"
-import usePhase3AnimStep from "../hooks/usePhase3AnimStep"
 import SpeechBubble from "./SpeechBubble"
 import useTextManager from "../hooks/useTextManager"
 import useAnimationState from "../hooks/useAnimationState"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
+import { clsx } from "clsx"
 
 /* eslint-disable complexity */
 const Phase3Pyramid = () => {
-  const { animStep } = usePhase3AnimStep()
-
   const { idx, showText, handleComplete, handleComplete2 } = useTextManager()
 
   const {
     isEndFadein,
+    setIsEndFadein,
     firstAnimate,
     isShowAdv,
-    handlePyramidFadeIn,
     isShake,
     setIsShake,
     isShowTexts2,
     isCursorAtCloseBtn,
+    isEndShuffleNumber,
   } = useAnimationState()
 
   useEffect(() => {
     if (isCursorAtCloseBtn) setIsShake(false)
   }, [isCursorAtCloseBtn, setIsShake])
 
+  const [hasAnimated, setHasAnimated] = useState(false)
+
+  useEffect(() => {
+    if (isEndFadein) {
+      setHasAnimated(true)
+    }
+  }, [isEndFadein])
+
+  const classes = clsx(
+    {
+      ["animate-[fadein-left_1s_ease-out_forwards]"]:
+        isEndShuffleNumber && !hasAnimated,
+      hidden: !isEndShuffleNumber,
+      ["animate-float"]: isEndFadein && !isShowAdv,
+      ["animate-[shake_0.3s_linear_infinite]"]: isShake,
+    },
+    "-ml-12 w-64"
+  )
+
   return (
     <div className="flex h-52 w-full px-2">
       <img
-        className={` ${animStep < 3 ? "hidden" : ""} ${animStep === 3 ? "animate-[fadein-left_1s_ease-out_forwards]" : ""} ${animStep >= 4 && !isShowAdv ? "animate-float" : ""} ${isShake && "animate-[shake_0.3s_linear_infinite]"} -ml-12 w-64`}
-        onAnimationEnd={handlePyramidFadeIn}
+        className={classes}
+        onAnimationEnd={() => setIsEndFadein(true)}
         src={Pyramid}
         alt=""
       />
