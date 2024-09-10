@@ -8,7 +8,7 @@ const usePhase3Anim = () => {
   const cursorRef = useRef<HTMLImageElement>(null)
   const { setCursorPos } = useFakeCursor()
   const { setShowText } = useTextManager()
-  const { isApproachingCloseBtn } = useAnimationState()
+  const { isApproachingCloseBtn, setIsCursorAtCloseBtn } = useAnimationState()
   const animationRef = useRef<number>()
 
   const warningLines = useMemo(
@@ -26,14 +26,21 @@ const usePhase3Anim = () => {
     const cursorPos = cursorRef.current.getBoundingClientRect()
     const closeBtnPos = closeBtn.getBoundingClientRect()
 
-    const { x, y, distance } = calculateNewPosition(cursorPos, closeBtnPos, 1.5)
+    const { x, y, distance, isCursorAtTarget } = calculateNewPosition(
+      cursorPos,
+      closeBtnPos,
+      1.5
+    )
 
     const line = setWaringLines(distance, warningLines)
     if (line !== null) setShowText(line)
 
     setCursorPos({ x, y })
+    if (isCursorAtTarget) {
+      setIsCursorAtCloseBtn(true)
+    }
     animationRef.current = requestAnimationFrame(animate)
-  }, [setCursorPos, setShowText, warningLines])
+  }, [setCursorPos, setIsCursorAtCloseBtn, setShowText, warningLines])
 
   useEffect(() => {
     if (isApproachingCloseBtn) {

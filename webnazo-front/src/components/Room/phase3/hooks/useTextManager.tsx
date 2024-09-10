@@ -65,7 +65,7 @@ const useTextManager = () => {
       setShowText("")
       setTimeout(() => {
         playKinshiku()
-      }, 3000)
+      }, 4000)
       setIdx(0)
       setShowText(texts2[0])
       setTimeout(() => {
