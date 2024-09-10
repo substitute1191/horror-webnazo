@@ -25,17 +25,22 @@ export const calculateNewPosition = (
   }
 }
 
+/* eslint-disable complexity */
 export const setWaringLines = (distance: number, warningLines: string[]) => {
-  if (240 < distance && distance < 250) {
+  if (280 < distance && distance < 300) {
     return warningLines[0]
   }
 
-  if (130 < distance && distance < 150) {
+  if (240 < distance && distance < 250) {
     return warningLines[1]
   }
 
-  if (70 < distance && distance < 80) {
+  if (130 < distance && distance < 150) {
     return warningLines[2]
+  }
+
+  if (70 < distance && distance < 80) {
+    return warningLines[3]
   }
 
   return null

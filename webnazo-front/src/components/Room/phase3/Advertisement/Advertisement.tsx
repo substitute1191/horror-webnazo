@@ -21,7 +21,7 @@ import clickSE from "@/assets/sound/PC-Mouse05-mp3/PC-Mouse05-1.mp3"
 import useCloseButton from "../hooks/useCloseButton"
 import { Phase3Context } from "../Phase3BGMProvider"
 
-/* eslint-disable complexity*/
+/* eslint-disable complexity,max-lines-per-function*/
 const Advertisement = ({ currentImg }: { currentImg: number }) => {
   const { play: playWindow, stop: stopWindow } = useSE(windowSE)
   const { play: playReadOut1, stop: _stopReadOut1 } = useSE(readout1)

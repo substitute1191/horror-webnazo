@@ -4,7 +4,7 @@ import useTextManager from "./hooks/useTextManager"
 import useAnimationState from "./hooks/useAnimationState"
 import { calculateNewPosition, setWaringLines } from "./phase3AnimUtils"
 
-const usePhase3Anim = () => {
+const usePhase3CursorAnim = () => {
   const cursorRef = useRef<HTMLImageElement>(null)
   const { setCursorPos } = useFakeCursor()
   const { setShowText } = useTextManager()
@@ -13,8 +13,9 @@ const usePhase3Anim = () => {
 
   const warningLines = useMemo(
     () => [
+      "ちょっと何してるの！？",
       "人の話聞いてる！？",
-      "バチボコにヤバい！",
+      "ヤバイヤバイヤバイって！",
       "あわわわわわわわわわわわわ",
     ],
     []
@@ -56,4 +57,4 @@ const usePhase3Anim = () => {
   return { cursorRef }
 }
 
-export default usePhase3Anim
+export default usePhase3CursorAnim

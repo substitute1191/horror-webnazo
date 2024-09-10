@@ -8,3 +8,9 @@
     src: url(/public/fonts/onryou.TTF) format(truetype);
   }
 }
+
+@layer components {
+  .grad1 {
+    @apply border-fuchsia-200 bg-gradient-to-t from-orange-200 via-lime-300 to-emerald-200;
+  }
+}
