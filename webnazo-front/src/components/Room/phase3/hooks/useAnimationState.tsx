@@ -8,6 +8,7 @@ const isShowTexts2Atom = atom(false)
 const isShakeAtom = atom(false)
 const isApproachingCloseBtnAtom = atom(false)
 const speakingTimeAtom = atom<number>(75)
+const isCursorAtCloseBtnAtom = atom(false)
 
 const useAnimationState = () => {
   const { handleAnimEnd } = usePhase3AnimStep()
@@ -20,6 +21,9 @@ const useAnimationState = () => {
     isApproachingCloseBtnAtom
   )
   const [speakingTime, setSpeakingTime] = useAtom(speakingTimeAtom)
+  const [isCursorAtCloseBtn, setIsCursorAtCloseBtn] = useAtom(
+    isCursorAtCloseBtnAtom
+  )
 
   const handlePyramidFadeIn = () => {
     setIsEndFadein(true)
@@ -42,6 +46,8 @@ const useAnimationState = () => {
     setIsApproachingCloseBtn,
     speakingTime,
     setSpeakingTime,
+    isCursorAtCloseBtn,
+    setIsCursorAtCloseBtn,
   }
 }
 

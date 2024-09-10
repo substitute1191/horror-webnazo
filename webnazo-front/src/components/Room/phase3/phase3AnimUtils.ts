@@ -14,9 +14,15 @@ export const calculateNewPosition = (
       x: cursorPos.x + dx * ratio,
       y: cursorPos.y + dy * ratio,
       distance,
+      isCursorAtTarget: false,
     }
   }
-  return { x: closeBtnPos.x, y: closeBtnPos.y, distance }
+  return {
+    x: closeBtnPos.x,
+    y: closeBtnPos.y,
+    distance,
+    isCursorAtTarget: true,
+  }
 }
 
 export const setWaringLines = (distance: number, warningLines: string[]) => {
