@@ -8,34 +8,41 @@ const cursorPosAtom = atom<{ x: number; y: number }>({
 })
 const isHideCursorAtom = atom(false)
 
-const useFakeCursor = (throttleInterval = 1000) => {
+const useFakeCursor = () => {
   const [cursorPos, setCursorPos] = useAtom(cursorPosAtom)
   const [isHideCursor, setIsHideCursor] = useAtom(isHideCursorAtom)
   const { isApproachingCloseBtn } = useAnimationState()
-  const lastUpdateTime = useRef(0)
+  const rafId = useRef<number | null>(null)
+  const currentMousePos = useRef({ x: 0, y: 0 })
 
-  const updateMousePosition = useCallback(
-    (e: MouseEvent) => {
-      if (isApproachingCloseBtn) return
-      const now = Date.now()
-      if (now - lastUpdateTime.current >= throttleInterval) {
-        setCursorPos({
-          x: e.clientX,
-          y: e.clientY,
-        })
-        lastUpdateTime.current = now
-      }
-    },
-    [isApproachingCloseBtn, setCursorPos, throttleInterval]
-  )
+  const updateCursorPosition = useCallback(() => {
+    if (!isApproachingCloseBtn) {
+      setCursorPos({
+        x: currentMousePos.current.x,
+        y: currentMousePos.current.y,
+      })
+    }
+    rafId.current = requestAnimationFrame(updateCursorPosition)
+  }, [isApproachingCloseBtn, setCursorPos])
+
+  const handleMouseMove = useCallback((e: MouseEvent) => {
+    currentMousePos.current = {
+      x: e.clientX,
+      y: e.clientY,
+    }
+  }, [])
 
   useEffect(() => {
-    window.addEventListener("mousemove", updateMousePosition)
+    window.addEventListener("mousemove", handleMouseMove)
+    rafId.current = requestAnimationFrame(updateCursorPosition)
 
     return () => {
-      window.removeEventListener("mousemove", updateMousePosition)
+      window.removeEventListener("mousemove", handleMouseMove)
+      if (rafId.current !== null) {
+        cancelAnimationFrame(rafId.current)
+      }
     }
-  }, [updateMousePosition])
+  }, [handleMouseMove, updateCursorPosition])
 
   return {
     isHideCursor,

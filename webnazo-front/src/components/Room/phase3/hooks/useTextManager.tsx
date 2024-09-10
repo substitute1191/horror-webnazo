@@ -17,6 +17,7 @@ const useTextManager = () => {
     setIsShowTexts2,
     setIsShake,
     setIsApproachingCloseBtn,
+    setSpeakingTime,
   } = useAnimationState()
   const { stopEndroll, playKinshiku } = useContext(Phase3Context)
   const { setIsHideCursor } = useFakeCursor()
@@ -83,6 +84,7 @@ const useTextManager = () => {
       setIsShake(true)
       setIsHideCursor(true)
       setIsApproachingCloseBtn(true)
+      setSpeakingTime(40)
     }
   }
 

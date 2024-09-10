@@ -1,6 +1,6 @@
 import Pyramid from "@/assets/image/mascot/mascot.png"
 import usePhase3AnimStep from "../hooks/usePhase3AnimStep"
-import SpeachBubble from "./SpeachBubble"
+import SpeechBubble from "./SpeechBubble"
 import useTextManager from "../hooks/useTextManager"
 import useAnimationState from "../hooks/useAnimationState"
 
@@ -28,7 +28,7 @@ const Phase3Pyramid = () => {
         alt=""
       />
       {isEndFadein && !isShowAdv ? (
-        <SpeachBubble
+        <SpeechBubble
           key={idx}
           text={showText}
           handleComplete={handleComplete}
@@ -36,7 +36,7 @@ const Phase3Pyramid = () => {
         />
       ) : null}
       {isShowAdv && isShowTexts2 ? (
-        <SpeachBubble
+        <SpeechBubble
           key={idx}
           text={showText}
           handleComplete={handleComplete2}
