@@ -5,7 +5,7 @@ import useAnimationState from "../hooks/useAnimationState"
 
 const GameClearMessage = () => {
   const { play, stop } = useSE(SEsrc)
-  const { setIsShowGameClearMsg } = useAnimationState()
+  const { setIsShowTime } = useAnimationState()
 
   useEffect(() => {
     play()
@@ -16,7 +16,7 @@ const GameClearMessage = () => {
   }, [play, stop])
 
   const handleAnimationEnd = (e: AnimationEvent<HTMLDivElement>) => {
-    if (e.animationName === "scaleup") setIsShowGameClearMsg(true)
+    if (e.animationName === "scaleup") setIsShowTime(true)
   }
 
   return (

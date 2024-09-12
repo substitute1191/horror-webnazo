@@ -8,9 +8,10 @@ import FakeCursor from "./Cursor/FakeCursor"
 import usePhase3CursorAnim from "./usePhase3CurosrAnim"
 import usePhase3AdvAnim from "./usePhase3AdvAnim"
 import { clsx } from "clsx"
+import ClearTime from "./ClearAnim/ClearTime"
 
 const Phase3 = () => {
-  const { isShowGameClearMsg, isShowAdv } = useAnimationState()
+  const { isShowGameClearMsg, isShowAdv, isShowTime } = useAnimationState()
   const { cursorRef } = usePhase3CursorAnim()
   const { currentImg } = usePhase3AdvAnim()
 
@@ -39,14 +40,14 @@ const Phase3 = () => {
   return (
     <Phase3BGMProvider>
       <div
-        id="phase2"
-        className={`bg-yumekawa ${bgClasses} relative bg-cover bg-blend-color`}
+        className={`bg-yumekawa ${bgClasses} relative min-h-screen overflow-auto bg-cover bg-blend-color`}
       >
         <div
-          className={`font-pop ${bgGradClasses} mx-auto flex h-screen w-full flex-col items-center border-2 border-solid pb-52 pt-7 lg:w-3/5`}
+          className={`font-pop ${bgGradClasses} mx-auto flex min-h-screen w-full flex-col items-center border-2 border-solid pb-52 pt-7 lg:w-3/5`}
         >
           <Phase3Pyramid />
           <GameClearMessage />
+          {isShowTime ? <ClearTime /> : null}
           {isShowGameClearMsg ? <Drumroll /> : null}
           {isShowAdv ? <Advertisement currentImg={currentImg} /> : null}
           <FakeCursor ref={cursorRef} />

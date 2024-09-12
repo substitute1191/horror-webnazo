@@ -56,7 +56,7 @@ export const stopGameTimer = async (req: Request, res: Response) => {
       timeRecord: result.toString(),
     },
   })
-  res.status(204)
+  res.status(200).json(result)
 }
 
 const SelectPlayerSchema = z.object({

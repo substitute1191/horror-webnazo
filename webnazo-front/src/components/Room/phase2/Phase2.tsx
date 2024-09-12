@@ -6,10 +6,12 @@ import AboutSite from "../components/prehorror/AboutSite"
 import RankmatchQuestions from "../components/prehorror/Questions/RankmatchQuestions"
 import useProceed from "../useProceed"
 import KeepSpeakingPyramid from "../components/prehorror/KeepSpeakingPyramid"
-import { tabInPhase2Atom } from "@/atoms/roomAtoms"
+import { clearTimeAtom, tabInPhase2Atom } from "@/atoms/roomAtoms"
 import { useAtom } from "jotai"
 import api from "@/utils/api"
 import { useParams } from "react-router-dom"
+import useAnimationState from "../phase3/hooks/useAnimationState"
+import { AxiosResponse } from "axios"
 
 // TODO 後で関数を分割する
 /* eslint-disable max-lines-per-function */
@@ -18,6 +20,8 @@ const Phase2 = () => {
   const [tab, setTab] = useAtom(tabInPhase2Atom)
   const { proceed } = useProceed()
   const { roomId } = useParams()
+  const { setIsShowTime } = useAnimationState()
+  const [, setClearTime] = useAtom(clearTimeAtom)
 
   // 音楽再生
   useEffect(() => {
@@ -68,7 +72,10 @@ const Phase2 = () => {
       .post(`/room/${roomId}/stopGameTimer`, {
         finishTime,
       })
-      .then()
+      .then((res: AxiosResponse) => {
+        setIsShowTime(true)
+        setClearTime(res.data as number)
+      })
       .catch((e) => {
         console.error(e)
       })
