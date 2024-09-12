@@ -8,13 +8,16 @@ import FakeCursor from "./Cursor/FakeCursor"
 import usePhase3CursorAnim from "./usePhase3CurosrAnim"
 import usePhase3AdvAnim from "./usePhase3AdvAnim"
 import { clsx } from "clsx"
+import { Helmet } from "react-helmet-async"
+import usePhase3Title from "./usePhase3Title"
 
 const Phase3 = () => {
   const { isShowGameClearMsg, isShowAdv } = useAnimationState()
   const { cursorRef } = usePhase3CursorAnim()
   const { currentImg } = usePhase3AdvAnim()
+  const { phase3Title } = usePhase3Title()
 
-  const bgClasses = clsx("transition-colors duration-300", {
+  const bgClasses = clsx({
     ["bg-white/20"]: currentImg === 1,
     ["bg-blue-400"]: currentImg === 2,
     ["bg-slate-400"]: currentImg === 3,
@@ -25,7 +28,7 @@ const Phase3 = () => {
     ["bg-slate-900"]: currentImg >= 8,
   })
 
-  const bgGradClasses = clsx("transition-colors duration-300", {
+  const bgGradClasses = clsx({
     ["grad1"]: currentImg === 1,
     ["grad2"]: currentImg === 2,
     ["grad3"]: currentImg === 3,
@@ -38,6 +41,9 @@ const Phase3 = () => {
 
   return (
     <Phase3BGMProvider>
+      <Helmet>
+        <title>{phase3Title}</title>
+      </Helmet>
       <div
         id="phase2"
         className={`bg-yumekawa ${bgClasses} relative bg-cover bg-blend-color`}
