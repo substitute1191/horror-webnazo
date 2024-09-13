@@ -3,16 +3,16 @@ import Drumroll from "./ClearAnim/Drumroll"
 import Phase3Pyramid from "./Pyramid/Phase3Pyramid"
 import Phase3BGMProvider from "./Phase3BGMProvider"
 import Advertisement from "./Advertisement/Advertisement"
-import useAnimationState from "./hooks/useAnimationState"
 import FakeCursor from "./Cursor/FakeCursor"
 import usePhase3CursorAnim from "./usePhase3CurosrAnim"
 import usePhase3AdvAnim from "./usePhase3AdvAnim"
 import { clsx } from "clsx"
 import { Helmet } from "react-helmet-async"
 import usePhase3Title from "./usePhase3Title"
+import useVisibilityState from "./hooks/useVisibilityState"
 
 const Phase3 = () => {
-  const { isShowGameClearMsg, isShowAdv } = useAnimationState()
+  const { isShowGameClearMsg, isShowAdv } = useVisibilityState()
   const { cursorRef } = usePhase3CursorAnim()
   const { currentImg } = usePhase3AdvAnim()
   const { phase3Title } = usePhase3Title()

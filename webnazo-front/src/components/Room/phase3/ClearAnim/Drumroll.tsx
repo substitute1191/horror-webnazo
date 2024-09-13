@@ -1,9 +1,9 @@
 import ShuffleNumber from "./ShuffleNumber"
 import { AnimationEvent } from "react"
-import useAnimationState from "../hooks/useAnimationState"
+import useVisibilityState from "../hooks/useVisibilityState"
 
 const Drumroll = () => {
-  const { isShowDrumroll, setIsShowDrumroll } = useAnimationState()
+  const { isShowDrumroll, setIsShowDrumroll } = useVisibilityState()
 
   const handleAnimationEnd = (e: AnimationEvent<HTMLDivElement>) => {
     if (e.animationName === "fadein-up") {

@@ -5,6 +5,7 @@ import useAnimationState from "../hooks/useAnimationState"
 import { useEffect, useState } from "react"
 import { clsx } from "clsx"
 import PyramidFlicker from "./PyramidFlicker"
+import useVisibilityState from "../hooks/useVisibilityState"
 
 /* eslint-disable complexity */
 const Phase3Pyramid = () => {
@@ -14,13 +15,13 @@ const Phase3Pyramid = () => {
     isEndFadein,
     setIsEndFadein,
     firstAnimate,
-    isShowAdv,
     isShake,
     setIsShake,
-    isShowTexts2,
     isCursorAtCloseBtn,
     isEndShuffleNumber,
   } = useAnimationState()
+
+  const { isShowAdv, isShowTexts2 } = useVisibilityState()
 
   useEffect(() => {
     if (isCursorAtCloseBtn) setIsShake(false)
