@@ -4,6 +4,7 @@ import useTextManager from "../hooks/useTextManager"
 import useAnimationState from "../hooks/useAnimationState"
 import { useEffect, useState } from "react"
 import { clsx } from "clsx"
+import PyramidFlicker from "./PyramidFlicker"
 
 /* eslint-disable complexity */
 const Phase3Pyramid = () => {
@@ -46,12 +47,16 @@ const Phase3Pyramid = () => {
 
   return (
     <div className="flex h-52 w-full px-2">
-      <img
-        className={classes}
-        onAnimationEnd={() => setIsEndFadein(true)}
-        src={Pyramid}
-        alt=""
-      />
+      {!isCursorAtCloseBtn ? (
+        <img
+          className={classes}
+          onAnimationEnd={() => setIsEndFadein(true)}
+          src={Pyramid}
+          alt=""
+        />
+      ) : (
+        <PyramidFlicker />
+      )}
       {isEndFadein && !isShowAdv ? (
         <SpeechBubble
           key={idx}

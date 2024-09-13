@@ -57,11 +57,14 @@ export const getAdvTransitionPhrases = (currentImg: number) => {
   const advTransitionPhrases = [
     "あ！",
     "何この声！？",
+    "何かバグってるよ！？",
+    "何が起こってるの！？",
+    "こ、怖いよ！！",
     "コワイコワイコワイコワイコワイコワイコワイ",
     "いやだいやだいやだいやだいやだいやだ",
     "死んじゃう死んじゃう死んじゃう死んじゃう",
-    "死死死死死死死死死死死死死死",
-    "$縺ｼぬ；*ユ見”拠！ハ」Ｌ？０",
+    "死にたくない死にたくない死にたくない",
+    "あなたは生きたいですか……？",
   ]
 
   switch (currentImg) {
@@ -79,6 +82,12 @@ export const getAdvTransitionPhrases = (currentImg: number) => {
       return advTransitionPhrases[5]
     case 8:
       return advTransitionPhrases[6]
+    case 9:
+      return advTransitionPhrases[7]
+    case 10:
+      return advTransitionPhrases[8]
+    case 11:
+      return advTransitionPhrases[9]
     default:
       return null
   }

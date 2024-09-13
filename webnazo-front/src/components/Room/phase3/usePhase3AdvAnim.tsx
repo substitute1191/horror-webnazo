@@ -4,6 +4,7 @@ import useAnimationState from "./hooks/useAnimationState"
 import useTextManager from "./hooks/useTextManager"
 import { getAdvTransitionPhrases } from "./phase3AnimUtils"
 import usePhase3Title from "./usePhase3Title"
+import useScreenEffect from "@/hooks/useScreenEffect"
 
 const currentImgAtom = atom(1)
 const currentImgIncAtom = atom(1)
@@ -14,6 +15,7 @@ const usePhase3AdvAnim = () => {
   const [currentImg, setCurrentImg] = useAtom(currentImgAtom)
   const [currentImgInc, setCurrentImgInc] = useAtom(currentImgIncAtom)
   const { changePhase3Title } = usePhase3Title()
+  const { setIsRotateScreen } = useScreenEffect()
   const rafRef = useRef<number>()
   const lastTime = useRef<number>(0)
 
@@ -30,6 +32,7 @@ const usePhase3AdvAnim = () => {
           const phrase = getAdvTransitionPhrases(prev + 1)
           if (phrase !== null) setShowText(phrase)
           changePhase3Title(prev + 1)
+          setIsRotateScreen(prev + 1)
           return prev === 11 ? 10 : prev + 1
         })
         // 一瞬消した後、100ms後に広告を表示する
@@ -44,6 +47,7 @@ const usePhase3AdvAnim = () => {
       setBgMode,
       setCurrentImg,
       setCurrentImgInc,
+      setIsRotateScreen,
       setShowText,
     ]
   )
