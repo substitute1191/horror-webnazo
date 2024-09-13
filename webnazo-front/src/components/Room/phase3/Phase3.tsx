@@ -45,7 +45,6 @@ const Phase3 = () => {
         <title>{phase3Title}</title>
       </Helmet>
       <div
-        id="phase2"
         className={`bg-yumekawa ${bgClasses} relative bg-cover bg-blend-color`}
       >
         <div

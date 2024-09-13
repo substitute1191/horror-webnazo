@@ -20,7 +20,7 @@ const usePhase3AdvAnim = () => {
   const clickAdv = useCallback(
     (currentTime: number) => {
       // 指定した間隔でアニメーションを切り替える
-      if (currentTime - lastTime.current > 800) {
+      if (currentTime - lastTime.current > 600) {
         lastTime.current = currentTime
         // 一瞬広告を非表示にする
         setCurrentImg(0)

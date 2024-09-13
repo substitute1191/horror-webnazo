@@ -1,6 +1,8 @@
 import { atom, useAtom } from "jotai"
 import { useCallback, useEffect, useRef } from "react"
 import useAnimationState from "../hooks/useAnimationState"
+import heartbeat from "@/assets/sound/Heartbeat04-mp3/Heartbeat04-1(Slow-Reverb).mp3"
+import useSE from "@/SoundManager/useSE"
 
 const cursorPosAtom = atom<{ x: number; y: number }>({
   x: 0,
@@ -11,7 +13,8 @@ const isHideCursorAtom = atom(false)
 const useFakeCursor = () => {
   const [cursorPos, setCursorPos] = useAtom(cursorPosAtom)
   const [isHideCursor, setIsHideCursor] = useAtom(isHideCursorAtom)
-  const { isApproachingCloseBtn } = useAnimationState()
+  const { isApproachingCloseBtn, isCursorAtCloseBtn } = useAnimationState()
+  const { play, stop } = useSE(heartbeat)
   const rafId = useRef<number | null>(null)
   const currentMousePos = useRef({ x: 0, y: 0 })
 
@@ -33,16 +36,26 @@ const useFakeCursor = () => {
   }, [])
 
   useEffect(() => {
+    if (isApproachingCloseBtn) play()
+    if (isCursorAtCloseBtn) stop()
     window.addEventListener("mousemove", handleMouseMove)
     rafId.current = requestAnimationFrame(updateCursorPosition)
 
     return () => {
+      stop()
       window.removeEventListener("mousemove", handleMouseMove)
       if (rafId.current !== null) {
         cancelAnimationFrame(rafId.current)
       }
     }
-  }, [handleMouseMove, updateCursorPosition])
+  }, [
+    handleMouseMove,
+    isApproachingCloseBtn,
+    isCursorAtCloseBtn,
+    play,
+    stop,
+    updateCursorPosition,
+  ])
 
   return {
     isHideCursor,
