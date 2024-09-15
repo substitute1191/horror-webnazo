@@ -36,6 +36,24 @@ export const createRoom = async (_req: Request, res: Response) => {
   })
 }
 
+interface TeamNameInterface {
+  teamName: string
+}
+
+export const setTeamName = async (req: Request, res: Response) => {
+  const { roomId } = req.params
+  const { teamName } = req.body as TeamNameInterface
+  await db.room.update({
+    where: {
+      id: roomId,
+    },
+    data: {
+      teamName: teamName,
+    },
+  })
+  res.status(204).send()
+}
+
 export const getRoomData = async (req: Request, res: Response) => {
   const { roomId } = req.params
   const room = await db.room.findUnique({

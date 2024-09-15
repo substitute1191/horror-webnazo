@@ -22,6 +22,8 @@ export default {
         noise: "noise 0.2s infinite",
         float: "float 3s ease-in-out infinite",
         runaway: "runaway 0.5s linear forwards",
+        "blur-enter": "blurIn 0.3s ease-out",
+        "blur-exit": "blurOut 0.3s ease-in forwards",
       },
       keyframes: {
         "irregular-blink": {
@@ -138,6 +140,14 @@ export default {
           "100%": {
             transform: "scale(1)",
           },
+        },
+        blurIn: {
+          from: { opacity: "0", filter: "blur(20px)" },
+          to: { opacity: "1", filter: "blur(0)" },
+        },
+        blurOut: {
+          from: { opacity: "1", filter: "blur(0)" },
+          to: { opacity: "0", filter: "blur(20px)" },
         },
       },
     },

@@ -1,6 +1,7 @@
 import { Router } from "express"
 import {
   createRoom,
+  setTeamName,
   getQ2sentence,
   getRoomData,
   getRank,
@@ -20,6 +21,7 @@ router.get("/createRoom", asyncHandler(createRoom))
 router.get("/room/:roomId", asyncHandler(getRoomData))
 router.get("/room/:roomId/getQ2sentence", asyncHandler(getQ2sentence))
 router.post("/room/:roomId/selectPlayer", asyncHandler(selectPlayer))
+router.post("/room/:roomId/setTeamName", asyncHandler(setTeamName))
 router.post("/room/:roomId/proceed", asyncHandler(proceed))
 router.post("/room/:roomId/startGameTimer", asyncHandler(startGameTimer))
 router.post("/room/:roomId/stopGameTimer", asyncHandler(stopGameTimer))
