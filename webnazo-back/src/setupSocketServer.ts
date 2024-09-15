@@ -41,6 +41,13 @@ export function setupSocketServer(httpServer: HttpServer) {
       }
     )
 
+    socket.on(
+      "setTeamName",
+      ({ roomId, teamName }: { roomId: string; teamName: string }) => {
+        socket.broadcast.to(roomId).emit("setTeamNameToStorage", teamName)
+      }
+    )
+
     socket.on("disconnect", () => {
       console.log("user disconnected!")
     })

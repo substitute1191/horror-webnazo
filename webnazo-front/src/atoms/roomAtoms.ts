@@ -95,3 +95,6 @@ export const tabInPhase2Atom = atomWithStorage("tabInPhase2", 0)
 export const clearTimeAtom = atomWithStorage("clearTime", 0, undefined, {
   getOnInit: true,
 })
+export const teamNameAtom = atomWithStorage("teamName", "", undefined, {
+  getOnInit: true,
+})
