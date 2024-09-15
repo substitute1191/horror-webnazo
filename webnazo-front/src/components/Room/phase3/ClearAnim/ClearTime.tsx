@@ -2,7 +2,7 @@ import { AnimationEvent, useEffect, useState } from "react"
 import SEsrc from "@/assets/sound/claphand.mp3"
 import useSE from "@/SoundManager/useSE"
 import useAnimationState from "../hooks/useAnimationState"
-import { clearTimeAtom } from "@/atoms/roomAtoms"
+import { clearTimeAtom, teamNameAtom } from "@/atoms/roomAtoms"
 import { useAtomValue } from "jotai"
 
 const ClearTime = () => {
@@ -12,6 +12,7 @@ const ClearTime = () => {
   const [minutes, setMinutes] = useState(0)
   const [seconds, setSeconds] = useState(0)
   const [milliseconds, setMilliseconds] = useState(0)
+  const teamName = useAtomValue(teamNameAtom)
 
   useEffect(() => {
     const totalSeconds = clearTime / 1000
@@ -38,7 +39,7 @@ const ClearTime = () => {
       onAnimationEnd={(e) => handleAnimationEnd(e)}
     >
       <p className="mb-8 bg-gradient-to-r from-fuchsia-400 to-pink-400 bg-clip-text text-4xl font-bold text-transparent">
-        ○○チームのスコアは・・・
+        {teamName}チームのスコアは・・・
       </p>
       <div className="inline-block rounded-xl bg-gradient-to-r from-fuchsia-100 to-pink-100 p-6 shadow-lg">
         <p className="text-8xl font-extrabold tracking-wider text-gray-800">
