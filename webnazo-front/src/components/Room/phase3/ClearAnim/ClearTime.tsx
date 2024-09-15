@@ -38,8 +38,8 @@ const ClearTime = () => {
       className="mt-5 animate-[scaleup_1s_ease-in-out] p-6 text-center"
       onAnimationEnd={(e) => handleAnimationEnd(e)}
     >
-      <p className="mb-8 bg-gradient-to-r from-fuchsia-400 to-pink-400 bg-clip-text text-4xl font-bold text-transparent">
-        <span className="text-6xl">{teamName}</span>チームのスコアは・・・
+      <p className="mb-8 bg-gradient-to-r from-fuchsia-400 to-pink-400 bg-clip-text pb-5 text-4xl font-bold text-transparent">
+        <span className="text-6xl">{teamName}</span>チームのスコアは
       </p>
       <div className="inline-block rounded-xl bg-gradient-to-r from-fuchsia-100 to-pink-100 p-6 shadow-lg">
         <p className="text-8xl font-extrabold tracking-wider text-gray-800">
