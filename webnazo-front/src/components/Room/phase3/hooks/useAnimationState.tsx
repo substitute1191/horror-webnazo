@@ -8,7 +8,6 @@ const isShakeAtom = atom(false)
 const isApproachingCloseBtnAtom = atom(false)
 const speakingTimeAtom = atom<number>(75)
 const isCursorAtCloseBtnAtom = atom(false)
-
 const isShowTImeAtom = atom(false)
 const isShowGameClearMsgAtom = atom(false)
 const isShowDrumrollAtom = atom(false)
