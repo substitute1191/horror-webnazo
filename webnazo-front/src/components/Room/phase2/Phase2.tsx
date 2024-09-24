@@ -1,13 +1,18 @@
 import useBGM from "@/SoundManager/useBGM"
-import { useEffect } from "react"
+import { useContext, useEffect } from "react"
 import bgmSrc from "@/assets/sound/Sunflower.mp3"
 import rankmatchFakeLogo from "@/assets/image/rankmatch_fake_logo.png"
 import AboutSite from "../components/prehorror/AboutSite"
 import RankmatchQuestions from "../components/prehorror/Questions/RankmatchQuestions"
 import useProceed from "../useProceed"
 import KeepSpeakingPyramid from "../components/prehorror/KeepSpeakingPyramid"
-import { tabInPhase2Atom } from "@/atoms/roomAtoms"
+import { clearTimeAtom, tabInPhase2Atom } from "@/atoms/roomAtoms"
 import { useAtom } from "jotai"
+import api from "@/utils/api"
+import { useParams } from "react-router-dom"
+import useAnimationState from "../phase3/hooks/useAnimationState"
+import { AxiosResponse } from "axios"
+import { SocketContext } from "../socketContext"
 
 // TODO 後で関数を分割する
 /* eslint-disable max-lines-per-function */
@@ -15,6 +20,10 @@ const Phase2 = () => {
   const { play, pause } = useBGM(bgmSrc)
   const [tab, setTab] = useAtom(tabInPhase2Atom)
   const { proceed } = useProceed()
+  const { roomId } = useParams()
+  const { setIsShowTime } = useAnimationState()
+  const [, setClearTime] = useAtom(clearTimeAtom)
+  const { socket, isConnected } = useContext(SocketContext)
 
   // 音楽再生
   useEffect(() => {
@@ -24,6 +33,14 @@ const Phase2 = () => {
       pause()
     }
   }, [play, pause])
+
+  useEffect(() => {
+    if (socket !== null && isConnected) {
+      socket.on("setClearTime", (clearTime: number) => {
+        localStorage.setItem("clearTime", clearTime.toString())
+      })
+    }
+  })
 
   // ロゴのクリック部分のレスポンシブ対応
   useEffect(() => {
@@ -58,6 +75,29 @@ const Phase2 = () => {
     setTab(num)
   }
 
+  const proceedAndSetFinishTime = (phase: number) => {
+    proceed(phase)
+    const finishTime = Date.now().toString()
+    api
+      .post(`/room/${roomId}/stopGameTimer`, {
+        finishTime,
+      })
+      .then((res: AxiosResponse) => {
+        setIsShowTime(true)
+        setClearTime(res.data as number)
+
+        if (socket !== null) {
+          socket.emit("registerClearTime", {
+            roomId: roomId,
+            clearTime: res.data as number,
+          })
+        }
+      })
+      .catch((e) => {
+        console.error(e)
+      })
+  }
+
   return (
     <div
       id="phase2"
@@ -76,7 +116,7 @@ const Phase2 = () => {
           />
           <map name="ImageMap">
             <area
-              onClick={() => proceed(3)}
+              onClick={() => proceedAndSetFinishTime(3)}
               shape="rect"
               coords="137,272,243,382"
               href="#"
