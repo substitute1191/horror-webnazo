@@ -5,12 +5,14 @@ import useTextManager from "./hooks/useTextManager"
 import { getAdvTransitionPhrases } from "./phase3AnimUtils"
 import usePhase3Title from "./usePhase3Title"
 import useScreenEffect from "@/hooks/useScreenEffect"
+import useAdvAnimSE from "./useAdvAnimSE"
 
 const currentImgAtom = atom(1)
 const currentImgIncAtom = atom(1)
 
 const usePhase3AdvAnim = () => {
-  const { isCursorAtCloseBtn, setBgMode } = useAnimationState()
+  const { isCursorAtCloseBtn, setBgMode, setIsEndAdvAnim, setSpeakingTime } =
+    useAnimationState()
   const { setShowText } = useTextManager()
   const [currentImg, setCurrentImg] = useAtom(currentImgAtom)
   const [currentImgInc, setCurrentImgInc] = useAtom(currentImgIncAtom)
@@ -33,6 +35,10 @@ const usePhase3AdvAnim = () => {
           if (phrase !== null) setShowText(phrase)
           changePhase3Title(prev + 1)
           setIsRotateScreen(prev + 1)
+          if (prev + 1 === 11) {
+            setSpeakingTime(500)
+            setIsEndAdvAnim(true)
+          }
           return prev === 11 ? 10 : prev + 1
         })
         // 一瞬消した後、100ms後に広告を表示する
@@ -47,8 +53,10 @@ const usePhase3AdvAnim = () => {
       setBgMode,
       setCurrentImg,
       setCurrentImgInc,
+      setIsEndAdvAnim,
       setIsRotateScreen,
       setShowText,
+      setSpeakingTime,
     ]
   )
 
@@ -66,6 +74,8 @@ const usePhase3AdvAnim = () => {
       if (rafRef.current !== undefined) cancelAnimationFrame(rafRef.current)
     }
   }, [clickAdv, currentImgInc, isCursorAtCloseBtn])
+
+  useAdvAnimSE(currentImg)
 
   return {
     currentImg,

@@ -12,10 +12,8 @@ const PyramidFlicker = () => {
   const changePyramid = useCallback((currentTime: number) => {
     // 指定した間隔でアニメーションを切り替える
     if (currentTime - lastTime.current > 100) {
-      console.info("changePyramid!")
       lastTime.current = currentTime
       if (Math.random() < 0.5) {
-        console.info("ピラミッドがノイズに切り替わる")
         setPyramidNoiseImg(Math.floor(Math.random() * 6))
         setIsChanging(true)
         setTimeout(() => setIsChanging(false), 100 + Math.random() * 100)

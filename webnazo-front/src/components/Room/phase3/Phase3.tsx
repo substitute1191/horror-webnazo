@@ -10,12 +10,17 @@ import { clsx } from "clsx"
 import { Helmet } from "react-helmet-async"
 import usePhase3Title from "./usePhase3Title"
 import useVisibilityState from "./hooks/useVisibilityState"
+import usePhase3TransitionAnim from "./usePhase3TransitionAnim"
+import useAnimationState from "./hooks/useAnimationState"
+import CharacterRevealSpan from "./CharacterRevealSpan"
 
 const Phase3 = () => {
   const { isShowGameClearMsg, isShowAdv } = useVisibilityState()
   const { cursorRef } = usePhase3CursorAnim()
   const { currentImg } = usePhase3AdvAnim()
   const { phase3Title } = usePhase3Title()
+  const { isEndAdvAnim } = useAnimationState()
+  usePhase3TransitionAnim()
 
   const bgClasses = clsx({
     ["bg-white/20"]: currentImg === 1,
@@ -45,10 +50,15 @@ const Phase3 = () => {
         <title>{phase3Title}</title>
       </Helmet>
       <div
-        className={`bg-yumekawa ${bgClasses} relative bg-cover bg-blend-color`}
+        className={`bg-yumekawa ${bgClasses} relative overflow-hidden bg-cover bg-blend-color`}
       >
+        <CharacterRevealSpan
+          text="イカサマ大好き"
+          interval={100}
+          classNames="text-9xl text-white font-onryou rotate-45 z-30 top-[10rem]"
+        />
         <div
-          className={`font-pop ${bgGradClasses} mx-auto flex h-screen w-full flex-col items-center border-2 border-solid pb-52 pt-7 lg:w-3/5`}
+          className={`${isEndAdvAnim ? "font-gothic" : "font-pop"} ${bgGradClasses} mx-auto flex h-screen w-full flex-col items-center border-2 border-solid pb-52 pt-7 lg:w-3/5`}
         >
           <Phase3Pyramid />
           <GameClearMessage />

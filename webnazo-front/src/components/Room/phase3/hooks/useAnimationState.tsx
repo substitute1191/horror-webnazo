@@ -8,6 +8,8 @@ const speakingTimeAtom = atom<number>(75)
 const isCursorAtCloseBtnAtom = atom(false)
 const isEndShuffleNumberAtom = atom(false)
 const bgModeAtom = atom(0)
+const isEndAdvAnimAtom = atom(false)
+const speechBubbleClassNameAtom = atom("")
 
 // TODO 後で役割毎に分割する
 const useAnimationState = () => {
@@ -24,8 +26,12 @@ const useAnimationState = () => {
   const [isEndShuffleNumber, setIsEndShuffleNumber] = useAtom(
     isEndShuffleNumberAtom
   )
-
   const [bgMode, setBgMode] = useAtom(bgModeAtom)
+  const [isEndAdvAnim, setIsEndAdvAnim] = useAtom(isEndAdvAnimAtom)
+
+  const [speechBubbleClassName, setSpeechBubbleClassName] = useAtom(
+    speechBubbleClassNameAtom
+  )
 
   return {
     bgMode,
@@ -44,6 +50,10 @@ const useAnimationState = () => {
     setSpeakingTime,
     isCursorAtCloseBtn,
     setIsCursorAtCloseBtn,
+    isEndAdvAnim,
+    setIsEndAdvAnim,
+    speechBubbleClassName,
+    setSpeechBubbleClassName,
   }
 }
 
