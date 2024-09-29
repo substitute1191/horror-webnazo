@@ -17,7 +17,7 @@ import { SocketContext } from "../socketContext"
 // TODO 後で関数を分割する
 /* eslint-disable max-lines-per-function */
 const Phase2 = () => {
-  const { play, pause } = useBGM(bgmSrc)
+  const { play, stop } = useBGM(bgmSrc)
   const [tab, setTab] = useAtom(tabInPhase2Atom)
   const { proceed } = useProceed()
   const { roomId } = useParams()
@@ -30,9 +30,9 @@ const Phase2 = () => {
     void play()
 
     return () => {
-      pause()
+      stop()
     }
-  }, [play, pause])
+  }, [play, stop])
 
   useEffect(() => {
     if (socket !== null && isConnected) {

@@ -1,8 +1,15 @@
 import useSoundMenu from "./useSoundMenu"
 
 const SoundMenu = () => {
-  const { isVisible, menuRef, seVol, bgmVol, handleSEChange, handleBGMChange } =
-    useSoundMenu()
+  const {
+    isVisible,
+    menuRef,
+    seVol,
+    bgmVol,
+    handleSEChange,
+    handleBGMChange,
+    handleMute,
+  } = useSoundMenu()
 
   return (
     <>
@@ -12,7 +19,12 @@ const SoundMenu = () => {
             ref={menuRef}
             className="flex w-40 flex-col rounded bg-black p-4"
           >
-            <span className="text-white">サウンドメニュー</span>
+            <div className="text-white">サウンドメニュー</div>
+            <div>
+              <button onClick={handleMute} className="text-white">
+                ミュートにする
+              </button>
+            </div>
             <label htmlFor="se-volume" className="text-white">
               SE音量
             </label>
