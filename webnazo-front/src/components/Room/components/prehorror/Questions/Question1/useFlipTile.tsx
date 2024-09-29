@@ -6,12 +6,13 @@ import clapHandsSE from "@/assets/sound/claphand.mp3"
 
 const useFlipTile = () => {
   const idx = [0, 1, 2, 3]
-  const [puzzle, setPuzzle] = useState([
+  const initialState = [
     [0, 1, 1, 0],
     [1, 0, 0, 1],
     [1, 0, 0, 1],
     [0, 1, 1, 0],
-  ])
+  ]
+  const [puzzle, setPuzzle] = useState(initialState)
   const answer = [
     [1, 1, 1, 1],
     [1, 1, 1, 0],
@@ -24,6 +25,11 @@ const useFlipTile = () => {
 
   const isin = (i: number, j: number) => {
     return 0 <= i && i < 4 && 0 <= j && j < 4
+  }
+
+  const reset = () => {
+    setPuzzle(initialState)
+    playFlip()
   }
 
   const flip = (row: number, col: number) => {
@@ -43,7 +49,7 @@ const useFlipTile = () => {
     }
   }
 
-  return { idx, puzzle, answer, isClear, flip }
+  return { idx, puzzle, answer, isClear, reset, flip }
 }
 
 export default useFlipTile
