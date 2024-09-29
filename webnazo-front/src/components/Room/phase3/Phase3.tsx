@@ -12,12 +12,14 @@ import usePhase3Title from "./usePhase3Title"
 import useVisibilityState from "./hooks/useVisibilityState"
 import usePhase3TransitionAnim from "./usePhase3TransitionAnim"
 import useAnimationState from "./hooks/useAnimationState"
-import CharacterRevealSpan from "./CharacterRevealSpan"
+import CharacterRevealManager from "./CharacterRevealManager"
+import useAdvImageManager from "./useAdvImageManager"
 
 const Phase3 = () => {
   const { isShowGameClearMsg, isShowAdv } = useVisibilityState()
   const { cursorRef } = usePhase3CursorAnim()
-  const { currentImg } = usePhase3AdvAnim()
+  usePhase3AdvAnim()
+  const { currentImg } = useAdvImageManager()
   const { phase3Title } = usePhase3Title()
   const { isEndAdvAnim } = useAnimationState()
   usePhase3TransitionAnim()
@@ -52,11 +54,7 @@ const Phase3 = () => {
       <div
         className={`bg-yumekawa ${bgClasses} relative overflow-hidden bg-cover bg-blend-color`}
       >
-        <CharacterRevealSpan
-          text="イカサマ大好き"
-          interval={100}
-          classNames="text-9xl text-white font-onryou rotate-45 z-30 top-[10rem]"
-        />
+        <CharacterRevealManager />
         <div
           className={`${isEndAdvAnim ? "font-gothic" : "font-pop"} ${bgGradClasses} mx-auto flex h-screen w-full flex-col items-center border-2 border-solid pb-52 pt-7 lg:w-3/5`}
         >

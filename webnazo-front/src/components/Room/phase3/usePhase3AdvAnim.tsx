@@ -1,4 +1,3 @@
-import { atom, useAtom } from "jotai"
 import { useCallback, useEffect, useRef } from "react"
 import useAnimationState from "./hooks/useAnimationState"
 import useTextManager from "./hooks/useTextManager"
@@ -6,16 +5,14 @@ import { getAdvTransitionPhrases } from "./phase3AnimUtils"
 import usePhase3Title from "./usePhase3Title"
 import useScreenEffect from "@/hooks/useScreenEffect"
 import useAdvAnimSE from "./useAdvAnimSE"
-
-const currentImgAtom = atom(1)
-const currentImgIncAtom = atom(1)
+import useAdvImageManager from "./useAdvImageManager"
 
 const usePhase3AdvAnim = () => {
   const { isCursorAtCloseBtn, setBgMode, setIsEndAdvAnim, setSpeakingTime } =
     useAnimationState()
   const { setShowText } = useTextManager()
-  const [currentImg, setCurrentImg] = useAtom(currentImgAtom)
-  const [currentImgInc, setCurrentImgInc] = useAtom(currentImgIncAtom)
+  const { currentImg, setCurrentImg, currentImgInc, setCurrentImgInc } =
+    useAdvImageManager()
   const { changePhase3Title } = usePhase3Title()
   const { setIsRotateScreen } = useScreenEffect()
   const rafRef = useRef<number>()
@@ -76,11 +73,6 @@ const usePhase3AdvAnim = () => {
   }, [clickAdv, currentImgInc, isCursorAtCloseBtn])
 
   useAdvAnimSE(currentImg)
-
-  return {
-    currentImg,
-    setCurrentImg,
-  }
 }
 
 export default usePhase3AdvAnim

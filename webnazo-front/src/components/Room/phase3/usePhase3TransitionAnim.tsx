@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef } from "react"
 import useAnimationState from "./hooks/useAnimationState"
 import useTextManager from "./hooks/useTextManager"
 import clsx from "clsx"
+import { atom, useAtom } from "jotai"
 
 const text = `
   蜒輔?逕溘″縺溘＞縺ｧ縺吶?ょヵ縺ｯ逕溘″縺溘＞縺ｧ縺吶?ょヵ縺ｯ菴輔→縺励※縺ｧ繧ら函縺阪◆縺?〒縺吶?
@@ -24,10 +25,15 @@ const text = `
 逶ｮ繧呈桃菴懊＠縺ｦ逕溘″谿九ｌ繧九↑繧牙ヵ縺ｯ縺?°縺輔∪繧ゅ＠縺ｾ縺吶?
 `
 
+const isStartPhase3TransitionAnimAtom = atom(false)
+
 const usePhase3TransitionAnim = () => {
   const { isEndAdvAnim, setSpeakingTime, setSpeechBubbleClassName } =
     useAnimationState()
   const { setShowText } = useTextManager()
+  const [isStartPhase3TransitionAnim, setIsStartPhase3TransitionAnim] = useAtom(
+    isStartPhase3TransitionAnimAtom
+  )
   const raf = useRef<number>()
   const lastTime = useRef<number>(0)
 
@@ -57,11 +63,13 @@ const usePhase3TransitionAnim = () => {
       requestAnimationFrame(animate)
     }
 
+    //広告アニメーションが終了してから5秒後に文字化けテキストをスタート
     if (isEndAdvAnim) {
       setTimeout(() => {
         setSpeakingTime(0)
         setShowText(text)
         raf.current = requestAnimationFrame(animate)
+        setIsStartPhase3TransitionAnim(true)
       }, 5000)
     }
 
@@ -69,6 +77,10 @@ const usePhase3TransitionAnim = () => {
       if (raf.current !== undefined) cancelAnimationFrame(raf.current)
     }
   })
+
+  return {
+    isStartPhase3TransitionAnim,
+  }
 }
 
 export default usePhase3TransitionAnim

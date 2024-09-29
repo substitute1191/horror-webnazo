@@ -49,7 +49,7 @@ const CharacterRevealSpan: React.FC<Props> = ({
   return (
     <>
       <div className={`absolute ${classNames}`}>
-        <span className={`absolute whitespace-nowrap`}>{spanText}</span>
+        <span className={`fixed whitespace-nowrap`}>{spanText}</span>
       </div>
     </>
   )
