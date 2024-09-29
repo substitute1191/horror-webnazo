@@ -4,6 +4,7 @@ const isShowAdvAtom = atom(false)
 const isShowTexts2Atom = atom(false)
 const isShowGameClearMsgAtom = atom(false)
 const isShowDrumrollAtom = atom(false)
+const isShowTimeAtom = atom(false)
 
 const useVisibilityState = () => {
   const [isShowAdv, setIsShowAdv] = useAtom(isShowAdvAtom)
@@ -12,6 +13,7 @@ const useVisibilityState = () => {
     isShowGameClearMsgAtom
   )
   const [isShowDrumroll, setIsShowDrumroll] = useAtom(isShowDrumrollAtom)
+  const [isShowTime, setIsShowTime] = useAtom(isShowTimeAtom)
 
   return {
     isShowAdv,
@@ -22,6 +24,8 @@ const useVisibilityState = () => {
     setIsShowGameClearMsg,
     isShowDrumroll,
     setIsShowDrumroll,
+    isShowTime,
+    setIsShowTime,
   }
 }
 

@@ -4,22 +4,39 @@ import rankmatchLogo from "@/assets/image/rankmatch_logo.png"
 import useProceed from "../useProceed"
 import useBGM from "@/SoundManager/useBGM"
 import bgmSrc from "@/assets/sound/pom_pom_shower.mp3"
-import { useEffect } from "react"
+import { memo, useEffect } from "react"
 import SiteDescription from "../components/prehorror/SiteDescription"
 import HighAchierver from "../components/prehorror/HighAchiever"
 import AboutPyramid from "../components/prehorror/AboutPyramid"
 import Precautions from "../components/prehorror/Precautions"
+import api from "@/utils/api"
+import { useParams } from "react-router-dom"
 
-const Phase1 = () => {
+const Phase1 = memo(function Phase1() {
   const { proceed } = useProceed()
-  const { play, pause } = useBGM(bgmSrc)
+  const { play, stop } = useBGM(bgmSrc)
+  const { roomId } = useParams()
+
+  const startGameTimer = () => {
+    api
+      .post(`/room/${roomId}/startGameTimer`)
+      .then()
+      .catch((e) => {
+        console.error(e)
+      })
+  }
+
+  const proceedAndSetStartTime = (phase: number): void => {
+    proceed(phase)
+    startGameTimer()
+  }
 
   useEffect(() => {
     void play()
     return () => {
-      pause()
+      stop()
     }
-  })
+  }, [play, stop])
 
   return (
     <div className="bg-yumekawa bg-white/40 bg-cover bg-blend-color">
@@ -48,7 +65,7 @@ const Phase1 = () => {
             <div className="text-center">
               <button
                 className="flex w-full transform items-center justify-between rounded-full bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 px-3 py-7 text-center text-7xl font-bold text-white shadow-lg transition duration-300 hover:scale-105 hover:shadow-2xl focus:outline-none"
-                onClick={() => proceed(2)}
+                onClick={() => proceedAndSetStartTime(2)}
               >
                 <span className="flex-grow text-center">ゲームに参加する</span>
                 <i className="fas fa-angle-right mr-5"></i>
@@ -62,5 +79,6 @@ const Phase1 = () => {
       </div>
     </div>
   )
-}
+})
+
 export default Phase1

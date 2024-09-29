@@ -7,20 +7,20 @@ import { useEffect } from "react"
 import StartButton from "./StartButton"
 
 const Home = () => {
-  const { play, pause } = useBGM(bgmSrc)
+  const { play, stop } = useBGM(bgmSrc)
 
   useEffect(() => {
     void play()
-    return () => pause()
-  }, [play, pause])
+    return () => stop()
+  }, [play, stop])
 
   return (
-    <div className="relative w-full h-screen">
+    <div className="relative h-screen w-full">
       {/* <FoggyImage src={bgimageSrc} /> */}
       <SoundMenu />
       <MusicPrompt />
-      <div className="bg-home-bg object-fit bg-cover absolute inset-0 flex flex-col justify-center items-center">
-        <div className="p-2 text-5xl place-content-center font-onryou text-white self-center">
+      <div className="bg-home-bg object-fit absolute inset-0 flex flex-col items-center justify-center bg-cover">
+        <div className="font-onryou place-content-center self-center p-2 text-5xl text-white">
           Web
           <CharacterFlicker
             origin="謎"

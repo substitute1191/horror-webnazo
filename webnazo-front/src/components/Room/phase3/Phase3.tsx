@@ -14,9 +14,10 @@ import usePhase3TransitionAnim from "./usePhase3TransitionAnim"
 import useAnimationState from "./hooks/useAnimationState"
 import CharacterRevealManager from "./CharacterRevealManager"
 import useAdvImageManager from "./useAdvImageManager"
+import ClearTime from "./ClearAnim/ClearTime"
 
 const Phase3 = () => {
-  const { isShowGameClearMsg, isShowAdv } = useVisibilityState()
+  const { isShowGameClearMsg, isShowAdv, isShowTime } = useVisibilityState()
   const { cursorRef } = usePhase3CursorAnim()
   usePhase3AdvAnim()
   const { currentImg } = useAdvImageManager()
@@ -52,14 +53,15 @@ const Phase3 = () => {
         <title>{phase3Title}</title>
       </Helmet>
       <div
-        className={`bg-yumekawa ${bgClasses} relative overflow-hidden bg-cover bg-blend-color`}
+        className={`bg-yumekawa ${bgClasses} relative min-h-screen overflow-auto bg-cover bg-blend-color`}
       >
         <CharacterRevealManager />
         <div
-          className={`${isEndAdvAnim ? "font-gothic" : "font-pop"} ${bgGradClasses} mx-auto flex h-screen w-full flex-col items-center border-2 border-solid pb-52 pt-7 lg:w-3/5`}
+          className={`${isEndAdvAnim ? "font-gothic" : "font-pop"} ${bgGradClasses} mx-auto flex min-h-screen w-full flex-col items-center border-2 border-solid pb-52 pt-7 lg:w-3/5`}
         >
           <Phase3Pyramid />
           <GameClearMessage />
+          {isShowTime ? <ClearTime /> : null}
           {isShowGameClearMsg ? <Drumroll /> : null}
           {isShowAdv ? <Advertisement currentImg={currentImg} /> : null}
           <FakeCursor ref={cursorRef} />

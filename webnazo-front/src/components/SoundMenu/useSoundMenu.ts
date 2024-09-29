@@ -1,10 +1,9 @@
-import { isPlayableAtom, seVolumeAtom, bgmVolumeAtom } from "@/atoms/soundAtoms"
+import { seVolumeAtom, bgmVolumeAtom } from "@/atoms/soundAtoms"
 import { useAtom } from "jotai"
 import { useState, useRef, useEffect } from "react"
 
 const useSoundMenu = () => {
   const [isVisible, setIsVisible] = useState(false)
-  const [isPlayable, setIsPlayable] = useAtom(isPlayableAtom)
   const [seVol, setSeVol] = useAtom(seVolumeAtom)
   const [bgmVol, setBgmVol] = useAtom(bgmVolumeAtom)
   const menuRef = useRef<HTMLDivElement | null>(null)
@@ -42,19 +41,19 @@ const useSoundMenu = () => {
     setBgmVol(parseFloat(e.target.value))
   }
 
-  const handleIsPlayableChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setIsPlayable(!e.target.checked)
+  const handleMute = () => {
+    setSeVol(0)
+    setBgmVol(0)
   }
 
   return {
     isVisible,
-    isPlayable,
     menuRef,
     seVol,
     bgmVol,
     handleSEChange,
     handleBGMChange,
-    handleIsPlayableChange,
+    handleMute,
   }
 }
 

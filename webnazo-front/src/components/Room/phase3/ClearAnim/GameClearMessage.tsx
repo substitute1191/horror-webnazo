@@ -5,7 +5,7 @@ import useVisibilityState from "../hooks/useVisibilityState"
 
 const GameClearMessage = () => {
   const { play, stop } = useSE(SEsrc)
-  const { setIsShowGameClearMsg } = useVisibilityState()
+  const { setIsShowTime } = useVisibilityState()
 
   useEffect(() => {
     play()
@@ -16,7 +16,7 @@ const GameClearMessage = () => {
   }, [play, stop])
 
   const handleAnimationEnd = (e: AnimationEvent<HTMLDivElement>) => {
-    if (e.animationName === "scaleup") setIsShowGameClearMsg(true)
+    if (e.animationName === "scaleup") setIsShowTime(true)
   }
 
   return (
