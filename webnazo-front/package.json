@@ -40,6 +40,7 @@
     "socket.io-client": "^4.7.5",
     "storybook": "^8.1.11",
     "three": "^0.166.1",
+    "use-sound": "^4.0.3",
     "uuid": "^10.0.0"
   },
   "devDependencies": {
