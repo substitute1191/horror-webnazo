@@ -1,3 +1,4 @@
+import Correct from "../Correct"
 import useFlipTile from "./useFlipTile"
 
 // eslint-disable-next-line max-lines-per-function
@@ -96,7 +97,7 @@ const FlipTile = () => {
           )}
         </div>
       </div>
-      {isClear ? <div>正解！</div> : null}
+      {isClear ? <Correct /> : null}
     </div>
   )
 }

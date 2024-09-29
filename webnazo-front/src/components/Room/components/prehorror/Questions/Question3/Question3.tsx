@@ -15,6 +15,7 @@ import { useAtom } from "jotai"
 import { roomAtom } from "@/atoms/roomAtoms"
 import { Room } from "@/types/RoomType"
 import { useState } from "react"
+import Correct from "../Correct"
 
 type FormValues = {
   [key: string]: string
@@ -40,6 +41,7 @@ const Question3 = () => {
   } = useForm()
   const [_room, setRoom] = useAtom(roomAtom)
   const [message, setMessage] = useState("")
+  const [isClear, setIsClear] = useState(false)
 
   const options = [
     "カフェ",
@@ -51,14 +53,14 @@ const Question3 = () => {
     "スーパー",
   ]
 
-  const onSubmit: SubmitHandler<FormValues> = (data, event) => {
-    event?.preventDefault()
+  const onSubmit: SubmitHandler<FormValues> = (data) => {
     api
       .post<CheckQ3Response>(`/room/${roomId}/checkQ3`, data)
       .then(({ data }) => {
         if (data.message === "correct") {
           const { message: _noused, ...room } = data
           setRoom(room)
+          setIsClear(true)
         } else {
           setMessage(data.message)
         }
@@ -66,6 +68,11 @@ const Question3 = () => {
       .catch((e) => {
         console.error(e)
       })
+  }
+
+  const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    void handleSubmit(onSubmit)(e)
   }
 
   return (
@@ -111,31 +118,35 @@ const Question3 = () => {
         <PlaceImage imgSrc={schoolSrc} initialPosition={{ x: 425, y: 35 }} />
         <PlaceImage imgSrc={superSrc} initialPosition={{ x: 510, y: 35 }} />
       </div>
-      <form onSubmit={void handleSubmit(onSubmit)}>
-        {Array.from("ABCDEFG").map((value, index) => (
-          <div key={index}>
-            <label htmlFor={`select${index + 1}`}>
-              {value}に当てはまる建物：
-            </label>
-            <select
-              id={`select${index + 1}`}
-              {...register(`select${value}`, { required: true })}
-            >
-              <option value=""></option>
-              {options.map((option) => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
-          </div>
-        ))}
-        {/* A学校 B公園 Cカフェ Dスーパー E郵便局 Fビル G墓地 */}
-        <button type="submit" className="border-1 border p-2 shadow-sm">
-          回答する
-        </button>
-        {message}
-      </form>
+      {isClear ? (
+        <Correct />
+      ) : (
+        <form onSubmit={onSubmitHandler}>
+          {Array.from("ABCDEFG").map((value, index) => (
+            <div key={index}>
+              <label htmlFor={`select${index + 1}`}>
+                {value}に当てはまる建物：
+              </label>
+              <select
+                id={`select${index + 1}`}
+                {...register(`select${value}`, { required: true })}
+              >
+                <option value=""></option>
+                {options.map((option) => (
+                  <option key={option} value={option}>
+                    {option}
+                  </option>
+                ))}
+              </select>
+            </div>
+          ))}
+          {/* A学校 B公園 Cカフェ Dスーパー E郵便局 Fビル G墓地 */}
+          <button type="submit" className="border-1 border p-2 shadow-sm">
+            回答する
+          </button>
+          {message}
+        </form>
+      )}
     </>
   )
 }
