@@ -12,7 +12,6 @@ import api from "@/utils/api"
 import { useParams } from "react-router-dom"
 import { AxiosResponse } from "axios"
 import { SocketContext } from "../socketContext"
-import useVisibilityState from "../phase3/hooks/useVisibilityState"
 
 // TODO 後で関数を分割する
 /* eslint-disable max-lines-per-function */
@@ -21,7 +20,6 @@ const Phase2 = () => {
   const [tab, setTab] = useAtom(tabInPhase2Atom)
   const { proceed } = useProceed()
   const { roomId } = useParams()
-  const { setIsShowTime } = useVisibilityState()
   const [, setClearTime] = useAtom(clearTimeAtom)
   const { socket, isConnected } = useContext(SocketContext)
 
@@ -83,7 +81,6 @@ const Phase2 = () => {
         finishTime,
       })
       .then((res: AxiosResponse) => {
-        setIsShowTime(true)
         setClearTime(res.data as number)
 
         if (socket !== null) {
