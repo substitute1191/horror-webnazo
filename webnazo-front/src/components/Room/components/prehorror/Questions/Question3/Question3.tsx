@@ -70,11 +70,6 @@ const Question3 = () => {
       })
   }
 
-  const onSubmitHandler = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    void handleSubmit(onSubmit)(e)
-  }
-
   return (
     <>
       <div className="text-3xl">Q3 道案内を参考に地図を完成させろ！</div>
@@ -121,7 +116,11 @@ const Question3 = () => {
       {isClear ? (
         <Correct />
       ) : (
-        <form onSubmit={onSubmitHandler}>
+        <form
+          onSubmit={(event: React.FormEvent<HTMLFormElement>) => {
+            handleSubmit(onSubmit)(event).catch((error) => console.error(error))
+          }}
+        >
           {Array.from("ABCDEFG").map((value, index) => (
             <div key={index}>
               <label htmlFor={`select${index + 1}`}>
