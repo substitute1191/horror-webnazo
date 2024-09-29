@@ -1,6 +1,6 @@
-import { q2sentenceAtom } from "@/atoms/roomAtoms"
+import { phaseAtom, q2sentenceAtom } from "@/atoms/roomAtoms"
 import api from "@/utils/api"
-import { useAtom } from "jotai"
+import { useAtom, useAtomValue } from "jotai"
 import { useEffect } from "react"
 import { useParams } from "react-router-dom"
 import getSE from "@/assets/sound/決定ボタンを押す53.mp3"
@@ -10,17 +10,20 @@ const CollectableChara = ({ chara }: { chara: string }) => {
   const { roomId } = useParams() as { roomId: string }
   const [q2sentence, setQ2sentence] = useAtom(q2sentenceAtom)
   const { play } = useSE(getSE)
+  const phase = useAtomValue(phaseAtom)
 
   useEffect(() => {
-    api
-      .get<Record<string, boolean>>(`/room/${roomId}/q2sentence`)
-      .then(({ data }) => {
-        setQ2sentence(data)
-      })
-      .catch((e) => {
-        console.error(e)
-      })
-  }, [roomId, setQ2sentence])
+    if (phase === 2) {
+      api
+        .get<Record<string, boolean>>(`/room/${roomId}/getQ2sentence`)
+        .then(({ data }) => {
+          setQ2sentence(data)
+        })
+        .catch((e) => {
+          console.error(e)
+        })
+    }
+  }, [roomId, setQ2sentence, phase])
 
   const handleCollect = (chara: string) => {
     api
@@ -39,7 +42,9 @@ const CollectableChara = ({ chara }: { chara: string }) => {
 
   return (
     <>
-      {q2sentence[chara] ? (
+      {phase !== 2 ? (
+        <>{chara}</>
+      ) : q2sentence[chara] ? (
         <span className="px-2"> </span>
       ) : (
         <button
