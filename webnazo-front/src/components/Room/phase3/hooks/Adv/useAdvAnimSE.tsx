@@ -1,11 +1,11 @@
 import SE1 from "@/assets/sound/グサッ1.mp3"
-import SE2 from "@/assets/sound/自主規制ピー音.mp3"
+import SE2 from "@/assets/sound/女衆「おう！」.mp3"
 import SE3 from "@/assets/sound/突撃ラッパ.mp3"
 import SE4 from "@/assets/sound/不安（ピアノ演奏）.mp3"
 import SE5 from "@/assets/sound/金額表示.mp3"
 import SE6 from "@/assets/sound/チーン1.mp3"
 import SE7 from "@/assets/sound/ニュースタイトル表示1.mp3"
-import SE8 from "@/assets/sound/ホラー文字表示音.mp3"
+import SE8 from "@/assets/sound/キラッ1.mp3"
 import { useEffect, useMemo, useRef } from "react"
 import useSE from "@/SoundManager/useSE"
 

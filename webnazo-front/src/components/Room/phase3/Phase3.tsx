@@ -15,6 +15,7 @@ import CharacterRevealManager from "./Transition/CharacterRevealManager"
 import useAdvImageManager from "./hooks/Adv/useAdvImageManager"
 import ClearTime from "./ClearAnim/ClearTime"
 import useTimingState from "./hooks/useTimingState"
+import Phase3Error from "./Transition/Phase3Error"
 
 const Phase3 = () => {
   const { isShowGameClearMsg, isShowAdv, isShowTime } = useVisibilityState()
@@ -22,7 +23,7 @@ const Phase3 = () => {
   usePhase3AdvAnim()
   const { currentImg } = useAdvImageManager()
   const { phase3Title } = usePhase3Title()
-  const { isEndAdvAnim } = useTimingState()
+  const { isEndAdvAnim, isStartErrorScene } = useTimingState()
   usePhase3TransitionAnim()
 
   const bgClasses = clsx({
@@ -52,21 +53,25 @@ const Phase3 = () => {
       <Helmet>
         <title>{phase3Title}</title>
       </Helmet>
-      <div
-        className={`bg-yumekawa ${bgClasses} relative min-h-screen overflow-auto bg-cover bg-blend-color`}
-      >
-        <CharacterRevealManager />
+      {!isStartErrorScene ? (
         <div
-          className={`${isEndAdvAnim ? "font-gothic" : "font-pop"} ${bgGradClasses} mx-auto flex min-h-screen w-full flex-col items-center border-2 border-solid pb-52 pt-7 lg:w-3/5`}
+          className={`bg-yumekawa ${bgClasses} relative min-h-screen overflow-auto bg-cover bg-blend-color`}
         >
-          <Phase3Pyramid />
-          <GameClearMessage />
-          {isShowTime ? <ClearTime /> : null}
-          {isShowGameClearMsg ? <Drumroll /> : null}
-          {isShowAdv ? <Advertisement currentImg={currentImg} /> : null}
-          <FakeCursor ref={cursorRef} />
+          <CharacterRevealManager />
+          <div
+            className={`${isEndAdvAnim ? "font-gothic" : "font-pop"} ${bgGradClasses} mx-auto flex min-h-screen w-full flex-col items-center border-2 border-solid pb-52 pt-7 lg:w-3/5`}
+          >
+            <Phase3Pyramid />
+            <GameClearMessage />
+            {isShowTime ? <ClearTime /> : null}
+            {isShowGameClearMsg ? <Drumroll /> : null}
+            {isShowAdv ? <Advertisement currentImg={currentImg} /> : null}
+            <FakeCursor ref={cursorRef} />
+          </div>
         </div>
-      </div>
+      ) : (
+        <Phase3Error />
+      )}
     </Phase3BGMProvider>
   )
 }

@@ -6,6 +6,7 @@ const isCursorAtCloseBtnAtom = atom(false)
 const isEndShuffleNumberAtom = atom(false)
 const isEndAdvAnimAtom = atom(false)
 const isStartPhase3TransitionAnimAtom = atom(false)
+const isStartErrorSceneAtom = atom(false)
 
 // アニメーションの開始・終了のタイミングを管理するカスタムフック
 export default function useTimingState() {
@@ -23,6 +24,9 @@ export default function useTimingState() {
   const [isStartPhase3TransitionAnim, setIsStartPhase3TransitionAnim] = useAtom(
     isStartPhase3TransitionAnimAtom
   )
+  const [isStartErrorScene, setIsStartErrorScene] = useAtom(
+    isStartErrorSceneAtom
+  )
 
   return {
     isEndFadein,
@@ -37,5 +41,7 @@ export default function useTimingState() {
     setIsEndAdvAnim,
     isStartPhase3TransitionAnim,
     setIsStartPhase3TransitionAnim,
+    isStartErrorScene,
+    setIsStartErrorScene,
   }
 }

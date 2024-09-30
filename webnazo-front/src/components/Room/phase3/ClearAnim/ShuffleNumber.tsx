@@ -1,16 +1,20 @@
-import { AnimationEvent, useContext, useEffect, useState } from "react"
+import { AnimationEvent, useEffect, useState } from "react"
 import useSE from "@/SoundManager/useSE"
 import drumrollSE from "@/assets/sound/ドラムロール.mp3"
 import drumrollEndSE from "@/assets/sound/ロールの閉め.mp3"
-import { Phase3Context } from "../Phase3BGMProvider"
 import useTimingState from "../hooks/useTimingState"
 
-const ShuffleNumber = ({ display }: { display: number }) => {
-  const [currentNumber, setCurrentNumber] = useState(0)
+const ShuffleNumber = ({
+  display,
+  classNames,
+}: {
+  display: number | string
+  classNames?: string
+}) => {
+  const [currentNumber, setCurrentNumber] = useState<number | string>(0)
   const { play: drumrollPlay, stop: drumrollStop } = useSE(drumrollSE)
   const { play: drumrollEndPlay, stop: _drumrollEndStop } = useSE(drumrollEndSE)
   const [isDrumrollEnd, setIsDrumrollEnd] = useState("")
-  const { playEndroll, stopEndroll } = useContext(Phase3Context)
   const { setIsEndShuffleNumber } = useTimingState()
 
   const handleAnimationEnd = (e: AnimationEvent<HTMLDivElement>) => {
@@ -37,30 +41,21 @@ const ShuffleNumber = ({ display }: { display: number }) => {
         setIsDrumrollEnd(
           "text-red-500 animate-[text-inpulse_0.3s_ease-in-out_forwards]"
         )
-        playEndroll()
       }, 1000)
     }, 3000)
 
     return () => {
-      stopEndroll()
       drumrollStop()
       clearInterval(intervalId)
     }
-  }, [
-    display,
-    drumrollEndPlay,
-    drumrollPlay,
-    drumrollStop,
-    playEndroll,
-    stopEndroll,
-  ])
+  }, [display, drumrollEndPlay, drumrollPlay, drumrollStop])
 
   return (
     <div
       className={`text-3xl ${isDrumrollEnd}`}
       onAnimationEnd={(e) => handleAnimationEnd(e)}
     >
-      <span className="text-9xl">{currentNumber}</span>位
+      <span className={`${classNames}`}>{currentNumber}</span>位
     </div>
   )
 }

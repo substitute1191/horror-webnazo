@@ -3,6 +3,8 @@ import useAnimationState from "./useAnimationState"
 import useTextManager from "./useTextManager"
 import clsx from "clsx"
 import useTimingState from "./useTimingState"
+import rise from "@/assets/sound/Horror_Accent-Rise02-2(Long).mp3"
+import useSE from "@/SoundManager/useSE"
 
 const text = `
   蜒輔?逕溘″縺溘＞縺ｧ縺吶?ょヵ縺ｯ逕溘″縺溘＞縺ｧ縺吶?ょヵ縺ｯ菴輔→縺励※縺ｧ繧ら函縺阪◆縺?〒縺吶?
@@ -31,8 +33,10 @@ const usePhase3TransitionAnim = () => {
     isEndAdvAnim,
     isStartPhase3TransitionAnim,
     setIsStartPhase3TransitionAnim,
+    setIsStartErrorScene,
   } = useTimingState()
   const { setShowText } = useTextManager()
+  const { play: playRise, stop: stopRise } = useSE(rise)
   const raf = useRef<number>()
   const lastTime = useRef<number>(0)
 
@@ -69,13 +73,27 @@ const usePhase3TransitionAnim = () => {
         setShowText(text)
         raf.current = requestAnimationFrame(animate)
         setIsStartPhase3TransitionAnim(true)
+        playRise()
+        setTimeout(() => {
+          setIsStartErrorScene(true)
+        }, 7000)
       }, 5000)
     }
 
     return () => {
       if (raf.current !== undefined) cancelAnimationFrame(raf.current)
+      stopRise()
     }
-  })
+  }, [
+    isEndAdvAnim,
+    playRise,
+    setIsStartErrorScene,
+    setIsStartPhase3TransitionAnim,
+    setShowText,
+    setSpeakingTime,
+    stopRise,
+    update,
+  ])
 
   return {
     isStartPhase3TransitionAnim,

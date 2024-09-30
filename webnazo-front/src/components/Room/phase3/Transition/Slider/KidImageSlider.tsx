@@ -1,32 +1,13 @@
 import kid from "@/assets/image/gif/kao-b11.gif"
-import { useCallback, useEffect, useRef, useState } from "react"
+import { useRef, useState } from "react"
+import useSlider from "../../hooks/useSlider"
 
 export default function KidImageSlider() {
   const raf = useRef<number>()
   const lastTime = useRef<number>(0)
   const [imgCnt, setImgCnt] = useState(0)
 
-  const imgSlide = useCallback((currentTime: number) => {
-    if (currentTime - lastTime.current >= 30) {
-      lastTime.current = currentTime
-      setImgCnt((prev) => prev + 1)
-    }
-  }, [])
-
-  useEffect(() => {
-    const animate = (currentTime: number) => {
-      imgSlide(currentTime)
-      raf.current = requestAnimationFrame(animate)
-    }
-
-    raf.current = requestAnimationFrame(animate)
-
-    return () => {
-      if (raf.current !== undefined) {
-        cancelAnimationFrame(raf.current)
-      }
-    }
-  }, [imgSlide])
+  useSlider({ raf, lastTime, interval: 45, setImgCnt })
 
   return (
     <div className="fixed left-[75vw] z-40 w-40">
