@@ -1,15 +1,16 @@
 import { useCallback, useEffect, useRef } from "react"
-import useAnimationState from "./hooks/useAnimationState"
-import useTextManager from "./hooks/useTextManager"
-import { getAdvTransitionPhrases } from "./phase3AnimUtils"
-import usePhase3Title from "./usePhase3Title"
+import useAnimationState from "../useAnimationState"
+import useTextManager from "../useTextManager"
+import { getAdvTransitionPhrases } from "../../phase3AnimUtils"
+import usePhase3Title from "../usePhase3Title"
 import useScreenEffect from "@/hooks/useScreenEffect"
 import useAdvAnimSE from "./useAdvAnimSE"
 import useAdvImageManager from "./useAdvImageManager"
+import useTimingState from "../useTimingState"
 
 const usePhase3AdvAnim = () => {
-  const { isCursorAtCloseBtn, setBgMode, setIsEndAdvAnim, setSpeakingTime } =
-    useAnimationState()
+  const { setBgMode, setSpeakingTime } = useAnimationState()
+  const { isCursorAtCloseBtn, setIsEndAdvAnim } = useTimingState()
   const { setShowText } = useTextManager()
   const { currentImg, setCurrentImg, currentImgInc, setCurrentImgInc } =
     useAdvImageManager()

@@ -4,17 +4,17 @@ import Phase3Pyramid from "./Pyramid/Phase3Pyramid"
 import Phase3BGMProvider from "./Phase3BGMProvider"
 import Advertisement from "./Advertisement/Advertisement"
 import FakeCursor from "./Cursor/FakeCursor"
-import usePhase3CursorAnim from "./usePhase3CurosrAnim"
-import usePhase3AdvAnim from "./usePhase3AdvAnim"
+import usePhase3CursorAnim from "./hooks/Adv/usePhase3CurosrAnim"
+import usePhase3AdvAnim from "./hooks/Adv/usePhase3AdvAnim"
 import { clsx } from "clsx"
 import { Helmet } from "react-helmet-async"
-import usePhase3Title from "./usePhase3Title"
+import usePhase3Title from "./hooks/usePhase3Title"
 import useVisibilityState from "./hooks/useVisibilityState"
-import usePhase3TransitionAnim from "./usePhase3TransitionAnim"
-import useAnimationState from "./hooks/useAnimationState"
-import CharacterRevealManager from "./CharacterRevealManager"
-import useAdvImageManager from "./useAdvImageManager"
+import usePhase3TransitionAnim from "./hooks/usePhase3TransitionAnim"
+import CharacterRevealManager from "./Transition/CharacterRevealManager"
+import useAdvImageManager from "./hooks/Adv/useAdvImageManager"
 import ClearTime from "./ClearAnim/ClearTime"
+import useTimingState from "./hooks/useTimingState"
 
 const Phase3 = () => {
   const { isShowGameClearMsg, isShowAdv, isShowTime } = useVisibilityState()
@@ -22,7 +22,7 @@ const Phase3 = () => {
   usePhase3AdvAnim()
   const { currentImg } = useAdvImageManager()
   const { phase3Title } = usePhase3Title()
-  const { isEndAdvAnim } = useAnimationState()
+  const { isEndAdvAnim } = useTimingState()
   usePhase3TransitionAnim()
 
   const bgClasses = clsx({

@@ -16,10 +16,10 @@ import readout1 from "@/assets/sound/読み上げ/読み上げ1.mp3"
 import readout2 from "@/assets/sound/読み上げ/読み上げ2.mp3"
 import readout3 from "@/assets/sound/読み上げ/読み上げ3.mp3"
 import readout4 from "@/assets/sound/読み上げ/読み上げ4.mp3"
-import useAnimationState from "../hooks/useAnimationState"
 import clickSE from "@/assets/sound/PC-Mouse05-mp3/PC-Mouse05-1.mp3"
-import useCloseButton from "../hooks/useCloseButton"
+import useCloseButton from "../hooks/Adv/useCloseButton"
 import { Phase3Context } from "../Phase3BGMProvider"
+import useTimingState from "../hooks/useTimingState"
 
 /* eslint-disable complexity,max-lines-per-function*/
 const Advertisement = ({ currentImg }: { currentImg: number }) => {
@@ -29,7 +29,7 @@ const Advertisement = ({ currentImg }: { currentImg: number }) => {
   const { play: playReadOut3, stop: _stopReadOut3 } = useSE(readout3)
   const { play: playReadOut4, stop: _stopReadOut4 } = useSE(readout4)
   const { play: playClick } = useSE(clickSE)
-  const { isCursorAtCloseBtn } = useAnimationState()
+  const { isCursorAtCloseBtn } = useTimingState()
   const { setIsClickedCloseBtn } = useCloseButton()
   const { stopKinshiku } = useContext(Phase3Context)
 

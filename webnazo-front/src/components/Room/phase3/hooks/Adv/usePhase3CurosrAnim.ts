@@ -1,15 +1,15 @@
 import { useCallback, useEffect, useRef } from "react"
-import useFakeCursor from "./Cursor/useFakeCursor"
-import useTextManager from "./hooks/useTextManager"
-import useAnimationState from "./hooks/useAnimationState"
-import { calculateNewPosition, setWaringLines } from "./phase3AnimUtils"
+import useFakeCursor from "../../Cursor/useFakeCursor"
+import useTextManager from "../useTextManager"
+import { calculateNewPosition, setWaringLines } from "../../phase3AnimUtils"
+import useTimingState from "../useTimingState"
 
 // カーソルを自動的に動かすアニメーションを行うカスタムフック
 const usePhase3CursorAnim = () => {
   const cursorRef = useRef<HTMLImageElement>(null)
   const { setCursorPos } = useFakeCursor()
   const { setShowText } = useTextManager()
-  const { isApproachingCloseBtn, setIsCursorAtCloseBtn } = useAnimationState()
+  const { isApproachingCloseBtn, setIsCursorAtCloseBtn } = useTimingState()
   const animationRef = useRef<number>()
 
   const animate = useCallback(() => {

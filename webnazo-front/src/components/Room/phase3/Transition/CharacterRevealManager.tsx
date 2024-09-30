@@ -1,15 +1,21 @@
 import { useEffect, useState } from "react"
 import CharacterRevealSpan from "./CharacterRevealSpan"
-import useAdvImageManager from "./useAdvImageManager"
+import useAdvImageManager from "../hooks/Adv/useAdvImageManager"
 import realeye from "@/assets/image/realeye.png"
 import handanim1 from "@/assets/image/gif/tekubiani01.gif"
+import KidImageSlider from "./Slider/KidImageSlider"
+import TVImageSlider from "./Slider/TVGifSlider"
+import EyeGifSlider from "./Slider/EyeGifSlider"
 
-/* eslint-disable */
+/* eslint-disable max-lines-per-function,max-lines */
 const CharacterRevealManager = () => {
   const { currentImg } = useAdvImageManager()
   const [isShowGroup1, setIsShowGroup1] = useState(false)
   const [isShowGroup2, setIsShowGroup2] = useState(false)
   const [isShowGroup3, setIsShowGroup3] = useState(false)
+  const [isShowGroup4, setIsShowGroup4] = useState(false)
+  const [isShowGroup5, setIsShowGroup5] = useState(false)
+  const [isShowGroup6, setIsShowGroup6] = useState(false)
 
   useEffect(() => {
     if (currentImg >= 2 && !isShowGroup1) {
@@ -18,12 +24,26 @@ const CharacterRevealManager = () => {
       setIsShowGroup2(true)
     } else if (currentImg >= 4 && !isShowGroup3) {
       setIsShowGroup3(true)
+    } else if (currentImg >= 5 && !isShowGroup4) {
+      setIsShowGroup4(true)
+    } else if (currentImg >= 6 && !isShowGroup5) {
+      setIsShowGroup5(true)
+    } else if (currentImg >= 7 && !isShowGroup6) {
+      setIsShowGroup6(true)
     }
-  }, [currentImg])
+  }, [
+    currentImg,
+    isShowGroup1,
+    isShowGroup2,
+    isShowGroup3,
+    isShowGroup4,
+    isShowGroup5,
+    isShowGroup6,
+  ])
 
   return (
     <>
-      {isShowGroup1 && (
+      {isShowGroup1 ? (
         <>
           <CharacterRevealSpan
             text="イカサマ大好き"
@@ -31,18 +51,18 @@ const CharacterRevealManager = () => {
             classNames="text-[15rem] font-black text-black font-onryou rotate-45 z-30 top-[10vh]"
           />
           <CharacterRevealSpan
-            text="人を殺してでも生き残りたいの"
+            text="誰かを押しのけても生き残りたいの？"
             interval={50}
-            classNames="text-[15rem] font-black text-black font-onryou z-30 top-[14vh] left-[3vw]"
+            classNames="text-[15rem] font-black text-red-800 font-onryou z-30 top-[14vh] left-[3vw]"
           />
           <CharacterRevealSpan
-            text="%ぅア誤縺タヒにヵ；＆！・"
-            interval={70}
-            classNames="text-[8rem] text-black font-black font-onryou -rotate-[5deg] z-30 top-[25vh] left-[35vw]"
+            text="練炭自殺 楽な死に方"
+            interval={50}
+            classNames="text-[12rem] font-black text-red-800 rotate-[65deg] font-onryou z-30 -top-[15vh] left-[80vw]"
           />
         </>
-      )}
-      {isShowGroup2 && (
+      ) : null}
+      {isShowGroup2 ? (
         <>
           <img
             src={realeye}
@@ -70,24 +90,24 @@ const CharacterRevealManager = () => {
             classNames="text-[15rem] text-black rotate-90 font-onryou z-30 -top-[40vh] left-[50vw]"
           />
         </>
-      )}
+      ) : null}
 
-      {isShowGroup3 && (
+      {isShowGroup3 ? (
         <>
           <img
             src={handanim1}
             alt=""
-            className="z-34 fixed top-[20vh] w-[10vw]"
+            className="fixed top-[20vh] z-40 w-[10vw]"
           />
           <img
             src={handanim1}
             alt=""
-            className="z-34 fixed left-[2vw] top-[21vh] w-[10vw]"
+            className="fixed left-[2vw] top-[21vh] z-40 w-[10vw]"
           />
           <img
             src={handanim1}
             alt=""
-            className="z-34 fixed left-[4vw] top-[25vh] w-[10vw]"
+            className="fixed left-[4vw] top-[25vh] z-40 w-[10vw]"
           />
           <CharacterRevealSpan
             text="私を置いていかないで"
@@ -95,15 +115,40 @@ const CharacterRevealManager = () => {
             classNames="text-[25rem] font-black text-black font-onryou rotate-[35deg] z-30 top-[15vh] -left-[10vw]"
           />
         </>
-      )}
+      ) : null}
 
-      {/* <CharacterRevealSpan
-            text="鬱鬱鬱鬱鬱鬱鬱鬱"
-            interval={10}
-            classNames="text-[31rem] font-extrabold text-black font-onryou rotate-[10deg] z-30 right-[80vw]"
+      {isShowGroup4 ? (
+        <>
+          <CharacterRevealSpan
+            text="%ぅア誤縺タヒにヵ；＆！・"
+            interval={70}
+            classNames="text-[8rem] text-blue-800 font-black font-gothic -rotate-[5deg] z-30 top-[25vh] left-[35vw]"
+            spanClassNames="-tracking-[1rem]"
           />
+        </>
+      ) : null}
+
+      {isShowGroup5 ? (
+        <>
+          <CharacterRevealSpan
+            text="鬱鬱鬱鬱鬱鬱鬱鬱"
+            interval={35}
+            classNames="text-[31rem] font-extrabold text-slate-800 font-onryou z-30 top-[8vh] left-[5vw]"
+            spanClassNames="inline-block origin-center rotate-180"
+          />
+        </>
+      ) : null}
+
+      {isShowGroup6 ? (
+        <>
+          <KidImageSlider />
+          <TVImageSlider />
+          <EyeGifSlider />
+        </>
+      ) : null}
+
+      {/* 
           
-      
       
       
       <CharacterRevealSpan

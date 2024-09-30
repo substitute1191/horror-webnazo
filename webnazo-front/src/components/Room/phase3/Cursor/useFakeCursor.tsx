@@ -1,8 +1,8 @@
 import { atom, useAtom } from "jotai"
 import { useCallback, useEffect, useRef } from "react"
-import useAnimationState from "../hooks/useAnimationState"
 import heartbeat from "@/assets/sound/Heartbeat04-mp3/Heartbeat04-1(Slow-Reverb).mp3"
 import useSE from "@/SoundManager/useSE"
+import useTimingState from "../hooks/useTimingState"
 
 const cursorPosAtom = atom<{ x: number; y: number }>({
   x: 0,
@@ -13,7 +13,7 @@ const isHideCursorAtom = atom(false)
 const useFakeCursor = () => {
   const [cursorPos, setCursorPos] = useAtom(cursorPosAtom)
   const [isHideCursor, setIsHideCursor] = useAtom(isHideCursorAtom)
-  const { isApproachingCloseBtn, isCursorAtCloseBtn } = useAnimationState()
+  const { isApproachingCloseBtn, isCursorAtCloseBtn } = useTimingState()
   const { play, stop } = useSE(heartbeat)
   const rafId = useRef<number | null>(null)
   const currentMousePos = useRef({ x: 0, y: 0 })

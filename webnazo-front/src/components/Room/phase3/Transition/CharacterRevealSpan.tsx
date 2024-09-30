@@ -4,12 +4,14 @@ type Props = {
   text: string
   interval: number
   classNames?: string
+  spanClassNames?: string
 }
 
 const CharacterRevealSpan: React.FC<Props> = ({
   text,
   interval,
   classNames,
+  spanClassNames,
 }) => {
   const [textIdx, setTextIdx] = useState(0)
   const [spanText, setSpanText] = useState("")
@@ -48,8 +50,10 @@ const CharacterRevealSpan: React.FC<Props> = ({
 
   return (
     <>
-      <div className={`absolute ${classNames}`}>
-        <span className={`fixed whitespace-nowrap`}>{spanText}</span>
+      <div className={`fixed ${classNames}`}>
+        <span className={`fixed whitespace-nowrap ${spanClassNames}`}>
+          {spanText}
+        </span>
       </div>
     </>
   )

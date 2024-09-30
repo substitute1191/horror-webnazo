@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useRef } from "react"
-import useAnimationState from "./hooks/useAnimationState"
-import useTextManager from "./hooks/useTextManager"
+import useAnimationState from "./useAnimationState"
+import useTextManager from "./useTextManager"
 import clsx from "clsx"
-import { atom, useAtom } from "jotai"
+import useTimingState from "./useTimingState"
 
 const text = `
   蜒輔?逕溘″縺溘＞縺ｧ縺吶?ょヵ縺ｯ逕溘″縺溘＞縺ｧ縺吶?ょヵ縺ｯ菴輔→縺励※縺ｧ繧ら函縺阪◆縺?〒縺吶?
@@ -25,15 +25,14 @@ const text = `
 逶ｮ繧呈桃菴懊＠縺ｦ逕溘″谿九ｌ繧九↑繧牙ヵ縺ｯ縺?°縺輔∪繧ゅ＠縺ｾ縺吶?
 `
 
-const isStartPhase3TransitionAnimAtom = atom(false)
-
 const usePhase3TransitionAnim = () => {
-  const { isEndAdvAnim, setSpeakingTime, setSpeechBubbleClassName } =
-    useAnimationState()
+  const { setSpeakingTime, setSpeechBubbleClassName } = useAnimationState()
+  const {
+    isEndAdvAnim,
+    isStartPhase3TransitionAnim,
+    setIsStartPhase3TransitionAnim,
+  } = useTimingState()
   const { setShowText } = useTextManager()
-  const [isStartPhase3TransitionAnim, setIsStartPhase3TransitionAnim] = useAtom(
-    isStartPhase3TransitionAnimAtom
-  )
   const raf = useRef<number>()
   const lastTime = useRef<number>(0)
 
