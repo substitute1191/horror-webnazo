@@ -1,4 +1,4 @@
-import tv from "@/assets/image/gif/tvani11.gif"
+import tv from "@/assets/image/bob214141379P4110138_TP_V4.jpg"
 import { useRef, useState } from "react"
 import useSlider from "../../hooks/useSlider"
 

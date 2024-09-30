@@ -1,4 +1,4 @@
-import eye from "@/assets/image/gif/meanic23.gif"
+import eye from "@/assets/image/realeye.png"
 import { useRef, useState } from "react"
 import useSlider from "../../hooks/useSlider"
 

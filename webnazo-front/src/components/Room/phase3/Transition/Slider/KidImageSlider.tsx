@@ -1,4 +1,4 @@
-import kid from "@/assets/image/gif/kao-b11.gif"
+import kid from "@/assets/image/DSCF0782-Edit_TP_V.webp"
 import { useRef, useState } from "react"
 import useSlider from "../../hooks/useSlider"
 
@@ -19,7 +19,7 @@ export default function KidImageSlider() {
         <img src={kid} className="absolute left-8 top-[10rem]" alt="" />
       ) : null}
       {imgCnt >= 4 ? (
-        <img src={kid} className="absolute left-12 top-[15rem]" alt="" />
+        <img src={kid} className="absolute left-40 top-[15rem]" alt="" />
       ) : null}
       {imgCnt >= 5 ? (
         <img src={kid} className="absolute left-16 top-[20rem]" alt="" />

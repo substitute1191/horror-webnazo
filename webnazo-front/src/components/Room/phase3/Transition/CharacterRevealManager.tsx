@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react"
 import CharacterRevealSpan from "./CharacterRevealSpan"
 import useAdvImageManager from "../hooks/Adv/useAdvImageManager"
-import realeye from "@/assets/image/realeye.png"
-import handanim1 from "@/assets/image/gif/tekubiani01.gif"
 import KidImageSlider from "./Slider/KidImageSlider"
 import TVImageSlider from "./Slider/TVGifSlider"
 import EyeGifSlider from "./Slider/EyeGifSlider"
@@ -72,16 +70,6 @@ const CharacterRevealManager = () => {
       ) : null}
       {isShowGroup2 ? (
         <>
-          <img
-            src={realeye}
-            alt=""
-            className="fixed left-[2vh] top-[10vh] w-32 animate-[scaleup_2s_ease-in-out]"
-          />
-          <img
-            src={realeye}
-            alt=""
-            className="fixed bottom-[10vh] right-[2vh] w-20 animate-[scaleup_1s_ease-in-out]"
-          />
           <CharacterRevealSpan
             text="二人いるから一人くらい良いよね？"
             interval={80}
@@ -102,21 +90,6 @@ const CharacterRevealManager = () => {
 
       {isShowGroup3 ? (
         <>
-          <img
-            src={handanim1}
-            alt=""
-            className="fixed top-[20vh] z-40 w-[10vw]"
-          />
-          <img
-            src={handanim1}
-            alt=""
-            className="fixed left-[2vw] top-[21vh] z-40 w-[10vw]"
-          />
-          <img
-            src={handanim1}
-            alt=""
-            className="fixed left-[4vw] top-[25vh] z-40 w-[10vw]"
-          />
           <CharacterRevealSpan
             text="私を置いていかないで"
             interval={50}
