@@ -227,7 +227,7 @@ export default function TransitionAnim() {
           <span className="fixed left-[30vw] top-[15vh] z-[55] text-[30rem] font-black text-red-600">
             ケ
           </span>
-          <span className="font-pop fixed left-[60vw] top-[21vh] z-[55] text-[32rem] font-extrabold text-red-400">
+          <span className="font-pop fixed left-[60vw] top-[21vh] z-[55] text-[22rem] font-extrabold text-red-600">
             テ
           </span>
         </>
