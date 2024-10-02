@@ -26,7 +26,14 @@ export const calculateNewPosition = (
 }
 
 /* eslint-disable complexity */
-export const setWaringLines = (distance: number, warningLines: string[]) => {
+export const setWaringLines = (distance: number) => {
+  const warningLines = [
+    "ちょっと何してるの！？",
+    "人の話聞いてる！？",
+    "ヤバイヤバイヤバイって！",
+    "あわわわわわわわわわわわわ",
+  ]
+
   if (300 < distance && distance < 330) {
     return warningLines[0]
   }
@@ -44,4 +51,44 @@ export const setWaringLines = (distance: number, warningLines: string[]) => {
   }
 
   return null
+}
+
+export const getAdvTransitionPhrases = (currentImg: number) => {
+  const advTransitionPhrases = [
+    "あ！",
+    "何この声！？",
+    "何かバグってるよ！？",
+    "何が起こってるの！？",
+    "こ、怖いよ！！",
+    "コワイコワイコワイコワイコワイコワイコワイ",
+    "いやだいやだいやだいやだいやだいやだ",
+    "死んじゃう死んじゃう死んじゃう死んじゃう",
+    "死にたくない死にたくない死にたくない",
+    "あなたは生きたいですか……？",
+  ]
+
+  switch (currentImg) {
+    case 2:
+      return advTransitionPhrases[0]
+    case 3:
+      return advTransitionPhrases[1]
+    case 4:
+      return advTransitionPhrases[2]
+    case 5:
+      return advTransitionPhrases[3]
+    case 6:
+      return advTransitionPhrases[4]
+    case 7:
+      return advTransitionPhrases[5]
+    case 8:
+      return advTransitionPhrases[6]
+    case 9:
+      return advTransitionPhrases[7]
+    case 10:
+      return advTransitionPhrases[8]
+    case 11:
+      return advTransitionPhrases[9]
+    default:
+      return null
+  }
 }

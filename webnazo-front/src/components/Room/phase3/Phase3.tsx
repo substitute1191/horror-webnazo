@@ -3,19 +3,30 @@ import Drumroll from "./ClearAnim/Drumroll"
 import Phase3Pyramid from "./Pyramid/Phase3Pyramid"
 import Phase3BGMProvider from "./Phase3BGMProvider"
 import Advertisement from "./Advertisement/Advertisement"
-import useAnimationState from "./hooks/useAnimationState"
 import FakeCursor from "./Cursor/FakeCursor"
-import usePhase3CursorAnim from "./usePhase3CurosrAnim"
-import usePhase3AdvAnim from "./usePhase3AdvAnim"
+import usePhase3CursorAnim from "./hooks/Adv/usePhase3CurosrAnim"
+import usePhase3AdvAnim from "./hooks/Adv/usePhase3AdvAnim"
 import { clsx } from "clsx"
+import { Helmet } from "react-helmet-async"
+import usePhase3Title from "./hooks/usePhase3Title"
+import useVisibilityState from "./hooks/useVisibilityState"
+import usePhase3TransitionAnim from "./hooks/usePhase3TransitionAnim"
+import CharacterRevealManager from "./Transition/CharacterRevealManager"
+import useAdvImageManager from "./hooks/Adv/useAdvImageManager"
 import ClearTime from "./ClearAnim/ClearTime"
+import useTimingState from "./hooks/useTimingState"
+import Phase3Error from "./Transition/Phase3Error"
 
 const Phase3 = () => {
-  const { isShowGameClearMsg, isShowAdv, isShowTime } = useAnimationState()
+  const { isShowGameClearMsg, isShowAdv, isShowTime } = useVisibilityState()
   const { cursorRef } = usePhase3CursorAnim()
-  const { currentImg } = usePhase3AdvAnim()
+  usePhase3AdvAnim()
+  const { currentImg } = useAdvImageManager()
+  const { phase3Title } = usePhase3Title()
+  const { isEndAdvAnim, isStartErrorScene } = useTimingState()
+  usePhase3TransitionAnim()
 
-  const bgClasses = clsx("transition-colors duration-300", {
+  const bgClasses = clsx({
     ["bg-white/20"]: currentImg === 1,
     ["bg-blue-400"]: currentImg === 2,
     ["bg-slate-400"]: currentImg === 3,
@@ -26,7 +37,7 @@ const Phase3 = () => {
     ["bg-slate-900"]: currentImg >= 8,
   })
 
-  const bgGradClasses = clsx("transition-colors duration-300", {
+  const bgGradClasses = clsx({
     ["grad1"]: currentImg === 1,
     ["grad2"]: currentImg === 2,
     ["grad3"]: currentImg === 3,
@@ -39,20 +50,28 @@ const Phase3 = () => {
 
   return (
     <Phase3BGMProvider>
-      <div
-        className={`bg-yumekawa ${bgClasses} relative min-h-screen overflow-auto bg-cover bg-blend-color`}
-      >
+      <Helmet>
+        <title>{phase3Title}</title>
+      </Helmet>
+      {!isStartErrorScene ? (
         <div
-          className={`font-pop ${bgGradClasses} mx-auto flex min-h-screen w-full flex-col items-center border-2 border-solid pb-52 pt-7 lg:w-3/5`}
+          className={`bg-yumekawa ${bgClasses} relative min-h-screen overflow-auto bg-cover bg-blend-color`}
         >
-          <Phase3Pyramid />
-          <GameClearMessage />
-          {isShowTime ? <ClearTime /> : null}
-          {isShowGameClearMsg ? <Drumroll /> : null}
-          {isShowAdv ? <Advertisement currentImg={currentImg} /> : null}
-          <FakeCursor ref={cursorRef} />
+          <CharacterRevealManager />
+          <div
+            className={`${isEndAdvAnim ? "font-gothic" : "font-pop"} ${bgGradClasses} mx-auto flex min-h-screen w-full flex-col items-center border-2 border-solid pb-52 pt-7 lg:w-3/5`}
+          >
+            <Phase3Pyramid />
+            <GameClearMessage />
+            {isShowTime ? <ClearTime /> : null}
+            {isShowGameClearMsg ? <Drumroll /> : null}
+            {isShowAdv ? <Advertisement currentImg={currentImg} /> : null}
+            <FakeCursor ref={cursorRef} />
+          </div>
         </div>
-      </div>
+      ) : (
+        <Phase3Error />
+      )}
     </Phase3BGMProvider>
   )
 }

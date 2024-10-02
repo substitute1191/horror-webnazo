@@ -1,11 +1,11 @@
 import { AnimationEvent, useEffect } from "react"
 import SEsrc from "@/assets/sound/claphand.mp3"
 import useSE from "@/SoundManager/useSE"
-import useAnimationState from "../hooks/useAnimationState"
+import useVisibilityState from "../hooks/useVisibilityState"
 
 const GameClearMessage = () => {
   const { play, stop } = useSE(SEsrc)
-  const { setIsShowTime } = useAnimationState()
+  const { setIsShowTime } = useVisibilityState()
 
   useEffect(() => {
     play()
