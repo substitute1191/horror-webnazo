@@ -12,7 +12,9 @@ const RankmatchQuestions = () => {
   return (
     <>
       <div className="text-3xl">
-        問題：「Q1の答え」の「Q2の答え」を「
+        問題：「
+        {room.isDone[0] ? "このページ" : "Q1の答え"}
+        」の「Q2の答え」を「
         {room.isDone[2] ? "クリック" : "Q3の答え"}」せよ
       </div>
       <FlipTile />

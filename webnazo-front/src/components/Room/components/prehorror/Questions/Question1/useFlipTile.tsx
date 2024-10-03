@@ -1,10 +1,42 @@
 import useSE from "@/SoundManager/useSE"
 import { areArraysEqual } from "@/utils/areArraysEqual"
-import { useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import flipSE from "@/assets/sound/flipTile.mp3"
 import clapHandsSE from "@/assets/sound/claphand.mp3"
+import { SocketContext } from "@/components/Room/socketContext"
+import { useParams } from "react-router-dom"
+import api from "@/utils/api"
+import { roomAtom } from "@/atoms/roomAtoms"
+import { useAtom } from "jotai"
+import { Room } from "@/types/RoomType"
+
+interface ResType {
+  questionNo: number
+  room: Room
+}
 
 const useFlipTile = () => {
+  const { socket, isConnected } = useContext(SocketContext)
+  const [, setRoom] = useAtom(roomAtom)
+
+  useEffect(() => {
+    if (socket !== null && isConnected) {
+      socket.on("partnerCleared", (data: ResType) => {
+        if (data.questionNo === 1) {
+          setIsPartnerClear(true)
+          setRoom(data.room)
+        }
+      })
+    }
+
+    return () => {
+      if (socket !== null) {
+        socket.off("partnerCleared")
+      }
+    }
+  }, [socket, isConnected, setRoom])
+
+  const { roomId } = useParams()
   const idx = [0, 1, 2, 3]
   const initialState = [
     [0, 1, 1, 0],
@@ -20,6 +52,7 @@ const useFlipTile = () => {
     [1, 0, 0, 0],
   ]
   const [isClear, setIsClear] = useState(false)
+  const [isPartnerClear, setIsPartnerClear] = useState(false)
   const { play: playFlip } = useSE(flipSE)
   const { play: playClapHands } = useSE(clapHandsSE)
 
@@ -43,13 +76,35 @@ const useFlipTile = () => {
       }
     }
     setPuzzle(newPuzzle)
-    if (areArraysEqual(newPuzzle, answer)) {
+    if (!isClear && areArraysEqual(newPuzzle, answer)) {
       setIsClear(true)
+      api
+        .post(`/room/${roomId}/clearQ1`)
+        .then((res) => {
+          setRoom(res.data as Room)
+          if (socket !== null && isConnected) {
+            socket.emit("clearQuestion", {
+              roomId,
+              questionNo: 1,
+              room: res.data as Room,
+            })
+          }
+        })
+        .catch((e) => console.error(e))
       playClapHands()
     }
   }
 
-  return { idx, puzzle, answer, isClear, reset, flip }
+  return {
+    idx,
+    puzzle,
+    answer,
+    isClear,
+    isPartnerClear,
+    setIsPartnerClear,
+    reset,
+    flip,
+  }
 }
 
 export default useFlipTile

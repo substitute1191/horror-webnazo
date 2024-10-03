@@ -1,9 +1,11 @@
-import Correct from "../Correct"
+import ClearComponent from "../CorrectComponent/ClearComponent"
+import PartnerClearComponent from "../CorrectComponent/PartnerClearComponent"
 import useFlipTile from "./useFlipTile"
 
 // eslint-disable-next-line max-lines-per-function
 const FlipTile = () => {
-  const { idx, puzzle, answer, isClear, reset, flip } = useFlipTile()
+  const { idx, puzzle, answer, isClear, isPartnerClear, reset, flip } =
+    useFlipTile()
 
   const containerStyle: React.CSSProperties = {
     display: "grid",
@@ -97,7 +99,11 @@ const FlipTile = () => {
           )}
         </div>
       </div>
-      {isClear ? <Correct /> : null}
+      {isClear ? (
+        <ClearComponent />
+      ) : isPartnerClear ? (
+        <PartnerClearComponent />
+      ) : null}
     </div>
   )
 }

@@ -48,6 +48,21 @@ export function setupSocketServer(httpServer: HttpServer) {
       }
     )
 
+    socket.on(
+      "clearQuestion",
+      ({
+        roomId,
+        questionNo,
+        room,
+      }: {
+        roomId: string
+        questionNo: number
+        room: unknown
+      }) => {
+        socket.broadcast.to(roomId).emit("partnerCleared", { questionNo, room })
+      }
+    )
+
     socket.on("disconnect", () => {
       console.log("user disconnected!")
     })

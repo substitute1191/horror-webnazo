@@ -15,7 +15,7 @@ import { useAtom } from "jotai"
 import { roomAtom } from "@/atoms/roomAtoms"
 import { Room } from "@/types/RoomType"
 import { useState } from "react"
-import Correct from "../Correct"
+import Correct from "../CorrectComponent/ClearComponent"
 
 type FormValues = {
   [key: string]: string
