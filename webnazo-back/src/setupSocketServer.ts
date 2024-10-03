@@ -63,6 +63,19 @@ export function setupSocketServer(httpServer: HttpServer) {
       }
     )
 
+    socket.on(
+      "collectChara",
+      ({
+        characters,
+        roomId,
+      }: {
+        characters: Record<string, boolean>
+        roomId: string
+      }) => {
+        socket.broadcast.to(roomId).emit("partnerCollectChara", characters)
+      }
+    )
+
     socket.on("disconnect", () => {
       console.log("user disconnected!")
     })

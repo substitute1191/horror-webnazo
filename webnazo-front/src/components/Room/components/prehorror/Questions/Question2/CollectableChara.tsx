@@ -1,16 +1,19 @@
 import { phaseAtom, q2sentenceAtom } from "@/atoms/roomAtoms"
 import api from "@/utils/api"
 import { useAtom, useAtomValue } from "jotai"
-import { useEffect } from "react"
+import { useContext, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import getSE from "@/assets/sound/決定ボタンを押す53.mp3"
 import useSE from "@/SoundManager/useSE"
+import { SocketContext } from "@/components/Room/socketContext"
 
 const CollectableChara = ({ chara }: { chara: string }) => {
   const { roomId } = useParams() as { roomId: string }
   const [q2sentence, setQ2sentence] = useAtom(q2sentenceAtom)
   const { play } = useSE(getSE)
   const phase = useAtomValue(phaseAtom)
+
+  const { socket, isConnected } = useContext(SocketContext)
 
   useEffect(() => {
     if (phase === 2) {
@@ -34,6 +37,12 @@ const CollectableChara = ({ chara }: { chara: string }) => {
       .then(({ data }) => {
         play()
         setQ2sentence(data)
+        if (socket !== null && isConnected) {
+          socket.emit("collectChara", {
+            characters: data,
+            roomId,
+          })
+        }
       })
       .catch((e) => {
         console.error(e)

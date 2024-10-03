@@ -1,5 +1,5 @@
 import { q2sentenceAtom, roomAtom } from "@/atoms/roomAtoms"
-import { useAtom, useAtomValue } from "jotai"
+import { useAtom } from "jotai"
 import InputComponent from "./InputComponent"
 import ButtonComponent from "../ButtonComponent"
 import { useContext, useEffect, useState } from "react"
@@ -14,11 +14,11 @@ import clapHandsSE from "@/assets/sound/claphand.mp3"
 
 const Question2 = () => {
   const { roomId } = useParams()
-  const q2sentence = useAtomValue(q2sentenceAtom)
   const { socket, isConnected } = useContext(SocketContext)
   const [, setRoom] = useAtom(roomAtom)
   const [isClear, setIsClear] = useState(false)
   const [isPartnerClear, setIsPartnerClear] = useState(false)
+  const [q2sentence] = useAtom(q2sentenceAtom)
 
   const { play: playClapHands } = useSE(clapHandsSE)
 
@@ -32,7 +32,7 @@ const Question2 = () => {
 
     return () => {
       if (socket !== null) {
-        socket.off("partnerClearedQ1")
+        socket.off("partnerClearedQ2")
       }
     }
   }, [socket, isConnected, setRoom])
