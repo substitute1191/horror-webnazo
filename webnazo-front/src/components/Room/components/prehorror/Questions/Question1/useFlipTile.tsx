@@ -10,28 +10,21 @@ import { roomAtom } from "@/atoms/roomAtoms"
 import { useAtom } from "jotai"
 import { Room } from "@/types/RoomType"
 
-interface ResType {
-  questionNo: number
-  room: Room
-}
-
 const useFlipTile = () => {
   const { socket, isConnected } = useContext(SocketContext)
   const [, setRoom] = useAtom(roomAtom)
 
   useEffect(() => {
     if (socket !== null && isConnected) {
-      socket.on("partnerCleared", (data: ResType) => {
-        if (data.questionNo === 1) {
-          setIsPartnerClear(true)
-          setRoom(data.room)
-        }
+      socket.on("partnerClearedQ1", (data: Room) => {
+        setIsPartnerClear(true)
+        setRoom(data)
       })
     }
 
     return () => {
       if (socket !== null) {
-        socket.off("partnerCleared")
+        socket.off("partnerClearedQ1")
       }
     }
   }, [socket, isConnected, setRoom])

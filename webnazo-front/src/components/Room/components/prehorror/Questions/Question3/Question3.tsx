@@ -14,8 +14,10 @@ import { useParams } from "react-router-dom"
 import { useAtom } from "jotai"
 import { roomAtom } from "@/atoms/roomAtoms"
 import { Room } from "@/types/RoomType"
-import { useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import Correct from "../CorrectComponent/ClearComponent"
+import { SocketContext } from "@/components/Room/socketContext"
+import PartnerClearComponent from "../CorrectComponent/PartnerClearComponent"
 
 type FormValues = {
   [key: string]: string
@@ -42,6 +44,23 @@ const Question3 = () => {
   const [_room, setRoom] = useAtom(roomAtom)
   const [message, setMessage] = useState("")
   const [isClear, setIsClear] = useState(false)
+  const [isPartnerClear, setIsPartnerClear] = useState(false)
+  const { socket, isConnected } = useContext(SocketContext)
+
+  useEffect(() => {
+    if (socket !== null && isConnected) {
+      socket.on("partnerClearedQ3", (data: Room) => {
+        setIsPartnerClear(true)
+        setRoom(data)
+      })
+    }
+
+    return () => {
+      if (socket !== null) {
+        socket.off("partnerClearedQ3")
+      }
+    }
+  }, [socket, isConnected, setRoom])
 
   const options = [
     "カフェ",
@@ -61,6 +80,13 @@ const Question3 = () => {
           const { message: _noused, ...room } = data
           setRoom(room)
           setIsClear(true)
+          if (socket !== null && isConnected) {
+            socket.emit("clearQuestion", {
+              roomId,
+              questionNo: 3,
+              room,
+            })
+          }
         } else {
           setMessage(data.message)
         }
@@ -146,6 +172,7 @@ const Question3 = () => {
           {message}
         </form>
       )}
+      {!isClear && isPartnerClear ? <PartnerClearComponent /> : null}
     </>
   )
 }

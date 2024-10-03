@@ -59,7 +59,7 @@ export function setupSocketServer(httpServer: HttpServer) {
         questionNo: number
         room: unknown
       }) => {
-        socket.broadcast.to(roomId).emit("partnerCleared", { questionNo, room })
+        socket.broadcast.to(roomId).emit(`partnerClearedQ${questionNo}`, room)
       }
     )
 
