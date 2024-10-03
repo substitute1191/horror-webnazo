@@ -16,6 +16,8 @@ import api from "@/utils/api"
 import { useParams } from "react-router-dom"
 import { AxiosResponse } from "axios"
 import { SocketContext } from "../socketContext"
+import useSE from "@/SoundManager/useSE"
+import getSE from "@/assets/sound/決定ボタンを押す26.mp3"
 
 // TODO 後で関数を分割する
 /* eslint-disable max-lines-per-function */
@@ -27,6 +29,7 @@ const Phase2 = () => {
   const [, setClearTime] = useAtom(clearTimeAtom)
   const { socket, isConnected } = useContext(SocketContext)
   const [, setQ2sentence] = useAtom(q2sentenceAtom)
+  const { play: playSE } = useSE(getSE)
 
   // 音楽再生
   useEffect(() => {
@@ -46,6 +49,7 @@ const Phase2 = () => {
         "partnerCollectChara",
         (characters: Record<string, boolean>) => {
           setQ2sentence(characters)
+          playSE()
         }
       )
     }
@@ -56,7 +60,7 @@ const Phase2 = () => {
         socket.off("partnerCollectChara")
       }
     }
-  }, [socket, isConnected, setQ2sentence])
+  }, [socket, isConnected, setQ2sentence, playSE])
 
   // ロゴのクリック部分のレスポンシブ対応
   useEffect(() => {

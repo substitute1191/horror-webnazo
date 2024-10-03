@@ -11,6 +11,7 @@ import { useParams } from "react-router-dom"
 import api from "@/utils/api"
 import useSE from "@/SoundManager/useSE"
 import clapHandsSE from "@/assets/sound/claphand.mp3"
+import getPartnerSE from "@/assets/sound/決定ボタンを押す37.mp3"
 
 const Question2 = () => {
   const { roomId } = useParams()
@@ -19,6 +20,7 @@ const Question2 = () => {
   const [isClear, setIsClear] = useState(false)
   const [isPartnerClear, setIsPartnerClear] = useState(false)
   const [q2sentence] = useAtom(q2sentenceAtom)
+  const { play: playPartner } = useSE(getPartnerSE)
 
   const { play: playClapHands } = useSE(clapHandsSE)
 
@@ -27,6 +29,7 @@ const Question2 = () => {
       socket.on("partnerClearedQ2", (data: Room) => {
         setIsPartnerClear(true)
         setRoom(data)
+        playPartner()
       })
     }
 
@@ -35,10 +38,10 @@ const Question2 = () => {
         socket.off("partnerClearedQ2")
       }
     }
-  }, [socket, isConnected, setRoom])
+  }, [socket, isConnected, setRoom, playPartner])
 
   const checkQ2 = (inputValue: string) => {
-    if (inputValue === "まちがい") {
+    if (inputValue === "まちがい" || inputValue === "間違い") {
       setIsClear(true)
       api
         .post(`/room/${roomId}/clearQ2`)

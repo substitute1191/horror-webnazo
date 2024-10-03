@@ -18,6 +18,8 @@ import { useContext, useEffect, useState } from "react"
 import Correct from "../CorrectComponent/ClearComponent"
 import { SocketContext } from "@/components/Room/socketContext"
 import PartnerClearComponent from "../CorrectComponent/PartnerClearComponent"
+import getPartnerSE from "@/assets/sound/決定ボタンを押す37.mp3"
+import useSE from "@/SoundManager/useSE"
 
 type FormValues = {
   [key: string]: string
@@ -46,12 +48,14 @@ const Question3 = () => {
   const [isClear, setIsClear] = useState(false)
   const [isPartnerClear, setIsPartnerClear] = useState(false)
   const { socket, isConnected } = useContext(SocketContext)
+  const { play: playPartner } = useSE(getPartnerSE)
 
   useEffect(() => {
     if (socket !== null && isConnected) {
       socket.on("partnerClearedQ3", (data: Room) => {
         setIsPartnerClear(true)
         setRoom(data)
+        playPartner()
       })
     }
 
@@ -60,7 +64,7 @@ const Question3 = () => {
         socket.off("partnerClearedQ3")
       }
     }
-  }, [socket, isConnected, setRoom])
+  }, [socket, isConnected, setRoom, playPartner])
 
   const options = [
     "カフェ",

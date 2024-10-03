@@ -9,16 +9,19 @@ import api from "@/utils/api"
 import { roomAtom } from "@/atoms/roomAtoms"
 import { useAtom } from "jotai"
 import { Room } from "@/types/RoomType"
+import getPartnerSE from "@/assets/sound/決定ボタンを押す37.mp3"
 
 const useFlipTile = () => {
   const { socket, isConnected } = useContext(SocketContext)
   const [, setRoom] = useAtom(roomAtom)
+  const { play: playPartner } = useSE(getPartnerSE)
 
   useEffect(() => {
     if (socket !== null && isConnected) {
       socket.on("partnerClearedQ1", (data: Room) => {
         setIsPartnerClear(true)
         setRoom(data)
+        playPartner()
       })
     }
 
@@ -27,7 +30,7 @@ const useFlipTile = () => {
         socket.off("partnerClearedQ1")
       }
     }
-  }, [socket, isConnected, setRoom])
+  }, [socket, isConnected, setRoom, playPartner])
 
   const { roomId } = useParams()
   const idx = [0, 1, 2, 3]
