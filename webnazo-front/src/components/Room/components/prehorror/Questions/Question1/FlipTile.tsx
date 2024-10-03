@@ -1,3 +1,4 @@
+import ButtonComponent from "../ButtonComponent"
 import ClearComponent from "../CorrectComponent/ClearComponent"
 import PartnerClearComponent from "../CorrectComponent/PartnerClearComponent"
 import useFlipTile from "./useFlipTile"
@@ -49,12 +50,7 @@ const FlipTile = () => {
         Q1 左のパズルを右図と一致させろ！（最短で3手）
       </h1>
       <div className="flex justify-center">
-        <button
-          className="mb-3 transform rounded-2xl border-b-4 border-pink-500 bg-pink-400 px-4 py-2 text-3xl text-white shadow-lg transition duration-150 ease-in-out hover:-translate-y-0.5 hover:border-pink-400 hover:shadow-inner active:border-pink-600"
-          onClick={reset}
-        >
-          初期盤面に戻す
-        </button>
+        <ButtonComponent value="初期状態にもどす" onClick={reset} />
       </div>
       <div className="flex justify-center gap-12">
         <div style={containerStyle}>

@@ -92,6 +92,48 @@ export const checkQ3 = async (req: Request, res: Response) => {
   }
 }
 
+export const clearQ2 = async (req: Request, res: Response) => {
+  const { roomId } = req.params
+  const room = await db.room.findUnique({
+    where: { id: roomId },
+    include: {
+      rankMatch: {
+        select: {
+          isDone: true,
+        },
+      },
+    },
+  })
+
+  const oldIsDone = room?.rankMatch?.isDone
+
+  if (oldIsDone === undefined) {
+    res.status(404).json({ message: "データが見つかりません" })
+    return
+  }
+
+  const newIsDone = oldIsDone.map((value, index) =>
+    index === 1 ? true : value
+  )
+
+  const updatedRoom = await db.room.update({
+    where: {
+      id: roomId,
+    },
+    data: {
+      rankMatch: {
+        update: {
+          isDone: newIsDone,
+        },
+      },
+    },
+    include: {
+      rankMatch: true,
+    },
+  })
+  res.status(200).send(updatedRoom)
+}
+
 export const clearQ1 = async (req: Request, res: Response) => {
   const { roomId } = req.params
   const room = await db.room.findUnique({
