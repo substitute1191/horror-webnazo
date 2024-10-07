@@ -22,7 +22,7 @@ const InputComponent = ({
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
         placeholder={isFocused || value ? placeholder : ""}
-        className="peer w-full rounded-full border-2 border-pink-300 bg-white px-4 py-2 text-4xl text-gray-700 outline-none transition-all duration-300 ease-in-out focus:border-pink-500 focus:ring-2 focus:ring-pink-200"
+        className="peer w-full rounded-full border-2 border-pink-300 bg-white px-4 py-2 text-5xl text-gray-700 outline-none transition-all duration-300 ease-in-out focus:border-pink-500 focus:ring-2 focus:ring-pink-200"
       />
       <label
         className={`absolute left-4 origin-left transform text-gray-500 transition-all duration-300 ease-in-out ${isFocused || value ? "-translate-y-6 scale-75 text-pink-500" : "translate-y-2 scale-100"} ${isFocused ? "text-pink-500" : ""}`}

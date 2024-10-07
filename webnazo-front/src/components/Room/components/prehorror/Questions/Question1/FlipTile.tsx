@@ -45,11 +45,11 @@ const FlipTile = () => {
   }
 
   return (
-    <div>
+    <div className="mb-9">
       <h1 style={{ fontSize: "1.875rem", marginBottom: "1rem" }}>
         Q1 左のパズルを右図と一致させろ！（最短で3手）
       </h1>
-      <div className="flex justify-center">
+      <div className="mb-4 flex justify-center">
         <ButtonComponent value="初期状態にもどす" onClick={reset} />
       </div>
       <div className="flex justify-center gap-12">
