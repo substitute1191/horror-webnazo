@@ -1,8 +1,12 @@
+import ButtonComponent from "../ButtonComponent"
+import ClearComponent from "../CorrectComponent/ClearComponent"
+import PartnerClearComponent from "../CorrectComponent/PartnerClearComponent"
 import useFlipTile from "./useFlipTile"
 
 // eslint-disable-next-line max-lines-per-function
 const FlipTile = () => {
-  const { idx, puzzle, answer, isClear, flip } = useFlipTile()
+  const { idx, puzzle, answer, isClear, isPartnerClear, reset, flip } =
+    useFlipTile()
 
   const containerStyle: React.CSSProperties = {
     display: "grid",
@@ -41,10 +45,13 @@ const FlipTile = () => {
   }
 
   return (
-    <div>
+    <div className="mb-9">
       <h1 style={{ fontSize: "1.875rem", marginBottom: "1rem" }}>
         Q1 左のパズルを右図と一致させろ！（最短で3手）
       </h1>
+      <div className="mb-4 flex justify-center">
+        <ButtonComponent value="初期状態にもどす" onClick={reset} />
+      </div>
       <div className="flex justify-center gap-12">
         <div style={containerStyle}>
           {idx.map((rowIdx) =>
@@ -88,7 +95,11 @@ const FlipTile = () => {
           )}
         </div>
       </div>
-      {isClear ? <div>正解！</div> : null}
+      {isClear ? (
+        <ClearComponent />
+      ) : isPartnerClear ? (
+        <PartnerClearComponent />
+      ) : null}
     </div>
   )
 }

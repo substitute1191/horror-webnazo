@@ -28,7 +28,7 @@ export const startGameTimer = async (req: Request, res: Response) => {
       startTime: gameStartTimeString,
     },
   })
-  res.status(204)
+  res.status(204).send()
 }
 
 interface FinishTimeType {

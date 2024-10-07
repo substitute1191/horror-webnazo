@@ -14,7 +14,12 @@ import { useParams } from "react-router-dom"
 import { useAtom } from "jotai"
 import { roomAtom } from "@/atoms/roomAtoms"
 import { Room } from "@/types/RoomType"
-import { useState } from "react"
+import { useContext, useEffect, useState } from "react"
+import Correct from "../CorrectComponent/ClearComponent"
+import { SocketContext } from "@/components/Room/socketContext"
+import PartnerClearComponent from "../CorrectComponent/PartnerClearComponent"
+import getPartnerSE from "@/assets/sound/決定ボタンを押す37.mp3"
+import useSE from "@/SoundManager/useSE"
 
 type FormValues = {
   [key: string]: string
@@ -40,6 +45,26 @@ const Question3 = () => {
   } = useForm()
   const [_room, setRoom] = useAtom(roomAtom)
   const [message, setMessage] = useState("")
+  const [isClear, setIsClear] = useState(false)
+  const [isPartnerClear, setIsPartnerClear] = useState(false)
+  const { socket, isConnected } = useContext(SocketContext)
+  const { play: playPartner } = useSE(getPartnerSE)
+
+  useEffect(() => {
+    if (socket !== null && isConnected) {
+      socket.on("partnerClearedQ3", (data: Room) => {
+        setIsPartnerClear(true)
+        setRoom(data)
+        playPartner()
+      })
+    }
+
+    return () => {
+      if (socket !== null) {
+        socket.off("partnerClearedQ3")
+      }
+    }
+  }, [socket, isConnected, setRoom, playPartner])
 
   const options = [
     "カフェ",
@@ -51,14 +76,21 @@ const Question3 = () => {
     "スーパー",
   ]
 
-  const onSubmit: SubmitHandler<FormValues> = (data, event) => {
-    event?.preventDefault()
+  const onSubmit: SubmitHandler<FormValues> = (data) => {
     api
       .post<CheckQ3Response>(`/room/${roomId}/checkQ3`, data)
       .then(({ data }) => {
         if (data.message === "correct") {
           const { message: _noused, ...room } = data
           setRoom(room)
+          setIsClear(true)
+          if (socket !== null && isConnected) {
+            socket.emit("clearQuestion", {
+              roomId,
+              questionNo: 3,
+              room,
+            })
+          }
         } else {
           setMessage(data.message)
         }
@@ -111,31 +143,40 @@ const Question3 = () => {
         <PlaceImage imgSrc={schoolSrc} initialPosition={{ x: 425, y: 35 }} />
         <PlaceImage imgSrc={superSrc} initialPosition={{ x: 510, y: 35 }} />
       </div>
-      <form onSubmit={void handleSubmit(onSubmit)}>
-        {Array.from("ABCDEFG").map((value, index) => (
-          <div key={index}>
-            <label htmlFor={`select${index + 1}`}>
-              {value}に当てはまる建物：
-            </label>
-            <select
-              id={`select${index + 1}`}
-              {...register(`select${value}`, { required: true })}
-            >
-              <option value=""></option>
-              {options.map((option) => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
-          </div>
-        ))}
-        {/* A学校 B公園 Cカフェ Dスーパー E郵便局 Fビル G墓地 */}
-        <button type="submit" className="border-1 border p-2 shadow-sm">
-          回答する
-        </button>
-        {message}
-      </form>
+      {isClear ? (
+        <Correct />
+      ) : (
+        <form
+          onSubmit={(event: React.FormEvent<HTMLFormElement>) => {
+            handleSubmit(onSubmit)(event).catch((error) => console.error(error))
+          }}
+        >
+          {Array.from("ABCDEFG").map((value, index) => (
+            <div key={index}>
+              <label htmlFor={`select${index + 1}`}>
+                {value}に当てはまる建物：
+              </label>
+              <select
+                id={`select${index + 1}`}
+                {...register(`select${value}`, { required: true })}
+              >
+                <option value=""></option>
+                {options.map((option) => (
+                  <option key={option} value={option}>
+                    {option}
+                  </option>
+                ))}
+              </select>
+            </div>
+          ))}
+          {/* A学校 B公園 Cカフェ Dスーパー E郵便局 Fビル G墓地 */}
+          <button type="submit" className="border-1 border p-2 shadow-sm">
+            回答する
+          </button>
+          {message}
+        </form>
+      )}
+      {!isClear && isPartnerClear ? <PartnerClearComponent /> : null}
     </>
   )
 }

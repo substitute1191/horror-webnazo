@@ -6,13 +6,18 @@ import AboutSite from "../components/prehorror/AboutSite"
 import RankmatchQuestions from "../components/prehorror/Questions/RankmatchQuestions"
 import useProceed from "../useProceed"
 import KeepSpeakingPyramid from "../components/prehorror/KeepSpeakingPyramid"
-import { clearTimeAtom, tabInPhase2Atom } from "@/atoms/roomAtoms"
+import {
+  clearTimeAtom,
+  q2sentenceAtom,
+  tabInPhase2Atom,
+} from "@/atoms/roomAtoms"
 import { useAtom } from "jotai"
 import api from "@/utils/api"
 import { useParams } from "react-router-dom"
 import { AxiosResponse } from "axios"
 import { SocketContext } from "../socketContext"
-import useVisibilityState from "../phase3/hooks/useVisibilityState"
+import useSE from "@/SoundManager/useSE"
+import getSE from "@/assets/sound/決定ボタンを押す26.mp3"
 
 // TODO 後で関数を分割する
 /* eslint-disable max-lines-per-function */
@@ -21,9 +26,10 @@ const Phase2 = () => {
   const [tab, setTab] = useAtom(tabInPhase2Atom)
   const { proceed } = useProceed()
   const { roomId } = useParams()
-  const { setIsShowTime } = useVisibilityState()
   const [, setClearTime] = useAtom(clearTimeAtom)
   const { socket, isConnected } = useContext(SocketContext)
+  const [, setQ2sentence] = useAtom(q2sentenceAtom)
+  const { play: playSE } = useSE(getSE)
 
   // 音楽再生
   useEffect(() => {
@@ -39,8 +45,22 @@ const Phase2 = () => {
       socket.on("setClearTime", (clearTime: number) => {
         localStorage.setItem("clearTime", clearTime.toString())
       })
+      socket.on(
+        "partnerCollectChara",
+        (characters: Record<string, boolean>) => {
+          setQ2sentence(characters)
+          playSE()
+        }
+      )
     }
-  })
+
+    return () => {
+      if (socket !== null) {
+        socket.off("setClearTime")
+        socket.off("partnerCollectChara")
+      }
+    }
+  }, [socket, isConnected, setQ2sentence, playSE])
 
   // ロゴのクリック部分のレスポンシブ対応
   useEffect(() => {
@@ -83,7 +103,6 @@ const Phase2 = () => {
         finishTime,
       })
       .then((res: AxiosResponse) => {
-        setIsShowTime(true)
         setClearTime(res.data as number)
 
         if (socket !== null) {
