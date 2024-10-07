@@ -4,7 +4,7 @@ import rankmatchLogo from "@/assets/image/rankmatch_logo.png"
 import useProceed from "../useProceed"
 import useBGM from "@/SoundManager/useBGM"
 import bgmSrc from "@/assets/sound/pom_pom_shower.mp3"
-import { useEffect } from "react"
+import { memo, useEffect } from "react"
 import SiteDescription from "../components/prehorror/SiteDescription"
 import HighAchierver from "../components/prehorror/HighAchiever"
 import AboutPyramid from "../components/prehorror/AboutPyramid"
@@ -12,9 +12,9 @@ import Precautions from "../components/prehorror/Precautions"
 import api from "@/utils/api"
 import { useParams } from "react-router-dom"
 
-const Phase1 = () => {
+const Phase1 = memo(function Phase1() {
   const { proceed } = useProceed()
-  const { play, pause } = useBGM(bgmSrc)
+  const { play, stop } = useBGM(bgmSrc)
   const { roomId } = useParams()
 
   const startGameTimer = () => {
@@ -34,9 +34,9 @@ const Phase1 = () => {
   useEffect(() => {
     void play()
     return () => {
-      pause()
+      stop()
     }
-  })
+  }, [play, stop])
 
   return (
     <div className="bg-yumekawa bg-white/40 bg-cover bg-blend-color">
@@ -79,5 +79,6 @@ const Phase1 = () => {
       </div>
     </div>
   )
-}
+})
+
 export default Phase1

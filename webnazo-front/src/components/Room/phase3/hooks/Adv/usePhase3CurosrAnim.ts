@@ -1,25 +1,16 @@
-import { useCallback, useEffect, useMemo, useRef } from "react"
-import useFakeCursor from "./Cursor/useFakeCursor"
-import useTextManager from "./hooks/useTextManager"
-import useAnimationState from "./hooks/useAnimationState"
-import { calculateNewPosition, setWaringLines } from "./phase3AnimUtils"
+import { useCallback, useEffect, useRef } from "react"
+import useFakeCursor from "../../Cursor/useFakeCursor"
+import useTextManager from "../useTextManager"
+import { calculateNewPosition, setWaringLines } from "../../phase3AnimUtils"
+import useTimingState from "../useTimingState"
 
+// カーソルを自動的に動かすアニメーションを行うカスタムフック
 const usePhase3CursorAnim = () => {
   const cursorRef = useRef<HTMLImageElement>(null)
   const { setCursorPos } = useFakeCursor()
   const { setShowText } = useTextManager()
-  const { isApproachingCloseBtn, setIsCursorAtCloseBtn } = useAnimationState()
+  const { isApproachingCloseBtn, setIsCursorAtCloseBtn } = useTimingState()
   const animationRef = useRef<number>()
-
-  const warningLines = useMemo(
-    () => [
-      "ちょっと何してるの！？",
-      "人の話聞いてる！？",
-      "ヤバイヤバイヤバイって！",
-      "あわわわわわわわわわわわわ",
-    ],
-    []
-  )
 
   const animate = useCallback(() => {
     const closeBtn = document.getElementById("closeBtn")
@@ -33,7 +24,8 @@ const usePhase3CursorAnim = () => {
       1.5
     )
 
-    const line = setWaringLines(distance, warningLines)
+    // 距離に応じてセリフを変更する
+    const line = setWaringLines(distance)
     if (line !== null) setShowText(line)
 
     setCursorPos({ x, y })
@@ -41,7 +33,7 @@ const usePhase3CursorAnim = () => {
       setIsCursorAtCloseBtn(true)
     }
     animationRef.current = requestAnimationFrame(animate)
-  }, [setCursorPos, setIsCursorAtCloseBtn, setShowText, warningLines])
+  }, [setCursorPos, setIsCursorAtCloseBtn, setShowText])
 
   useEffect(() => {
     if (isApproachingCloseBtn) {

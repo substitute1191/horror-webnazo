@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react"
-import useCloseButton from "../hooks/useCloseButton"
+import useCloseButton from "../hooks/Adv/useCloseButton"
 
 const CloseButton = () => {
   const closeBtnRef = useRef<HTMLDivElement | null>(null)

@@ -10,18 +10,18 @@ import { clearTimeAtom, tabInPhase2Atom } from "@/atoms/roomAtoms"
 import { useAtom } from "jotai"
 import api from "@/utils/api"
 import { useParams } from "react-router-dom"
-import useAnimationState from "../phase3/hooks/useAnimationState"
 import { AxiosResponse } from "axios"
 import { SocketContext } from "../socketContext"
+import useVisibilityState from "../phase3/hooks/useVisibilityState"
 
 // TODO 後で関数を分割する
 /* eslint-disable max-lines-per-function */
 const Phase2 = () => {
-  const { play, pause } = useBGM(bgmSrc)
+  const { play, stop } = useBGM(bgmSrc)
   const [tab, setTab] = useAtom(tabInPhase2Atom)
   const { proceed } = useProceed()
   const { roomId } = useParams()
-  const { setIsShowTime } = useAnimationState()
+  const { setIsShowTime } = useVisibilityState()
   const [, setClearTime] = useAtom(clearTimeAtom)
   const { socket, isConnected } = useContext(SocketContext)
 
@@ -30,9 +30,9 @@ const Phase2 = () => {
     void play()
 
     return () => {
-      pause()
+      stop()
     }
-  }, [play, pause])
+  }, [play, stop])
 
   useEffect(() => {
     if (socket !== null && isConnected) {

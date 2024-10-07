@@ -1,13 +1,13 @@
 import { AnimationEvent, useEffect, useState } from "react"
 import SEsrc from "@/assets/sound/claphand.mp3"
 import useSE from "@/SoundManager/useSE"
-import useAnimationState from "../hooks/useAnimationState"
 import { clearTimeAtom, teamNameAtom } from "@/atoms/roomAtoms"
 import { useAtomValue } from "jotai"
+import useVisibilityState from "../hooks/useVisibilityState"
 
 const ClearTime = () => {
   const { play, stop } = useSE(SEsrc)
-  const { setIsShowGameClearMsg } = useAnimationState()
+  const { setIsShowGameClearMsg } = useVisibilityState()
   const clearTime = useAtomValue(clearTimeAtom)
   const [minutes, setMinutes] = useState(0)
   const [seconds, setSeconds] = useState(0)

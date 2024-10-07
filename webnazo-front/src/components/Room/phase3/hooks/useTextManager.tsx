@@ -3,6 +3,8 @@ import { Phase3Context } from "../Phase3BGMProvider"
 import useAnimationState from "./useAnimationState"
 import { atom, useAtom } from "jotai"
 import useFakeCursor from "../Cursor/useFakeCursor"
+import useVisibilityState from "./useVisibilityState"
+import useTimingState from "./useTimingState"
 
 /* eslint-disable max-lines-per-function */
 const idxAtom = atom<number>(0)
@@ -11,14 +13,10 @@ const showTextAtom = atom<string>("")
 const useTextManager = () => {
   const [idx, setIdx] = useAtom(idxAtom)
   const [showText, setShowText] = useAtom(showTextAtom)
-  const {
-    setFirstAnimate,
-    setIsShowAdv,
-    setIsShowTexts2,
-    setIsShake,
-    setIsApproachingCloseBtn,
-    setSpeakingTime,
-  } = useAnimationState()
+  const { setFirstAnimate, setIsShake, setSpeakingTime } = useAnimationState()
+  const { setIsApproachingCloseBtn } = useTimingState()
+
+  const { setIsShowAdv, setIsShowTexts2 } = useVisibilityState()
   const { stopEndroll, playKinshiku } = useContext(Phase3Context)
   const { setIsHideCursor } = useFakeCursor()
 
