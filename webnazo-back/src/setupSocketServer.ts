@@ -53,7 +53,10 @@ export function setupSocketServer(httpServer: HttpServer) {
       ({ roomId, title }: { roomId: string; title: string }) => {
         console.log("memoShow fired!")
         socket.to(roomId).emit("peerMemoShow", title)
-        
+      }
+    )
+
+    socket.on(
       "clearQuestion",
       ({
         roomId,
