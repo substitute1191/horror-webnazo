@@ -5,12 +5,19 @@ import Player2Phase4 from "./Player2Phase4"
 import { useContext, useEffect } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
 import { SocketContext } from "../socketContext"
+import useFakeCursor from "../phase3/Cursor/useFakeCursor"
 
 const Phase4 = () => {
   const myChara = useAtomValue(myCharaAtom)
   const { socket, isConnected } = useContext(SocketContext)
   const location = useLocation()
   const navigate = useNavigate()
+  const { setIsHideCursor } = useFakeCursor()
+
+  // カーソル表示を元に戻す
+  useEffect(() => {
+    setIsHideCursor(false)
+  }, [setIsHideCursor])
 
   // 相方がメモを開いたときにそのタイトルを履歴にプッシュする
   useEffect(() => {
