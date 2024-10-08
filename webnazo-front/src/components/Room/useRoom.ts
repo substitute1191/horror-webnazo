@@ -1,6 +1,6 @@
-import { roomAtom, roomIdAtom , phaseAtom } from "@/atoms/roomAtoms"
+import { roomAtom, roomIdAtom, phaseAtom } from "@/atoms/roomAtoms"
 import { useRoomOperation } from "@/hooks/useRoomQuery"
-import { useSocket } from "@/utils/useSocket"
+import { useSocket } from "@/hooks/useSocket"
 import { useSetAtom } from "jotai"
 import { useEffect } from "react"
 import { useParams } from "react-router-dom"
