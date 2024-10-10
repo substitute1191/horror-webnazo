@@ -1,6 +1,6 @@
-import Labyrinth from "./Labyrinth"
+import Labyrinth from "./Labyrinth/Labyrinth"
 import Memo from "./Memo"
-import useIsShowLabyrinth from "./useIsShowLabyrinth"
+import useIsShowLabyrinth from "./Labyrinth/useIsShowLabyrinth"
 import useIsShowMemo from "./useIsShowMemo"
 
 export default function Player1Phase4() {
