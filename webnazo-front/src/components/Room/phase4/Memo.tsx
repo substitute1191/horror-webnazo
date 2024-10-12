@@ -15,6 +15,7 @@ export default function Memo({ title, text }: Props) {
   const { roomId } = useParams()
   const { resetMemo } = useIsShowMemo()
   const memoBackgroundRef = useRef<HTMLDivElement | null>(null)
+  const memoRef = useRef<HTMLDivElement | null>(null)
   const { socket, isConnected } = useContext(SocketContext)
 
   // メモを開いたときに相方にイベントを発行する
@@ -42,14 +43,15 @@ export default function Memo({ title, text }: Props) {
 
   // メモ以外の部分がクリックされたらメモを閉じる
   useEffect(() => {
-    const currentRef = memoBackgroundRef.current
-    if (currentRef !== null) {
-      currentRef.addEventListener("click", resetMemo)
+    const currentBgRef = memoBackgroundRef.current
+
+    if (currentBgRef !== null) {
+      currentBgRef.addEventListener("click", resetMemo)
     }
 
     return () => {
-      if (currentRef !== null) {
-        currentRef.removeEventListener("click", resetMemo)
+      if (currentBgRef !== null) {
+        currentBgRef.removeEventListener("click", resetMemo)
       }
     }
   }, [resetMemo])
@@ -64,6 +66,7 @@ export default function Memo({ title, text }: Props) {
         className="fixed inset-0 z-10 h-screen w-screen text-white"
       >
         <div
+          ref={memoRef}
           className={`fixed left-[50%] top-[50%] z-[15] h-[80vh] w-[50vw] -translate-x-[50%] -translate-y-[50%] rounded bg-slate-50 px-12 py-8 text-black`}
         >
           {text}

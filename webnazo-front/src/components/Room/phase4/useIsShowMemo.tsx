@@ -11,12 +11,14 @@ export default function useIsShowMemo() {
     setIsShowMemo(memo)
   }
 
-  const resetMemo = useCallback(() => {
-    if (isShowMemo !== 0) {
-      console.log("resetMemo called!")
-      setIsShowMemo(0)
-    }
-  }, [isShowMemo, setIsShowMemo])
+  const resetMemo = useCallback(
+    (e: MouseEvent) => {
+      if (isShowMemo !== 0 && e.target === e.currentTarget) {
+        setIsShowMemo(0)
+      }
+    },
+    [isShowMemo, setIsShowMemo]
+  )
 
   return {
     isShowMemo,

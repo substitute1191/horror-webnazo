@@ -7,6 +7,21 @@
     font-family: onryou;
     src: url(/public/fonts/onryou.TTF) format(truetype);
   }
+
+  @font-face {
+    font-family: DelaGothicOne;
+    src: url(/public/fonts/DelaGothicOne-Regular.ttf) format(truetype);
+  }
+
+  @font-face {
+    font-family: ibaraji;
+    src: url(/public/fonts/ibaraji04.ttf) format(truetype);
+  }
+
+  @font-face {
+    font-family: ZeroGothic;
+    src: url(/public/fonts/ZeroGothic.otf) format(opentype);
+  }
 }
 
 @layer components {
