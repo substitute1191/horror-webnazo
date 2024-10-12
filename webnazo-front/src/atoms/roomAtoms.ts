@@ -2,6 +2,7 @@ import { atom } from "jotai"
 import { atomWithStorage } from "jotai/utils"
 import { Room } from "@/types/RoomType"
 import { v4 as uuidv4 } from "uuid"
+import { Point } from "@/components/Room/phase4/Labyrinth/Point"
 
 export const userIdAtom = atom<string>(() => {
   const storedUserId = localStorage.getItem("userId")
@@ -98,3 +99,4 @@ export const clearTimeAtom = atomWithStorage("clearTime", 0, undefined, {
 export const teamNameAtom = atomWithStorage("teamName", "", undefined, {
   getOnInit: true,
 })
+export const currentPointAtom = atomWithStorage("currentPoint", new Point(1, 9))

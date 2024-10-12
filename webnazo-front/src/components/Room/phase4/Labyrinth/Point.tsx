@@ -3,7 +3,7 @@ export class Point {
   row: number
 
   constructor(x: number, y: number) {
-    this.col = y
-    this.row = x
+    this.col = x
+    this.row = y
   }
 }
