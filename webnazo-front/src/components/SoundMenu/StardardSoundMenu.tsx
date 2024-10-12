@@ -1,4 +1,4 @@
-import useSoundMenu from "./useSoundMenu"
+import useSoundMenu from "./hooks/useSoundMenu"
 
 export default function StandardSoundMenu() {
   const {

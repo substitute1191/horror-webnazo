@@ -1,5 +1,5 @@
 import Pochi from "./Pochi"
-import usePochiSoundMenu from "./usePochiSoundMenu"
+import usePochiSoundMenu from "./hooks/usePochiSoundMenu"
 
 export default function PochiApproachingSoundMenu() {
   const {
