@@ -14,23 +14,35 @@ datasource db {
 }
 
 model Room {
-  id String @id @default(uuid())
-  phase Int @default(0)
+  id         String     @id @default(uuid())
+  phase      Int        @default(0)
   character1 String?
   character2 String?
-  teamName  String?
-  startTime String?
+  teamName   String?
+  startTime  String?
   finishTime String?
   timeRecord String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  rankMatch RankMatch?
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+  rankMatch  RankMatch?
+  confined   Confined?
 }
 
 model RankMatch {
-  id        Int @id @default(autoincrement())
-  roomId    String   @unique
-  isDone    Boolean[]
+  id         Int       @id @default(autoincrement())
+  roomId     String    @unique
+  isDone     Boolean[]
   q2sentence Json
-  room      Room     @relation(fields: [roomId], references: [id])
+  room       Room      @relation(fields: [roomId], references: [id])
+}
+
+model Confined {
+  id            Int     @id @default(autoincrement())
+  roomId        String  @unique
+  isMillionaire Boolean
+  reachedShop   Boolean
+  hasMicrowave  Boolean
+  isDonated     Boolean
+  hasDice       Boolean
+  room          Room    @relation(fields: [roomId], references: [id])
 }
