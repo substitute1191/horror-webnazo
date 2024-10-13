@@ -11,15 +11,7 @@ import Phase4 from "./phase4/Phase4"
 /* eslint-disable complexity */
 const Room = () => {
   const phase = useAtomValue(phaseAtom)
-  const { socket, isConnected, isPending, error } = useRoom()
-
-  if (isPending) {
-    return <div>Loading...</div>
-  }
-
-  if (error !== null) {
-    return <div>Error: {error.message}</div>
-  }
+  const { socket, isConnected } = useRoom()
 
   return (
     <SocketContext.Provider value={{ socket, isConnected }}>

@@ -6,6 +6,7 @@ export interface Room {
   createdAt: Date
   updatedAt: Date
   rankMatch?: RankMatch
+  confined?: Confined
 }
 
 export interface RankMatch {
@@ -15,6 +16,16 @@ export interface RankMatch {
   isDone: boolean[]
   q2sentence: Record<string, boolean>
   room: Room
+}
+
+export interface Confined {
+  id: number
+  roomId: string
+  isMillionaire: boolean
+  reachedShop: boolean
+  hasMicrowave: boolean
+  isDonated: boolean
+  hasDice: boolean
 }
 
 export interface Position {

@@ -1,5 +1,10 @@
-import { useState, useEffect, useCallback } from "react"
+import { useState, useEffect, useCallback, useContext } from "react"
 import useRecentFourKeys from "./useRecentFourKeys"
+import api from "@/utils/api"
+import { Room } from "@/types/RoomType"
+import { useAtomValue, useSetAtom } from "jotai"
+import { roomAtom, roomIdAtom } from "@/atoms/roomAtoms"
+import { SocketContext } from "../../socketContext"
 
 interface WindowState {
   isMaximized: boolean
@@ -15,6 +20,9 @@ export default function useDetectMaximize() {
     previousHeight: window.innerHeight,
   })
   const { recentFourKeys } = useRecentFourKeys()
+  const roomId = useAtomValue(roomIdAtom)
+  const setRoom = useSetAtom(roomAtom)
+  const { socket, isConnected } = useContext(SocketContext)
 
   const detectMaximize = useCallback(() => {
     const { innerWidth, innerHeight, outerWidth, outerHeight, screen } = window
@@ -37,9 +45,23 @@ export default function useDetectMaximize() {
     const isMaximized =
       (isMaximizedBySize || isMaximizedByScreen) && hasSignificantChange
 
+    const postMillionaire = async () => {
+      const { data } = await api.post<Room>(
+        `/room/${roomId}/updateConfinedField`,
+        {
+          fieldName: "isMillionaire",
+          newValue: true,
+        }
+      )
+      if (socket !== null && isConnected) {
+        socket.emit("updateRoom", { roomId })
+      }
+      setRoom(data)
+    }
+
     setWindowState((prev) => {
       if (isMaximized !== prev.isMaximized && recentFourKeys === "aksd") {
-        console.log("100万円ゲット！")
+        void postMillionaire()
       }
       return {
         isMaximized,
@@ -47,7 +69,15 @@ export default function useDetectMaximize() {
         previousHeight: innerHeight,
       }
     })
-  }, [windowState.previousWidth, windowState.previousHeight, recentFourKeys])
+  }, [
+    windowState.previousWidth,
+    windowState.previousHeight,
+    roomId,
+    socket,
+    isConnected,
+    setRoom,
+    recentFourKeys,
+  ])
 
   useEffect(() => {
     window.addEventListener("resize", detectMaximize)

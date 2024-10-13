@@ -36,6 +36,12 @@ export const q2sentenceAtom = atomWithStorage<Record<string, boolean>>(
   }
 )
 
+export const isMillionaireAtom = atomWithStorage("isMillionaire", false)
+export const reachedShopAtom = atomWithStorage("reachedShop", false)
+export const hasMicrowaveAtom = atomWithStorage("hasMicrowave", false)
+export const isDonatedAtom = atomWithStorage("isDonated", false)
+export const hasDiceAtom = atomWithStorage("hasDice", false)
+
 export const roomAtom = atom(
   (get) => ({
     phase: get(phaseAtom),
@@ -43,14 +49,30 @@ export const roomAtom = atom(
     otherChara: get(otherCharaAtom),
     isDone: get(isDoneAtom),
     q2sentence: get(q2sentenceAtom),
+    isMillionaire: get(isMillionaireAtom),
+    reachedShop: get(reachedShopAtom),
+    hasMicrowave: get(hasMicrowaveAtom),
+    isDonated: get(isDonatedAtom),
+    hasDice: get(hasDiceAtom),
   }),
   (get, set, room: Room) => {
-    const { phase, character1, character2, rankMatch } = room
+    const { phase, character1, character2, rankMatch, confined } = room
     if (rankMatch !== undefined) {
       const { isDone, q2sentence } = rankMatch
       set(isDoneAtom, isDone)
       set(q2sentenceAtom, q2sentence)
     }
+
+    if (confined !== undefined) {
+      const { isMillionaire, reachedShop, hasMicrowave, isDonated, hasDice } =
+        confined
+      set(isMillionaireAtom, isMillionaire)
+      set(reachedShopAtom, reachedShop)
+      set(hasMicrowaveAtom, hasMicrowave)
+      set(isDonatedAtom, isDonated)
+      set(hasDiceAtom, hasDice)
+    }
+
     set(phaseAtom, phase)
 
     const userId = get(userIdAtom)
