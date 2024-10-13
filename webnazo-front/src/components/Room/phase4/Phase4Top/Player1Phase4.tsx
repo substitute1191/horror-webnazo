@@ -1,9 +1,14 @@
-import GetMoneyAdv from "./GetMoney/GetMoneyAdv"
-import Memo from "./Memo"
-import useIsShowMemo from "./useIsShowMemo"
+import GetMoneyAdv from "../GetMoney/GetMoneyAdv"
+import Memo from "./memo/Memo"
+import useIsShowMemo from "./memo/useIsShowMemo"
+import useDetectKeyDown from "./useDetectKeys"
+import useDetectMaximize from "./useDetectMaximize"
 
 export default function Player1Phase4() {
   const { isShowMemo, handleClickMemo } = useIsShowMemo()
+
+  useDetectKeyDown()
+  useDetectMaximize()
 
   return (
     <div className="text-white">

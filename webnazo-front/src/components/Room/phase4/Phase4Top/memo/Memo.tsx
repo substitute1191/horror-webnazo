@@ -2,7 +2,7 @@ import { useContext, useEffect, useRef } from "react"
 import { Helmet } from "react-helmet-async"
 import { useLocation, useNavigate, useParams } from "react-router-dom"
 import useIsShowMemo from "./useIsShowMemo"
-import { SocketContext } from "../socketContext"
+import { SocketContext } from "@/components/Room/socketContext"
 
 type Props = {
   title: string
