@@ -1,6 +1,7 @@
 import { Request, Response } from "express"
 import { db } from "../lib/prisma"
 
+// Room, rankMatch, confinedを作成する
 export const createRoom = async (_req: Request, res: Response) => {
   const result = await db.$transaction(async (prisma) => {
     const room = await prisma.room.create({
@@ -25,6 +26,17 @@ export const createRoom = async (_req: Request, res: Response) => {
           // eslint-disable-next-line @typescript-eslint/naming-convention
           "？": false,
         },
+      },
+    })
+
+    await prisma.confined.create({
+      data: {
+        roomId: room.id,
+        isMillionaire: false,
+        reachedShop: false,
+        hasMicrowave: false,
+        isDonated: false,
+        hasDice: false,
       },
     })
 
