@@ -78,7 +78,6 @@ const useTextManager = () => {
         updateText(texts2)
       }, 500)
     } else {
-      console.debug("handleComplete2 end!")
       setIsShake(true)
       setIsHideCursor(true)
       setIsApproachingCloseBtn(true)
