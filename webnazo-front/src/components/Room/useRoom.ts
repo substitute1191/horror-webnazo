@@ -1,4 +1,4 @@
-import { roomAtom, phaseAtom } from "@/atoms/roomAtoms"
+import { roomAtom, phaseAtom, roomIdAtom } from "@/atoms/roomAtoms"
 import { useSocket } from "@/hooks/useSocket"
 import { Room } from "@/types/RoomType"
 import api from "@/utils/api"
@@ -16,11 +16,19 @@ export default function useRoom() {
   const setPhase = useSetAtom(phaseAtom)
   const { socket, connect, disconnect, isConnected } = useSocket()
   const setRoom = useSetAtom(roomAtom)
+  const setRoomId = useSetAtom(roomIdAtom)
+
+  useEffect(() => {
+    if (roomId !== undefined) {
+      setRoomId(roomId)
+    }
+  }, [roomId, setRoomId])
 
   const fetchAndSetRoom = useCallback(async () => {
     if (roomId === undefined) return
     console.log("fetchAndSetRoom!")
     const res = await fetchRoom(roomId)
+    console.dir(res)
     setRoom(res)
   }, [roomId, setRoom])
 
