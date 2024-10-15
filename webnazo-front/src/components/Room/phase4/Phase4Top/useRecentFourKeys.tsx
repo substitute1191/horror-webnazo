@@ -9,7 +9,7 @@ const recenetFourKeysAtom = atom(
     const curKeys = get(keysAtom)
     // アルファベットと数字以外のキーを検出しない
     if (newKey.length !== 1) return
-    console.info(`curKeys: ${curKeys}, newKey: ${newKey}`)
+
     if (curKeys.length >= 4) {
       set(keysAtom, `${curKeys.slice(1, 4)}${newKey}`)
     } else {

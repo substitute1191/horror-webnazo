@@ -14,7 +14,7 @@ export default function GetMoneyImgManager() {
       </h2>
       <div className="flex items-center justify-center">
         <button
-          className={`h-10 w-10 -rotate-45 rounded border-l-4 border-t-4 border-slate-400 hover:animate-[hover-l-cursor_0.5s_infinite_ease-out] hover:border-slate-50`}
+          className={`relative z-20 h-10 w-10 -rotate-45 rounded border-l-4 border-t-4 border-slate-400 hover:animate-[hover-l-cursor_0.5s_infinite_ease-out] hover:border-slate-50`}
           onClick={() => handleClick(-1)}
         ></button>
         {whichQuestion === 0 ? <img src={nazo1} alt="" /> : null}
@@ -22,7 +22,7 @@ export default function GetMoneyImgManager() {
         {whichQuestion === 2 ? <PochiRoom /> : null}
         {whichQuestion === 4 ? <img src={nazo5} alt="" /> : null}
         <button
-          className={`h-10 w-10 rotate-45 rounded border-r-4 border-t-4 border-slate-400 hover:animate-[hover-r-cursor_0.5s_infinite_ease-out] hover:border-slate-50`}
+          className={`relative z-20 h-10 w-10 rotate-45 rounded border-r-4 border-t-4 border-slate-400 hover:animate-[hover-r-cursor_0.5s_infinite_ease-out] hover:border-slate-50`}
           onClick={() => handleClick(1)}
         ></button>
       </div>

@@ -19,6 +19,11 @@ export function setupSocketServer(httpServer: HttpServer) {
       console.debug("joined room:", roomId)
     })
 
+    socket.on("updateRoom", ({ roomId }: { roomId: string }) => {
+      console.debug("updateRoom event")
+      socket.broadcast.to(roomId).emit("roomUpdated")
+    })
+
     socket.on(
       "selectChara",
       ({ roomId, chara }: { roomId: string; chara: number }) => {

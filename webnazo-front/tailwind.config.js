@@ -114,6 +114,16 @@ export default {
             opacity: 1,
           },
         },
+        "fadein-alert": {
+          "0%": {
+            transform: "translateY(-40px) translateX(-50%)",
+            opacity: 0,
+          },
+          "100%": {
+            transform: "translateY(0) translateX(-50%)",
+            opacity: 1,
+          },
+        },
         "fadein-left": {
           "0%": {
             transform: "translateX(-1000px)",

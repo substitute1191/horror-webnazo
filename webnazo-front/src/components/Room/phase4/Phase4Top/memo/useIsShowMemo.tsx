@@ -7,7 +7,6 @@ export default function useIsShowMemo() {
   const [isShowMemo, setIsShowMemo] = useAtom(isShowMemoAtom)
 
   const handleClickMemo = (memo: number) => {
-    console.log("handleClickMemo called!")
     setIsShowMemo(memo)
   }
 
