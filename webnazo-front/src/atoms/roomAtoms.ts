@@ -2,7 +2,7 @@ import { atom } from "jotai"
 import { atomWithStorage } from "jotai/utils"
 import { Room } from "@/types/RoomType"
 import { v4 as uuidv4 } from "uuid"
-import { Point } from "@/components/Room/phase4/Phase4Top/Labyrinth/Point"
+import { Point } from "@/components/Room/phase4/Phase4Top/labyrinth/Point"
 
 export const userIdAtom = atom<string>(() => {
   const storedUserId = localStorage.getItem("userId")

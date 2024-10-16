@@ -1,5 +1,5 @@
-import Labyrinth from "./Labyrinth/Labyrinth"
-import useIsShowLabyrinth from "./Labyrinth/useIsShowLabyrinth"
+import Labyrinth from "./labyrinth/Labyrinth"
+import useIsShowLabyrinth from "./labyrinth/useIsShowLabyrinth"
 import GetMoneyAdv from "../GetMoney/GetMoneyAdv"
 import Memo from "./memo/Memo"
 import useIsShowMemo from "./memo/useIsShowMemo"
