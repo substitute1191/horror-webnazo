@@ -31,7 +31,7 @@ const Home = () => {
               "transform rotate-90 text-black",
               "transform rotate-270 text-black",
             ]}
-            probability={0.2}
+            probability={0.8}
           />
           へ
           <CharacterFlicker

@@ -1,0 +1,89 @@
+import { useMemo } from "react"
+import { Point } from "./Point"
+import { useAtom } from "jotai"
+import { currentPointAtom } from "@/atoms/roomAtoms"
+
+const useLabyrinth = () => {
+  const [currentPoint, setCurrentPoint] = useAtom(currentPointAtom)
+
+  const map = useMemo(
+    () => [
+      ["止", "止", "止", "止", "止", "止", "止", "止", "止", "止", "止"],
+      ["止", "断", "列", "軽", "掘", "頼", "止", "色", "止", "始", "止"],
+      ["止", "地", "止", "止", "揉", "止", "欲", "虚", "無", "霊", "止"],
+      ["止", "緑", "止", "止", "知", "止", "止", "怨", "止", "止", "止"],
+      ["止", "引", "止", "総", "泣", "止", "止", "出", "辣", "跳", "止"],
+      ["止", "遣", "止", "止", "六", "止", "寝", "止", "止", "養", "止"],
+      ["止", "霊", "止", "怯", "丸", "栓", "毛", "令", "猟", "斬", "止"],
+      ["止", "龍", "止", "止", "手", "止", "止", "困", "止", "死", "止"],
+      ["止", "怨", "霊", "策", "止", "駄", "止", "発", "止", "未", "止"],
+      ["止", "影", "止", "怒", "止", "真", "止", "止", "法", "止", "止"],
+      ["止", "話", "止", "来", "夜", "令", "犬", "団", "陳", "見", "止"],
+      ["止", "止", "或", "止", "止", "和", "止", "節", "止", "濃", "止"],
+      ["止", "根", "頂", "行", "短", "絶", "止", "焼", "止", "人", "止"],
+      ["止", "窒", "止", "止", "止", "止", "嶺", "笑", "止", "全", "止"],
+      ["止", "鎌", "辺", "揶", "酸", "電", "機", "止", "郎", "悪", "止"],
+      ["止", "怨", "止", "止", "止", "止", "愛", "止", "六", "止", "止"],
+      ["止", "霊", "止", "粘", "遍", "師", "止", "水", "波", "海", "止"],
+      ["止", "止", "止", "蜘", "止", "金", "返", "弩", "止", "怨", "止"],
+      ["止", "霊", "止", "兵", "亜", "止", "霊", "止", "平", "ボ", "止"],
+      ["止", "怨", "怨", "止", "止", "武", "楽", "弦", "止", "濡", "止"],
+      ["止", "怨", "止", "止", "止", "止", "止", "野", "止", "魔", "止"],
+      ["止", "終", "県", "漣", "流", "劉", "士", "議", "止", "炉", "止"],
+      ["止", "止", "止", "止", "止", "止", "止", "止", "止", "止", "止"],
+    ],
+    []
+  )
+
+  const move = (moveType: string) => {
+    let nextPoint
+    switch (moveType) {
+      case "up":
+        nextPoint = new Point(currentPoint.col, currentPoint.row - 1)
+        break
+      case "left":
+        nextPoint = new Point(currentPoint.col - 1, currentPoint.row)
+        break
+      case "down":
+        nextPoint = new Point(currentPoint.col, currentPoint.row + 1)
+        break
+      case "right":
+        nextPoint = new Point(currentPoint.col + 1, currentPoint.row)
+        break
+      default:
+        nextPoint = currentPoint
+    }
+    if (map[nextPoint.col][nextPoint.row] !== "止") {
+      setCurrentPoint(nextPoint)
+    }
+  }
+
+  const keyDownHandler = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    switch (e.code) {
+      case "KeyW":
+      case "ArrowUp":
+        move("up")
+        return
+      case "KeyA":
+      case "ArrowLeft":
+        move("left")
+        return
+      case "KeyS":
+      case "ArrowDown":
+        move("down")
+        return
+      case "KeyD":
+      case "ArrowRight":
+        move("right")
+        return
+    }
+  }
+
+  return {
+    map,
+    currentPoint,
+    keyDownHandler,
+  }
+}
+
+export default useLabyrinth

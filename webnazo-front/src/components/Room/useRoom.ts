@@ -1,26 +1,48 @@
-import { roomAtom, roomIdAtom, phaseAtom } from "@/atoms/roomAtoms"
-import { useRoomOperation } from "@/hooks/useRoomQuery"
+import { roomAtom, phaseAtom, roomIdAtom } from "@/atoms/roomAtoms"
 import { useSocket } from "@/hooks/useSocket"
+import { Room } from "@/types/RoomType"
+import api from "@/utils/api"
 import { useSetAtom } from "jotai"
-import { useEffect } from "react"
+import { useCallback, useEffect } from "react"
 import { useParams } from "react-router-dom"
+
+const fetchRoom = async (roomId: string): Promise<Room> => {
+  const { data } = await api.get<Room>(`/room/${roomId}`)
+  return data
+}
 
 export default function useRoom() {
   const { roomId } = useParams()
-  const { data: room, isPending, error } = useRoomOperation()
-  const setRoom = useSetAtom(roomAtom)
   const setPhase = useSetAtom(phaseAtom)
   const { socket, connect, disconnect, isConnected } = useSocket()
+  const setRoom = useSetAtom(roomAtom)
   const setRoomId = useSetAtom(roomIdAtom)
 
   useEffect(() => {
-    if (room !== undefined) {
-      setRoom(room)
-    }
     if (roomId !== undefined) {
       setRoomId(roomId)
     }
-  }, [room, setRoom, roomId, setRoomId])
+  }, [roomId, setRoomId])
+
+  const fetchAndSetRoom = useCallback(async () => {
+    if (roomId === undefined) return
+    const res = await fetchRoom(roomId)
+    setRoom(res)
+  }, [roomId, setRoom])
+
+  useEffect(() => {
+    void fetchAndSetRoom()
+
+    if (socket !== null && isConnected) {
+      socket.on("roomUpdated", fetchAndSetRoom)
+    }
+
+    return () => {
+      if (socket !== null) {
+        socket.off("roomUpdated")
+      }
+    }
+  }, [fetchAndSetRoom, isConnected, roomId, setRoom, socket])
 
   /* eslint-disable react-hooks/exhaustive-deps*/
   useEffect(() => {
@@ -48,5 +70,5 @@ export default function useRoom() {
     }
   }, [socket, isConnected])
 
-  return { socket, isConnected, isPending, error }
+  return { socket, isConnected }
 }
