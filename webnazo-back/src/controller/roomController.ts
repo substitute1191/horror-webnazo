@@ -72,6 +72,7 @@ export const getRoomData = async (req: Request, res: Response) => {
     where: { id: roomId },
     include: {
       rankMatch: true,
+      confined: true,
     },
   })
   res.status(200).json(room)
