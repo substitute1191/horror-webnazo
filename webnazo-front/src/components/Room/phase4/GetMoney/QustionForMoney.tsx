@@ -1,8 +1,10 @@
-import useCloseHundred from "./hooks/useCloseGetMoney"
 import GetMoneyImgManager from "./GetMoneyImgManager"
+import useCloseAdv from "../hooks/useCloseAdv"
+import useIsShowQuestionForMoney from "@/hooks/useIsShowQuestionForMoney"
 
 export default function QuestionForMoney() {
-  const bgRef = useCloseHundred()
+  const { setIsShowQuestionForMoney } = useIsShowQuestionForMoney()
+  const bgRef = useCloseAdv(setIsShowQuestionForMoney)
 
   return (
     <div

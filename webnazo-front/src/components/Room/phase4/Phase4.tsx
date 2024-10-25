@@ -1,16 +1,12 @@
-import { useAtomValue } from "jotai"
-import { myCharaAtom } from "@/atoms/roomAtoms"
 import Player1Phase4 from "./Phase4Top/Player1Phase4"
-import Player2Phase4 from "./Phase4Top/Player2Phase4"
 import { useContext, useEffect } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
 import { SocketContext } from "../socketContext"
 import useFakeCursor from "../phase3/Cursor/useFakeCursor"
-import Alert from "./Alert"
-import useAlert from "./useAlert"
+import Alert from "./Alert/Alert"
+import useAlert from "./Alert/useAlert"
 
 const Phase4 = () => {
-  const myChara = useAtomValue(myCharaAtom)
   const { socket, isConnected } = useContext(SocketContext)
   const location = useLocation()
   const navigate = useNavigate()
@@ -55,8 +51,7 @@ const Phase4 = () => {
   return (
     <div className="relative h-screen w-screen bg-black">
       <Alert />
-      {myChara === 1 ? <Player1Phase4 /> : null}
-      {myChara === 2 ? <Player2Phase4 /> : null}
+      <Player1Phase4 />
     </div>
   )
 }

@@ -1,3 +1,4 @@
+import DonationSite from "../DonationSite/Components/DonationAdv"
 import GetMoneyAdv from "../GetMoney/GetMoneyAdv"
 import Memo from "./memo/Memo"
 import useIsShowMemo from "./memo/useIsShowMemo"
@@ -12,8 +13,8 @@ export default function Player1Phase4() {
 
   return (
     <div className="text-white">
-      私はPlayer1
       <GetMoneyAdv />
+      <DonationSite />
       <button className="text-white" onClick={() => handleClickMemo(1)}>
         メモ1を開く
       </button>

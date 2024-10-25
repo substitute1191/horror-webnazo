@@ -1,18 +1,18 @@
-import { useRef, useCallback, useEffect } from "react"
-import useIsShowQuestionForMoney from "../../../../../hooks/useIsShowQuestionForMoney"
+import { useRef, useCallback, useEffect, Dispatch, SetStateAction } from "react"
 
 // 背景がクリックされたら謎モーダルを閉じるためのカスタムフック
-export default function useCloseGetMoney() {
+export default function useCloseAdv(
+  closeAdv: Dispatch<SetStateAction<boolean>>
+) {
   const bgRef = useRef<HTMLDivElement | null>(null)
-  const { setIsShowQuestionForMoney } = useIsShowQuestionForMoney()
 
   const closeQuestion = useCallback(
     (e: MouseEvent) => {
       if (e.target === e.currentTarget) {
-        setIsShowQuestionForMoney(false)
+        closeAdv(false)
       }
     },
-    [setIsShowQuestionForMoney]
+    [closeAdv]
   )
 
   useEffect(() => {

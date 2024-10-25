@@ -5,7 +5,7 @@ import { Room } from "@/types/RoomType"
 import { useAtomValue, useSetAtom } from "jotai"
 import { isMillionaireAtom, roomAtom, roomIdAtom } from "@/atoms/roomAtoms"
 import { SocketContext } from "../../socketContext"
-import useAlert from "../useAlert"
+import useAlert from "../Alert/useAlert"
 import calcIsMaximized from "./calcIsMaximized"
 
 interface WindowState {
@@ -33,18 +33,19 @@ export default function useDetectMaximize() {
 
   // データの更新とソケット送信
   const postMillionaire = useCallback(async () => {
-    const { data } = await api.post<Room>(
-      `/room/${roomId}/updateConfinedField`,
-      {
+    try {
+      const { data } = await api.patch<Room>(`/room/${roomId}/confined`, {
         fieldName: "isMillionaire",
         newValue: true,
-      }
-    )
+      })
+      setRoom(data)
+    } catch (e) {
+      console.error(e)
+    }
     if (socket !== null && isConnected) {
       socket.emit("updateRoom", { roomId })
       socket.emit("submitAlert", { roomId, alertMsg: alert100msg })
     }
-    setRoom(data)
   }, [isConnected, roomId, setRoom, socket])
 
   const detectMaximize = useCallback(() => {
