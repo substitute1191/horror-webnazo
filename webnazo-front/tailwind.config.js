@@ -361,6 +361,17 @@ export default {
               "rotate3d(1,0,0,360deg) scale(1.7) translate(29px,800px)",
           },
         },
+        bounce: {
+          "0%": {
+            transform: "translateY(0px)",
+          },
+          "10%": {
+            transform: "translateY(-10px)",
+          },
+          "20%": {
+            transform: "translateY(0px)",
+          },
+        },
       },
     },
     fontFamily: {

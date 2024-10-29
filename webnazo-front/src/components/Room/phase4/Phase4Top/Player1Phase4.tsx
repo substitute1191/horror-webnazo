@@ -1,4 +1,4 @@
-import DonationSite from "../DonationSite/Components/DonationAdv"
+import DonationSite from "../DonationSite/Components/DonationSite/DonationAdv"
 import GetMoneyAdv from "../GetMoney/GetMoneyAdv"
 import Memo from "./memo/Memo"
 import useIsShowMemo from "./memo/useIsShowMemo"

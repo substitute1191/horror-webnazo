@@ -1,4 +1,4 @@
-import useDonate from "../Hooks/useDonate"
+import useDonate from "../../Hooks/useDonate"
 import DonationButton from "./DonationButton"
 
 type Props = {

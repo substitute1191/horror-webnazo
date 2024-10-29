@@ -3,16 +3,15 @@ import img3 from "@/assets/image/imprisonment/crayon/背景3.png"
 import img4 from "@/assets/image/imprisonment/crayon/背景4.png"
 import { useCallback, useEffect, useState } from "react"
 import CrayonFamily from "./CrayonFamily"
-import DonationMsg from "./DonationMsg"
-import DonationButtons from "./DonationButtons"
+import DonationMsg from "../DonationSite/DonationMsg"
+import DonationButtons from "../DonationSite/DonationButtons"
 
-export default function Crayon() {
+export default function Crayons() {
   const [crayonImgIdx, setCrayonImgIdx] = useState(0)
 
   const handleImg = useCallback(() => {
-    console.log(crayonImgIdx)
     setCrayonImgIdx((prev) => prev + 1)
-  }, [crayonImgIdx])
+  }, [])
 
   useEffect(() => {
     const timerId = setInterval(() => {

@@ -1,6 +1,6 @@
 import kidsAdv from "@/assets/image/imprisonment/募金広告.jpg"
 import DonationSite from "./DonationSite"
-import useIsShowDonationSite from "../Hooks/useIsShowDonation"
+import useIsShowDonationSite from "../../Hooks/useIsShowDonation"
 
 export default function DonationAdv() {
   const { isShowDonationSite, setIsShowDonationSite } = useIsShowDonationSite()
