@@ -1,7 +1,7 @@
 type Props = {
   text: string
   classNames?: string
-  onClick: () => void
+  onClick?: () => void
 }
 
 export default function DonationButton({ text, classNames, onClick }: Props) {

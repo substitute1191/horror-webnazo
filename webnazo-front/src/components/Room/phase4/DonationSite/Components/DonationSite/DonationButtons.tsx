@@ -1,5 +1,5 @@
-import useDonate from "../../Hooks/useDonate"
-import DonationButton from "./DonationButton"
+import useDonate from "@/components/Room/phase4/DonationSite/Hooks/useDonate"
+import DonationButton from "@/components/Room/phase4/DonationSite/Components/DonationSite/DonationButton"
 
 type Props = {
   classNames?: string
