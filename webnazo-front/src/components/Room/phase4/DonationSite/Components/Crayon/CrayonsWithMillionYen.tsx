@@ -21,7 +21,7 @@ export default function CrayonsWithMillionYen() {
       })
       setRoom(data)
       if (socket !== null && isConnected) {
-        socket.emit("roomUpdated")
+        socket.emit("updateRoom", { roomId })
       }
     } catch (e) {
       console.error(e)

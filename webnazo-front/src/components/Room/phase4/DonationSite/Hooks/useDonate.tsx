@@ -1,4 +1,9 @@
-import { myCharaAtom, roomAtom, roomIdAtom } from "@/atoms/roomAtoms"
+import {
+  isMillionaireAtom,
+  myCharaAtom,
+  roomAtom,
+  roomIdAtom,
+} from "@/atoms/roomAtoms"
 import { SocketContext } from "@/components/Room/socketContext"
 import { Room } from "@/types/RoomType"
 import api from "@/utils/api"
@@ -10,9 +15,11 @@ export default function useDonate() {
   const myChara = useAtomValue(myCharaAtom)
   const setRoom = useSetAtom(roomAtom)
   const { socket, isConnected } = useContext(SocketContext)
+  const isMillionaire = useAtomValue(isMillionaireAtom)
 
   const handleDonate = useCallback(async () => {
     if (myChara === 1) return
+    if (!isMillionaire) return
     try {
       const { data: newRoomData } = await api.patch<Room>(
         `/room/${roomId}/confined`,
@@ -28,7 +35,7 @@ export default function useDonate() {
     if (socket !== null && isConnected) {
       socket.emit("roomUpdated")
     }
-  }, [isConnected, myChara, roomId, setRoom, socket])
+  }, [isConnected, isMillionaire, myChara, roomId, setRoom, socket])
 
   return {
     handleDonate,

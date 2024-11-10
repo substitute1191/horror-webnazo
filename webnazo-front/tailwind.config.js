@@ -105,6 +105,14 @@ export default {
             transform: "translateX(-1px)",
           },
         },
+        "shake-crayon-bg": {
+          "0%": {
+            transform: "translateX(-50%) translateY(-50.5%)",
+          },
+          "100%": {
+            transform: "translateX(-50%) translateY(-49.5%)",
+          },
+        },
         "fadein-up": {
           "0%": {
             transform: "translateY(40px)",
@@ -370,6 +378,39 @@ export default {
           },
           "20%": {
             transform: "translateY(0px)",
+          },
+        },
+        "wobble-face": {
+          "0%": {
+            transform: "rotate(15deg)",
+          },
+          "50%": {
+            transform: "rotate(-15deg)",
+          },
+          "100%": {
+            transform: "rotate(15deg)",
+          },
+        },
+        "skew-face": {
+          "0%": {
+            transform: "skewY(10deg)",
+          },
+          "50%": {
+            transform: "skewY(-10deg)",
+          },
+          "100%": {
+            transform: "skewY(10deg)",
+          },
+        },
+        "neck-break": {
+          "0%": {
+            transform: "translateX(0)",
+          },
+          "1%": {
+            transform: "translateX(-10px) translateY(50px) rotate(-10deg)",
+          },
+          "100%": {
+            transform: "translateX(-340px) translateY(50px) rotate(-407deg)",
           },
         },
       },
