@@ -1,10 +1,10 @@
-import Player1Phase4 from "./Phase4Top/Player1Phase4"
+import Phase4Top from "@/components/Room/phase4/Phase4Top/Phase4Top"
 import { useContext, useEffect } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
-import { SocketContext } from "../socketContext"
-import useFakeCursor from "../phase3/Cursor/useFakeCursor"
-import Alert from "./Alert/Alert"
-import useAlert from "./Alert/useAlert"
+import { SocketContext } from "@/components/Room/socketContext"
+import useFakeCursor from "@/components/Room/phase3/Cursor/useFakeCursor"
+import Alert from "@/components/Room/phase4/Alert/Alert"
+import useAlert from "@/components/Room/phase4/Alert/useAlert"
 
 const Phase4 = () => {
   const { socket, isConnected } = useContext(SocketContext)
@@ -51,7 +51,7 @@ const Phase4 = () => {
   return (
     <div className="relative h-screen w-screen bg-black">
       <Alert />
-      <Player1Phase4 />
+      <Phase4Top />
     </div>
   )
 }
