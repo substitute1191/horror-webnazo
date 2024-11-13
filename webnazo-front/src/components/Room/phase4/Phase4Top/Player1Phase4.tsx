@@ -7,7 +7,7 @@ import useDetectKeyDown from "./useDetectKeys"
 import useDetectMaximize from "./useDetectMaximize"
 import { reachedShopAtom } from "@/atoms/roomAtoms"
 import { useAtomValue } from "jotai"
-import Supermarket from "./Supermarket/Supermarket"
+import Supermarket from "./Supermarket/SupermarketModal"
 
 export default function Player1Phase4() {
   const { isShowMemo, handleClickMemo } = useIsShowMemo()

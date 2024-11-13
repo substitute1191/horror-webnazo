@@ -1,29 +1,25 @@
 import { useEffect, useRef } from "react"
-import useIsShowLabyrinth from "./useIsShowLabyrinth"
-import TileGrid from "./TileGrid"
-import useLabyrinth from "./useLabyrinth"
-import Instruction from "./Instruction"
-import Compass from "@/assets/image/compass.png"
+import useIsShowLabyrinth from "../labyrinth/useIsShowLabyrinth"
+import Supermarket from "./Supermarket"
 
 export default function Labyrinth() {
   const { resetLabyrinth } = useIsShowLabyrinth()
-  const labyrinthbackgroundRef = useRef<HTMLDivElement | null>(null)
-  const labyrinthModalRef = useRef<HTMLDivElement | null>(null)
-  const { keyDownHandler } = useLabyrinth()
+  const supermarketbackgroundRef = useRef<HTMLDivElement | null>(null)
+  const supermarketModalRef = useRef<HTMLDivElement | null>(null)
 
   // モーダル以外の部分がクリックされたらメモを閉じる
   useEffect(() => {
     const handleBackgroundClick = (event: MouseEvent) => {
       if (
-        labyrinthbackgroundRef.current !== null &&
-        labyrinthModalRef.current !== null &&
-        !labyrinthModalRef.current.contains(event.target as Node)
+        supermarketbackgroundRef.current !== null &&
+        supermarketModalRef.current !== null &&
+        !supermarketModalRef.current.contains(event.target as Node)
       ) {
         resetLabyrinth()
       }
     }
 
-    const currentBackgroundRef = labyrinthbackgroundRef.current
+    const currentBackgroundRef = supermarketbackgroundRef.current
     if (currentBackgroundRef !== null) {
       currentBackgroundRef.addEventListener("click", handleBackgroundClick)
     }
@@ -36,26 +32,23 @@ export default function Labyrinth() {
   }, [resetLabyrinth])
 
   useEffect(() => {
-    if (labyrinthModalRef?.current !== null) {
-      labyrinthModalRef.current.focus()
+    if (supermarketModalRef?.current !== null) {
+      supermarketModalRef.current.focus()
     }
   }, [])
 
   return (
     <>
       <div
-        ref={labyrinthbackgroundRef}
+        ref={supermarketbackgroundRef}
         className="fixed inset-0 z-10 h-screen w-screen text-white"
       >
         <div // eslint-disable-line jsx-a11y/no-static-element-interactions
-          ref={labyrinthModalRef}
-          onKeyDown={keyDownHandler}
+          ref={supermarketModalRef}
           tabIndex={0} // eslint-disable-line jsx-a11y/no-noninteractive-tabindex
           className={`fixed left-[50%] top-[50%] z-[15] flex h-2/3 w-4/5 -translate-x-[50%] -translate-y-[50%] items-center justify-around rounded bg-slate-50 px-12 py-8 text-black`}
         >
-          <Instruction />
-          <TileGrid />
-          <img src={Compass} className="w-1/6" alt="" />
+          <Supermarket />
         </div>
       </div>
     </>
