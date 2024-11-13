@@ -11,7 +11,7 @@ export default function PortalGirlHead() {
         <img
           src={girlhead}
           style={{ ...girlFinalStyle }}
-          className="absolute max-w-[100px] -rotate-[407deg]"
+          className="absolute max-w-[100px] -rotate-[507deg]"
           alt=""
         />,
         phase4TopElem

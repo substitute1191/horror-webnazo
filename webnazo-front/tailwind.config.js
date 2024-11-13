@@ -410,7 +410,7 @@ export default {
             transform: "translateX(-10px) translateY(50px) rotate(-10deg)",
           },
           "100%": {
-            transform: "translateX(-340px) translateY(50px) rotate(-407deg)",
+            transform: "translateX(-340px) translateY(50px) rotate(-507deg)",
           },
         },
       },
