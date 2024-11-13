@@ -27,6 +27,8 @@ export default function useRoom() {
   const fetchAndSetRoom = useCallback(async () => {
     if (roomId === undefined) return
     const res = await fetchRoom(roomId)
+    console.log("fetchAndSetRoom called!")
+    console.table(res)
     setRoom(res)
   }, [roomId, setRoom])
 

@@ -8,6 +8,7 @@ const fieldNameSchema = z.object({
 })
 
 export const updateConfinedField = async (req: Request, res: Response) => {
+  console.log("updateConfinedField called")
   const { roomId } = req.params
   const { fieldName, newValue } = fieldNameSchema.parse(req.body)
 
@@ -24,6 +25,8 @@ export const updateConfinedField = async (req: Request, res: Response) => {
       confined: true,
     },
   })
+
+  console.dir(updatedRoom)
 
   res.status(200).send(updatedRoom)
 }

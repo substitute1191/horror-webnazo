@@ -12,7 +12,7 @@ const port = 4000
 app.use(
   cors({
     origin: ["http://localhost:5173", "http://127.0.0.1:5173"],
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    methods: ["GET", "POST", "PATCH", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
   })
@@ -26,6 +26,7 @@ app.use("/api", roomRoutes)
 setupSocketServer(server)
 
 app.use((err: Error, req: Request, res: Response, _next: NextFunction) => {
+  console.error("エラーを検出")
   console.error(err.stack)
 
   res.status(500).json({

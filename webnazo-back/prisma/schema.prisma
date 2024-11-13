@@ -43,6 +43,7 @@ model Confined {
   reachedShop   Boolean
   hasMicrowave  Boolean
   isDonated     Boolean
+  hasStolen     Boolean @default(false)
   hasDice       Boolean
   room          Room    @relation(fields: [roomId], references: [id])
 }
