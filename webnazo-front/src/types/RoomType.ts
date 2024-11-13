@@ -25,6 +25,7 @@ export interface Confined {
   reachedShop: boolean
   hasMicrowave: boolean
   isDonated: boolean
+  hasStolen: boolean
   hasDice: boolean
 }
 

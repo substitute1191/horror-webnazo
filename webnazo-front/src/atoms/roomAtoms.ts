@@ -40,6 +40,7 @@ export const isMillionaireAtom = atomWithStorage("isMillionaire", false)
 export const reachedShopAtom = atomWithStorage("reachedShop", false)
 export const hasMicrowaveAtom = atomWithStorage("hasMicrowave", false)
 export const isDonatedAtom = atomWithStorage("isDonated", false)
+export const hasStolenAtom = atomWithStorage("hasStolen", false)
 export const hasDiceAtom = atomWithStorage("hasDice", false)
 
 export const roomAtom = atom(
@@ -53,6 +54,7 @@ export const roomAtom = atom(
     reachedShop: get(reachedShopAtom),
     hasMicrowave: get(hasMicrowaveAtom),
     isDonated: get(isDonatedAtom),
+    hasStolen: get(hasStolenAtom),
     hasDice: get(hasDiceAtom),
   }),
   (get, set, room: Room) => {
@@ -64,12 +66,19 @@ export const roomAtom = atom(
     }
 
     if (confined !== undefined) {
-      const { isMillionaire, reachedShop, hasMicrowave, isDonated, hasDice } =
-        confined
+      const {
+        isMillionaire,
+        reachedShop,
+        hasMicrowave,
+        isDonated,
+        hasStolen,
+        hasDice,
+      } = confined
       set(isMillionaireAtom, isMillionaire)
       set(reachedShopAtom, reachedShop)
       set(hasMicrowaveAtom, hasMicrowave)
       set(isDonatedAtom, isDonated)
+      set(hasStolenAtom, hasStolen)
       set(hasDiceAtom, hasDice)
     }
 

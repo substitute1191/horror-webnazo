@@ -89,6 +89,13 @@ export function setupSocketServer(httpServer: HttpServer) {
       }
     )
 
+    socket.on(
+      "submitAlert",
+      ({ roomId, alertMsg }: { roomId: string; alertMsg: string }) => {
+        socket.broadcast.to(roomId).emit("receiveAlert", alertMsg)
+      }
+    )
+
     socket.on("disconnect", () => {
       console.log("user disconnected!")
     })
