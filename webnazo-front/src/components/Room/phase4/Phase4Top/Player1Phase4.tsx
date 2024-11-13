@@ -5,10 +5,14 @@ import Memo from "./memo/Memo"
 import useIsShowMemo from "./memo/useIsShowMemo"
 import useDetectKeyDown from "./useDetectKeys"
 import useDetectMaximize from "./useDetectMaximize"
+import { reachedShopAtom } from "@/atoms/roomAtoms"
+import { useAtomValue } from "jotai"
+import Supermarket from "./Supermarket/Supermarket"
 
 export default function Player1Phase4() {
   const { isShowMemo, handleClickMemo } = useIsShowMemo()
   const { isShowLabyrinth, handleClickLabyrinth } = useIsShowLabyrinth()
+  const hasBeenShop = useAtomValue(reachedShopAtom)
 
   useDetectKeyDown()
   useDetectMaximize()
@@ -24,7 +28,13 @@ export default function Player1Phase4() {
         ショッピングセンターへ行く
       </button>
       {isShowMemo === 1 ? <Memo title="◆◆◆◇◇◇◆◆◆" text="memo" /> : null}
-      {isShowLabyrinth === 1 ? <Labyrinth /> : null}
+      {isShowLabyrinth === 1 ? (
+        hasBeenShop ? (
+          <Supermarket />
+        ) : (
+          <Labyrinth />
+        )
+      ) : null}
     </div>
   )
 }

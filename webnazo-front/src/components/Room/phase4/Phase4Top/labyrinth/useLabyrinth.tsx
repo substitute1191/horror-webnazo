@@ -1,10 +1,11 @@
-import { useMemo } from "react"
+import { useEffect, useMemo } from "react"
 import { Point } from "./Point"
 import { useAtom } from "jotai"
-import { currentPointAtom } from "@/atoms/roomAtoms"
+import { currentPointAtom , reachedShopAtom } from "@/atoms/roomAtoms"
 
 const useLabyrinth = () => {
   const [currentPoint, setCurrentPoint] = useAtom(currentPointAtom)
+  const [, setHasBeenShop] = useAtom(reachedShopAtom)
 
   const map = useMemo(
     () => [
@@ -34,6 +35,12 @@ const useLabyrinth = () => {
     ],
     []
   )
+
+  useEffect(() => {
+    if (map[currentPoint.col][currentPoint.row] === "終") {
+      setHasBeenShop(true)
+    }
+  }, [map, currentPoint, setHasBeenShop])
 
   const move = (moveType: string) => {
     let nextPoint
