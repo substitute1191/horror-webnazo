@@ -1,11 +1,18 @@
-import { useEffect, useMemo } from "react"
+import { useContext, useEffect, useMemo } from "react"
 import { Point } from "./Point"
-import { useAtom } from "jotai"
-import { currentPointAtom , reachedShopAtom } from "@/atoms/roomAtoms"
+import { useAtom, useSetAtom } from "jotai"
+import { currentPointAtom, reachedShopAtom, roomAtom } from "@/atoms/roomAtoms"
+import { useParams } from "react-router-dom"
+import { Room } from "@/types/RoomType"
+import api from "@/utils/api"
+import { SocketContext } from "@/components/Room/socketContext"
 
 const useLabyrinth = () => {
   const [currentPoint, setCurrentPoint] = useAtom(currentPointAtom)
   const [, setHasBeenShop] = useAtom(reachedShopAtom)
+  const { roomId } = useParams()
+  const { socket, isConnected } = useContext(SocketContext)
+  const setRoom = useSetAtom(roomAtom)
 
   const map = useMemo(
     () => [
@@ -38,9 +45,18 @@ const useLabyrinth = () => {
 
   useEffect(() => {
     if (map[currentPoint.col][currentPoint.row] === "終") {
-      setHasBeenShop(true)
+      void (async () => {
+        const { data } = await api.patch<Room>(`/room/${roomId}/confined`, {
+          fieldName: "reachedShop",
+          newValue: true,
+        })
+        setRoom(data)
+        if (socket !== null && isConnected) {
+          socket.emit("updateRoom", { roomId })
+        }
+      })()
     }
-  }, [map, currentPoint, setHasBeenShop])
+  }, [map, socket, isConnected, currentPoint, setHasBeenShop, roomId, setRoom])
 
   const move = (moveType: string) => {
     let nextPoint
