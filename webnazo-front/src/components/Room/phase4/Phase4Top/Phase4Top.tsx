@@ -10,6 +10,7 @@ import useDetectMaximize from "@/components/Room/phase4/Phase4Top/useDetectMaxim
 import { reachedShopAtom } from "@/atoms/roomAtoms"
 import { useAtomValue } from "jotai"
 import Supermarket from "./Supermarket/SupermarketModal"
+import SupermarketAdv from "@/assets/image/imprisonment/ショッピングセンター広告.jpg"
 
 export default function Phase4Top() {
   const { isShowMemo, handleClickMemo } = useIsShowMemo()
@@ -26,8 +27,11 @@ export default function Phase4Top() {
       <button className="text-white" onClick={() => handleClickMemo(1)}>
         メモ1を開く
       </button>
-      <button className="text-white" onClick={() => handleClickLabyrinth(1)}>
-        ショッピングセンターへ行く
+      <button
+        onClick={() => handleClickLabyrinth(1)}
+        className="absolute right-0 top-0 block w-[30vw]"
+      >
+        <img src={SupermarketAdv} alt="" />
       </button>
       <PortalGirlHead />
       {isShowMemo === 1 ? <Memo title="◆◆◆◇◇◇◆◆◆" text="memo" /> : null}

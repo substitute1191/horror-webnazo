@@ -40,6 +40,7 @@ export const q2sentenceAtom = atomWithStorage<Record<string, boolean>>(
 export const isMillionaireAtom = atomWithStorage("isMillionaire", false)
 export const reachedShopAtom = atomWithStorage("reachedShop", false)
 export const hasMicrowaveAtom = atomWithStorage("hasMicrowave", false)
+export const isMicrowaveInCartAtom = atomWithStorage("isMicrowaveInCart", false)
 export const isDonatedAtom = atomWithStorage("isDonated", false)
 export const hasStolenAtom = atomWithStorage("hasStolen", false)
 export const hasDiceAtom = atomWithStorage("hasDice", false)
