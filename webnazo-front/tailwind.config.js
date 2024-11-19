@@ -422,6 +422,8 @@ export default {
       ibaraji: ["ibaraji"],
       DelaGothicOne: ["DelaGothicOne"],
       ZeroGothic: ["ZeroGothic"],
+      ad: ["Shrikhand", "serif"],
+      productName: ["Dela Gothic One", "sans-serif"],
     },
   },
   plugins: [],

@@ -22,7 +22,9 @@ const Supermarket = () => {
 
   return (
     <>
-      <header className="flex h-1/5 justify-between rounded-t bg-lime-600 pb-8">
+      <header
+        className={`flex h-1/5 justify-between rounded-t bg-lime-600 pb-8 ${isMicrowaveInCart ? "-scale-x-100 transform" : ""}`}
+      >
         <h1 className="ml-10 pt-8 text-7xl font-extrabold">
           ショッピングセンター
         </h1>
@@ -63,7 +65,7 @@ const Supermarket = () => {
             <li className="border-y py-4 pl-3 hover:bg-yellow-600">サイド３</li>
           </ul>
         </nav>
-        <main className="grid w-5/6 grid-cols-3 gap-x-32 gap-y-8 overflow-scroll overflow-x-hidden rounded-br px-10 pt-8">
+        <main className="grid w-5/6 grid-cols-3 gap-x-16 gap-y-8 overflow-scroll overflow-x-hidden rounded-br px-10 pt-8">
           <Product src={mascot} price={100} name={"ピラミッド"} />
           <Product src={mascot} price={100} name={"ピラミッド"} />
           <Product src={mascot} price={100} name={"ピラミッド"} />
