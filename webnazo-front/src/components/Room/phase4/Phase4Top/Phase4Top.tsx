@@ -7,6 +7,7 @@ import useDetectKeyDown from "@/components/Room/phase4/Phase4Top/hooks/useDetect
 import useDetectMaximize from "@/components/Room/phase4/Phase4Top/hooks/useDetectMaximize"
 import Phase4Mission from "@/components/Room/phase4/Phase4Top/Phase4Mission"
 import { memo1p1 } from "@/components/Room/phase4/Phase4Top/memo/MemoText"
+import GetDiceAdv from "@/components/Room/phase4/GetDice/GetDiceAdv"
 
 export default function Phase4Top() {
   const { isShowMemo } = useIsShowMemo()
@@ -18,6 +19,7 @@ export default function Phase4Top() {
     <div className="text-white" id="phase4Top">
       <GetMoneyAdv />
       <DonationAdv />
+      <GetDiceAdv />
 
       <Phase4Mission />
       {/* 転がった後に残る少女の頭 */}

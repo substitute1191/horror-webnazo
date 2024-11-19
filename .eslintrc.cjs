@@ -68,7 +68,7 @@ module.exports = {
       "error",
       {
         selector: "variable",
-        format: ["camelCase", "PascalCase"],
+        format: ["camelCase", "PascalCase","UPPER_CASE"],
         leadingUnderscore: "allow",
       },
       {
