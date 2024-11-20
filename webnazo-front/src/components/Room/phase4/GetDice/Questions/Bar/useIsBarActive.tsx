@@ -17,31 +17,31 @@ const isBarActiveDerivedAtom = atom(
     set(isBarActiveAtom, newState)
   }
 )
-const q2AnsAtom = atom("15")
+const barNumberAtom = atom("15")
 
 export default function useIsBarActive() {
   const [isBarActive, toggleIsBarActive] = useAtom(isBarActiveDerivedAtom)
-  const [q2Ans, setQ2Ans] = useAtom(q2AnsAtom)
+  const [barNumber, setBarNumber] = useAtom(barNumberAtom)
 
   // バーの状態によって答えを変える
   useEffect(() => {
     if (areArraysEqual(isBarActive, BAR_FIFTEEN)) {
-      setQ2Ans("15")
+      setBarNumber("15")
     } else if (areArraysEqual(isBarActive, BAR_FIVE)) {
-      setQ2Ans("5")
+      setBarNumber("5")
     } else if (areArraysEqual(isBarActive, BAR_ONE)) {
-      setQ2Ans("1")
+      setBarNumber("1")
     } else if (areArraysEqual(isBarActive, BAR_TWO)) {
-      setQ2Ans("2")
+      setBarNumber("2")
     } else {
-      setQ2Ans("?")
+      setBarNumber("?")
     }
-  }, [isBarActive, setQ2Ans])
+  }, [isBarActive, setBarNumber])
 
   return {
     isBarActive,
     toggleIsBarActive,
-    q2Ans,
-    setQ2Ans,
+    barNumber,
+    setBarNumber,
   }
 }
