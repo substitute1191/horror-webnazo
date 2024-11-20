@@ -3,7 +3,7 @@ import { useEffect } from "react"
 import { evaluate } from "mathjs"
 
 const OPERATORS = ["+", "-", "*", "/"]
-const q1AnsAtom = atom(0)
+const expressionAnsAtom = atom(0)
 const baseExpressionAtom = atom(["4", "+", "8", "+", "6", "+", "3"])
 const expressionDerivedAtom = atom(
   (get) => get(baseExpressionAtom),
@@ -19,18 +19,18 @@ const expressionDerivedAtom = atom(
   }
 )
 
-export default function useQ1Ans() {
-  const [q1Ans, setQ1Ans] = useAtom(q1AnsAtom)
+export default function useExpression() {
+  const [expressionAns, setExpressionAns] = useAtom(expressionAnsAtom)
   const [expression, updateExpression] = useAtom(expressionDerivedAtom)
 
   useEffect(() => {
     const newValue = evaluate(expression.join("")) as number
-    setQ1Ans(newValue)
-  }, [expression, setQ1Ans])
+    setExpressionAns(newValue)
+  }, [expression, setExpressionAns])
 
   return {
-    q1Ans,
-    setQ1Ans,
+    expressionAns,
+    setExpressionAns,
     expression,
     updateExpression,
   }

@@ -1,4 +1,4 @@
-import useQ1Ans from "@/components/Room/phase4/GetDice/hooks/Answers/useQ1Ans"
+import useDiceQ1 from "@/components/Room/phase4/GetDice/Questions/Expression/useExpression"
 
 // 引き算、掛け算、割り算は演算子の表示を変える
 function formatOprator(target: string) {
@@ -13,11 +13,11 @@ function formatOprator(target: string) {
   }
 }
 
-export default function Question1() {
-  const { expression, updateExpression } = useQ1Ans()
+export default function Expression() {
+  const { expression, updateExpression } = useDiceQ1()
 
   return (
-    <div className="-mt-12">
+    <div className="">
       {expression.map((term, index) => {
         return (
           <>
