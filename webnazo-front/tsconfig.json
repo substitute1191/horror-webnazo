@@ -19,6 +19,8 @@
       "jest",
       "@testing-library/jest-dom",
       "vite-plugin-svgr/client"
-    ]
+    ],
+    "noEmit": true,
+    "allowImportingTsExtensions": true
   }
 }
