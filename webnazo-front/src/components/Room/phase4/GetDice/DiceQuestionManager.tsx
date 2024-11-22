@@ -23,9 +23,9 @@ export default function DiceQuestionManager() {
       ></button>
       {whichQuestion === 0 ? <CubeNet /> : null}
       {whichQuestion === 1 ? <BarNumber /> : null}
-      {whichQuestion === 2 ? <TV /> : null}
-      {whichQuestion === 3 ? <Expression /> : null}
-      {whichQuestion === 5 ? <LegCount /> : null}
+      {whichQuestion === 2 ? <Expression /> : null}
+      {whichQuestion === 4 ? <LegCount /> : null}
+      {whichQuestion === 5 ? <TV /> : null}
       <button
         className={`absolute right-[5vw] top-[50%] z-20 h-10 w-10 rotate-45 rounded border-r-4 border-t-4 border-slate-400 hover:animate-[hover-r-cursor_0.5s_infinite_ease-out] hover:border-slate-50`}
         onClick={() => handleClick(1)}

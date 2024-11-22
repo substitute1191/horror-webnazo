@@ -69,5 +69,3 @@ export function kanaToNum(kana: string) {
       return "?"
   }
 }
-
-console.log(shiftToDown50Table("カ"))

@@ -5,7 +5,15 @@ import { useEffect } from "react"
 const BAR_FIFTEEN = [true, true, true, true, true, true, true]
 const BAR_FIVE = [false, false, true, true, true, true, true]
 const BAR_ONE = [true, true, false, false, false, false, false]
-const BAR_TWO = [true, true, true, false, false, false, true]
+const BAR_TWO_ARRAYS = [
+  // ひらがなの「に」
+  [true, true, true, false, false, false, true],
+  // 漢字の二
+  [false, false, true, false, true, false, false],
+  [false, false, true, false, false, false, true],
+  [false, false, false, false, true, false, true],
+]
+const BAR_THREE = [false, false, true, false, true, false, true]
 
 const isBarActiveAtom = atom([true, true, true, true, true, true, true])
 // 指定されたindexのtrue/falseを切り替えるアトム
@@ -31,8 +39,13 @@ export default function useIsBarActive() {
       setBarNumber("5")
     } else if (areArraysEqual(isBarActive, BAR_ONE)) {
       setBarNumber("1")
-    } else if (areArraysEqual(isBarActive, BAR_TWO)) {
+    } else if (
+      // 2のパターンは複数あるので1つでも当てはまったら
+      BAR_TWO_ARRAYS.some((barTwo) => areArraysEqual(isBarActive, barTwo))
+    ) {
       setBarNumber("2")
+    } else if (areArraysEqual(isBarActive, BAR_THREE)) {
+      setBarNumber("3")
     } else {
       setBarNumber("?")
     }
