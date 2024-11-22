@@ -4,6 +4,7 @@ import Expression from "@/components/Room/phase4/GetDice/Questions/Expression/Ex
 import BarNumber from "@/components/Room/phase4/GetDice/Questions/Bar/BarNumber"
 import TV from "@/components/Room/phase4/GetDice/Questions/TV/TV"
 import LegCount from "@/components/Room/phase4/GetDice/Questions/LegCount/LegCount"
+import BuildWords from "@/components/Room/phase4/GetDice/Questions/BuildWords/BuildWords"
 
 const QUESTION_COUNT = 7
 
@@ -24,6 +25,7 @@ export default function DiceQuestionManager() {
       {whichQuestion === 0 ? <CubeNet /> : null}
       {whichQuestion === 1 ? <BarNumber /> : null}
       {whichQuestion === 2 ? <Expression /> : null}
+      {whichQuestion === 3 ? <BuildWords /> : null}
       {whichQuestion === 4 ? <LegCount /> : null}
       {whichQuestion === 5 ? <TV /> : null}
       <button
