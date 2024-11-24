@@ -63,7 +63,7 @@ module.exports = {
     ],
     "max-lines-per-function": ["warn", { max: 80, skipBlankLines: true }],
     "max-depth": ["warn", 3],
-    complexity: ["warn", 7],
+    complexity: ["warn", 8],
     "@typescript-eslint/naming-convention": [
       "error",
       {
