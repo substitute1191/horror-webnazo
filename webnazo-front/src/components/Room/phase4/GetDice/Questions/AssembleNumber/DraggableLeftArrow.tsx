@@ -2,9 +2,10 @@ import useWhichDiceQuestion from "@/components/Room/phase4/GetDice/hooks/useWhic
 import { useDraggable } from "@dnd-kit/core"
 
 export default function DraggableLeftArrow() {
-  const { setNodeRef, listeners, attributes, transform } = useDraggable({
-    id: "LeftArrow",
-  })
+  const { setNodeRef, listeners, attributes, transform, isDragging } =
+    useDraggable({
+      id: "LeftArrow",
+    })
 
   const { handleClick } = useWhichDiceQuestion()
   const transformStyle =
@@ -19,8 +20,9 @@ export default function DraggableLeftArrow() {
       {...attributes}
       style={{
         transform: transformStyle,
+        cursor: isDragging ? "grabbing" : "grab",
       }}
-      className={`absolute left-[5vw] top-[50%] z-20 h-10 w-10 -rotate-45 cursor-grab rounded border-l-4 border-t-4 border-slate-200 hover:animate-[hover-l-cursor_0.5s_infinite_ease-out] hover:border-slate-50`}
+      className={`absolute left-[5vw] top-[50%] z-20 h-10 w-10 -rotate-45 rounded border-l-4 border-t-4 border-slate-200 hover:animate-[hover-l-cursor_0.5s_infinite_ease-out] hover:border-slate-50`}
       onClick={() => handleClick(-1)}
     ></button>
   )

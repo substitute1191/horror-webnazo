@@ -18,7 +18,7 @@ export default function AnswerZone() {
         role="button"
         tabIndex={0}
         onClick={handleClickAnsZone}
-        className={`flex h-16 min-w-[360px] items-center justify-center gap-6 rounded-md border border-pink-500 bg-pink-300 bg-opacity-20 px-4 py-2 hover:bg-opacity-30`}
+        className={`flex h-16 min-w-[360px] items-center justify-center gap-6 rounded-md border border-pink-500 bg-pink-300 bg-opacity-20 px-4 py-2 text-blue-500 hover:bg-opacity-30`}
       >
         {ansWords.map((word, idx) => (
           <OwnableWord key={idx} word={word} />

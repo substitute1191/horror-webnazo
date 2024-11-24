@@ -1,3 +1,4 @@
+import { isWClickedAtom } from "@/components/Room/phase4/GetDice/Questions/atom/questionsAtom"
 import {
   ALL_UNUSED_WORDS,
   ansWordsAtom,
@@ -25,6 +26,7 @@ const resetAnsWordsAtom = atom(
     set(ansWordsAtom, [])
     set(unusedWordsAtom, ALL_UNUSED_WORDS)
     set(ownedWordAtom, "")
+    set(isWClickedAtom, false)
   }
 )
 
