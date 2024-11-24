@@ -4,9 +4,9 @@ import api from "@/utils/api"
 import { Room } from "@/types/RoomType"
 import { useAtomValue, useSetAtom } from "jotai"
 import { isMillionaireAtom, roomAtom, roomIdAtom } from "@/atoms/roomAtoms"
-import { SocketContext } from "../../socketContext"
-import useAlert from "../Alert/useAlert"
-import calcIsMaximized from "./calcIsMaximized"
+import { SocketContext } from "@/components/Room/socketContext"
+import useAlert from "@/components/Room/phase4/Alert/useAlert"
+import calcIsMaximized from "@/components/Room/phase4/Phase4Top/calcIsMaximized"
 
 interface WindowState {
   isMaximized: boolean
