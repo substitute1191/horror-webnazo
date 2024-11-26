@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react"
-import useIsShowLabyrinth from "../labyrinth/useIsShowLabyrinth"
+import useIsShowLabyrinth from "./labyrinth/useIsShowLabyrinth"
 import Supermarket from "./Supermarket"
 
 export default function Labyrinth() {
