@@ -1,5 +1,5 @@
-import GetMoneyImgManager from "./GetMoneyImgManager"
-import useCloseAdv from "../hooks/useCloseAdv"
+import GetMoneyImgManager from "@/components/Room/phase4/GetMoney/GetMoneyImgManager"
+import useCloseAdv from "@/components/Room/phase4/hooks/useCloseAdv"
 import useIsShowQuestionForMoney from "@/hooks/useIsShowQuestionForMoney"
 
 export default function QuestionForMoney() {
