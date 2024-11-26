@@ -2,8 +2,14 @@ import {
   hasMicrowaveAtom,
   isMicrowaveInCartAtom,
   isMillionaireAtom,
+  roomAtom,
 } from "@/atoms/roomAtoms"
-import { useAtom } from "jotai"
+import { SocketContext } from "@/components/Room/socketContext"
+import { Room } from "@/types/RoomType"
+import api from "@/utils/api"
+import { useAtom, useSetAtom } from "jotai"
+import { useContext } from "react"
+import { useParams } from "react-router-dom"
 
 export default function SupermarketNav() {
   const [, setHasMicrowave] = useAtom(hasMicrowaveAtom)
@@ -11,11 +17,31 @@ export default function SupermarketNav() {
   const [isMicrowaveInCart, setIsMicrowaveInCart] = useAtom(
     isMicrowaveInCartAtom
   )
+  const { roomId } = useParams()
+  const { socket, isConnected } = useContext(SocketContext)
+  const setRoom = useSetAtom(roomAtom)
 
-  const purchaseMicrowave = () => {
+  const purchaseMicrowave = async () => {
     setHasMicrowave(true)
     setIsMicrowaveInCart(false)
     setIsMillionaire(false)
+
+    try {
+      await api.patch<Room>(`/room/${roomId}/confined`, {
+        fieldName: "hasMicrowave",
+        newValue: true,
+      })
+      const { data } = await api.patch<Room>(`/room/${roomId}/confined`, {
+        fieldName: "isMillionaire",
+        newValue: false,
+      })
+      setRoom(data)
+    } catch (e) {
+      console.error(e)
+    }
+    if (socket !== null && isConnected) {
+      socket.emit("updateRoom", { roomId })
+    }
   }
 
   return (
@@ -27,7 +53,7 @@ export default function SupermarketNav() {
         </li>
         <li className="relative ml-5 hover:text-orange-500">
           <button
-            onClick={purchaseMicrowave}
+            onClick={() => void purchaseMicrowave()}
             disabled={!isMicrowaveInCart}
             className="cursor-pointer"
           >
