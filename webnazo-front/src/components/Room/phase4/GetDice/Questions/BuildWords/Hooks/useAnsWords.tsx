@@ -1,9 +1,9 @@
-import { isWClickedAtom } from "@/components/Room/phase4/GetDice/Questions/atom/questionsAtom"
 import {
   ALL_UNUSED_WORDS,
   ansWordsAtom,
   ownedWordAtom,
   unusedWordsAtom,
+  isWClickedAtom,
 } from "@/components/Room/phase4/GetDice/Questions/BuildWords/atom/wordAtoms"
 import { atom, useAtom, useSetAtom } from "jotai"
 

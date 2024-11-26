@@ -1,4 +1,4 @@
-import { isWClickedAtom } from "@/components/Room/phase4/GetDice/Questions/atom/questionsAtom"
+import { isWClickedAtom } from "@/components/Room/phase4/GetDice/Questions/BuildWords/atom/wordAtoms"
 import useOwnedWord from "@/components/Room/phase4/GetDice/Questions/BuildWords/Hooks/useOwnedWord"
 import { useAtom } from "jotai"
 
