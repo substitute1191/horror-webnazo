@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react"
 import useIsShowLabyrinth from "./labyrinth/useIsShowLabyrinth"
-import Supermarket from "./Supermarket"
+import Supermarket from "./SupermarketSite/Supermarket"
 
 export default function Labyrinth() {
   const { resetLabyrinth } = useIsShowLabyrinth()
