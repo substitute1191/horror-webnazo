@@ -11,22 +11,19 @@ export default function LegCount() {
     <div>
       <div className="flex flex-col items-center">
         <h3 className="text-2xl font-bold">法則性を見破れ！</h3>
-        <p className="text-lg font-thin">
-          ?には単語が隠されています。同一の単語ではありません
-        </p>
       </div>
       <div className="mt-4 flex flex-col items-center text-3xl font-normal">
         <p>
           カメ <RedArrow /> ヨン
         </p>
         <p>
-          カメ <BlueArrow /> ? <RedArrow /> ゼロ
+          カメ <BlueArrow /> サメ <RedArrow /> ゼロ
         </p>
         <p>
           ハト <RedArrow /> ニ
         </p>
         <p>
-          ハト <GreenArrow /> ? <RedArrow /> ニ
+          ハト <GreenArrow /> ヒト <RedArrow /> ニ
         </p>
       </div>
       <LegCountAnswer />

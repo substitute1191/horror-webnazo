@@ -4,7 +4,12 @@ import { useEffect } from "react"
 
 const BAR_FIFTEEN = [true, true, true, true, true, true, true]
 const BAR_FIVE = [false, false, true, true, true, true, true]
-const BAR_ONE = [true, true, false, false, false, false, false]
+const BAR_ONE_ARRAYS = [
+  [true, true, false, false, false, false, false],
+  [false, false, true, false, false, false, false],
+  [false, false, false, false, true, false, false],
+  [false, false, false, false, false, false, true],
+]
 const BAR_TWO_ARRAYS = [
   // ひらがなの「に」
   [true, true, true, false, false, false, true],
@@ -37,7 +42,9 @@ export default function useIsBarActive() {
       setBarNumber("15")
     } else if (areArraysEqual(isBarActive, BAR_FIVE)) {
       setBarNumber("5")
-    } else if (areArraysEqual(isBarActive, BAR_ONE)) {
+    } else if (
+      BAR_ONE_ARRAYS.some((barOne) => areArraysEqual(isBarActive, barOne))
+    ) {
       setBarNumber("1")
     } else if (
       // 2のパターンは複数あるので1つでも当てはまったら
