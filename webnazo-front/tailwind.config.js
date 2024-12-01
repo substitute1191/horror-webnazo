@@ -418,6 +418,7 @@ export default {
     fontFamily: {
       gothic: ["メイリオ", "Yu Gothic"],
       onryou: ["onryou", "sans-serif"],
+      isekai: ["isekai"],
       pop: ['"Yusei Magic"', "cursive"],
       ibaraji: ["ibaraji"],
       DelaGothicOne: ["DelaGothicOne"],

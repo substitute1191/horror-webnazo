@@ -22,6 +22,11 @@
     font-family: ZeroGothic;
     src: url(/public/fonts/ZeroGothic.otf) format(opentype);
   }
+
+  @font-face {
+    font-family: isekai;
+    src: url(/public/fonts/Isego.otf) format(truetype);
+  }
 }
 
 @layer components {

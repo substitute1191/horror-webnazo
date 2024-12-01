@@ -7,9 +7,10 @@ import {
 import { SocketContext } from "@/components/Room/socketContext"
 import { Room } from "@/types/RoomType"
 import api from "@/utils/api"
-import { useAtom, useSetAtom } from "jotai"
+import { atom, useAtom, useSetAtom } from "jotai"
 import { useContext } from "react"
 import { useParams } from "react-router-dom"
+export const pushedButtonAtom = atom("")
 
 export default function SupermarketNav() {
   const [, setHasMicrowave] = useAtom(hasMicrowaveAtom)
@@ -20,8 +21,10 @@ export default function SupermarketNav() {
   const { roomId } = useParams()
   const { socket, isConnected } = useContext(SocketContext)
   const setRoom = useSetAtom(roomAtom)
+  const [, setPushedButton] = useAtom(pushedButtonAtom)
 
   const purchaseMicrowave = async () => {
+    setPushedButton("purchase")
     setHasMicrowave(true)
     setIsMicrowaveInCart(false)
     setIsMillionaire(false)
@@ -47,11 +50,23 @@ export default function SupermarketNav() {
   return (
     <nav className="content-end pt-14">
       <ul className="mr-16 flex list-none justify-around text-2xl">
-        <li className="cursor-pointer hover:text-orange-500">所持金の確認</li>
-        <li className="ml-5 cursor-pointer hover:text-orange-500">
-          カートを見る
+        <li>
+          <button
+            className="cursor-pointer hover:text-yellow-500"
+            onClick={() => setPushedButton("money")}
+          >
+            所持金の確認
+          </button>
         </li>
-        <li className="relative ml-5 hover:text-orange-500">
+        <li>
+          <button
+            className="ml-5 cursor-pointer hover:text-yellow-500"
+            onClick={() => setPushedButton("cart")}
+          >
+            カートを見る
+          </button>
+        </li>
+        <li className="relative ml-5 hover:text-yellow-500">
           <button
             onClick={() => void purchaseMicrowave()}
             disabled={!isMicrowaveInCart}
