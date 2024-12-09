@@ -5,6 +5,7 @@ import useBuildWordsAns from "@/components/Room/phase4/GetDice/Questions/BuildWo
 import useExpression from "@/components/Room/phase4/GetDice/Questions/Expression/useExpression"
 import useLegCountAnswer from "@/components/Room/phase4/GetDice/Questions/LegCount/hooks/useLegCountAnswer"
 import useViewer from "@/components/Room/phase4/GetDice/Questions/TV/useViewer"
+import useMemoFlags from "@/components/Room/phase4/Phase4Top/memo/useMemoFlags"
 import { SocketContext } from "@/components/Room/socketContext"
 import { Room } from "@/types/RoomType"
 import api from "@/utils/api"
@@ -44,6 +45,7 @@ export default function useGetDice() {
   const hasDice = useAtomValue(hasDiceAtom)
   const roomId = useAtomValue(roomIdAtom)
   const { socket, isConnected } = useContext(SocketContext)
+  const { setMemoFlags } = useMemoFlags()
 
   useEffect(() => {
     if (
@@ -62,6 +64,7 @@ export default function useGetDice() {
           newValue: true,
         })
         setRoom(data)
+        setMemoFlags("hasDice")
       }
 
       try {
@@ -87,6 +90,7 @@ export default function useGetDice() {
     isConnected,
     legCountAnswer,
     roomId,
+    setMemoFlags,
     setRoom,
     socket,
     viewer,

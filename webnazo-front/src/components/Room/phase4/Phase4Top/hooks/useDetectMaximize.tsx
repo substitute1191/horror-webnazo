@@ -7,6 +7,7 @@ import { isMillionaireAtom, roomAtom, roomIdAtom } from "@/atoms/roomAtoms"
 import { SocketContext } from "@/components/Room/socketContext"
 import useAlert from "@/components/Room/phase4/Alert/useAlert"
 import calcIsMaximized from "@/components/Room/phase4/Phase4Top/calcIsMaximized"
+import useMemoFlags from "@/components/Room/phase4/Phase4Top/memo/useMemoFlags"
 
 interface WindowState {
   isMaximized: boolean
@@ -30,6 +31,7 @@ export default function useDetectMaximize() {
   const { socket, isConnected } = useContext(SocketContext)
   const { setIsAlert, setAlertMsg } = useAlert()
   const isMillionaire = useAtomValue(isMillionaireAtom)
+  const { setMemoFlags } = useMemoFlags()
 
   // データの更新とソケット送信
   const postMillionaire = useCallback(async () => {
@@ -39,6 +41,8 @@ export default function useDetectMaximize() {
         newValue: true,
       })
       setRoom(data)
+      // 100万円ゲットと共に一部メモを解禁
+      setMemoFlags("isMillionaire")
     } catch (e) {
       console.error(e)
     }
@@ -46,7 +50,7 @@ export default function useDetectMaximize() {
       socket.emit("updateRoom", { roomId })
       socket.emit("submitAlert", { roomId, alertMsg: alert100msg })
     }
-  }, [isConnected, roomId, setRoom, socket])
+  }, [isConnected, roomId, setMemoFlags, setRoom, socket])
 
   const detectMaximize = useCallback(() => {
     const isMaximized = calcIsMaximized(windowState)

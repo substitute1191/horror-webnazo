@@ -6,12 +6,14 @@ import { useContext, useCallback } from "react"
 import { Room } from "@/types/RoomType"
 import bokinbako from "@/assets/image/imprisonment/募金箱「.png"
 import CrayonFamily from "@/components/Room/phase4/DonationSite/Components/Crayon/CrayonFamily"
+import useMemoFlags from "@/components/Room/phase4/Phase4Top/memo/useMemoFlags"
 
 // 100万円を募金されて強奪される前のクレヨンファミリー
 export default function CrayonsWithMillionYen() {
   const roomId = useAtomValue(roomIdAtom)
   const setRoom = useSetAtom(roomAtom)
   const { socket, isConnected } = useContext(SocketContext)
+  const { setMemoFlags } = useMemoFlags()
 
   const handleStealing = useCallback(async () => {
     try {
@@ -20,13 +22,14 @@ export default function CrayonsWithMillionYen() {
         newValue: true,
       })
       setRoom(data)
+      setMemoFlags("hasStolen")
       if (socket !== null && isConnected) {
         socket.emit("updateRoom", { roomId })
       }
     } catch (e) {
       console.error(e)
     }
-  }, [isConnected, roomId, setRoom, socket])
+  }, [isConnected, roomId, setMemoFlags, setRoom, socket])
 
   return (
     <>

@@ -32,12 +32,13 @@ const Phase4 = () => {
   useEffect(() => {
     if (socket !== null && isConnected) {
       socket.on("peerMemoShow", (peerTitle: string) => {
+        console.log("peerMemoShow received!")
         const newPath = `${location.pathname}#${Date.now()}`
-        document.title = peerTitle
         navigate(newPath, {
-          replace: false,
+          replace: true,
           state: {},
         })
+        document.title = peerTitle
       })
     }
 
