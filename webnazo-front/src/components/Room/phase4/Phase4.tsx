@@ -5,6 +5,8 @@ import { SocketContext } from "@/components/Room/socketContext"
 import useFakeCursor from "@/components/Room/phase3/Cursor/useFakeCursor"
 import Alert from "@/components/Room/phase4/Alert/Alert"
 import useAlert from "@/components/Room/phase4/Alert/useAlert"
+import useBGM from "@/SoundManager/useBGM"
+import horrorBGM from "@/assets/sound/imprisonment/疑惑の霧.mp3"
 
 const Phase4 = () => {
   const { socket, isConnected } = useContext(SocketContext)
@@ -12,6 +14,15 @@ const Phase4 = () => {
   const navigate = useNavigate()
   const { setIsHideCursor } = useFakeCursor()
   const { setIsAlert, setAlertMsg } = useAlert()
+  const { play, stop } = useBGM(horrorBGM)
+
+  useEffect(() => {
+    play()
+
+    return () => {
+      stop()
+    }
+  }, [play, stop])
 
   // カーソル表示を元に戻す
   useEffect(() => {

@@ -105,6 +105,17 @@ export default {
             transform: "translateX(-1px)",
           },
         },
+        "shake-y": {
+          "0%,100%": {
+            transform: "translateY(0)",
+          },
+          "20%,60%": {
+            transform: "translateY(1px)",
+          },
+          "40%,80%": {
+            transform: "translateY(-1px)",
+          },
+        },
         "shake-crayon-bg": {
           "0%": {
             transform: "translateX(-50%) translateY(-50.5%)",

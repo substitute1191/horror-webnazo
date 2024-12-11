@@ -14,7 +14,7 @@ export default function MemoList() {
 
   return (
     <div className="">
-      <h3>入手したメモ一覧</h3>
+      <h3 className="font-onryou mt-2 text-2xl">入手したメモ一覧</h3>
       <div className="flex justify-between gap-2 border border-blue-600 bg-blue-400 bg-opacity-30 px-4 py-2">
         {memoFlags.map((memoFlag, idx) => {
           return (
