@@ -7,6 +7,7 @@ import Phase2 from "./phase2/Phase2"
 import useRoom from "./useRoom"
 import Phase3 from "./phase3/Phase3"
 import Phase4 from "./phase4/Phase4"
+import Phase5 from "@/components/Room/phase5/Phase5"
 
 /* eslint-disable complexity */
 const Room = () => {
@@ -21,6 +22,7 @@ const Room = () => {
         {phase === 2 ? <Phase2 /> : null}
         {phase === 3 ? <Phase3 /> : null}
         {phase === 4 ? <Phase4 /> : null}
+        {phase === 5 ? <Phase5 /> : null}
       </div>
     </SocketContext.Provider>
   )

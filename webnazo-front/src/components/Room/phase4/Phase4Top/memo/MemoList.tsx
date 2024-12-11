@@ -20,7 +20,7 @@ export default function MemoList() {
           return (
             <NoteIcon
               key={idx}
-              className={`${memoFlag ? "" : "opacity-20"}`}
+              className={`${memoFlag ? "" : "pointer-events-none opacity-20"}`}
               onClick={() => handleClickMemo(idx + 1)}
             />
           )

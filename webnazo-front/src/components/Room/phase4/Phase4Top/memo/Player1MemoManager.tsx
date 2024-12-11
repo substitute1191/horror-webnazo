@@ -28,14 +28,14 @@ export default function Player1MemoManager() {
   return (
     <>
       {isShowMemo === 1 ? <Memo title={title2p1} text={memo2p1} /> : null}
-      {isShowMemo === 2 ? <Memo title={title9p1} text={memo9p1} /> : null}
+      {isShowMemo === 2 ? <Memo title={title4p1} text={memo4p1} /> : null}
       {isShowMemo === 3 ? <Memo title={title3p1} text={memo3p1} /> : null}
       {isShowMemo === 4 ? <Memo title={title5p1} text={memo5p1} /> : null}
       {isShowMemo === 5 ? <Memo title={title7p1} text={memo7p1} /> : null}
       {isShowMemo === 6 ? <Memo title={title1p1} text={memo1p1} /> : null}
       {isShowMemo === 7 ? <Memo title={title8p1} text={memo8p1} /> : null}
       {isShowMemo === 8 ? <Memo title={title6p1} text={memo6p1} /> : null}
-      {isShowMemo === 9 ? <Memo title={title4p1} text={memo4p1} /> : null}
+      {isShowMemo === 9 ? <Memo title={title9p1} text={memo9p1} /> : null}
     </>
   )
 }

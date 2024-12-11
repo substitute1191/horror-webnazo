@@ -8,7 +8,7 @@ import { useAtomValue } from "jotai"
 import Supermarket from "./Supermarket/SupermarketModal"
 import useDetectKeyDown from "@/components/Room/phase4/Phase4Top/hooks/useDetectKeys"
 import useDetectMaximize from "@/components/Room/phase4/Phase4Top/hooks/useDetectMaximize"
-import Phase4Mission from "@/components/Room/phase4/Phase4Top/Phase4Mission"
+import Phase4Mission from "@/components/Room/phase4/Phase4Top/Mission/Phase4Mission"
 import GetDiceAdv from "@/components/Room/phase4/GetDice/GetDiceAdv"
 import SupermarketAdv from "./Supermarket/SupermarketAdv"
 
