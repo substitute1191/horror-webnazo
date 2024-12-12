@@ -116,6 +116,25 @@ export default {
             transform: "translateY(-1px)",
           },
         },
+        skew: {
+          "0%,100%": {
+            transform: "skew(0deg,0deg)",
+          },
+          "33%": {
+            transform: "skew(15deg,15deg)",
+          },
+          "66%": {
+            transform: "skew(-15deg,15deg)",
+          },
+        },
+        "rotate-char": {
+          "0%": {
+            transform: "rotateZ(0deg)",
+          },
+          "100%": {
+            transform: "rotateZ(360deg)",
+          },
+        },
         "shake-crayon-bg": {
           "0%": {
             transform: "translateX(-50%) translateY(-50.5%)",
@@ -427,6 +446,9 @@ export default {
       },
     },
     fontFamily: {
+      hiragino: ["Hiragino Sans", "ヒラギノ角ゴシック"],
+      MSPgothic: ["MS PGothic"],
+      mincho: ["MS PMincho"],
       gothic: ["メイリオ", "Yu Gothic"],
       onryou: ["onryou", "sans-serif"],
       pop: ['"Yusei Magic"', "cursive"],
