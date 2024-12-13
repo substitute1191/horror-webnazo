@@ -12,10 +12,21 @@ import Phase4Mission from "@/components/Room/phase4/Phase4Top/Mission/Phase4Miss
 import GetDiceAdv from "@/components/Room/phase4/GetDice/GetDiceAdv"
 import SupermarketAdv from "./Supermarket/SupermarketAdv"
 import bg from "@/assets/image/imprisonment/抽象色リバース.gif"
+import { useContext, useEffect } from "react"
+import { Phase4BGMContext } from "@/components/Room/phase4/Phase4BGMProvider"
 
 export default function Phase4Top() {
   const { isShowLabyrinth } = useIsShowLabyrinth()
   const hasBeenShop = useAtomValue(reachedShopAtom)
+  const { playBGM, stopBGM } = useContext(Phase4BGMContext)
+
+  useEffect(() => {
+    playBGM()
+
+    return () => {
+      stopBGM()
+    }
+  }, [playBGM, stopBGM])
 
   useDetectKeyDown()
   useDetectMaximize()
