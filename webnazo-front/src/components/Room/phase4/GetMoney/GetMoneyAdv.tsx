@@ -9,6 +9,7 @@ import {
   myCharaAtom,
 } from "@/atoms/roomAtoms"
 import MillionaireMsg from "./MillionaireMsg"
+import noise from "@/assets/image/imprisonment/n12_周辺減光黒.png"
 
 export default function GetMoneyAdv() {
   const { isShowQuestionForMoney, setIsShowQuestionForMoney } =
@@ -22,10 +23,23 @@ export default function GetMoneyAdv() {
   return (
     <>
       <button className="relative block w-[30vw]" onClick={handleClick}>
+        <img
+          src={noise}
+          className="pointer-events-none absolute z-10 h-[30vh] w-full"
+          alt=""
+        />
         {isMillionaire ? (
-          <img src={adv100clear} alt="" className="object-cover" />
+          <img
+            src={adv100clear}
+            alt=""
+            className="absolute h-[30vh] w-[30vw] object-cover"
+          />
         ) : (
-          <img src={adv100} alt="" className="object-cover" />
+          <img
+            src={adv100}
+            alt=""
+            className="absolute h-[30vh] w-[30vw] object-cover"
+          />
         )}
         {isMillionaire && myChara === 2 && !isDonated ? (
           <MillionaireMsg />

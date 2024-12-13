@@ -18,22 +18,10 @@ export default function ShakeText({ text }: Props) {
           ["text-pink-800"]: randomColor <= 0.25,
         })
 
-        const randomProb = Math.random() % 0.05
-
         return idx % 2 !== 0 ? (
-          <RandomShakeXChar
-            key={idx}
-            char={char}
-            sometime={sometimeColor}
-            probability={randomProb}
-          />
+          <RandomShakeXChar key={idx} char={char} sometime={sometimeColor} />
         ) : (
-          <RandomShakeYChar
-            key={idx}
-            char={char}
-            sometime={sometimeColor}
-            probability={randomProb}
-          />
+          <RandomShakeYChar key={idx} char={char} sometime={sometimeColor} />
         )
       })}
     </>

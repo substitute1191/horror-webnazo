@@ -11,6 +11,7 @@ import useDetectMaximize from "@/components/Room/phase4/Phase4Top/hooks/useDetec
 import Phase4Mission from "@/components/Room/phase4/Phase4Top/Mission/Phase4Mission"
 import GetDiceAdv from "@/components/Room/phase4/GetDice/GetDiceAdv"
 import SupermarketAdv from "./Supermarket/SupermarketAdv"
+import bg from "@/assets/image/imprisonment/抽象色リバース.gif"
 
 export default function Phase4Top() {
   const { isShowLabyrinth } = useIsShowLabyrinth()
@@ -21,6 +22,11 @@ export default function Phase4Top() {
 
   return (
     <div className="text-white" id="phase4Top">
+      <img className="absolute z-0 h-full w-full opacity-40" src={bg} alt="" />
+      {/* <img
+      className="absolute z-[200] w-full h-full pointer-events-none opacity-40"
+      src={fog} 
+      alt="" /> */}
       <GetMoneyAdv />
       <DonationAdv />
       <GetDiceAdv />

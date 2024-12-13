@@ -1,4 +1,5 @@
-import useDynamicRandom from "@/components/Room/phase4/TextAnim/useDynamicRandom"
+import useDynamicRandom from "@/components/Room/phase4/TextAnim/hooks/useDynamicRandom"
+import useRandomFont from "@/components/Room/phase4/TextAnim/hooks/useRandomFont"
 import clsx from "clsx"
 import { useMemo } from "react"
 
@@ -21,10 +22,9 @@ export default function RandomShakeXChar({
 }: Props) {
   // コンポーネント描画時に固定される変数
   const randomNum = useMemo(() => Math.random(), [])
-  const randomFontNum = useMemo(() => Math.random(), [])
-  const randomIntervalNum = useMemo(() => Math.random(), [])
   // コンポーネント描画中も切り替わり続ける変数
   const { dynamicRandom } = useDynamicRandom(interval)
+  const { randomFont } = useRandomFont()
 
   const randomShakeX = clsx({
     ["animate-[shake_0.1s_linear_infinite]"]: randomNum < 0.33,
@@ -33,23 +33,7 @@ export default function RandomShakeXChar({
     ["animate-[shake_1.7s_linear_infinite]"]: randomNum >= 0.66,
   })
 
-  const randomFont = clsx({
-    ["font-MSPGothic"]: randomFontNum > 0.8,
-    ["font-mincho"]: randomFontNum > 0.6,
-    ["font-onryou"]: randomFontNum > 0.4,
-    ["font-pop"]: randomFontNum > 0.2,
-    ["font-ZeroGothic"]: randomFontNum >= 0,
-  })
-
-  const randomInterval = clsx({
-    [500]: randomIntervalNum > 0.8,
-    [800]: randomIntervalNum > 0.6,
-    [1200]: randomIntervalNum > 0.4,
-    [1600]: randomIntervalNum > 0.2,
-    [2000]: randomIntervalNum >= 0,
-  })
-
-  const allClass = clsx(classNames, randomFont, randomInterval, {
+  const allClass = clsx(classNames, randomFont, {
     [sometime]: dynamicRandom < probability,
     [origin]: dynamicRandom >= probability,
   })

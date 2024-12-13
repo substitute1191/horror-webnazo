@@ -1,4 +1,4 @@
-import useDynamicRandom from "@/components/Room/phase4/TextAnim/useDynamicRandom"
+import useDynamicRandom from "@/components/Room/phase4/TextAnim/hooks/useDynamicRandom"
 import clsx from "clsx"
 import { useMemo } from "react"
 

@@ -1,5 +1,5 @@
 import RandomRotateChar from "@/components/Room/phase4/TextAnim/RandomRotateChar"
-import useDynamicRandom from "@/components/Room/phase4/TextAnim/useDynamicRandom"
+import useDynamicRandom from "@/components/Room/phase4/TextAnim/hooks/useDynamicRandom"
 import clsx from "clsx"
 
 type Props = {

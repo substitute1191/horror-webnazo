@@ -1,0 +1,39 @@
+import FlickChar from "@/components/Room/phase4/TextAnim/FlickChar"
+import playbtn from "@/assets/image/imprisonment/再生ボタン.png"
+import HorrorVideo from "@/components/Room/phase4/GetMoney/HorrorVideo"
+import useIsVideoStart from "@/components/Room/phase4/GetMoney/useIsVideoStart"
+
+export default function NoActiveTab() {
+  const { isVideoStart, handleClickPlayBtn } = useIsVideoStart()
+
+  return (
+    <>
+      {isVideoStart ? <HorrorVideo /> : null}
+      <div className="flex flex-col items-center text-white">
+        <h3 className="absolute top-[20%] mt-20 text-4xl font-extrabold">
+          {"見たら死ぬ呪いのビデオを再生する".split("").map((char, idx) => (
+            <FlickChar
+              key={idx}
+              char={char}
+              origin="text-red-700"
+              sometime="text-red-900"
+            />
+          ))}
+        </h3>
+        <button onClick={handleClickPlayBtn}>
+          <img className="mb-12 mt-12 w-40" src={playbtn} alt="" />
+        </button>
+        <div className="text-2xl">
+          {"呪われなければ答えをゲット！".split("").map((char, idx) => (
+            <FlickChar
+              key={idx}
+              char={char}
+              origin="text-yellow-700"
+              sometime="text-yellow-900"
+            />
+          ))}
+        </div>
+      </div>
+    </>
+  )
+}
