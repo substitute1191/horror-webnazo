@@ -1,7 +1,7 @@
 import FlickChar from "@/components/Room/phase4/TextAnim/FlickChar"
 import playbtn from "@/assets/image/imprisonment/再生ボタン.png"
-import HorrorVideo from "@/components/Room/phase4/GetMoney/HorrorVideo"
-import useIsVideoStart from "@/components/Room/phase4/GetMoney/useIsVideoStart"
+import HorrorVideo from "@/components/Room/phase4/GetMoney/Questions/NoActiveTab/HorrorVideo"
+import useIsVideoStart from "@/components/Room/phase4/GetMoney/Questions/NoActiveTab/hooks/useIsVideoStart"
 
 export default function NoActiveTab() {
   const { isVideoStart, handleClickPlayBtn } = useIsVideoStart()
@@ -20,9 +20,12 @@ export default function NoActiveTab() {
             />
           ))}
         </h3>
-        <button onClick={handleClickPlayBtn}>
-          <img className="mb-12 mt-12 w-40" src={playbtn} alt="" />
-        </button>
+        <div className="mb-4 flex h-[20rem] w-[40rem] items-center justify-center rounded bg-black">
+          <button onClick={handleClickPlayBtn}>
+            <img className="w-40" src={playbtn} alt="" />
+          </button>
+        </div>
+
         <div className="text-2xl">
           {"呪われなければ答えをゲット！".split("").map((char, idx) => (
             <FlickChar

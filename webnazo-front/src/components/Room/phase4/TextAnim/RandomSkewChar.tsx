@@ -1,4 +1,5 @@
 import useDynamicRandom from "@/components/Room/phase4/TextAnim/hooks/useDynamicRandom"
+import useRandomFont from "@/components/Room/phase4/TextAnim/hooks/useRandomFont"
 import clsx from "clsx"
 import { useMemo } from "react"
 
@@ -21,7 +22,7 @@ export default function RandomSkewChar({
 }: Props) {
   // コンポーネント描画時に固定される変数
   const randomNum = useMemo(() => Math.random(), [])
-  const randomFontNum = useMemo(() => Math.random(), [])
+  const { randomFont } = useRandomFont()
   // コンポーネント描画中も切り替わり続ける変数
   const { dynamicRandom } = useDynamicRandom(interval)
 
@@ -30,14 +31,6 @@ export default function RandomSkewChar({
     ["animate-[skew_1.7s_linear_infinite]"]: randomNum > 0.5,
     ["animate-[skew_2.3s_linear_infinite]"]: randomNum > 0.25,
     ["animate-[skew_3.9s_linear_infinite]"]: randomNum >= 0,
-  })
-
-  const randomFont = clsx({
-    ["font-MSPGothic"]: randomFontNum > 0.8,
-    ["font-mincho"]: randomFontNum > 0.6,
-    ["font-onryou"]: randomFontNum > 0.4,
-    ["font-pop"]: randomFontNum > 0.2,
-    ["font-ZeroGothic"]: randomFontNum >= 0,
   })
 
   const allClass = clsx(classNames, randomFont, {

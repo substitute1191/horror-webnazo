@@ -16,6 +16,7 @@ export default {
         yumekawa: "url('/src/assets/image/yumekawa.jpg')",
         yumekawa2: "url('/src/assets/image/yumekawa2.jpg')",
         "crayon-bg": "url('/src/assets/image/imprisonment/crayon/背景.png')",
+        "cell-purple": "url('/src/assets/image/imprisonment/cell_purple.gif')",
       },
       transformStyle: {
         "3d": "preserve-3d",
@@ -256,6 +257,20 @@ export default {
           },
           "100%": {
             transform: "scale(1)",
+          },
+        },
+        swing: {
+          "0%,100%": {
+            transform: "rotateZ(-10deg)",
+          },
+          "25%": {
+            transform: "rotateZ(10deg)",
+          },
+          "50%": {
+            transform: "rotateZ(-10deg)",
+          },
+          "75%": {
+            transform: "rotateZ(10deg)",
           },
         },
         blurIn: {

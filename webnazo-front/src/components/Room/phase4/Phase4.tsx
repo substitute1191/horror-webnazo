@@ -52,7 +52,10 @@ const Phase4 = () => {
 
   return (
     <Phase4BGMProvider>
-      <div className="relative h-screen w-screen bg-black">
+      <div
+        className="relative h-screen w-screen overflow-hidden bg-slate-900"
+        id="phase4"
+      >
         <Alert />
         <Phase4Top />
       </div>

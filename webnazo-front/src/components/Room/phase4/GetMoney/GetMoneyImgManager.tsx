@@ -1,10 +1,10 @@
 import nazo5 from "@/assets/image/imprisonment/謎5.jpg"
 import useWhichQuestion from "./hooks/useWhichQuestion"
-import PochiRoom from "./PochiRoom"
-import NEWS from "@/components/Room/phase4/GetMoney/NEWS"
+import PochiRoom from "./Questions/PochiRoom"
+import NEWS from "@/components/Room/phase4/GetMoney/Questions/NEWS"
 import GetMoneyTitle from "@/components/Room/phase4/GetMoney/GetMoneyTitle"
-import PhoneTranslate from "@/components/Room/phase4/GetMoney/PhoneTranslate"
-import NoActiveTab from "@/components/Room/phase4/GetMoney/NoActiveTab"
+import PhoneTranslate from "@/components/Room/phase4/GetMoney/Questions/PhoneTranslate"
+import NoActiveTab from "@/components/Room/phase4/GetMoney/Questions/NoActiveTab/NoActiveTab"
 
 export default function GetMoneyImgManager() {
   const { whichQuestion, handleClick } = useWhichQuestion()
