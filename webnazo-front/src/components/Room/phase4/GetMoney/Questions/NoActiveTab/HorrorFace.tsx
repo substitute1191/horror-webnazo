@@ -4,7 +4,6 @@ import noise from "@/assets/image/imprisonment/apng_noise.png"
 import useSE from "@/SoundManager/useSE"
 import mental from "@/assets/sound/imprisonment/mental_attack3.mp3"
 import { useEffect } from "react"
-import useCountupMsgEnd from "@/components/Room/phase4/GetMoney/Questions/NoActiveTab/hooks/useCountUpMsgEnd"
 import useIsCountdownEnd from "@/components/Room/phase4/GetMoney/Questions/NoActiveTab/hooks/useIsCountdownEnd"
 import useIsCountdownStart from "@/components/Room/phase4/GetMoney/Questions/NoActiveTab/hooks/useIsCountdownStart"
 import useIsVideoStart from "@/components/Room/phase4/GetMoney/Questions/NoActiveTab/hooks/useIsVideoStart"
@@ -13,7 +12,6 @@ import useSequentialMoaiEnd from "@/components/Room/phase4/GetMoney/Questions/No
 
 export default function HorrorFace() {
   const { play, stop } = useSE(mental)
-  const { setCountupMsgEnd } = useCountupMsgEnd()
   const { setIsCountdownStart } = useIsCountdownStart()
   const { setIsCountdownEnd } = useIsCountdownEnd()
   const { setIsVideoStart } = useIsVideoStart()
@@ -30,7 +28,6 @@ export default function HorrorFace() {
 
   useEffect(() => {
     setTimeout(() => {
-      setCountupMsgEnd(false)
       setIsCountdownEnd(false)
       setIsCountdownStart(false)
       setIsVideoStart(false)
@@ -38,7 +35,6 @@ export default function HorrorFace() {
       setMorikumaRate(1)
     }, 1300)
   }, [
-    setCountupMsgEnd,
     setIsCountdownEnd,
     setIsCountdownStart,
     setIsVideoStart,

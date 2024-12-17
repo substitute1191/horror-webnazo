@@ -2,16 +2,20 @@ import FlickChar from "@/components/Room/phase4/TextAnim/FlickChar"
 import playbtn from "@/assets/image/imprisonment/再生ボタン.png"
 import HorrorVideo from "@/components/Room/phase4/GetMoney/Questions/NoActiveTab/HorrorVideo"
 import useIsVideoStart from "@/components/Room/phase4/GetMoney/Questions/NoActiveTab/hooks/useIsVideoStart"
+import useIsSeen from "@/components/Room/phase4/GetMoney/Questions/NoActiveTab/hooks/useIsSeen"
+import useIsPlayedVideo from "@/components/Room/phase4/GetMoney/Questions/NoActiveTab/hooks/useIsPlayedVideo"
 
 export default function NoActiveTab() {
   const { isVideoStart, handleClickPlayBtn } = useIsVideoStart()
+  const { isSeen } = useIsSeen()
+  const { isPlayedVideo } = useIsPlayedVideo()
 
   return (
     <>
       {isVideoStart ? <HorrorVideo /> : null}
       <div className="flex flex-col items-center text-white">
         <h3 className="absolute top-[20%] mt-20 text-4xl font-extrabold">
-          {"見たら死ぬ呪いのビデオを再生する".split("").map((char, idx) => (
+          {"見たら呪われるビデオを再生する".split("").map((char, idx) => (
             <FlickChar
               key={idx}
               char={char}
@@ -27,14 +31,27 @@ export default function NoActiveTab() {
         </div>
 
         <div className="text-2xl">
-          {"呪われなければ答えをゲット！".split("").map((char, idx) => (
-            <FlickChar
-              key={idx}
-              char={char}
-              origin="text-yellow-700"
-              sometime="text-yellow-900"
-            />
-          ))}
+          {!isSeen && isPlayedVideo
+            ? "答えはD"
+                .split("")
+                .map((char, idx) => (
+                  <FlickChar
+                    key={idx}
+                    char={char}
+                    origin="text-yellow-700"
+                    sometime="text-yellow-900"
+                  />
+                ))
+            : "呪われなければ答えをゲット！"
+                .split("")
+                .map((char, idx) => (
+                  <FlickChar
+                    key={idx}
+                    char={char}
+                    origin="text-yellow-700"
+                    sometime="text-yellow-900"
+                  />
+                ))}
         </div>
       </div>
     </>
