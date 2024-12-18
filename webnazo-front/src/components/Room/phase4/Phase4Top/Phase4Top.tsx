@@ -14,6 +14,7 @@ import SupermarketAdv from "./Supermarket/SupermarketAdv"
 import bg from "@/assets/image/imprisonment/抽象色リバース.gif"
 import { useContext, useEffect } from "react"
 import { Phase4BGMContext } from "@/components/Room/phase4/Phase4BGMProvider"
+import RandomSE from "@/components/Room/phase4/Phase4Top/RandomSE"
 
 export default function Phase4Top() {
   const { isShowLabyrinth } = useIsShowLabyrinth()
@@ -33,6 +34,7 @@ export default function Phase4Top() {
 
   return (
     <div className="text-white" id="phase4Top">
+      <RandomSE />
       <img className="absolute z-0 h-full w-full opacity-40" src={bg} alt="" />
       {/* <img
       className="absolute z-[200] w-full h-full pointer-events-none opacity-40"
