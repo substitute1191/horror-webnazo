@@ -15,6 +15,7 @@ import noise300 from "@/assets/sound/imprisonment/300hz_noise.mp3"
 import other_world from "@/assets/sound/imprisonment/other_world.mp3"
 import { useCallback, useEffect, useState } from "react"
 import SE from "@/components/Room/phase4/Phase4Top/SE"
+import useCanPlayRandomSE from "@/components/Room/phase4/Phase4Top/hooks/useCanPlayRandomSE"
 
 const srcList = [
   wind,
@@ -37,17 +38,18 @@ const srcList = [
 export default function RandomSE() {
   const [isPlaying, setIsPlaying] = useState(false)
   const [src, setSrc] = useState("")
+  const { canPlayRandomSE } = useCanPlayRandomSE()
 
   const generateRandom = useCallback(() => {
     const random = Math.random()
-    if (random <= 0.1 && !isPlaying) {
+    if (random <= 0.1 && !isPlaying && canPlayRandomSE) {
       setIsPlaying(true)
       const randomSrc = Math.floor(Math.random() * srcList.length)
       setSrc(srcList[randomSrc])
       const randomSec = Math.floor(2000 + Math.random() * 3000)
       setTimeout(() => setIsPlaying(false), randomSec)
     }
-  }, [isPlaying])
+  }, [canPlayRandomSE, isPlaying])
 
   useEffect(() => {
     const timerId = setInterval(generateRandom, 1000)

@@ -1,5 +1,6 @@
 import useDonate from "@/components/Room/phase4/DonationSite/Hooks/useDonate"
 import DonationButton from "@/components/Room/phase4/DonationSite/Components/DonationSite/DonationButton"
+import useNoHelp from "@/components/Room/phase4/DonationSite/Components/Crayon/Hooks/useNoHelp"
 
 type Props = {
   classNames?: string
@@ -7,6 +8,7 @@ type Props = {
 
 export default function DonationButtons({ classNames }: Props) {
   const { handleDonate } = useDonate()
+  const { toggleNoHelp } = useNoHelp()
 
   return (
     <div
@@ -20,6 +22,7 @@ export default function DonationButtons({ classNames }: Props) {
       <DonationButton
         text={"女の子が死のうと興味が無いので見捨てる"}
         classNames="bg-blue-300"
+        onClick={() => toggleNoHelp()}
       />
     </div>
   )

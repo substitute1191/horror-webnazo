@@ -18,6 +18,8 @@ export default {
         "crayon-bg": "url('/src/assets/image/imprisonment/crayon/背景.png')",
         "cell-purple": "url('/src/assets/image/imprisonment/cell_purple.gif')",
         "memo-paper": "url('/src/assets/image/imprisonment/紙.jpg')",
+        crayongirlhead:
+          "url('/src/assets/image/imprisonment/crayon/クレヨンガール顔.png')",
       },
       transformStyle: {
         "3d": "preserve-3d",
@@ -458,6 +460,10 @@ export default {
           "100%": {
             transform: "translateX(-340px) translateY(50px) rotate(-507deg)",
           },
+        },
+        "slide-crayon": {
+          "0%": { transform: "translateX(0) translateY(0)" },
+          "100%": { transform: "translateX(-200px) translateY(-200px)" },
         },
       },
     },

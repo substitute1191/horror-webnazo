@@ -12,7 +12,7 @@ export default function GetDiceAdv() {
     <>
       <button
         onClick={() => setIsShowQuestionForDice(true)}
-        className="absolute bottom-0 right-0 h-[30vh] w-[30vw]"
+        className="absolute bottom-0 right-0 h-[36vh] w-[30vw]"
       >
         <img src={dark} className="absolute h-full w-full" alt="" />
         <img src={noise} className="absolute h-full w-full" alt="" />

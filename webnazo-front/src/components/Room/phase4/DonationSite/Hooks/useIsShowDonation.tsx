@@ -1,6 +1,6 @@
 import { atom, useAtom } from "jotai"
 
-const isShowDonationSiteAtom = atom(false)
+export const isShowDonationSiteAtom = atom(false)
 
 export default function useIsShowDonationSite() {
   const [isShowDonationSite, setIsShowDonationSite] = useAtom(

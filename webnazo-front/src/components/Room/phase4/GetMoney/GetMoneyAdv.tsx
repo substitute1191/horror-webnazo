@@ -25,21 +25,17 @@ export default function GetMoneyAdv() {
       <button className="relative block w-[30vw]" onClick={handleClick}>
         <img
           src={noise}
-          className="pointer-events-none absolute z-10 h-[30vh] w-full"
+          className="pointer-events-none absolute z-10 h-[36vh] w-[30vw]"
           alt=""
         />
         {isMillionaire ? (
           <img
             src={adv100clear}
             alt=""
-            className="absolute h-[30vh] w-[30vw] object-cover"
+            className="absolute h-[36vh] w-[30vw]"
           />
         ) : (
-          <img
-            src={adv100}
-            alt=""
-            className="absolute h-[30vh] w-[30vw] object-cover"
-          />
+          <img src={adv100} alt="" className="absolute h-[36vh] w-[30vw]" />
         )}
         {isMillionaire && myChara === 2 && !isDonated ? (
           <MillionaireMsg />

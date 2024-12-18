@@ -8,7 +8,7 @@ export default function SupermarketAdv() {
   return (
     <button
       onClick={() => handleClickLabyrinth(1)}
-      className="absolute right-0 top-0 block h-[30vh] w-[30vw]"
+      className="absolute right-0 top-0 block h-[36vh] w-[30vw]"
     >
       <img src={dark} alt="" className="absolute h-full w-full" />
       <img src={noise} alt="" className="absolute h-full w-full" />
