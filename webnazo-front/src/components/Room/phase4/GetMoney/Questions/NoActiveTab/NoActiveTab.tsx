@@ -14,7 +14,7 @@ export default function NoActiveTab() {
     <>
       {isVideoStart ? <HorrorVideo /> : null}
       <div className="flex flex-col items-center text-white">
-        <h3 className="absolute top-[20%] mt-20 text-4xl font-extrabold">
+        <h3 className="absolute top-[20%] mt-12 text-4xl font-extrabold">
           {"見たら呪われるビデオを再生する".split("").map((char, idx) => (
             <FlickChar
               key={idx}

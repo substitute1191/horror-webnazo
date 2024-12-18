@@ -19,9 +19,13 @@ export default function ShakeText({ text }: Props) {
         })
 
         return idx % 2 !== 0 ? (
-          <RandomShakeXChar key={idx} char={char} sometime={sometimeColor} />
+          <RandomShakeXChar key={idx} sometime={sometimeColor}>
+            {char}
+          </RandomShakeXChar>
         ) : (
-          <RandomShakeYChar key={idx} char={char} sometime={sometimeColor} />
+          <RandomShakeYChar key={idx} sometime={sometimeColor}>
+            {char}
+          </RandomShakeYChar>
         )
       })}
     </>

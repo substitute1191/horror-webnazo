@@ -17,6 +17,7 @@ export default {
         yumekawa2: "url('/src/assets/image/yumekawa2.jpg')",
         "crayon-bg": "url('/src/assets/image/imprisonment/crayon/背景.png')",
         "cell-purple": "url('/src/assets/image/imprisonment/cell_purple.gif')",
+        "memo-paper": "url('/src/assets/image/imprisonment/紙.jpg')",
       },
       transformStyle: {
         "3d": "preserve-3d",
@@ -467,8 +468,8 @@ export default {
       gothic: ["メイリオ", "Yu Gothic"],
       onryou: ["onryou", "sans-serif"],
       pop: ['"Yusei Magic"', "cursive"],
-      ibaraji: ["ibaraji"],
-      DelaGothicOne: ["DelaGothicOne"],
+      ibaraji: ["ibaraji", "MS PGothic"],
+      DelaGothicOne: ["DelaGothicOne", "MS PGothic"],
       ZeroGothic: ["ZeroGothic"],
       ad: ["Shrikhand", "serif"],
       productName: ["Dela Gothic One", "sans-serif"],

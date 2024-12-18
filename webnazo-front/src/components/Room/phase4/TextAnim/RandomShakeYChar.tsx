@@ -4,7 +4,7 @@ import clsx from "clsx"
 import { useMemo } from "react"
 
 type Props = {
-  char: string
+  children: React.ReactNode
   classNames?: string
   origin?: string
   sometime?: string
@@ -13,7 +13,7 @@ type Props = {
 }
 
 export default function RandomShakeYChar({
-  char, // 表示する文字
+  children, // 表示する文字
   classNames, // 設定したいclassNamesがあれば
   origin = "text-white", // 基本的な色
   sometime = "text-red-600", // 時々差し替える色
@@ -39,6 +39,8 @@ export default function RandomShakeYChar({
   })
 
   return (
-    <span className={clsx("inline-block", randomShakeY, allClass)}>{char}</span>
+    <span className={clsx("inline-block", randomShakeY, allClass)}>
+      {children}
+    </span>
   )
 }

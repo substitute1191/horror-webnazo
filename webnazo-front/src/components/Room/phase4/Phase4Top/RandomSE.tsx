@@ -40,7 +40,6 @@ export default function RandomSE() {
 
   const generateRandom = useCallback(() => {
     const random = Math.random()
-    console.log("random: ", random)
     if (random <= 0.1 && !isPlaying) {
       setIsPlaying(true)
       const randomSrc = Math.floor(Math.random() * srcList.length)
