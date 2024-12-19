@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { atom } from "jotai"
 import { atomWithStorage } from "jotai/utils"
 import { Room } from "@/types/RoomType"

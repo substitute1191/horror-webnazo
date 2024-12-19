@@ -1,3 +1,6 @@
+/* eslint-disable max-lines */
+/* eslint-disable complexity */
+/* eslint-disable max-lines-per-function */
 import { useContext, useEffect, useMemo } from "react"
 import { Point } from "./Point"
 import { useAtom, useSetAtom } from "jotai"
@@ -94,6 +97,7 @@ const useLabyrinth = () => {
   }
 
   const keyDownHandler = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    e.preventDefault()
     switch (e.code) {
       case "KeyW":
       case "ArrowUp":

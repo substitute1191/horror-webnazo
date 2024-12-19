@@ -1,4 +1,5 @@
 import { atom, useAtom } from "jotai"
+import { atomWithStorage } from "jotai/utils"
 
 export type TriggerType =
   | "isMillionaire"
@@ -6,7 +7,7 @@ export type TriggerType =
   | "hasStolen"
   | "hasDice"
 
-const memoFlagsAtom = atom([
+const memoFlagsAtom = atomWithStorage("memoFlags", [
   true,
   false,
   false,

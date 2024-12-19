@@ -8,7 +8,7 @@ const toggleNoHelpAtom = atom(
   (_get, set) => {
     set(noHelpAtom, true)
     set(isShowDonationSiteAtom, false)
-    setTimeout(() => set(noHelpAtom, false), 3200)
+    setTimeout(() => set(noHelpAtom, false), 3000)
   }
 )
 
