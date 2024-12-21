@@ -461,9 +461,93 @@ export default {
             transform: "translateX(-340px) translateY(50px) rotate(-507deg)",
           },
         },
+        "neck-rotate": {
+          "0%": {
+            transform: "rotateZ(0deg)",
+          },
+          "100%": {
+            transform: "rotateZ(170deg)",
+          },
+        },
+        "neck-rotate2": {
+          "0%": {
+            transform: "rotateZ(0deg)",
+          },
+          "100%": {
+            transform: "rotateZ(-100deg)",
+          },
+        },
+        "neck-rotate3": {
+          "0%": {
+            transform: "rotateZ(0deg)",
+          },
+          "100%": {
+            transform: "rotateZ(75deg)",
+          },
+        },
+        "body-falldown": {
+          "0%": {
+            transform: "rotateX(0deg)",
+          },
+          "100%": {
+            transform: "rotateX(120deg)",
+          },
+        },
+        "body-falldown-backward": {
+          "0%": {
+            transform: "rotateX(0deg)",
+          },
+          "100%": {
+            transform: "rotateX(-120deg)",
+          },
+        },
         "slide-crayon": {
           "0%": { transform: "translateX(0) translateY(0)" },
           "100%": { transform: "translateX(-200px) translateY(-200px)" },
+        },
+        "scale-anim1": {
+          "0%,100%": {
+            transform: "scale(0.9)",
+          },
+          "25%": {
+            transform: "scale(1.1)",
+          },
+          "50%": {
+            transform: "scale(0.9)",
+          },
+          "75%": {
+            transform: "scale(1.1)",
+          },
+        },
+        "scale-anim2": {
+          "0%,100%": {
+            transform: "scale(1.3)",
+          },
+          "25%": {
+            transform: "scale(0.7)",
+          },
+          "50%": {
+            transform: "scale(1.3)",
+          },
+          "75%": {
+            transform: "scale(0.7)",
+          },
+        },
+        "scaleup-mama": {
+          "0%": {
+            transform: "scale(1) rotateZ(-90deg)",
+          },
+          "100%": {
+            transform: "scale(20) rotateZ(-90deg)",
+          },
+        },
+        "scaleup-mama-body": {
+          "0%": {
+            transform: "scale(1)",
+          },
+          "100%": {
+            transform: "scale(25)",
+          },
         },
       },
     },

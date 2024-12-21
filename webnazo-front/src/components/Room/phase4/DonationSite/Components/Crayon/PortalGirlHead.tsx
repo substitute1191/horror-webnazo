@@ -3,9 +3,8 @@ import girlhead from "@/assets/image/imprisonment/crayon/クレヨンガール�
 
 export default function PortalGirlHead() {
   const { isGirlAnimEnd, girlFinalStyle } = useGirlAnimEnd()
-  const phase4TopElem = document.getElementById("phase4Top")
 
-  return isGirlAnimEnd && phase4TopElem !== null ? (
+  return isGirlAnimEnd ? (
     <img
       src={girlhead}
       style={{ ...girlFinalStyle }}

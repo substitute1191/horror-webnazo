@@ -10,6 +10,7 @@ import CrayonsAfterDonation from "@/components/Room/phase4/DonationSite/Componen
 import useGirlDeathState from "@/components/Room/phase4/DonationSite/Components/Crayon/Hooks/useGirlDeathState"
 import { Phase4BGMContext } from "@/components/Room/phase4/Phase4BGMProvider"
 import useCanPlayRandomSE from "@/components/Room/phase4/Phase4Top/hooks/useCanPlayRandomSE"
+import GirlDyingNoise from "@/components/Room/phase4/DonationSite/Components/DonationSite/GirlDyingNoise"
 
 export default function DonationSite() {
   const { setIsShowDonationSite } = useIsShowDonationSite()
@@ -49,6 +50,7 @@ export default function DonationSite() {
       <div
         className={`fixed left-[50%] top-[50%] z-[15] flex h-[85vh] w-[85vw] -translate-x-[50%] -translate-y-[50%] rounded bg-slate-50 px-12 py-8 text-black`}
       >
+        {isGirlDying ? <GirlDyingNoise /> : null}
         {isDonated ? <CrayonsAfterDonation /> : <Crayons />}
       </div>
     </div>
