@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react"
 import useIsShowLabyrinth from "./labyrinth/useIsShowLabyrinth"
 import Supermarket from "./SupermarketSite/Supermarket"
 
-export default function Labyrinth() {
+export default function SupermarketModal() {
   const { resetLabyrinth } = useIsShowLabyrinth()
   const supermarketbackgroundRef = useRef<HTMLDivElement | null>(null)
   const supermarketModalRef = useRef<HTMLDivElement | null>(null)
