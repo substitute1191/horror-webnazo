@@ -6,12 +6,15 @@ import Instruction from "./Instruction"
 import Compass from "@/assets/image/compass.png"
 import walk from "@/assets/image/imprisonment/walk.gif"
 import TextShakeTiltScale from "@/components/Room/phase4/TextAnim/TextShakeTiltScale"
+import useIsShowJumpScare from "@/components/Room/phase4/Supermarket/labyrinth/useisShowJumpScare"
+import MissJumpScares from "@/components/Room/phase4/Supermarket/labyrinth/JumpScare/MissJumpScares"
 
 export default function Player1Labyrinth() {
   const { resetLabyrinth } = useIsShowLabyrinth()
   const labyrinthbackgroundRef = useRef<HTMLDivElement | null>(null)
   const labyrinthModalRef = useRef<HTMLDivElement | null>(null)
   const { keyDownHandler } = useLabyrinth()
+  const { isShowJumpScare } = useIsShowJumpScare()
 
   // モーダル以外の部分がクリックされたらメモを閉じる
   useEffect(() => {
@@ -45,6 +48,7 @@ export default function Player1Labyrinth() {
 
   return (
     <>
+      {isShowJumpScare ? <MissJumpScares /> : null}
       <div
         ref={labyrinthbackgroundRef}
         className="fixed inset-0 z-10 h-screen w-screen text-white"

@@ -10,6 +10,26 @@ import { Room } from "@/types/RoomType"
 import api from "@/utils/api"
 import { SocketContext } from "@/components/Room/socketContext"
 import useMemoFlags from "@/components/Room/phase4/Phase4Top/memo/useMemoFlags"
+import useIsShowJumpScare from "@/components/Room/phase4/Supermarket/labyrinth/useisShowJumpScare"
+
+const stopChars = [
+  "色",
+  "欲",
+  "未",
+  "困",
+  "寝",
+  "手",
+  "怯",
+  "総",
+  "頼",
+  "駄",
+  "話",
+  "法",
+  "酸",
+  "亜",
+  "平",
+  "炉",
+]
 
 const useLabyrinth = () => {
   const [currentPoint, setCurrentPoint] = useAtom(currentPointAtom)
@@ -18,6 +38,7 @@ const useLabyrinth = () => {
   const { socket, isConnected } = useContext(SocketContext)
   const setRoom = useSetAtom(roomAtom)
   const { setMemoFlags } = useMemoFlags()
+  const { toggleIsShowJumpScare } = useIsShowJumpScare()
 
   const map = useMemo(
     () => [
@@ -91,8 +112,17 @@ const useLabyrinth = () => {
       default:
         nextPoint = currentPoint
     }
-    if (map[nextPoint.col][nextPoint.row] !== "止") {
+    const currentChar = map[nextPoint.col][nextPoint.row]
+    if (currentChar !== "止") {
       setCurrentPoint(nextPoint)
+    }
+    // ジャンプスケアを出してスタートに戻す文字のリストに含まれているか
+    if (stopChars.includes(currentChar)) {
+      const randomSec = Math.floor(Math.random() * 400) + 100
+      setTimeout(() => {
+        setCurrentPoint(new Point(1, 9))
+        toggleIsShowJumpScare()
+      }, randomSec)
     }
   }
 

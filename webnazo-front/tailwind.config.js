@@ -549,6 +549,38 @@ export default {
             transform: "scale(25)",
           },
         },
+        "move-updown": {
+          "0%,100%": {
+            transform: "translateY(500px)",
+          },
+          "50%": {
+            transform: "translateY(-500px)",
+          },
+        },
+        "move-rightleft": {
+          "0%,100%": {
+            transform: "translateX(500px)",
+          },
+          "50%": {
+            transform: "translateX(-500px)",
+          },
+        },
+        "move-diagonal": {
+          "0%,100%": {
+            transform: "translate(500px,500px)",
+          },
+          "50%": {
+            transform: "translate(-500px,-500px)",
+          },
+        },
+        rotation: {
+          "0%,100%": {
+            transform: "rotate(0)",
+          },
+          "50%": {
+            transform: "rotate(180deg)",
+          },
+        },
       },
     },
     fontFamily: {

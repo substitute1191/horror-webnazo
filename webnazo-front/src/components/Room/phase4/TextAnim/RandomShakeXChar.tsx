@@ -1,14 +1,9 @@
-import useRandomFont from "@/components/Room/phase4/TextAnim/hooks/useRandomFont"
 import clsx from "clsx"
 import { useMemo } from "react"
 
 type Props = {
   children: React.ReactNode
   classNames?: string
-  origin?: string
-  sometime?: string
-  probability?: number
-  interval?: number
 }
 
 export default function RandomShakeXChar({
@@ -17,7 +12,6 @@ export default function RandomShakeXChar({
 }: Props) {
   // コンポーネント描画時に固定される変数
   const randomNum = useMemo(() => Math.random(), [])
-  const { randomFont } = useRandomFont()
 
   const randomShakeX = clsx({
     ["animate-[shake_0.1s_linear_infinite]"]: randomNum < 0.33,
@@ -26,10 +20,8 @@ export default function RandomShakeXChar({
     ["animate-[shake_1.7s_linear_infinite]"]: randomNum >= 0.66,
   })
 
-  const allClass = clsx(classNames, randomFont)
-
   return (
-    <span className={clsx("inline-block", randomShakeX, allClass)}>
+    <span className={clsx("inline-block", classNames, randomShakeX)}>
       {children}
     </span>
   )
