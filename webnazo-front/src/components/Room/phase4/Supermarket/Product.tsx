@@ -1,9 +1,12 @@
 import { isMillionaireAtom, isMicrowaveInCartAtom } from "@/atoms/roomAtoms"
+import RandomFont from "@/components/Room/phase4/TextAnim/RandomFont"
+import RandomScaleAnim from "@/components/Room/phase4/TextAnim/RandomScaleAnim"
+import TextShakeTiltScale from "@/components/Room/phase4/TextAnim/TextShakeTiltScale"
 import { useAtom, useAtomValue } from "jotai"
 
 interface SrcType {
   src: string
-  price: number
+  price: string
   name: string
 }
 
@@ -21,10 +24,18 @@ export default function Product(props: SrcType) {
   return (
     <div className="flex flex-col p-5 hover:bg-pink-200">
       <img src={props.src} alt="" className="mb-4" />
-      <h2 className="font-productName text-3xl">{props.name}</h2>
+      <h2 className="font-productName text-3xl font-bold text-white">
+        <TextShakeTiltScale text={props.name} />
+      </h2>
       <p className="mt-2 self-end">
         <span className="font-ad text-5xl font-extrabold text-red-500">
-          {Number(props.price).toLocaleString()}
+          {props.price.split("").map((char, idx) => {
+            return (
+              <RandomFont key={idx}>
+                <RandomScaleAnim>{char}</RandomScaleAnim>
+              </RandomFont>
+            )
+          })}
         </span>
         <span className="font-gothic ml-3 text-xl font-bold">円</span>
       </p>
