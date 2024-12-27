@@ -42,5 +42,5 @@ export default function useLegCountAnswer() {
     solveLegCount()
   }, [solveLegCount, droppedItems])
 
-  return legCountAnswer
+  return { legCountAnswer }
 }

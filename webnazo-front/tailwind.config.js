@@ -16,6 +16,10 @@ export default {
         yumekawa: "url('/src/assets/image/yumekawa.jpg')",
         yumekawa2: "url('/src/assets/image/yumekawa2.jpg')",
         "crayon-bg": "url('/src/assets/image/imprisonment/crayon/背景.png')",
+        "cell-purple": "url('/src/assets/image/imprisonment/cell_purple.gif')",
+        "memo-paper": "url('/src/assets/image/imprisonment/紙.jpg')",
+        crayongirlhead:
+          "url('/src/assets/image/imprisonment/crayon/クレヨンガール顔.png')",
       },
       transformStyle: {
         "3d": "preserve-3d",
@@ -103,6 +107,36 @@ export default {
           },
           "40%,80%": {
             transform: "translateX(-1px)",
+          },
+        },
+        "shake-y": {
+          "0%,100%": {
+            transform: "translateY(0)",
+          },
+          "20%,60%": {
+            transform: "translateY(1px)",
+          },
+          "40%,80%": {
+            transform: "translateY(-1px)",
+          },
+        },
+        skew: {
+          "0%,100%": {
+            transform: "skew(0deg,0deg)",
+          },
+          "33%": {
+            transform: "skew(15deg,15deg)",
+          },
+          "66%": {
+            transform: "skew(-15deg,15deg)",
+          },
+        },
+        "rotate-char": {
+          "0%": {
+            transform: "rotateZ(0deg)",
+          },
+          "100%": {
+            transform: "rotateZ(360deg)",
           },
         },
         "shake-crayon-bg": {
@@ -226,6 +260,20 @@ export default {
           },
           "100%": {
             transform: "scale(1)",
+          },
+        },
+        swing: {
+          "0%,100%": {
+            transform: "rotateZ(-10deg)",
+          },
+          "25%": {
+            transform: "rotateZ(10deg)",
+          },
+          "50%": {
+            transform: "rotateZ(-10deg)",
+          },
+          "75%": {
+            transform: "rotateZ(10deg)",
           },
         },
         blurIn: {
@@ -413,14 +461,137 @@ export default {
             transform: "translateX(-340px) translateY(50px) rotate(-507deg)",
           },
         },
+        "neck-rotate": {
+          "0%": {
+            transform: "rotateZ(0deg)",
+          },
+          "100%": {
+            transform: "rotateZ(170deg)",
+          },
+        },
+        "neck-rotate2": {
+          "0%": {
+            transform: "rotateZ(0deg)",
+          },
+          "100%": {
+            transform: "rotateZ(-100deg)",
+          },
+        },
+        "neck-rotate3": {
+          "0%": {
+            transform: "rotateZ(0deg)",
+          },
+          "100%": {
+            transform: "rotateZ(75deg)",
+          },
+        },
+        "body-falldown": {
+          "0%": {
+            transform: "rotateX(0deg)",
+          },
+          "100%": {
+            transform: "rotateX(120deg)",
+          },
+        },
+        "body-falldown-backward": {
+          "0%": {
+            transform: "rotateX(0deg)",
+          },
+          "100%": {
+            transform: "rotateX(-120deg)",
+          },
+        },
+        "slide-crayon": {
+          "0%": { transform: "translateX(0) translateY(0)" },
+          "100%": { transform: "translateX(-200px) translateY(-200px)" },
+        },
+        "scale-anim1": {
+          "0%,100%": {
+            transform: "scale(0.9)",
+          },
+          "25%": {
+            transform: "scale(1.1)",
+          },
+          "50%": {
+            transform: "scale(0.9)",
+          },
+          "75%": {
+            transform: "scale(1.1)",
+          },
+        },
+        "scale-anim2": {
+          "0%,100%": {
+            transform: "scale(1.3)",
+          },
+          "25%": {
+            transform: "scale(0.7)",
+          },
+          "50%": {
+            transform: "scale(1.3)",
+          },
+          "75%": {
+            transform: "scale(0.7)",
+          },
+        },
+        "scaleup-mama": {
+          "0%": {
+            transform: "scale(1) rotateZ(-90deg)",
+          },
+          "100%": {
+            transform: "scale(20) rotateZ(-90deg)",
+          },
+        },
+        "scaleup-mama-body": {
+          "0%": {
+            transform: "scale(1)",
+          },
+          "100%": {
+            transform: "scale(25)",
+          },
+        },
+        "move-updown": {
+          "0%,100%": {
+            transform: "translateY(500px)",
+          },
+          "50%": {
+            transform: "translateY(-500px)",
+          },
+        },
+        "move-rightleft": {
+          "0%,100%": {
+            transform: "translateX(500px)",
+          },
+          "50%": {
+            transform: "translateX(-500px)",
+          },
+        },
+        "move-diagonal": {
+          "0%,100%": {
+            transform: "translate(500px,500px)",
+          },
+          "50%": {
+            transform: "translate(-500px,-500px)",
+          },
+        },
+        rotation: {
+          "0%,100%": {
+            transform: "rotate(0)",
+          },
+          "50%": {
+            transform: "rotate(180deg)",
+          },
+        },
       },
     },
     fontFamily: {
+      hiragino: ["Hiragino Sans", "ヒラギノ角ゴシック"],
+      MSPgothic: ["MS PGothic"],
+      mincho: ["MS PMincho"],
       gothic: ["メイリオ", "Yu Gothic"],
       onryou: ["onryou", "sans-serif"],
       pop: ['"Yusei Magic"', "cursive"],
-      ibaraji: ["ibaraji"],
-      DelaGothicOne: ["DelaGothicOne"],
+      ibaraji: ["ibaraji", "MS PGothic"],
+      DelaGothicOne: ["DelaGothicOne", "MS PGothic"],
       ZeroGothic: ["ZeroGothic"],
       ad: ["Shrikhand", "serif"],
       productName: ["Dela Gothic One", "sans-serif"],

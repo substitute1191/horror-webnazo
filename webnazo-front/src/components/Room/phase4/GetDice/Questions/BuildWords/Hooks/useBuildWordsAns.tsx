@@ -14,6 +14,8 @@ export default function useBuildWordsAns() {
       setBuildWordsAns("0")
     } else if (ansStr === "TWO") {
       setBuildWordsAns("2")
+    } else if (ansStr === "X") {
+      setBuildWordsAns("10")
     } else {
       setBuildWordsAns("?")
     }

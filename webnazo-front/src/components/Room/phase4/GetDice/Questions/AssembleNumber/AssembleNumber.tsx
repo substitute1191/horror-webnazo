@@ -3,6 +3,7 @@ import DraggableLeftArrow from "@/components/Room/phase4/GetDice/Questions/Assem
 import DraggableParts from "@/components/Room/phase4/GetDice/Questions/AssembleNumber/DraggableParts"
 import DroppableArea from "@/components/Room/phase4/GetDice/Questions/AssembleNumber/DroppableArea"
 import useDroppableAreaContent from "@/components/Room/phase4/GetDice/Questions/AssembleNumber/useDroppableAreaContent"
+import TextShakeTiltScale from "@/components/Room/phase4/TextAnim/TextShakeTiltScale"
 import {
   DndContext,
   DragEndEvent,
@@ -42,8 +43,8 @@ export default function AssembleNumber() {
     <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
       <DraggableLeftArrow />
       <div className="relative">
-        <h2 className="font-pop text-center text-2xl font-normal">
-          パーツを組み合わせて数字を作ろう！
+        <h2 className="font-pop text-center text-3xl font-normal">
+          <TextShakeTiltScale text="パーツを組み合わせて数字を作ろう！" />
         </h2>
         <span className="font-gothic -ml-2 rounded bg-yellow-600 p-2 text-xs font-normal">
           アイテム
@@ -70,7 +71,7 @@ export default function AssembleNumber() {
             </div>
           </div>
           <div className="font-pop flex h-56 w-60 items-center justify-center rounded-md border-4 border-gray-950 bg-gray-900 text-2xl font-normal shadow-md">
-            何が出来るかな？
+            <TextShakeTiltScale text="何が出来るかな？" />
           </div>
         </div>
       </div>

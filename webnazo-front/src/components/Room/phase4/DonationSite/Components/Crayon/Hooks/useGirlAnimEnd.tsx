@@ -1,8 +1,9 @@
-import { atom, useAtom } from "jotai"
+import { useAtom } from "jotai"
+import { atomWithStorage } from "jotai/utils"
 import { useRef } from "react"
 
-const isGirlAnimEndAtom = atom(false)
-const girlFinalStyleAtom = atom({})
+const isGirlAnimEndAtom = atomWithStorage("isGirlAnimEnd", false)
+const girlFinalStyleAtom = atomWithStorage("girlFinalStyle", {})
 
 // 少女のアニメ終了時の状態・イベントハンドラを管理するカスタムフック
 export default function useGirlAnimEnd() {

@@ -12,6 +12,7 @@ export default function useIsShowMemo() {
 
   const resetMemo = useCallback(
     (e: MouseEvent) => {
+      console.log(e.target, e.currentTarget)
       if (isShowMemo !== 0 && e.target === e.currentTarget) {
         setIsShowMemo(0)
       }

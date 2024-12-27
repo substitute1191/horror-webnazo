@@ -5,6 +5,7 @@ import { SocketContext } from "@/components/Room/socketContext"
 import useFakeCursor from "@/components/Room/phase3/Cursor/useFakeCursor"
 import Alert from "@/components/Room/phase4/Alert/Alert"
 import useAlert from "@/components/Room/phase4/Alert/useAlert"
+import Phase4BGMProvider from "@/components/Room/phase4/Phase4BGMProvider"
 
 const Phase4 = () => {
   const { socket, isConnected } = useContext(SocketContext)
@@ -32,12 +33,13 @@ const Phase4 = () => {
   useEffect(() => {
     if (socket !== null && isConnected) {
       socket.on("peerMemoShow", (peerTitle: string) => {
+        console.log("peerMemoShow received!")
         const newPath = `${location.pathname}#${Date.now()}`
-        document.title = peerTitle
         navigate(newPath, {
-          replace: false,
+          replace: true,
           state: {},
         })
+        document.title = peerTitle
       })
     }
 
@@ -49,10 +51,15 @@ const Phase4 = () => {
   }, [isConnected, location.pathname, navigate, socket])
 
   return (
-    <div className="relative h-screen w-screen bg-black">
-      <Alert />
-      <Phase4Top />
-    </div>
+    <Phase4BGMProvider>
+      <div
+        className="relative h-screen w-screen overflow-hidden bg-slate-900"
+        id="phase4"
+      >
+        <Alert />
+        <Phase4Top />
+      </div>
+    </Phase4BGMProvider>
   )
 }
 

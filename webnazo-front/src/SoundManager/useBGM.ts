@@ -4,12 +4,13 @@ import { useCallback, useRef } from "react"
 import useSound from "use-sound"
 import useUserInteracted from "./useUserInteracted"
 
-export default function useBGM(src: string) {
+export default function useBGM(src: string, playbackRate: number = 1) {
   const { hasUserInteracted } = useUserInteracted()
   const bgmVolume = useAtomValue(bgmVolumeAtom)
   const isPlayable = useAtomValue(isPlayableAtom)
 
   const [playSound, { stop }] = useSound(src, {
+    playbackRate: playbackRate,
     volume: bgmVolume,
     soundEnabled: isPlayable,
     interrupt: true,
