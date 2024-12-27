@@ -9,7 +9,6 @@ import { useParams } from "react-router-dom"
 import { Room } from "@/types/RoomType"
 import api from "@/utils/api"
 import { SocketContext } from "@/components/Room/socketContext"
-import useMemoFlags from "@/components/Room/phase4/Phase4Top/memo/useMemoFlags"
 import useIsShowJumpScare from "@/components/Room/phase4/Supermarket/labyrinth/useisShowJumpScare"
 
 const stopChars = [
@@ -37,7 +36,6 @@ const useLabyrinth = () => {
   const { roomId } = useParams()
   const { socket, isConnected } = useContext(SocketContext)
   const setRoom = useSetAtom(roomAtom)
-  const { setMemoFlags } = useMemoFlags()
   const { toggleIsShowJumpScare } = useIsShowJumpScare()
 
   const map = useMemo(
@@ -77,22 +75,12 @@ const useLabyrinth = () => {
           newValue: true,
         })
         setRoom(data)
-        setMemoFlags("reachedShop")
         if (socket !== null && isConnected) {
           socket.emit("updateRoom", { roomId })
         }
       })()
     }
-  }, [
-    map,
-    socket,
-    isConnected,
-    currentPoint,
-    setHasBeenShop,
-    roomId,
-    setRoom,
-    setMemoFlags,
-  ])
+  }, [map, socket, isConnected, currentPoint, setHasBeenShop, roomId, setRoom])
 
   const move = (moveType: string) => {
     let nextPoint

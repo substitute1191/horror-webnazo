@@ -16,7 +16,7 @@ export default function Phase4Mission() {
   }, [memoFlags])
 
   return (
-    <div className="absolute left-[50%] top-[50%] -translate-x-[50%]">
+    <div className="absolute left-[50%] top-[50%] z-[1] -translate-x-[50%]">
       <div>{!hasGetAllMemo ? <DiceandMicrowaveMsg /> : <MemoMissionMsg />}</div>
       <MemoList />
       <MemoManager />

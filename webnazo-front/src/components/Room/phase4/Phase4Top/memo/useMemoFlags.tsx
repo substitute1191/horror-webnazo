@@ -1,61 +1,36 @@
-import { atom, useAtom } from "jotai"
-import { atomWithStorage } from "jotai/utils"
+import {
+  hasDiceAtom,
+  hasMicrowaveAtom,
+  hasStolenAtom,
+  isMillionaireAtom,
+  reachedShopAtom,
+} from "@/atoms/roomAtoms"
+import { atom, useAtomValue } from "jotai"
 
-export type TriggerType =
-  | "isMillionaire"
-  | "reachedShop"
-  | "hasStolen"
-  | "hasDice"
+const memoFlagsAtom = atom((get) => {
+  const isMillionaire = get(isMillionaireAtom)
+  const reachedShop = get(reachedShopAtom)
+  const hasStolen = get(hasStolenAtom)
+  const hasDice = get(hasDiceAtom)
+  const hasMicrowave = get(hasMicrowaveAtom)
 
-const memoFlagsAtom = atomWithStorage("memoFlags", [
-  true,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-])
-
-const setMemoFlagsAtom = atom(
-  (get) => get(memoFlagsAtom),
-  (get, set, trigger: TriggerType) => {
-    const prev = get(memoFlagsAtom)
-    if (trigger === "isMillionaire") {
-      const newMemoFlags = prev.map((item, idx) => {
-        if (idx === 1 || idx === 2) return true
-        else return item
-      })
-      set(memoFlagsAtom, newMemoFlags)
-    } else if (trigger === "reachedShop") {
-      const newMemoFlags = prev.map((item, idx) => {
-        if (idx === 3 || idx === 4) return true
-        else return item
-      })
-      set(memoFlagsAtom, newMemoFlags)
-    } else if (trigger === "hasStolen") {
-      const newMemoFlags = prev.map((item, idx) => {
-        if (idx === 5 || idx === 6) return true
-        else return item
-      })
-      set(memoFlagsAtom, newMemoFlags)
-    } else if (trigger === "hasDice") {
-      const newMemoFlags = prev.map((item, idx) => {
-        if (idx === 7 || idx === 8) return true
-        else return item
-      })
-      set(memoFlagsAtom, newMemoFlags)
-    }
-  }
-)
+  return [
+    true,
+    isMillionaire || hasMicrowave,
+    isMillionaire || hasMicrowave,
+    reachedShop,
+    reachedShop,
+    hasStolen,
+    hasStolen,
+    hasDice,
+    hasDice,
+  ]
+})
 
 export default function useMemoFlags() {
-  const [memoFlags, setMemoFlags] = useAtom(setMemoFlagsAtom)
+  const memoFlags = useAtomValue(memoFlagsAtom)
 
   return {
     memoFlags,
-    setMemoFlags,
   }
 }
